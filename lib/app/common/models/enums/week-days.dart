@@ -1,0 +1,1 @@
+enum WeekDays{SAT, SUN, MON, TUE, WED, THU, FRI}
