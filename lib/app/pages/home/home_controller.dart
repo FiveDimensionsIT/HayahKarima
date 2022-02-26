@@ -22,7 +22,6 @@ class HomeController extends GetxController {
   @override
   void onClose() {}
 
-
   navigateToBack() {
 
   }
@@ -38,7 +37,7 @@ class HomeController extends GetxController {
       {'name': 'الدقهلية', 'value': '639.625', 'percentage': Get.width * 0.6},
       {'name': 'الاسكندرية', 'value': '554.123', 'percentage': Get.width * 0.4},
       {'name': 'شمال سيناء', 'value': '128.876', 'percentage': Get.width * 0.4},
-      {'name': 'مرسي مطروح', 'value': '58.873', 'percentage': Get.width * 0.5},
+      {'name': 'مرسي مطروح', 'value': '58.873', 'percentage': Get.width * 0.2},
     ]);
     provincesList.refresh();
 
