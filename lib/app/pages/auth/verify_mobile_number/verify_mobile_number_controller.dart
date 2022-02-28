@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/action_center/action_center.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
+import 'package:hayah_karema/app/pages/auth/forgot_password/forgot_password_controller.dart';
 import 'package:hayah_karema/app/pages/splash/splash_controller.dart';
 import 'package:hayah_karema/services/firebase_phone_auth/i_firebase_phone_auth.dart';
 import 'package:hayah_karema/setup.dart';
@@ -16,7 +17,9 @@ class VerifyMobileNoController extends GetxController {
 
   final _fPhoneAuthService = DI.find<IFirebasePhoneAuth>();
 
-  String? currentCode;
+  String? code;
+  var mobileNo = ''.obs;
+
   var loginLoading = false.obs;
   var verifyLoading = false.obs;
   var resendLoading = false.obs;
@@ -27,22 +30,24 @@ class VerifyMobileNoController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    mobileNo.value = Get.find<ForgotPasswordController>().mobileNo??'';
     _startTimer();
   }
 
   @override
   void onClose() {
     _timer?.cancel();
+    super.onClose();
   }
 
   void onVerifyBtnPressed() {
-    if (currentCode == null || currentCode!.isEmpty || currentCode?.length != 6) {
+    if (code == null || code!.isEmpty || code?.length != 6) {
       hasError.value = true;
       return;
     }
     verifyLoading.value = true;
     _fPhoneAuthService.verifySMSCode(
-        code: currentCode!,
+        code: code!,
         onCodeVerified: (result) {
           verifyLoading.value = false;
           if (result != null && result is bool && result) {

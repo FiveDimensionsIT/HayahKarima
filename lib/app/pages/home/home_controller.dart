@@ -1,12 +1,29 @@
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/action_center/action_center.dart';
+import 'package:hayah_karema/app/common/managers/api/home/_models/digital_pointer_request.dart';
+import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
+import 'package:hayah_karema/app/common/managers/api/home/i_home_api_manager.dart';
+import 'package:hayah_karema/app/common/translation/app_text.dart';
+import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 
 class HomeController extends GetxController {
 
   final provincesList = [].obs;
   final centersList = [].obs;
-  final countrysidesList = [].obs;
+  final villagesList = [].obs;
   final citizensList = [].obs;
-  final typesList = [].obs;
+  final categoriesList = [].obs;
+  var statisticNumber = 0.obs;
+
+  var provincesLoading = false.obs;
+  var centersLoading = false.obs;
+  var villagesLoading = false.obs;
+  var citizensLoading = false.obs;
+  var categoriesLoading = false.obs;
+
+  final _apiManager = DI.find<IHomeApiManager>();
+  final _action = ActionCenter();
 
   @override
   void onInit() {
@@ -14,67 +31,122 @@ class HomeController extends GetxController {
     _onLoad();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  _onLoad() {
+    getStatisticNumber();
+    getProvincesApi();
+    getCentersApi();
+    getVillagesApi();
+    getCitizenApi();
+    getCategoriesApi();
   }
 
-  @override
-  void onClose() {}
-
-  navigateToBack() {
-
+  void getStatisticNumber() async {
+    final request = DigitalPointerRequest(statusId: 2, pageNo: 1);
+    List<PointerItemModel>? result;
+    var success = await _action.execute(() async {
+      result = await _apiManager.getStatisticNumber(request);
+    }, checkConnection: true);
+    //
+    if (success) {
+      if (result != null) {
+        statisticNumber.value = result?.first.villagesCount??0;
+      } else {
+        OverlayHelper.showErrorToast(AppText.somethingWrong);
+      }
+    }
+  }
+  void getProvincesApi() async {
+    provincesLoading.value = true;
+    final request = DigitalPointerRequest(countryId: 1, statusId: 2, pageNo: 1, orderBy: 'indicator desc');
+    List<PointerItemModel>? result;
+    var success = await _action.execute(() async {
+      result = await _apiManager.getProvincesPointer(request);
+    }, checkConnection: true);
+    //
+    provincesLoading.value = false;
+    //
+    if (success) {
+      if (result != null) {
+        provincesList.assignAll(result??[]);
+      } else {
+        OverlayHelper.showErrorToast(AppText.somethingWrong);
+      }
+    }
+  }
+  //
+  void getCentersApi() async {
+    centersLoading.value = true;
+    final request = DigitalPointerRequest(countryId: 1, statusId: 2, pageNo: 1, orderBy: 'indicator desc');
+    List<PointerItemModel>? result;
+    var success = await _action.execute(() async {
+      result = await _apiManager.getCentersPointer(request);
+    }, checkConnection: true);
+    //
+    centersLoading.value = false;
+    //
+    if (success) {
+      if (result != null) {
+        centersList.assignAll(result ?? []);
+      } else {
+        OverlayHelper.showErrorToast(AppText.somethingWrong);
+      }
+    }
+  }
+  //
+  void getVillagesApi() async {
+    villagesLoading.value = true;
+    final request = DigitalPointerRequest(countryId: 1, statusId: 2, pageNo: 1, orderBy: 'indicator desc');
+    List<PointerItemModel>? result;
+    var success = await _action.execute(() async {
+      result = await _apiManager.getVillagesPointer(request);
+    }, checkConnection: true);
+    //
+    villagesLoading.value = false;
+    //
+    if (success) {
+      if (result != null) {
+        villagesList.assignAll(result?? []);
+      } else {
+        OverlayHelper.showErrorToast(AppText.somethingWrong);
+      }
+    }
   }
 
-  _onLoad(){
-    _initPointersList();
+  void getCitizenApi() async {
+    citizensLoading.value = true;
+    final request = DigitalPointerRequest(roleId: 2, statusId: 2, pageNo: 1, orderBy: 'indicator desc');
+    List<PointerItemModel>? result;
+    var success = await _action.execute(() async {
+      result = await _apiManager.getCitizensPointer(request);
+    }, checkConnection: true);
+    //
+    citizensLoading.value = false;
+    //
+    if (success) {
+      if (result != null) {
+        citizensList.assignAll(result?? []);
+      } else {
+        OverlayHelper.showErrorToast(AppText.somethingWrong);
+      }
+    }
   }
 
-  void _initPointersList() {
-
-    provincesList.assignAll([
-      {'name': 'القاهرة', 'value': '848.456', 'percentage': Get.width * 0.8},
-      {'name': 'الدقهلية', 'value': '639.625', 'percentage': Get.width * 0.6},
-      {'name': 'الاسكندرية', 'value': '554.123', 'percentage': Get.width * 0.4},
-      {'name': 'شمال سيناء', 'value': '128.876', 'percentage': Get.width * 0.4},
-      {'name': 'مرسي مطروح', 'value': '58.873', 'percentage': Get.width * 0.2},
-    ]);
-    provincesList.refresh();
-
-    centersList.assignAll([
-      {'name': 'دسوق', 'value': '848.456', 'percentage': Get.width * 0.8},
-      {'name': 'مطوبس', 'value': '639.625', 'percentage': Get.width * 0.6},
-      {'name': 'البرنس', 'value': '554.123', 'percentage': Get.width * 0.4},
-      {'name': 'بيلا', 'value': '128.876', 'percentage': Get.width * 0.4},
-      {'name': 'الرياض', 'value': '58.873', 'percentage': Get.width * 0.5},
-    ]);
-    centersList.refresh();
-
-    countrysidesList.assignAll([
-      {'name': 'ابو طرطور', 'value': '848.456', 'percentage': Get.width * 0.8},
-      {'name': 'الخادمية', 'value': '639.625', 'percentage': Get.width * 0.6},
-      {'name': 'الشارقة', 'value': '554.123', 'percentage': Get.width * 0.4},
-      {'name': 'الطايفة', 'value': '128.876', 'percentage': Get.width * 0.4},
-      {'name': 'القرضا', 'value': '58.873', 'percentage': Get.width * 0.5},
-    ]);
-    countrysidesList.refresh();
-
-    citizensList.assignAll([
-      {'name': 'مسعد العربي', 'value': '848.456', 'percentage': Get.width * 0.8},
-      {'name': 'سلامة عباس', 'value': '639.625', 'percentage': Get.width * 0.6},
-      {'name': 'اشرف خالد', 'value': '554.123', 'percentage': Get.width * 0.4},
-      {'name': 'ابانوب مجدي', 'value': '128.876', 'percentage': Get.width * 0.4},
-      {'name': 'مها الحسيني', 'value': '58.873', 'percentage': Get.width * 0.5},
-    ]);
-    citizensList.refresh();
-
-    typesList.assignAll([
-      {'name': 'تكنو-معرفي', 'value': '848.456', 'percentage': Get.width * 0.8},
-      {'name': 'تكنو-اجتماعي', 'value': '639.625', 'percentage': Get.width * 0.6},
-      {'name': 'تكنو-اقتصادي', 'value': '554.123', 'percentage': Get.width * 0.4},
-      {'name': 'تكنو-رياضي', 'value': '128.876', 'percentage': Get.width * 0.4},
-      {'name': 'تكنو-ثقافي', 'value': '58.873', 'percentage': Get.width * 0.5},
-    ]);
-    typesList.refresh();
+  void getCategoriesApi() async {
+    categoriesLoading.value = true;
+    List<PointerItemModel>? result;
+    final request = DigitalPointerRequest(pageNo: 1, orderBy: 'indicator desc');
+    var success = await _action.execute(() async {
+      result = await _apiManager.getCategoriesPointer(request);
+    }, checkConnection: true);
+    //
+    categoriesLoading.value = false;
+    //
+    if (success) {
+      if (result != null) {
+        categoriesList.assignAll(result??[]);
+      } else {
+        OverlayHelper.showErrorToast(AppText.somethingWrong);
+      }
+    }
   }
 }

@@ -1,4 +1,10 @@
 import 'package:get_it/get_it.dart';
+import 'package:hayah_karema/app/common/managers/api/auth/auth_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/auth/fake_auth_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/auth/i_auth_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/home/fake_home_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/home/home_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/home/i_home_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/cache/cache_manager.dart';
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/services/connectivity/connectivity_lib.dart';
@@ -31,28 +37,25 @@ void setup() {
   DI.setSingleton<AbsCacheService>(() => LocalCacheService());
   // file service
   //DI.setSingleton<IFileService>(() => FileService());
-  // connectivity
+  // connectivity service
   DI.setSingleton<IConnectivityService>(() => ConnectivityService());
   // http
   DI.setSingleton<IHttpService>(() => DioHttpService());
   // url launcher service
   DI.setSingleton<IUrlLauncherService>(() => UrlLauncherService());
-  // firebase phone auth
+  // firebase phone auth service
   DI.setSingleton<IFirebasePhoneAuth>(() => FirebasePhoneAuth());
   // endregion  ==== services ====
 
   // region ==== managers ====
   DI.setSingleton<ICacheManager>(() => CacheManager(DI.find()));
+  // auth api manager
+  DI.setSingleton<IAuthApiManager>(() => AuthApiManager(DI.find()));
+  // home manager
+  DI.setSingleton<IHomeApiManager>(() => HomeApiManager(DI.find()));
 
-  // DI.setSingleton<ILoginApiManager>(() => LoginApiManager(DI.find(), DI.find()));
-
-  if (BUILD_TYPE != BuildType.release) {
-  //   DI.setSingleton<INabaCustomersApiManager>(() => TestingNabaCustomerApiManager());
-  // } else {
-  //   DI.setSingleton<INabaCustomersApiManager>(() => NabaCustomersApiManager(DI.find()));
-  }
   // endregion  ==== managers ====
-  // Get.lazyPut(()=> MenuController());
+
 }
 
 void setupDemoMode() {
@@ -61,8 +64,11 @@ void setupDemoMode() {
   DI.remove<AbsCacheService>();
   DI.setSingleton<AbsCacheService>(() => FakeCacheService());
   //
-  // DI.remove<ILoginApiManager>();
-  // DI.setSingleton<ILoginApiManager>(() => FakeLoginApiManager());
+  DI.remove<IAuthApiManager>();
+  DI.setSingleton<IAuthApiManager>(() => FakeAuthApiManager());
+  //
+  DI.remove<IHomeApiManager>();
+  DI.setSingleton<IHomeApiManager>(() => FakeHomeApiManager());
 }
 
 /// Dependency Injection wrapper
