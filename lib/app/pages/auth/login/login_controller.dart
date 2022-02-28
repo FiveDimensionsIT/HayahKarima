@@ -47,7 +47,6 @@ class LoginController extends GetxController {
     }, checkConnection: true);
     //
     loginLoading.value = false;
-    //
     if (success) {
       if (result != null) {
         // غير معتمد
