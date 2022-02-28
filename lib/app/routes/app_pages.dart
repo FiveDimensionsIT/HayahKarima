@@ -25,30 +25,27 @@ class AppPages {
       name: _Paths.SPLASH_VIEW,
       page: () => SplashView(),
       binding: SplashBinding(),
-      children: [
-        GetPage(
-          name: _Paths.LOGIN,
-          page: () => LoginView(),
-          binding: LoginBinding(),
-        ),
-        GetPage(
-          name: _Paths.FORGOT_PASSWORD,
-          page: () => ForgotPasswordView(),
-          binding: ForgotPasswordBinding(),
-        ),
-        GetPage(
-          name: _Paths.VERIFY_AUTH,
-          page: () => VerifyMobileNoView(),
-          binding: VerifyMobileNoBinding(),
-        ),
-        GetPage(
-          name: _Paths.NEW_PASSWORD,
-          page: () => NewPasswordView(),
-          binding: NewPasswordBinding(),
-        ),
-      ]
     ),
-
+    GetPage(
+      name: _Paths.LOGIN,
+      page: () => LoginView(),
+      binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGOT_PASSWORD,
+      page: () => ForgotPasswordView(),
+      binding: ForgotPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.VERIFY_AUTH,
+      page: () => VerifyMobileNoView(),
+      binding: VerifyMobileNoBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEW_PASSWORD,
+      page: () => NewPasswordView(),
+      binding: NewPasswordBinding(),
+    ),
     GetPage(
       name: _Paths.HOME,
       page: () => HomeView(),

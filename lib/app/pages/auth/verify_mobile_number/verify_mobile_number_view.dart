@@ -43,14 +43,14 @@ class VerifyMobileNoView extends StatelessWidget {
 
               Empty(height: 20,),
 
-              _buildPhoneNumberBody('+201090217251'),
+              _buildPhoneNumberBody(),
 
               Center(child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                _buildPinCode(),
-                _buildErrorHint(),
-              ],),),
+                  _buildPinCode(),
+                  _buildErrorHint(),
+                ],),),
 
               /// confirm
               _buildConfirmPasswordButton()
@@ -81,7 +81,7 @@ class VerifyMobileNoView extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           decoration: BoxDecoration(color: AppColors.current.primaryLight.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(10)
+              borderRadius: BorderRadius.circular(10)
           ),
           child: Obx(() {
             return Text(controller.timeout.value, style: TextStyle(color: AppColors.current.primary,
@@ -92,23 +92,26 @@ class VerifyMobileNoView extends StatelessWidget {
     );
   }
 
-  Widget _buildPhoneNumberBody(String phoneNumber) {
+  Widget _buildPhoneNumberBody() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
-      child: RichText(
-        text: TextSpan(
-            text: AppText.enterCodeSent,
-            children: [
-              TextSpan(
-                  text: "  $phoneNumber",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: Get.textTheme.bodyText1?.fontSize)),
-            ],
-            style:  TextStyle(color: AppColors.current.dimmed, fontSize: Get.textTheme.bodyText1?.fontSize,height: 2)),
-        textAlign: TextAlign.center,
-      ),
+      child: Obx(() {
+        return RichText(
+          text: TextSpan(
+              text: AppText.enterCodeSent,
+              children: [
+                TextSpan(
+                    text: "  ${controller.mobileNo.value}",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: Get.textTheme.bodyText1?.fontSize)),
+              ],
+              style: TextStyle(
+                  color: AppColors.current.dimmed, fontSize: Get.textTheme.bodyText1?.fontSize, height: 2)),
+          textAlign: TextAlign.center,
+        );
+      }),
     );
   }
 
@@ -144,15 +147,9 @@ class VerifyMobileNoView extends StatelessWidget {
                 blurRadius: 2,
               )
             ],
-            onCompleted: (v) {
-              controller.hasError.value = false;
-            },
-            onChanged: (value) {
-              controller.currentCode = value;
-            },
-            beforeTextPaste: (text) {
-              return true;
-            },
+            onCompleted: (v) => controller.hasError.value = false,
+            onChanged: (value) => controller.code = value,
+            beforeTextPaste: (text) => true,
             // validator: RequiredValidator(errorText: AppText.requiredField),
           )),
     );

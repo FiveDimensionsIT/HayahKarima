@@ -80,17 +80,18 @@ class NewPasswordView extends  StatelessWidget {
       decoration: InputDecoration(hintText: AppText.newPassword,),
       obscureText: true,
       textInputAction: TextInputAction.next,
-      onSaved: (val) => controller.newPassword,
+      onChanged: (val) => controller.newPassword=val,
       validator: RequiredValidator(errorText: AppText.requiredField),
     );
   }
 
   TextFormField _buildConfirmNewPasswordTextField() {
     return TextFormField(
+
       decoration: InputDecoration(hintText: AppText.confirmNewPassword,),
       obscureText: true,
       textInputAction: TextInputAction.done,
-      onSaved: (val) => controller.confirmNewPassword,
+      onChanged: (val) => controller.confirmNewPassword=val,
       validator: RequiredValidator(errorText: AppText.requiredField),
       onEditingComplete: ()=> _onConfirm(),
     );

@@ -1,6 +1,4 @@
-import 'package:get/get.dart';
-
-var isArLocale = Get.locale.toString().contains("ar");
+import 'package:intl/intl.dart';
 
 num convertToNum({required String value}) {
   num? val = double.tryParse(value);
@@ -12,3 +10,4 @@ num convertToNum({required String value}) {
   return val!;
 }
 
+var formatter = NumberFormat('###,000');
