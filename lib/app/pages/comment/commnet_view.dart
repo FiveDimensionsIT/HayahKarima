@@ -15,6 +15,7 @@ class CommentView extends StatelessWidget{
         backgroundColor: AppColors.current.neutral,
         resizeToAvoidBottomInset: false,
         body:_buildBody(),
+      bottomNavigationBar: _writeComment(),
     );
   }
    Widget _buildBody() {
@@ -28,17 +29,17 @@ class CommentView extends StatelessWidget{
            ),
            SizedBox(height: Get.height/36,),
            _contentNotification(),
-           _writeComment(),
+
          ],
        ),
      );
    }
 
   Widget _contentNotification(){
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: Get.width/16),
-      height: Get.height/1.6,
+    return Expanded(
+
       child: ListView.builder(
+          padding: EdgeInsets.symmetric(horizontal: Get.width/16),
         itemCount: 5,
           itemBuilder:(context,index){
           return Column(
@@ -109,32 +110,33 @@ class CommentView extends StatelessWidget{
   }
   Widget _writeComment(){
     return Container(
-      width: Get.width,
-      height: Get.height/5,
+      // width: Get.width,
+       height: 124,
+      padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
       decoration:  BoxDecoration(
           boxShadow: [
             BoxShadow(
-                offset: const Offset(0,3),
-                blurRadius: 0.5,
-                color:AppColors.current.background)
+                offset: const Offset(4,0),
+                blurRadius: 6,
+                color:AppColors.current.dimmed)
           ],
-          color: Colors.white12,
+          color: AppColors.current.neutral,
         borderRadius:const BorderRadius.only(
-          topRight: Radius.circular(12),
-          topLeft: Radius.circular(12),
+          topRight: Radius.circular(24),
+          topLeft: Radius.circular(24),
         )
       ),
       child: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(
               horizontal: 24),
-          child: TextField(
+          child: TextFormField(
             controller: null,
             decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                  borderSide: BorderSide(color: AppColors.current.dimmed, width: 1.0,),
-                ),
+                // enabledBorder: OutlineInputBorder(
+                //   borderRadius: BorderRadius.circular(16.0),
+                //   borderSide: BorderSide(color: AppColors.current.dimmed, width: 1.0,),
+                // ),
               hintText: AppText.write_comment,
              suffixIcon:  Icon(Icons.send,
              color: AppColors.current.accent,),

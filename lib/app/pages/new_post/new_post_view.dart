@@ -4,34 +4,16 @@ import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
+import 'package:hayah_karema/app/pages/new_post/new_post_controller.dart';
 import 'package:hayah_karema/utils/ui/ui_lib.dart';
 import 'package:image_picker/image_picker.dart';
 
-class NewPostView extends StatefulWidget {
-  const NewPostView({Key? key}) : super(key: key);
+class NewPostView extends StatelessWidget {
+   NewPostView({Key? key}) : super(key: key);
 
-  @override
-  State<NewPostView> createState() => _NewPostViewState();
-}
+   var controller = Get.find<NewPostController>();
 
-class _NewPostViewState extends State<NewPostView> {
-  final ImagePicker imgpicker = ImagePicker();
-  List<XFile>? imagefiles;
 
-  openImages() async {
-    try {
-      var pickedfiles = await imgpicker.pickMultiImage();
-      //you can use ImageCourse.camera for Camera capture
-      if (pickedfiles != null) {
-        imagefiles = pickedfiles;
-        setState(() {});
-      } else {
-        print("No image is selected.");
-      }
-    } catch (e) {
-      print("error while picking file.");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,29 +61,34 @@ class _NewPostViewState extends State<NewPostView> {
   }
 
   Widget _selectedImage() {
-    return imagefiles != null
-        ? SizedBox(
+    return SizedBox(
             height: Get.height / 3,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: imagefiles!.map((imageone) {
-                return Card(
-                  child: SizedBox(
-                    height: 200,
-                    width: 200,
-                    child: Image.file(File(imageone.path), fit: BoxFit.cover),
-                  ),
-                );
-              }).toList(),
-            ),
-          )
-        : SizedBox(
-            height: Get.height / 3,
-            child: Image.asset(
-              'assets/images/splash_3.png',
-              fit: BoxFit.cover,
+            // todo slider
+            child: Obx(
+                (){
+                  return ListView(
+
+                    scrollDirection: Axis.horizontal,
+                    children:controller.imagefiles.map((image) {
+                      return Card(
+                        child: SizedBox(
+                          height: 200,
+                          width: 200,
+                          child: Image.file(File(image.path), fit: BoxFit.cover),
+                        ),
+                      );
+                    }).toList(),
+                  );
+                }
             ),
           );
+    // : SizedBox(
+    // height: Get.height / 3,
+    // child: Image.asset(
+    // 'assets/images/splash_3.png',
+    // fit: BoxFit.cover,
+    // ),
+    // );
   }
 
   Widget _buildBottomBar() {
@@ -128,7 +115,7 @@ class _NewPostViewState extends State<NewPostView> {
                   icon: Icon(Icons.image),
                   color: AppColors.current.primaryLight,
                   colorText: AppColors.current.background,
-                  onPress: openImages),
+                  onPress: ()=>controller.openImages()),
               BuildButton(
                   title: AppText.activate,
                   icon: Icon(Icons.mood),
