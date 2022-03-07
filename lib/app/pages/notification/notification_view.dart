@@ -3,120 +3,152 @@ import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/common/widgets/shadow_view.dart';
+import 'package:hayah_karema/utils/ui/empty.dart';
 
 import '../../common/themes/app_colors.dart';
 
-class NotificationView extends StatelessWidget{
-
-   NotificationView({Key? key}) : super(key: key);
+class NotificationView extends StatelessWidget {
+  NotificationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
         backgroundColor: AppColors.current.neutral,
-        body:_buildBody(),
-    );
-  }
-   Widget _buildBody() {
-     return SafeArea(
-       child: Column(
-         children: [
-           /// toolbar.
-           AppToolbar(
-             title: AppText.notification, backCallBack: () {
-           },
-           ),
-           SizedBox(height: Get.height/36,),
-           _buildButtons(),
-           SizedBox(height: Get.height/36,),
-           _contentNotification(),
-         ],
-       ),
-     );
-   }
-   // build tab bar view
-  Widget _buildButtons(){
-    return Row(
-      children: [
-        SizedBox(width: Get.width/16,),
-        _buildContentButton(AppText.all, Get.width/8, AppColors.current.neutral,AppColors.current.accent),
-        SizedBox(width: Get.width/16,),
-        _buildContentButton(AppText.notRead, Get.width/3, AppColors.current.neutral,AppColors.current.accent.withOpacity(0.2)),
-      ],
-    );
-  }
-  Widget _buildContentButton(String text,double width,Color fontColor,Color colorContinaer){
-    return  Container(
-      width: width,
-      //width: Get.width/3,
-      decoration: BoxDecoration(
-          color: colorContinaer,
-          borderRadius: BorderRadius.circular(12)
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(136),
+          child: SafeArea(
+            child: Column(
+              children: <Widget>[
+                AppToolbar(
+                  title: AppText.notification,
+                  backCallBack: () {},
+                ),
+                Empty(
+                  height: 24,
+                ),
+                TabBar(
+                  indicatorColor: Colors.transparent,
+                  padding: const EdgeInsets.only(left: 136),
+                  indicatorPadding: EdgeInsets.zero,
+                  labelPadding: EdgeInsets.zero,
+                  tabs: [
+                    _buildContentButton(AppText.all, 48,
+                        AppColors.current.neutral, AppColors.current.accent),
+                    _buildContentButton(
+                        AppText.notRead,
+                        96,
+                        AppColors.current.accent,
+                        AppColors.current.accent.withOpacity(0.2)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        body: _contentBody(),
       ),
-      child: InkWell(
-        onTap: (){},
-        child:
-        Text(text,
+    );
+  }
+
+  Widget _buildContentButton(
+      String text, double width, Color fontColor, Color colorContinaer) {
+    return Container(
+      width: width,
+      decoration: BoxDecoration(
+          color: colorContinaer, borderRadius: BorderRadius.circular(12)),
+      child: Tab(
+        child: Text(
+          text,
           textAlign: TextAlign.center,
-          style: TextStyle(color:fontColor),
+          style: TextStyle(color: fontColor),
         ),
       ),
     );
   }
+
+  Widget _contentBody() {
+    return TabBarView(
+        children: [
+      Flex(
+        direction: Axis.vertical,
+        children: [
+          Expanded(
+            flex: 1,
+            child: _contentNotification(),
+          ),
+        ],
+      ),
+      Flex(
+        direction: Axis.vertical,
+        children: [
+          Expanded(
+            flex: 1,
+            child: _contentNotification(),
+          ),
+        ],
+      ),
+    ]);
+  }
+
   Widget _contentNotification(){
-    return Expanded(
-      child: ListView.builder(
-        itemCount: 5,
-          itemBuilder:(context,index){
+    return ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
           return ShadowView(
             child: Container(
-              color: index % 2 == 0 ? AppColors.current.neutral 
+              color: index % 2 == 0
+                  ? AppColors.current.neutral
                   : AppColors.current.primary.withOpacity(0.05),
               child: Row(
                 children: [
                   Container(
-                    width: 64,height: 64,
+                    width: 64,
+                    height: 64,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      image: const DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage('assets/images/icon_user.png',
-                        )
-                      )
-                    ),
-
+                        borderRadius: BorderRadius.circular(16),
+                        image: const DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage(
+                              'assets/images/icon_user.png',
+                            ))),
                   ),
-                  const SizedBox(width: 16,),
+                  const SizedBox(
+                    width: 16,
+                  ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    SizedBox(
-                      width: Get.width/1.65,
-                      child:  Text('هناك حقيقة مثبتة منذ زمن طويل وهى ان المحتوى المقروء لصفحة  ',
-                        maxLines: 2,
-                        softWrap: true,
-                        //overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: AppColors.current.text,
-                          fontWeight: FontWeight.bold
+                      SizedBox(
+                        width: Get.width / 1.65,
+                        child: Text(
+                          'هناك حقيقة مثبتة منذ زمن طويل وهى ان المحتوى المقروء لصفحة  ',
+                          maxLines: 2,
+                          softWrap: true,
+                          //overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: AppColors.current.text,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
-                    ),
-                    Text('14 الاثنين.فبراير 2022',
-                    style: TextStyle(
-                      color: AppColors.current.primary
-                    ),
-                    ),
-                  ],),
+                      Text(
+                        '14 الاثنين.فبراير 2022',
+                        style:
+                        TextStyle(color: AppColors.current.primary),
+                      ),
+                    ],
+                  ),
                   SizedBox(
-                    width: Get.width/12,
-                    child: Text("...",
-                      style: TextStyle(fontWeight: FontWeight.bold,
+                    width: Get.width / 12,
+                    child: Text(
+                      "...",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
                           fontSize: 18,
                           color: AppColors.current.dimmed,
-                          letterSpacing: 1
-                      ),
+                          letterSpacing: 1),
                       textAlign: TextAlign.end,
                     ),
                   )
@@ -124,7 +156,6 @@ class NotificationView extends StatelessWidget{
               ),
             ),
           );
-          }),
-    );
+        });
   }
 }

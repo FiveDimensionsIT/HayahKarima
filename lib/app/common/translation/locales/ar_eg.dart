@@ -185,7 +185,7 @@ const ar_eg = {
   "live":"مباشر",
   "share":"نشر",
   "comments":"التعليقات",
-  "write_comment":"أكتب تعليقا",
+  "write_comment":"أكتب تعليق",
   "notification":"الإشعارات",
   "all":"الكل",
   "not_read":"الغير مقروءة"

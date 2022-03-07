@@ -133,10 +133,10 @@ class CommentView extends StatelessWidget{
           child: TextFormField(
             controller: null,
             decoration: InputDecoration(
-                // enabledBorder: OutlineInputBorder(
-                //   borderRadius: BorderRadius.circular(16.0),
-                //   borderSide: BorderSide(color: AppColors.current.dimmed, width: 1.0,),
-                // ),
+                 enabledBorder: OutlineInputBorder(
+                   borderRadius: BorderRadius.circular(16.0),
+                   borderSide: BorderSide(color: AppColors.current.dimmedLight, width: 1.0,),
+                 ),
               hintText: AppText.write_comment,
              suffixIcon:  Icon(Icons.send,
              color: AppColors.current.accent,),

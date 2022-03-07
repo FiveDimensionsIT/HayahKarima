@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
@@ -21,6 +22,7 @@ class NewPostView extends StatelessWidget {
       backgroundColor: AppColors.current.neutral,
       resizeToAvoidBottomInset: false,
       body: _buildBody(),
+
     );
   }
 
@@ -37,15 +39,14 @@ class NewPostView extends StatelessWidget {
         ),
         _buildTextField(),
         _selectedImage(),
-        _buildBottomBar(),
+        _buildBottomBar()
       ],
     ));
   }
 
   Widget _buildTextField() {
-    return SizedBox(
-      width: Get.width,
-      height: Get.height / 3.5,
+    return Expanded(
+      flex: 1,
       child: TextFormField(
         controller: null,
         maxLines: 5,
@@ -61,19 +62,30 @@ class NewPostView extends StatelessWidget {
   }
 
   Widget _selectedImage() {
-    return SizedBox(
-            height: Get.height / 3,
-            // todo slider
+      return Expanded(
+          flex: 1,
+          child: Container(
+          decoration: const BoxDecoration(
+          image: DecorationImage(
+            scale: 3,
+          image: AssetImage('assets/images/empty.png',
+          )
+    ),
+    ),
             child: Obx(
-                (){
-                  return ListView(
+                    (){
+                  return CarouselSlider(
+                    options: CarouselOptions(
 
-                    scrollDirection: Axis.horizontal,
-                    children:controller.imagefiles.map((image) {
+                      autoPlay: true,
+                      enlargeCenterPage: true,
+                      aspectRatio: 2.0,
+                    ),
+                    items:controller.imagefiles.map((image) {
                       return Card(
                         child: SizedBox(
                           height: 200,
-                          width: 200,
+                          width: 400,
                           child: Image.file(File(image.path), fit: BoxFit.cover),
                         ),
                       );
@@ -81,7 +93,10 @@ class NewPostView extends StatelessWidget {
                   );
                 }
             ),
-          );
+          )
+      );
+
+
     // : SizedBox(
     // height: Get.height / 3,
     // child: Image.asset(
@@ -93,7 +108,7 @@ class NewPostView extends StatelessWidget {
 
   Widget _buildBottomBar() {
     return Container(
-      padding: const EdgeInsets.only(bottom: 8, top: 5),
+      padding: const EdgeInsets.only(bottom: 8, top: 5,),
       decoration: BoxDecoration(
           color: AppColors.current.neutral,
           borderRadius: const BorderRadius.only(
@@ -105,30 +120,37 @@ class NewPostView extends StatelessWidget {
                 offset: const Offset(6, 0))
           ]),
       child: Column(
+
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              BuildButton(
-                  title: AppText.image,
-                  icon: Icon(Icons.image),
-                  color: AppColors.current.primaryLight,
-                  colorText: AppColors.current.background,
-                  onPress: ()=>controller.openImages()),
-              BuildButton(
-                  title: AppText.activate,
-                  icon: Icon(Icons.mood),
-                  color: AppColors.current.accentLight,
-                  colorText: AppColors.current.background,
-                  onPress: () {}),
-              BuildButton(
-                  title: AppText.live,
-                  icon: Icon(Icons.tv),
-                  color: AppColors.current.error,
-                  colorText: AppColors.current.background,
-                  onPress: () {}),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                BuildButton(
+                    title: AppText.image,
+                    colorIcon: AppColors.current.primary,
+                    icon:const Icon(Icons.image),
+                    color: AppColors.current.background,
+                    colorText: AppColors.current.primary,
+                    onPress: ()=>controller.openImages()),
+                BuildButton(
+                    title: AppText.activate,
+                    colorIcon: AppColors.current.accent,
+                    icon: const Icon(Icons.mood),
+                    color: AppColors.current.background,
+                    colorText: AppColors.current.accent,
+                    onPress: () {}),
+                BuildButton(
+                    title: AppText.live,
+                    colorIcon: AppColors.current.error,
+                    icon: const Icon(Icons.app_shortcut_rounded),
+                    color: AppColors.current.background,
+                    colorText: AppColors.current.error,
+                    onPress: () {}),
+              ],
+            ),
           ),
           _shareButton(),
         ],
@@ -156,6 +178,7 @@ class BuildButton extends StatelessWidget {
   final String title;
   final Icon icon;
   final Color color;
+  final Color colorIcon;
   final Color colorText;
   final VoidCallback onPress;
   const BuildButton(
@@ -164,34 +187,32 @@ class BuildButton extends StatelessWidget {
       required this.icon,
       required this.color,
       required this.onPress,
+        required this.colorIcon,
       required this.colorText})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 12),
-        child: Container(
-          width: 96,
-          height: 48,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(12),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 12),
+      child: Container(
+        height: 48,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: ElevatedButton.icon(
+          style: ElevatedButton.styleFrom(
+            primary: color,
+            onPrimary: colorIcon,// background// foreground
           ),
-          child: ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-              primary: color, // background// foreground
-            ),
-            onPressed: onPress,
-            icon: icon,
-            label: Text(
-              title,
-              style: TextStyle(
-                fontSize: 12,
-                color: colorText,
-              ),
+          onPressed: onPress,
+          icon: icon,
+          label: Text(
+            title,
+            style: TextStyle(
+              fontSize: 12,
+              color: colorText,
             ),
           ),
         ),
