@@ -7,7 +7,7 @@ import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/pages/new_post/new_post_controller.dart';
 import 'package:hayah_karema/utils/ui/ui_lib.dart';
-import 'package:image_picker/image_picker.dart';
+
 
 class NewPostView extends StatelessWidget {
    NewPostView({Key? key}) : super(key: key);

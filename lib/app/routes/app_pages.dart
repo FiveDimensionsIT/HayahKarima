@@ -12,6 +12,8 @@ import 'package:hayah_karema/app/pages/comment/comment_binding.dart';
 import 'package:hayah_karema/app/pages/comment/commnet_view.dart';
 import 'package:hayah_karema/app/pages/home/home_binding.dart';
 import 'package:hayah_karema/app/pages/home/home_view.dart';
+import 'package:hayah_karema/app/pages/my_village/my_village_binding.dart';
+import 'package:hayah_karema/app/pages/my_village/my_village_view.dart';
 import 'package:hayah_karema/app/pages/new_post/new_post_binding.dart';
 import 'package:hayah_karema/app/pages/new_post/new_post_view.dart';
 import 'package:hayah_karema/app/pages/notification/notification_binding.dart';
@@ -25,7 +27,7 @@ class AppPages {
   AppPages._();
 
   //static const INITIAL = Routes.SPLASH_VIEW;
-  static const INITIAL = Routes.NEW_POST;
+  static const INITIAL = Routes.MY_VILLAGE;
   static final routes = [
     GetPage(
       name: _Paths.SPLASH_VIEW,
@@ -71,6 +73,10 @@ class AppPages {
     GetPage(name: _Paths.COMMENT_VIEW,
       page: ()=> CommentView(),
       binding: CommentBinding(),
+    ),
+    GetPage(name: _Paths.MY_VILLAGE,
+      page: ()=> MyVillageView(),
+      binding: MyVillageBinding(),
     ),
   ];
 }
