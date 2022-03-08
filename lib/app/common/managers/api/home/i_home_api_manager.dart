@@ -11,7 +11,7 @@ abstract class IHomeApiManager{
 
   Future<List<PointerItemModel>?> getVillagesPointer(DigitalPointerRequest pointerRequest);
 
-  Future<List<PointerItemModel>?> getCitizensPointer(DigitalPointerRequest pointerRequest);
+  Future<List<PointerItemModel>?> getContactsSearch(DigitalPointerRequest pointerRequest);
 
   Future<List<PointerItemModel>?> getCategoriesPointer(DigitalPointerRequest pointerRequest);
 

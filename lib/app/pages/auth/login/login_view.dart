@@ -116,12 +116,14 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  BigBtn _buildLoginButton() {
-    return BigBtn(
-      state: controller.loginLoading.value ? BtnState.loading : BtnState.active,
-      text: AppText.login,
-      onPressed: () => _onLogin(),
-    );
+  Widget _buildLoginButton() {
+    return Obx(() {
+      return BigBtn(
+        state: controller.loginLoading.value ? BtnState.loading : BtnState.active,
+        text: AppText.login,
+        onPressed: () => _onLogin(),
+      );
+    });
   }
 
   _onLogin() {

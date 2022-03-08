@@ -7,6 +7,7 @@ class PointerItemModel extends Serializable{
   int? id;
   var code;
   String? name;
+  String? fullName;
   String? country;
   String? governorate;
   String? lang;
@@ -14,9 +15,11 @@ class PointerItemModel extends Serializable{
   int? indicator;
   int? villagesCount;
   String? status;
+  String? avatar;
+  String? email;
   int? statusId;
 
-  PointerItemModel({this.id, this.code, this.name, this.country, this.governorate, this.lang, this.lat, this.indicator, this.villagesCount, this.status, this.statusId, });
+  PointerItemModel({this.id, this.code, this.name, this.country, this.governorate, this.lang, this.lat, this.indicator, this.villagesCount, this.status, this.statusId,this.avatar, this.email});
 
   @override
   void fromMap(Map<String, dynamic> map) {
@@ -31,6 +34,9 @@ class PointerItemModel extends Serializable{
     villagesCount = map['villagesCount'];
     status = map['status'];
     statusId = map['statusId'];
+    fullName = map['fullName'];
+    avatar = map['avatar'];
+    email = map['email'];
   }
 
   @override
@@ -47,9 +53,13 @@ class PointerItemModel extends Serializable{
     data['villagesCount'] = this.villagesCount;
     data['status'] = this.status;
     data['statusId'] = this.statusId;
+    data['fullName'] = this.fullName;
+    data['avatar'] = this.avatar;
+    data['email'] = this.email;
     return data;
   }
 
   double percentage(int maxIndicator) => indicator!/maxIndicator;
+  String? get userName => name ?? fullName??'';
 }
 

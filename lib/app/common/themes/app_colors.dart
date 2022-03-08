@@ -53,7 +53,7 @@ class AppColors {
 
 var _defaultLightColors = AppColors(
   background: const Color.fromRGBO(245, 246, 240, 1),
-    secondary:const Color(0xffCB7FE6),
+  secondary:const Color(0xffCB7FE6),
   accent: const Color(0xffF47321),
   accentLight: const Color(0xfff79355),
   error: const Color(0xffe62e00),
@@ -64,5 +64,5 @@ var _defaultLightColors = AppColors(
   dimmed: const Color.fromRGBO(167, 167, 167, 1),
   success: const Color.fromRGBO(0, 128, 0, 1),
   neutral: Colors.white,
-    transparent: Colors.transparent
+  transparent: Colors.transparent
 );

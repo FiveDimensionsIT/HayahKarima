@@ -8,8 +8,22 @@ import 'package:hayah_karema/app/pages/auth/new_password/new_password_binding.da
 import 'package:hayah_karema/app/pages/auth/new_password/new_password_view.dart';
 import 'package:hayah_karema/app/pages/auth/verify_mobile_number/verify_mobile_number_binding.dart';
 import 'package:hayah_karema/app/pages/auth/verify_mobile_number/verify_mobile_number_view.dart';
+import 'package:hayah_karema/app/pages/digital_pointer/digital_pointer_binding.dart';
+import 'package:hayah_karema/app/pages/digital_pointer/digital_pointer_view.dart';
+import 'package:hayah_karema/app/pages/grids_view/creators/creators_binding.dart';
+import 'package:hayah_karema/app/pages/grids_view/creators/creators_view.dart';
+import 'package:hayah_karema/app/pages/grids_view/homeland_martyrs/homeland_martyrs_binding.dart';
+import 'package:hayah_karema/app/pages/grids_view/homeland_martyrs/homeland_martyrs_view.dart';
+import 'package:hayah_karema/app/pages/grids_view/proficients/proficients_binding.dart';
+import 'package:hayah_karema/app/pages/grids_view/proficients/proficients_view.dart';
+import 'package:hayah_karema/app/pages/grids_view/sponsors/sponsors_binding.dart';
+import 'package:hayah_karema/app/pages/grids_view/sponsors/sponsors_view.dart';
 import 'package:hayah_karema/app/pages/home/home_binding.dart';
 import 'package:hayah_karema/app/pages/home/home_view.dart';
+import 'package:hayah_karema/app/pages/profile/profile_binding.dart';
+import 'package:hayah_karema/app/pages/profile/profile_view.dart';
+import 'package:hayah_karema/app/pages/side_menu/side_menu_binding.dart';
+import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
 import 'package:hayah_karema/app/pages/splash/splash_binding.dart';
 import 'package:hayah_karema/app/pages/splash/splash_view.dart';
 
@@ -50,6 +64,41 @@ class AppPages {
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.HOMELAND_MARTYRS,
+      page: () => HomelandMartyrsView(),
+      binding: HomelandMartyrsBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFICIENTS,
+      page: () => ProficientsView(),
+      binding: ProficientsBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATORS,
+      page: () => CreatorsView(),
+      binding: CreatorsBinding(),
+    ),
+    GetPage(
+      name: _Paths.TOP_COMPANIES,
+      page: () => SponsorsView(),
+      binding: SponsersBinding(),
+    ),
+    GetPage(
+      name: _Paths.SIDE_MENU,
+      page: () => SideMenuView(),
+      binding: SideMenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.DIGITAL_POINTER,
+      page: () => DigitalPointerView(),
+      binding: DigitalPointerBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

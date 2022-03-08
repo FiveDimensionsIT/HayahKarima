@@ -62,7 +62,7 @@ class HomeApiManager implements IHomeApiManager {
   }
 
   @override
-  Future<List<PointerItemModel>?> getCitizensPointer(DigitalPointerRequest params) async{
+  Future<List<PointerItemModel>?> getContactsSearch(DigitalPointerRequest params) async{
     final _params = '?roleId=${params.roleId}&statusId=${params.statusId}&PageNumber=${params.pageNo}&PageSize=${params.pageSize}&OrderBy=${params.orderBy}';
     var request = HttpRequest(method: HttpMethod.get, url: 'Contacts/Search$_params', )..addJsonHeaders();
     //

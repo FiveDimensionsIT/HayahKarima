@@ -24,7 +24,7 @@ class FakeHomeApiManager implements IHomeApiManager{
   }
 
   @override
-  Future<List<PointerItemModel>?> getCitizensPointer(DigitalPointerRequest pointerRequest) async{
+  Future<List<PointerItemModel>?> getContactsSearch(DigitalPointerRequest pointerRequest) async{
     await Future.delayed(const Duration(seconds: 2));
     return [PointerItemModel()];
   }

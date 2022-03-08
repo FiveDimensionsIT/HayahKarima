@@ -17,8 +17,12 @@ class UserData extends Serializable{
   String? iss;
   String? aud;
   int langNo = 0;
+  int? status;
+  int? groupStatus;
+  String? profileImgUrl;
 
-  UserData({this.id, this.email, this.name, this.fullName, this.idNumber, this.membershipCatId, this.villageId, this.village, this.group, this.module, this.permissions, this.exp, this.iss, this.aud, });
+
+  UserData({this.id, this.email, this.name, this.fullName, this.idNumber, this.membershipCatId, this.villageId, this.village, this.group, this.module, this.permissions, this.exp, this.iss, this.aud, this.status, this.groupStatus, this.profileImgUrl});
 
   @override
   void fromMap(Map<String, dynamic> map) {
@@ -35,7 +39,10 @@ class UserData extends Serializable{
     permissions = map['permissions'];
     exp = map['exp'];
     iss = map['iss'];
+    groupStatus = map['groupStatus'];
+    status = map['status'];
     aud = map['aud'];
+    profileImgUrl = map['profileImgUrl'];
   }
 
   @override
@@ -55,9 +62,12 @@ class UserData extends Serializable{
     data['exp'] = this.exp;
     data['iss'] = this.iss;
     data['aud'] = this.aud;
+    data['status'] = this.status;
+    data['groupStatus'] = this.groupStatus;
+    data['profileImgUrl'] = this.profileImgUrl;
     return data;
   }
 
-  UserType get userRole => module == '2' ? UserType.admin:UserType.user;
+  UserType get userRole => module == '1' ? UserType.admin:UserType.user;
 }
 

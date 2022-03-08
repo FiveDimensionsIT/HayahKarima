@@ -8,8 +8,15 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const HOME = _Paths.HOME;
-  static const VERIFY_AUTH =  _Paths.VERIFY_AUTH;
+  static const VERIFY_AUTH = _Paths.VERIFY_AUTH;
   static const NEW_PASSWORD = _Paths.NEW_PASSWORD;
+  static const HOMELAND_MARTYRS = _Paths.HOMELAND_MARTYRS;
+  static const PROFICIENTS = _Paths.PROFICIENTS;
+  static const CREATORS = _Paths.CREATORS;
+  static const TOP_COMPANIES = _Paths.TOP_COMPANIES;
+  static const SIDE_MENU = _Paths.SIDE_MENU;
+  static const DIGITAL_POINTER = _Paths.DIGITAL_POINTER;
+  static const PROFILE =  _Paths.PROFILE;
 }
 
 abstract class _Paths {
@@ -19,4 +26,11 @@ abstract class _Paths {
   static const HOME = '/home';
   static const VERIFY_AUTH = '/verify-auth';
   static const NEW_PASSWORD = '/new-password';
+  static const HOMELAND_MARTYRS = '/homeland-martyrs';
+  static const PROFICIENTS = '/proficients';
+  static const CREATORS = '/creators';
+  static const TOP_COMPANIES = '/top-companies';
+  static const SIDE_MENU = '/side-menu';
+  static const DIGITAL_POINTER = '/digital-pointer';
+  static const PROFILE = '/profile';
 }
