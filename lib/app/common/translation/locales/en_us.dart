@@ -202,7 +202,10 @@ const en_us = {
   "write_comment":"Write Comment",
   "notification":"Notification",
   "all":"All",
-  "not_read":"not read"
+  "not_read":"not read",
+  "point_village":"Point of Village",
+  "people":"people",
+  "photo_gallery":"Photo Gallery"
 
 
 };

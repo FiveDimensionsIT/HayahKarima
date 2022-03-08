@@ -205,6 +205,9 @@ abstract class AppText {
   static String get notification => 'notification'.tr;
   static String get all => 'all'.tr;
   static  String get notRead =>'not_read'.tr;
+  static  String get pointVillage =>'point_village'.tr;
+  static  String get people =>'people'.tr;
+  static String get photoGallery =>'photo_gallery'.tr;
 
 
 

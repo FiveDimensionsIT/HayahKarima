@@ -1,5 +1,8 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
@@ -11,22 +14,33 @@ class MyVillageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.current.neutral,
-      body: _buildBody(),
+      body:SafeArea(
+        child: Column(
+          children: [
+            AppToolbar(title:AppText.myVillage,
+                drawerCallBack: (){}),
+            _buildBody(),
+          ],
+        ),
+      ),
     );
   }
 
   Widget _buildBody(){
-    return SafeArea(
-      child: Column(
+    return Expanded(
+      child: ListView(
       children: [
-        AppToolbar(title: 'قريتى',
-             drawerCallBack: (){}),
-            _buildProfile(),
-            Empty(height: 16,),
-            _buildPoint(Icons.accessibility,'قرية الزعفران',213521),
-        _buildPoint(Icons.accessibility,'السكان',241221),
+              _buildProfile(),
+              _buildPoint(CupertinoIcons.star_lefthalf_fill,AppText.pointVillage,213521,
+                  AppColors.current.accent),
+              Empty(height: 16,),
+              _buildPoint(Icons.accessibility,AppText.people,241221,
+                  AppColors.current.primary),
+                 _buildGallery(),
+        _buildStoryAndPeople(title:AppText.people,descr: 'أنشئت القرية عام 1912 باسم الأبعادية القبلية، وفي عام 1925 تم تغيير اسمها إلى اسمها الحالي، وذلك لأن أراضيها كانت ملك الحكومة المصرية، وباعتها الحكومة إلى الملك فؤاد الأول، واشترت بثمن الأراض سراي الزعفران بالقاهرة، لذلك رأت الخاصة الملكية تسمية البلدة بالزعفران إحياء لذكرى سراي الزعفران التي أعطيت بدلاً منها'),
+        _buildStoryAndPeople(title: AppText.date,descr: 'بلغ عدد سكان الزعفران 22240 نسمة حسب الإحصاء الرسمى لعام 2006.')
       ],
-    ),
+      ),
     );
   }
 
@@ -51,13 +65,20 @@ class MyVillageView extends StatelessWidget {
           const Text('قرية الزعفران',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const[
-            Text('مركز الحامول',style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
+            children: [
+            const Text('مركز الحامول',style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                child: Text('0'),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Container(
+                  width: 10,
+                  height: 10,
+                  decoration: BoxDecoration(
+                    color: AppColors.current.text,
+                    shape: BoxShape.circle,
+                  ),
+                ),
               ),
-              Text('محافظة كفر الشيخ',style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
+              const Text('محافظة كفر الشيخ',style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
           ],
           ),
           Empty(height: 16,)
@@ -66,25 +87,76 @@ class MyVillageView extends StatelessWidget {
       ),
     );
   }
-  Widget _buildPoint(icon,String title ,int number){
+  Widget _buildPoint(icon,String title ,int number,Color color){
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+      height: 64,
+      margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
               width: 1,
               color: AppColors.current.dimmedLight),
       ),
-      child: Row(
-        children: [
-          Icon(icon,color: AppColors.current.accent,),
-          Text(title,style: TextStyle(color: AppColors.current.accent,),),
-          Container(
-              width: 148,
-              child: Text(number.toString(),textAlign: TextAlign.end,),
-          )
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Row(
+          children: [
+            Icon(icon,color: color,),
+            const SizedBox(width: 16,),
+            Text(title,style: TextStyle(color: color,fontSize: 14),),
+            const Spacer(flex: 1),
+            Text(number.toString(),style:TextStyle(
+              color: color,
+              fontWeight: FontWeight.normal,
+              fontSize: 14
+            )),
+          ],
+        ),
       ),
+    );
+  }
+  Widget _buildGallery (){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding:  const EdgeInsets.symmetric(horizontal: 24.0,vertical: 8),
+          child: Text(AppText.photoGallery,
+          style:const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        ),
+        CarouselSlider(items: [
+         ClipRRect(
+           borderRadius: BorderRadius.circular(20.0),
+           child: Image.asset(
+             'assets/images/egypt.jpeg',
+            fit: BoxFit.cover,
+           ),
+         ),
+        ],
+          options: CarouselOptions(
+            autoPlay: true,
+            enlargeCenterPage: true,
+            aspectRatio: 2.0,
+          ),
+        ),
+      ],
+    );
+  }
+  Widget _buildStoryAndPeople({@required String? title,@required String? descr}){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+         Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0,vertical: 8),
+          child: Text(title!,
+            style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        ),
+           Padding(
+             padding: const EdgeInsets.symmetric(horizontal: 24.0),
+             child: Text(descr!,
+               maxLines: 14,softWrap: true,),
+           ),
+      ],
     );
   }
 }

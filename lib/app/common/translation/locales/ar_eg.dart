@@ -201,7 +201,11 @@ const ar_eg = {
   "write_comment":"أكتب تعليق",
   "notification":"الإشعارات",
   "all":"الكل",
-  "not_read":"الغير مقروءة"
+  "not_read":"الغير مقروءة",
+  "point_village":"نقاط القرية",
+  "people":"السكان",
+  "photo_gallery":"معرض الصور"
+
 
 
 };
