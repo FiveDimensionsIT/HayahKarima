@@ -23,7 +23,8 @@ class MyVillageView extends StatelessWidget {
              drawerCallBack: (){}),
             _buildProfile(),
             Empty(height: 16,),
-            _buildPoint(Icons.accessibility,'قرية الزعفران',221),
+            _buildPoint(Icons.accessibility,'قرية الزعفران',213521),
+        _buildPoint(Icons.accessibility,'السكان',241221),
       ],
     ),
     );

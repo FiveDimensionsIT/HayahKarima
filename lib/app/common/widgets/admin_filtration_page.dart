@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/common/widgets/pointer_item.dart';
+import 'package:hayah_karema/utils/NumberHelper.dart';
 
 class AdminFiltrationPage extends StatelessWidget {
   final String title;
@@ -31,12 +32,15 @@ class AdminFiltrationPage extends StatelessWidget {
           separatorBuilder: (_, __) => const SizedBox(
                 height: 10,
               ),
-          itemBuilder: (cxt, index) => PointerItem(
-                title: list[index]['name'],
-                subtitle: list[index]['value'],
-                percentage: list[index]['percentage'],
-                itemBackGround: itemBackGround,
-              )),
+          itemBuilder: (cxt, index) {
+            final maxIndicator = list[0].indicator;
+            return PointerItem(
+              title: list[index].userName,
+              subtitle: formatter.format(list[index].indicator),
+              percentage: list[index].percentage(maxIndicator),
+              itemBackGround: itemBackGround,
+            );
+          }),
     );
   }
 }

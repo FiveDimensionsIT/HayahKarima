@@ -8,15 +8,18 @@ class EmptyResponse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Icon(Icons.cloud_off_outlined, size: 70, color: AppColors.current.dimmed,),
-        ),
-        Text(AppText.noData),
-      ],);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Icon(Icons.cloud_off_outlined, size: 70, color: AppColors.current.dimmed,),
+          ),
+          Text(AppText.noData),
+        ],),
+    );
   }
 }

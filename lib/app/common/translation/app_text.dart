@@ -28,6 +28,18 @@ abstract class AppText {
   static String get countrysidePointerFilter => 'countryside_pointer_filter'.tr;
   static String get citizensPointerFilter => 'citizens_pointer_filter'.tr;
   static String get typesPointerFilter => 'types_pointer_filter'.tr;
+  static String get homelandMartyrs => 'homeland_martyrs'.tr;
+  static String get proficients => 'proficients'.tr;
+  static String get creators => 'creators'.tr;
+  static String get companies => 'companies'.tr;
+  static String get homePage => 'home_page'.tr;
+  static String get myVillage => 'my_village'.tr;
+  static String get honorFiles => 'honor_files'.tr;
+  static String get settings => 'settings'.tr;
+  static String get courses => 'courses'.tr;
+  static String get sponsors => 'sponsors'.tr;
+  static String get rewards => 'rewards'.tr;
+  static String get shop => 'shop'.tr;
 
   static String get getStarted => 'get_started'.tr;
   static String get hello => 'hello'.tr;

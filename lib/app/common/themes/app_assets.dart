@@ -21,4 +21,5 @@ abstract class AppAssets{
   static const String empty = 'assets/images/empty.png';
   static const String teacherImage = 'assets/images/teacher_image.png';
   static const String otpGif = 'assets/images/otp.gif';
+  static const String userIcon = 'assets/images/icon_user.png';
 }

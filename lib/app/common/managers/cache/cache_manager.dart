@@ -1,9 +1,7 @@
 import 'dart:ui';
-
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/managers/api/auth/_model/user_data.dart';
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
-import 'package:hayah_karema/app/common/managers/cache/models/customer_data.dart';
-import 'package:hayah_karema/app/common/managers/cache/models/user_data.dart';
 import 'package:hayah_karema/services/persistence/cache/abs_cache_service.dart';
 
 
@@ -15,17 +13,6 @@ class CacheManager implements ICacheManager {
   @override
   Future<void> init() {
     return _cacheService.init();
-  }
-
-
-  @override
-  CustomerData? getCustomerData() {
-    return _cacheService.retrieveObject("customer", new CustomerData());
-  }
-
-  @override
-  Future<void> setCustomerData(CustomerData data) {
-    return _cacheService.storeObject("customer", data);
   }
 
   @override
@@ -49,9 +36,8 @@ class CacheManager implements ICacheManager {
 
   @override
   bool? logout() {
-    /// remove cached customer data
-    _cacheService.remove('customer');
     /// remove cached user data
     _cacheService.remove('user');
+    return true;
   }
 }

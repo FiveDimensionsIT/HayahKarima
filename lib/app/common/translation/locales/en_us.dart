@@ -26,6 +26,19 @@ const en_us = {
   "countryside_pointer_filter":"Countrysides pointer sort",
   "citizens_pointer_filter":"Citizens pointer sort",
   "types_pointer_filter":"Types pointer sort",
+  "home_page":"Home Page",
+  "my_village":"My village",
+  "honor_files":"Honor files",
+  "sponsors":"Sponsors",
+  "shop":"Shop",
+  "rewards":"Rewards",
+  "settings":"Settings",
+  "courses":"Courses",
+
+  "homeland_martyrs":"Homeland Martyrs",
+  "proficients":"Proficients",
+  "creators":"Creators",
+  "companies":"Companies",
 
 
   "hello": "Hello",

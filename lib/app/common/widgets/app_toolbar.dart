@@ -17,8 +17,7 @@ class AppToolbar extends StatelessWidget {
           color: AppColors.current.neutral,
           borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
           boxShadow: [
-            BoxShadow(color: AppColors.current.dimmed.withOpacity(0.15),
-                blurRadius: 3, offset: const Offset(0, 6))
+            BoxShadow(color: AppColors.current.dimmed.withOpacity(0.15), blurRadius: 3, offset: const Offset(0, 6))
           ]),
       child: Row(
         children: [

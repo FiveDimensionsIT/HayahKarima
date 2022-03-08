@@ -95,15 +95,6 @@ class NewPostView extends StatelessWidget {
             ),
           )
       );
-
-
-    // : SizedBox(
-    // height: Get.height / 3,
-    // child: Image.asset(
-    // 'assets/images/splash_3.png',
-    // fit: BoxFit.cover,
-    // ),
-    // );
   }
 
   Widget _buildBottomBar() {
