@@ -33,6 +33,7 @@ class LoginView extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+
               /// action sheet indicator
               const ActionSheetIndicator(),
 
@@ -70,53 +71,64 @@ class LoginView extends StatelessWidget {
 
   SizedBox _buildToolbar() {
     return SizedBox(
-            width: Get.width,
-            child: Text(
-              AppText.loginTitle,
-              style: TextStyle(fontSize: Get.textTheme.headline3?.fontSize, color: AppColors.current.accent, fontWeight: FontWeight.bold),
-            ),
-          );
+      width: Get.width,
+      child: Text(
+        AppText.loginTitle,
+        style: TextStyle(
+            fontSize: Get.textTheme.headline3?.fontSize, color: AppColors.current.accent, fontWeight: FontWeight.bold),
+      ),
+    );
   }
 
-  TextFormField _buildMobileNoTextField() {
-    return TextFormField(
-            decoration: InputDecoration(hintText: AppText.mobileNumber),
-            keyboardType: TextInputType.phone,
-            textInputAction: TextInputAction.next,
-            onSaved: (val)=> controller.mobileNo,
-            validator: RequiredValidator(errorText: AppText.requiredField),
-          );
+  Widget _buildMobileNoTextField() {
+    return Obx(() {
+      return TextFormField(
+        enabled: !controller.loginLoading.value,
+        decoration: InputDecoration(hintText: AppText.mobileNumber),
+        keyboardType: TextInputType.text,
+        textInputAction: TextInputAction.next,
+        initialValue: controller.userName.value,
+        onChanged: (val) => controller.userName.value = val,
+        validator: RequiredValidator(errorText: AppText.requiredField),
+      );
+    });
   }
 
-  TextFormField _buildPasswordTextField() {
-    return TextFormField(
-            decoration: InputDecoration(hintText: AppText.password,),
-            obscureText: true,
-            textInputAction: TextInputAction.done,
-            onSaved: (val) => controller.password,
-            validator: RequiredValidator(errorText: AppText.requiredField),
-            onEditingComplete: ()=> _onLogin(),
-          );
+  Widget _buildPasswordTextField() {
+    return Obx(() {
+      return TextFormField(
+        enabled: !controller.loginLoading.value,
+        decoration: InputDecoration(hintText: AppText.password,),
+        obscureText: true,
+        textInputAction: TextInputAction.done,
+        initialValue: controller.password.value,
+        onChanged: (val) => controller.password.value = val,
+        validator: RequiredValidator(errorText: AppText.requiredField),
+        onEditingComplete: () => _onLogin(),
+      );
+    });
   }
 
   TextButton _buildForgotPassword() {
     return TextButton(
-            child: Text(AppText.forgotPassword),
-            onPressed: () => controller.navigateToForgotPassword(),
-          );
+      child: Text(AppText.forgotPassword),
+      onPressed: () => controller.navigateToForgotPassword(),
+    );
   }
 
-  BigBtn _buildLoginButton() {
-    return BigBtn(
-            state: controller.loginLoading.value? BtnState.loading: BtnState.active,
-            text: AppText.login,
-            onPressed: () => _onLogin(),
-          );
+  Widget _buildLoginButton() {
+    return Obx(() {
+      return BigBtn(
+        state: controller.loginLoading.value ? BtnState.loading : BtnState.active,
+        text: AppText.login,
+        onPressed: () => _onLogin(),
+      );
+    });
   }
 
-  _onLogin(){
+  _onLogin() {
     _keyForm.currentState?.save();
-    if(_keyForm.currentState!.validate()){
+    if (_keyForm.currentState!.validate()) {
       controller.onLoginClick();
     }
   }

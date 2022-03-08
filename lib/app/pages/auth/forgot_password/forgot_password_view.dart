@@ -80,7 +80,7 @@ class ForgotPasswordView extends StatelessWidget {
             decoration: InputDecoration(hintText: AppText.mobileNumber),
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.done,
-            onSaved: (val)=> controller.mobileNo,
+      onChanged: (val)=> controller.mobileNo=val,
             validator: RequiredValidator(errorText: AppText.requiredField),
             onEditingComplete: ()=> _onSendCode(),
           );

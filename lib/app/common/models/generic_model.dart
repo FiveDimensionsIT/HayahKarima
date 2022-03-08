@@ -10,7 +10,9 @@ class GenericModel{
   Color? backgroundColor;
   Color? foregroundColor;
   DateTime? date;
-
+  Function? callBack;
   GenericModel({this.id, this.title, this.subTitle, this.isSelected, this.icon, this.imgPath, this.backgroundColor,
-    this.foregroundColor, this.date});
+    this.foregroundColor, this.date, this.callBack});
+
+
 }

@@ -14,8 +14,7 @@ class SplashView extends GetView<SplashController> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.current.neutral,
-        body: Stack(
-          children: [
+        body: Stack(children: [
 
           _buildTopShapeDesign(),
 

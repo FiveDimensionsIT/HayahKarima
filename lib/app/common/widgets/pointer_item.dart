@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PointerItem extends StatelessWidget {
   final String title, subtitle;
@@ -44,7 +45,7 @@ class PointerItem extends StatelessWidget {
             ],
           ),
           Container(
-            width: percentage,
+            width: Get.width * percentage,
             height: 3,
             decoration: BoxDecoration(
               color: itemBackGround,
