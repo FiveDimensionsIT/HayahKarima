@@ -18,6 +18,8 @@ import 'package:hayah_karema/app/pages/new_post/new_post_binding.dart';
 import 'package:hayah_karema/app/pages/new_post/new_post_view.dart';
 import 'package:hayah_karema/app/pages/notification/notification_binding.dart';
 import 'package:hayah_karema/app/pages/notification/notification_view.dart';
+import 'package:hayah_karema/app/pages/profile/profile_binding.dart';
+import 'package:hayah_karema/app/pages/profile/profile_view.dart';
 import 'package:hayah_karema/app/pages/splash/splash_binding.dart';
 import 'package:hayah_karema/app/pages/splash/splash_view.dart';
 
@@ -27,7 +29,7 @@ class AppPages {
   AppPages._();
 
   //static const INITIAL = Routes.SPLASH_VIEW;
-  static const INITIAL = Routes.MY_VILLAGE;
+  static const INITIAL = Routes.PROFILE;
   static final routes = [
     GetPage(
       name: _Paths.SPLASH_VIEW,
@@ -77,6 +79,10 @@ class AppPages {
     GetPage(name: _Paths.MY_VILLAGE,
       page: ()=> MyVillageView(),
       binding: MyVillageBinding(),
+    ),
+    GetPage(name: _Paths.PROFILE,
+      page: ()=> ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

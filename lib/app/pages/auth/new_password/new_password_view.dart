@@ -87,7 +87,6 @@ class NewPasswordView extends  StatelessWidget {
 
   TextFormField _buildConfirmNewPasswordTextField() {
     return TextFormField(
-
       decoration: InputDecoration(hintText: AppText.confirmNewPassword,),
       obscureText: true,
       textInputAction: TextInputAction.done,

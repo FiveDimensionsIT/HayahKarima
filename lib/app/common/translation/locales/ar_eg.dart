@@ -204,7 +204,20 @@ const ar_eg = {
   "not_read":"الغير مقروءة",
   "point_village":"نقاط القرية",
   "people":"السكان",
-  "photo_gallery":"معرض الصور"
+  "photo_gallery":"معرض الصور",
+  "replaceable":"قابل للإستبدال",
+  "replaced":"تم إستبدالها",
+  "information":"معلومات",
+  "education":"التعليم",
+  "practical_experience":"الخبرة العملية",
+  "earn_points":"إكتساب نقاط",
+  "replacing_prizes":"إستبدال الجوائز",
+  "title":"اللقب"
+
+
+
+
+
 
 
 

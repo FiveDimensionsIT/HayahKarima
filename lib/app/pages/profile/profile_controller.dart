@@ -1,7 +1,19 @@
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
-  //TODO: Implement ProfileController
+
+  String? name, nationalId,title,email,phone,address;
+  var loginLoading = false.obs;
+
+  navigateToHomePage(){
+
+  }
+
+  void onConfirmClick() {
+    navigateToHomePage();
+  }
+
+
 
   final count = 0.obs;
   @override

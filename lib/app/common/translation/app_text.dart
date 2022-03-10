@@ -206,9 +206,16 @@ abstract class AppText {
   static String get all => 'all'.tr;
   static  String get notRead =>'not_read'.tr;
   static  String get pointVillage =>'point_village'.tr;
+  static String get replaceable => 'replaceable'.tr;
+  static String get replacedPoint => 'replaced'.tr;
   static  String get people =>'people'.tr;
   static String get photoGallery =>'photo_gallery'.tr;
-
+  static String get information =>'information'.tr;
+  static String get education =>'education'.tr;
+  static String get practicalExperience =>'practical_experience'.tr;
+  static String get earnPoints =>'earn_points'.tr;
+  static String get replacingPrizes =>'replacing_prizes'.tr;
+  static String get title =>'title'.tr;
 
 
 }

@@ -202,10 +202,20 @@ const en_us = {
   "write_comment":"Write Comment",
   "notification":"Notification",
   "all":"All",
-  "not_read":"not read",
+  "not_read":"Not read",
   "point_village":"Point of Village",
-  "people":"people",
-  "photo_gallery":"Photo Gallery"
+  "people":"People",
+  "photo_gallery":"Photo Gallery",
+  "replaceable":"Replaceable",
+  "replaced":"Replaced",
+  "information":"Information",
+  "education":"Education",
+  "practical_experience":"Practical Experience",
+  "earn_points":"Earn Points",
+  "replacing_prizes":"Replacing Prizes",
+  "title":"Title"
+
+
 
 
 };

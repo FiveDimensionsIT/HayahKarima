@@ -14,7 +14,7 @@ abstract class Routes {
   static const NOTIFICATION_VIEW=_Paths.NOTIFICATION_VIEW;
   static const COMMENT_VIEW=_Paths.COMMENT_VIEW;
   static const MY_VILLAGE = _Paths.MY_VILLAGE;
-
+  static const PROFILE = _Paths.PROFILE;
 }
 
 abstract class _Paths {
@@ -28,4 +28,5 @@ abstract class _Paths {
   static const NOTIFICATION_VIEW='/notification';
   static const COMMENT_VIEW='/comment';
   static const MY_VILLAGE = '/my-village';
+  static const  PROFILE = '/profile';
 }
