@@ -33,7 +33,7 @@ class AppToolbar extends StatelessWidget {
           else if (drawerCallBack != null)
             IconButton(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-                onPressed: () => drawerCallBack!(),
+                onPressed: () => drawerCallBack!( ),
                 icon: Icon(
                   Icons.menu,
                   color: AppColors.current.accent,

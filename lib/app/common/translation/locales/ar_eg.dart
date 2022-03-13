@@ -212,7 +212,9 @@ const ar_eg = {
   "practical_experience":"الخبرة العملية",
   "earn_points":"إكتساب نقاط",
   "replacing_prizes":"إستبدال الجوائز",
-  "title":"اللقب"
+  "title":"اللقب",
+  "what_is_in_your_mind":"ماذا يدور بعقلك"
+
 
 
 

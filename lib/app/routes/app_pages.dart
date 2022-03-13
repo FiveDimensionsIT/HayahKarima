@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import 'package:hayah_karema/app/pages/auth/forgot_password/forgot_password_binding.dart';
 import 'package:hayah_karema/app/pages/auth/forgot_password/forgot_password_view.dart';
 import 'package:hayah_karema/app/pages/auth/login/login_binding.dart';
@@ -29,7 +28,7 @@ class AppPages {
   AppPages._();
 
   //static const INITIAL = Routes.SPLASH_VIEW;
-  static const INITIAL = Routes.PROFILE;
+  static const INITIAL = Routes.HOME;
   static final routes = [
     GetPage(
       name: _Paths.SPLASH_VIEW,

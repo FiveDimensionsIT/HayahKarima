@@ -216,6 +216,7 @@ abstract class AppText {
   static String get earnPoints =>'earn_points'.tr;
   static String get replacingPrizes =>'replacing_prizes'.tr;
   static String get title =>'title'.tr;
+  static String get whatIsInYourMind => 'what_is_in_your_mind'.tr;
 
 
 }

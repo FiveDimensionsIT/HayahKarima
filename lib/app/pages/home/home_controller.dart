@@ -10,6 +10,22 @@ class HomeController extends GetxController {
   final _apiManager = DI.find<IHomeApiManager>();
   final _action = ActionCenter();
 
+  RxBool colorButtonChange = false.obs;
+  var plantAntigensSelected = [].obs;
+
+  toogle(int index) {
+    if (plantAntigensSelected.contains(index)) {
+      plantAntigensSelected.remove(index);
+    } else {
+      plantAntigensSelected.add(index);
+    }
+  }
+
+  changeColorButton(){
+    colorButtonChange !=colorButtonChange;
+    update();
+  }
+
   @override
   void onInit() {
     super.onInit();

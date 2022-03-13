@@ -213,7 +213,8 @@ const en_us = {
   "practical_experience":"Practical Experience",
   "earn_points":"Earn Points",
   "replacing_prizes":"Replacing Prizes",
-  "title":"Title"
+  "title":"Title",
+  "what_is_in_your_mind":"What is in your mind"
 
 
 

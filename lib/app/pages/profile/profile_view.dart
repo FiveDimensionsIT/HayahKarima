@@ -9,7 +9,6 @@ import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/common/widgets/big_btn.dart';
 import 'package:hayah_karema/app/pages/profile/profile_controller.dart';
-import 'package:hayah_karema/main.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 class ProfileView extends StatelessWidget {
@@ -26,7 +25,9 @@ class ProfileView extends StatelessWidget {
         body: SafeArea(
           child: Column(
             children: [
-              AppToolbar(title: AppText.profile, drawerCallBack: () {}),
+              AppToolbar(title: AppText.profile, drawerCallBack: () {
+
+              }),
               _buildBody(),
             ],
           ),
@@ -34,7 +35,7 @@ class ProfileView extends StatelessWidget {
       ),
     );
   }
-
+  
   Widget _buildBody() {
     return Expanded(
       child: ListView(
@@ -201,7 +202,7 @@ class ProfileView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: ButtonsTabBar(
           height: 84,
-          buttonMargin: EdgeInsets.symmetric(horizontal: 8, vertical: 24),
+          buttonMargin: const EdgeInsets.symmetric(horizontal: 8, vertical: 24),
           labelStyle: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.bold,
@@ -259,7 +260,6 @@ class ProfileView extends StatelessWidget {
       ),
     );
   }
-
   /// Build TabBars views
   Widget _buildInformationTab() {
     return Form(
