@@ -17,6 +17,9 @@ abstract class Routes {
   static const SIDE_MENU = _Paths.SIDE_MENU;
   static const DIGITAL_POINTER = _Paths.DIGITAL_POINTER;
   static const PROFILE =  _Paths.PROFILE;
+  static const NEW_POST =  _Paths.NEW_POST;
+  static const COMMENTS =  _Paths.COMMENT_VIEW;
+  static const NOTIFICATION =  _Paths.NOTIFICATION_VIEW;
 }
 
 abstract class _Paths {

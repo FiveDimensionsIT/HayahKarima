@@ -38,7 +38,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH_VIEW;
+  static const INITIAL = Routes.NOTIFICATION;
 
   static final routes = [
     GetPage(
@@ -107,15 +107,15 @@ class AppPages {
       binding: ProfileBinding(),
     ),
     GetPage(name: _Paths.NEW_POST,
-      page: ()=> NewPostView(),
+      page: ()=> const NewPostView(),
       binding: NewPostBinding(),
     ),
     GetPage(name: _Paths.NOTIFICATION_VIEW,
-        page: ()=> NotificationView(),
+        page: ()=> const NotificationView(),
         binding: NotificationBinding(),
     ),
     GetPage(name: _Paths.COMMENT_VIEW,
-      page: ()=> CommentView(),
+      page: ()=> const CommentView(),
       binding: CommentBinding(),
     ),
   ];

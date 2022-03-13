@@ -143,4 +143,13 @@ abstract class AppTheme {
         borderSide: BorderSide(color: color, width: 1,));
   }
 
+  static BoxDecoration bottomNavBarDecoration(){
+    return BoxDecoration(
+        color: AppColors.current.neutral,
+        borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+        boxShadow: [
+          BoxShadow(color: AppColors.current.dimmed.withOpacity(0.15), blurRadius: 6, offset: const Offset(0, -6))
+        ]);
+  }
+
 }

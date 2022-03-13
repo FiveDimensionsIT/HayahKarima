@@ -35,6 +35,8 @@ const ar_eg = {
   "settings":"الاعدادت",
   "sponsors":"الرعاة",
   "homeland_martyrs":"شهداء الوطن",
+  "post_title":"ادخل عنوان المنشور",
+  "post_body":"ادخل تفاصيل المنشور",
   "companies":"الشركات",
 
   "proficients":"المتفوقون",
@@ -193,7 +195,7 @@ const ar_eg = {
   "dubai_office": 'مكتب دبي',
   "no_data_changed": 'لا يوجد اي تعديلات في الملف الشخصي الخاص بك',
   "new_post":"منشور جديد",
-  "image":"صور",
+  "image":"صور/فيديو",
   "activate":"أنشطة",
   "live":"مباشر",
   "share":"نشر",

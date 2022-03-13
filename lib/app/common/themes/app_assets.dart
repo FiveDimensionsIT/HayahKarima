@@ -9,6 +9,10 @@ abstract class AppAssets{
   static const String splash6 = 'assets/images/splash_6.png';
   static const String imgNotFound = 'assets/images/img_not_found.png';
 
+  static const String liveIcon = 'assets/images/live.svg';
+  static const String activitiesIcon = 'assets/images/activities.svg';
+  static const String mediaIcon = 'assets/images/media.svg';
+
   static const String logo = 'assets/images/logo.svg';
   static const String homeBG = 'assets/images/home_bg.png';
   static const String profile = 'assets/images/profile.png';

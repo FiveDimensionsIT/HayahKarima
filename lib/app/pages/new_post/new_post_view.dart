@@ -2,19 +2,17 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
+import 'package:hayah_karema/app/common/widgets/big_btn.dart';
+import 'package:hayah_karema/app/common/widgets/build_button_with_icon.dart';
 import 'package:hayah_karema/app/pages/new_post/new_post_controller.dart';
-import 'package:hayah_karema/utils/ui/ui_lib.dart';
-import 'package:image_picker/image_picker.dart';
 
-class NewPostView extends StatelessWidget {
-   NewPostView({Key? key}) : super(key: key);
-
-   var controller = Get.find<NewPostController>();
-
-
+class NewPostView extends GetView<NewPostController> {
+  const NewPostView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,136 +20,128 @@ class NewPostView extends StatelessWidget {
       backgroundColor: AppColors.current.neutral,
       resizeToAvoidBottomInset: false,
       body: _buildBody(),
-
     );
   }
 
   Widget _buildBody() {
-    return SafeArea(
-        child: Column(
+    return SafeArea(child: Column(
       children: [
-        AppToolbar(
-          title: AppText.new_post,
-          backCallBack: () {},
-        ),
-        Empty(
-          height: 20,
-        ),
-        _buildTextField(),
+        AppToolbar(title: AppText.new_post, backCallBack: () => Get.back(),),
+
+        const SizedBox(height: 20,),
+
+        _buildPostTitle(),
+
+        const SizedBox(height: 10,),
+
+        _buildPostBody(),
+
+        const SizedBox(height: 10,),
+
         _selectedImage(),
+
+        const SizedBox(height: 10,),
+
         _buildBottomBar()
       ],
     ));
   }
 
-  Widget _buildTextField() {
-    return Expanded(
-      flex: 1,
+  Widget _buildPostTitle() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
       child: TextFormField(
-        controller: null,
-        maxLines: 5,
-        decoration: const InputDecoration(
-          border: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          errorBorder: InputBorder.none,
-          disabledBorder: InputBorder.none,
-        ),
+        decoration:  InputDecoration(hintText: 'post_title'.tr,),
+        onSaved: (val){ controller.postTitle.value = val??'';},
+        textInputAction: TextInputAction.next,
+      ),
+    );
+  }
+
+  Widget _buildPostBody() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      child: TextFormField(
+        maxLines: 4,
+        decoration:  InputDecoration(hintText: 'post_body'.tr,),
+        onSaved: (val){ controller.postBody.value = val??'';},
+        textInputAction: TextInputAction.done,
       ),
     );
   }
 
   Widget _selectedImage() {
-      return Expanded(
-          flex: 1,
-          child: Container(
-          decoration: const BoxDecoration(
-          image: DecorationImage(
-            scale: 3,
-          image: AssetImage('assets/images/empty.png',
-          )
-    ),
-    ),
-            child: Obx(
-                    (){
-                  return CarouselSlider(
-                    options: CarouselOptions(
+    return Expanded(
+        child: Obx(() {
+          if(controller.imageFilesList.isEmpty){return _buildEmptyImage();}
 
-                      autoPlay: true,
-                      enlargeCenterPage: true,
-                      aspectRatio: 2.0,
-                    ),
-                    items:controller.imagefiles.map((image) {
-                      return Card(
-                        child: SizedBox(
-                          height: 200,
-                          width: 400,
-                          child: Image.file(File(image.path), fit: BoxFit.cover),
-                        ),
-                      );
-                    }).toList(),
-                  );
-                }
+          return CarouselSlider(
+            options: CarouselOptions(
+              autoPlay: false,
+              enlargeCenterPage: true,
+
             ),
-          )
-      );
+            items: controller.imageFilesList.map((image) {
+              return Card(
+                color: AppColors.current.dimmedLight,
+                child: SizedBox(
+                  // child: Center(child: Text(image.toString())),
+                  child: Image.file(File(image.path), fit: BoxFit.cover),
+                ),
+              );
+            }).toList(),
+          );
+        }));
 
+  }
 
-    // : SizedBox(
-    // height: Get.height / 3,
-    // child: Image.asset(
-    // 'assets/images/splash_3.png',
-    // fit: BoxFit.cover,
-    // ),
-    // );
+  Widget _buildEmptyImage(){
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      decoration:  BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: AppColors.current.dimmedLight,
+          image: const DecorationImage(image: AssetImage(AppAssets.imgNotFound), fit: BoxFit.cover)),
+    );
   }
 
   Widget _buildBottomBar() {
     return Container(
-      padding: const EdgeInsets.only(bottom: 8, top: 5,),
-      decoration: BoxDecoration(
-          color: AppColors.current.neutral,
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-          boxShadow: [
-            BoxShadow(
-                color: AppColors.current.dimmed.withOpacity(0.15),
-                blurRadius: 3,
-                offset: const Offset(6, 0))
-          ]),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal:16,),
+      decoration: AppTheme.bottomNavBarDecoration(),
       child: Column(
-
         children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                BuildButton(
-                    title: AppText.image,
-                    colorIcon: AppColors.current.primary,
-                    icon:const Icon(Icons.image),
-                    color: AppColors.current.background,
-                    colorText: AppColors.current.primary,
-                    onPress: ()=>controller.openImages()),
-                BuildButton(
-                    title: AppText.activate,
-                    colorIcon: AppColors.current.accent,
-                    icon: const Icon(Icons.mood),
-                    color: AppColors.current.background,
-                    colorText: AppColors.current.accent,
-                    onPress: () {}),
-                BuildButton(
-                    title: AppText.live,
-                    colorIcon: AppColors.current.error,
-                    icon: const Icon(Icons.app_shortcut_rounded),
-                    color: AppColors.current.background,
-                    colorText: AppColors.current.error,
-                    onPress: () {}),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+
+              BuildButtonWithIcon(
+                  title: AppText.image,
+                  icon: AppAssets.mediaIcon,
+                  color: AppColors.current.primary,
+                  onPress: () => controller.openImages()),
+
+              const SizedBox(width: 15,),
+
+              BuildButtonWithIcon(
+                  title: AppText.activate,
+                  icon: AppAssets.activitiesIcon,
+                  color: AppColors.current.accent,
+                  onPress: () {}),
+
+              const SizedBox(width: 15,),
+
+              BuildButtonWithIcon(
+                  title: AppText.live,
+                  icon: AppAssets.liveIcon,
+                  color: AppColors.current.error,
+                  onPress: () {}),
+            ],
           ),
+
+          const SizedBox(height: 10,),
+
           _shareButton(),
         ],
       ),
@@ -159,64 +149,12 @@ class NewPostView extends StatelessWidget {
   }
 
   Widget _shareButton() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: AppColors.current.accent, // background// foreground
-            ),
-            onPressed: () {},
-            child: Text(AppText.share)),
-      ),
-    );
-  }
-}
-
-class BuildButton extends StatelessWidget {
-  final String title;
-  final Icon icon;
-  final Color color;
-  final Color colorIcon;
-  final Color colorText;
-  final VoidCallback onPress;
-  const BuildButton(
-      {Key? key,
-      required this.title,
-      required this.icon,
-      required this.color,
-      required this.onPress,
-        required this.colorIcon,
-      required this.colorText})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 12),
-      child: Container(
-        height: 48,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-            primary: color,
-            onPrimary: colorIcon,// background// foreground
-          ),
-          onPressed: onPress,
-          icon: icon,
-          label: Text(
-            title,
-            style: TextStyle(
-              fontSize: 12,
-              color: colorText,
-            ),
-          ),
-        ),
-      ),
+    return SizedBox(
+      width: Get.width,
+      child: BigBtn(
+        state: controller.loginLoading.value? BtnState.loading: BtnState.active,
+        text: AppText.share,
+          onPressed: () => controller.onAddPostButtonClick()),
     );
   }
 }
