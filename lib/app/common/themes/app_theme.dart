@@ -19,9 +19,9 @@ abstract class AppTheme {
 
   // region theme constants
 
-  static const double _textSizeXL = 30;
-  static const double _textSizeL = 22;
-  static const double _textSizeM = 20;
+  static const double _textSizeXL = 25;
+  static const double _textSizeL = 20;
+  static const double _textSizeM = 17.5;
   static const double _textSizeS = 15;
   static const double _textSizeXS = 10;
 

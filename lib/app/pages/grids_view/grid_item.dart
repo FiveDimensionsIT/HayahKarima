@@ -21,27 +21,45 @@ class GridItemView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
-          Expanded(child: Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: AppColors.current.dimmedLight),
-              child: LayoutBuilder(
-                builder: (context, constrains) {
-                  return ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.network(model.imgPath ?? '', width: constrains.maxWidth, height: constrains.maxWidth,));
-                }
-              ))),
-
-          const SizedBox(height: 10,),
-
-          FittedBox(child: Text(model.title ?? '', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: Get.textTheme.headline3?.fontSize))),
-
-          const SizedBox(height: 10,),
-
-          FittedBox(child: Text(model.subTitle ?? '', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: Get.textTheme.bodyText2?.fontSize, color: AppColors.current.accent),)),
-
-          const SizedBox(height: 10,),
-
+          Expanded(
+              child: Container(
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColors.current.dimmedLight),
+                  child: LayoutBuilder(builder: (context, constrains) {
+                    return ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.network(
+                          model.imgPath ?? '',
+                          width: constrains.maxWidth,
+                          height: constrains.maxWidth,
+                        ));
+                  }))),
+          const SizedBox(
+            height: 10,
+          ),
+          (model.title == null || model.title!.isEmpty)
+              ? const Text('')
+              : FittedBox(
+              child: Text(model.title ?? '',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontSize: Get.textTheme.headline3?.fontSize))),
+          const SizedBox(
+            height: 10,
+          ),
+          (model.subTitle == null || model.subTitle!.isEmpty)
+              ? const Text('')
+              : FittedBox(
+                  child: Text(
+                  model.subTitle ?? '',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontSize: Get.textTheme.bodyText2?.fontSize, color: AppColors.current.accent),
+                  textAlign: TextAlign.center,
+                )),
+          const SizedBox(
+            height: 10,
+          ),
           BigBtn(
               text: AppText.more,
               onPressed: () {
