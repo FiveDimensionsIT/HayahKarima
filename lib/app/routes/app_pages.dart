@@ -38,7 +38,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.NOTIFICATION;
+  static const INITIAL = Routes.SPLASH_VIEW;
 
   static final routes = [
     GetPage(
