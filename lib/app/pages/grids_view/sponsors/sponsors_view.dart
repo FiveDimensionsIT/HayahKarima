@@ -46,7 +46,7 @@ class SponsorsView extends GetView<SponsersController> {
               return GridItemView(
                   model: GenericModel(
                       title: controller.sponsorsList[index].userName,
-                      subTitle: controller.sponsorsList[index].email,
+                      subTitle: '${controller.sponsorsList[index].sponsorCategory}\n${controller.sponsorsList[index].email}',
                       imgPath: controller.sponsorsList[index].avatar,
                       callBack: () {
                        controller.launchUrl(controller.sponsorsList[index].email);

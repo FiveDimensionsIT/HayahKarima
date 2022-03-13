@@ -7,6 +7,7 @@ abstract class AppAssets{
   static const String splash4 = 'assets/images/splash_4.png';
   static const String splash5 = 'assets/images/splash_5.png';
   static const String splash6 = 'assets/images/splash_6.png';
+  static const String imgNotFound = 'assets/images/img_not_found.png';
 
   static const String logo = 'assets/images/logo.svg';
   static const String homeBG = 'assets/images/home_bg.png';
