@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
+import 'package:hayah_karema/app/common/widgets/3dots_view.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/pages/comment/comment_controller.dart';
 import '../../common/themes/app_colors.dart';
@@ -103,16 +104,7 @@ class CommentView extends GetView<CommentController> {
               ),
             ),
 
-            SizedBox(
-              width: 40,
-              child: Center(
-                child: Text("...",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: Get.textTheme.headline1?.fontSize,
-                      color: AppColors.current.dimmed, letterSpacing: 1),
-                ),
-              ),
-            )
+            DotsView(onClick: (){}),
           ],
         ),
 

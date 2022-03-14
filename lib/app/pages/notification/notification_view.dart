@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
+import 'package:hayah_karema/app/common/widgets/3dots_view.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/pages/notification/notification_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
@@ -112,19 +113,8 @@ class NotificationView extends GetView<NotificationController> {
               ],
             ),
           ),
-          SizedBox(
-            width: 40,
-            child: Center(
-              child: Text(
-                "...",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: Get.textTheme.headline1?.fontSize,
-                    color: AppColors.current.dimmed,
-                    letterSpacing: 1),
-              ),
-            ),
-          )
+
+          DotsView(onClick: (){}),
         ],
       ),
     );

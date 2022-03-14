@@ -46,6 +46,27 @@ class AppPages {
       page: () => SplashView(),
       binding: SplashBinding(),
     ),
+
+    GetPage(
+      name: _Paths.LOGIN,
+      page: () => LoginView(),
+      binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGOT_PASSWORD,
+      page: () => ForgotPasswordView(),
+      binding: ForgotPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.VERIFY_AUTH,
+      page: () => VerifyMobileNoView(),
+      binding: VerifyMobileNoBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEW_PASSWORD,
+      page: () => NewPasswordView(),
+      binding: NewPasswordBinding(),
+    ),
     GetPage(
       name: _Paths.LOGIN,
       page: () => LoginView(),
@@ -117,6 +138,14 @@ class AppPages {
     GetPage(name: _Paths.COMMENT_VIEW,
       page: ()=> const CommentView(),
       binding: CommentBinding(),
+    ),
+    GetPage(name: _Paths.MY_VILLAGE,
+      page: ()=> const MyVillageView(),
+      binding: MyVillageBinding(),
+    ),
+    GetPage(name: _Paths.PROFILE,
+      page: ()=> ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

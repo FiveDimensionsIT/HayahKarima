@@ -203,7 +203,19 @@ const en_us = {
   "write_comment":"Write Comment",
   "notification":"Notification",
   "all":"All",
-  "not_read":"Not Read"
+  "not_read":"Not read",
+  "point_village":"Point of Village",
+  "people":"People",
+  "photo_gallery":"Photo Gallery",
+  "replaceable":"Replaceable",
+  "replaced":"Replaced",
+  "information":"Information",
+  "education":"Education",
+  "practical_experience":"Practical Experience",
+  "earn_points":"Earn Points",
+  "replacing_prizes":"Replacing Prizes",
+  "title":"Title",
+  "what_is_in_your_mind":"What is in your mind",
 
 
 };

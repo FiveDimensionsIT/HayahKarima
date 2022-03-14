@@ -12,6 +12,17 @@ abstract class AppAssets{
   static const String liveIcon = 'assets/images/live.svg';
   static const String activitiesIcon = 'assets/images/activities.svg';
   static const String mediaIcon = 'assets/images/media.svg';
+  static const String threeDotsIcon = 'assets/images/threedots_icon.svg';
+
+  static const String settingsSideMenuIcon = 'assets/images/settings_side_menu.svg';
+  static const String coursesSideMenuIcon = 'assets/images/course_side_menu.svg';
+  static const String logoutSideMenuIcon = 'assets/images/logout_side_menu.svg';
+  static const String awardsSideMenuIcon = 'assets/images/awards_side_menu.svg';
+  static const String partnersSideMenuIcon = 'assets/images/partners_side_menu.svg';
+  static const String honorbordSideMenuIcon = 'assets/images/honorbord_side_menu.svg';
+  static const String villageSideMenuIcon = 'assets/images/village_side_menu.svg';
+  static const String marketSideMenuIcon = 'assets/images/market_side_menu.svg';
+  static const String homeSideMenuIcon = 'assets/images/home_side_menu.svg';
 
   static const String logo = 'assets/images/logo.svg';
   static const String homeBG = 'assets/images/home_bg.png';

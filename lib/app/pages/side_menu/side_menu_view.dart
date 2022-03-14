@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/widgets/3dots_view.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
-
 import 'side_menu_controller.dart';
 
 class SideMenuView extends StatelessWidget {
@@ -16,15 +16,15 @@ class SideMenuView extends StatelessWidget {
     return Drawer(
       backgroundColor: AppColors.current.neutral,
       child: SafeArea(
-        child: Obx(() {
-          return Column(
-            children: [
-              _buildUserData(),
-              const Divider(),
-              _buildMenuList(context),
-            ],
-          );
-        }),
+        child: Column(
+          children: [
+            _buildUserData(),
+
+            Divider(color: AppColors.current.accentLight,),
+
+            _buildMenuList(context),
+          ],
+        ),
       ),
     );
   }
@@ -32,10 +32,12 @@ class SideMenuView extends StatelessWidget {
   Obx _buildUserData() {
     return Obx(() {
       return Padding(
-        padding: const EdgeInsets.only(top: 30,bottom: 15, left: 16, right: 16),
+        padding: const EdgeInsets.only(top: 30, bottom: 15, left: 16, right: 16),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+
             SizedBox(
               width: 55,
               child: ClipRRect(
@@ -44,9 +46,9 @@ class SideMenuView extends StatelessWidget {
                     errorBuilder: (_, __, ___) => Image.asset(AppAssets.userIcon), color: AppColors.current.dimmed),
               ),
             ),
-            const SizedBox(
-              width: 20,
-            ),
+
+            const SizedBox(width: 20,),
+
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,14 +63,7 @@ class SideMenuView extends StatelessWidget {
               ),
             ),
 
-            InkWell(
-              onTap: ()=> Get.toNamed(Routes.PROFILE),
-              child: Container(
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: AppColors.current.dimmedLight),
-                child: const Icon(CupertinoIcons.settings),
-              ),
-            )
+            DotsView(onClick: () => Get.toNamed(Routes.PROFILE)),
           ],
         ),
       );
@@ -77,27 +72,30 @@ class SideMenuView extends StatelessWidget {
 
   Expanded _buildMenuList(BuildContext context) {
     return Expanded(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: controller.menuItems.map((item) => _buildMenuItem(context, item)).toList(),
-      ),
+      child: Obx(() {
+        return ListView(
+          padding: EdgeInsets.zero,
+          children: controller.menuItems.map((item) => _buildMenuItem(context, item)).toList(),
+        );
+      }),
     );
   }
 
   Widget _buildMenuItem(BuildContext context, MenuItem item) {
+    if (!controller.honorFilesExpanded.value && item.iconPath == null) return const SizedBox();
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
       horizontalTitleGap: 0,
       onTap: () {
-        if(item.isExpandable == false) Get.back();
+        if (item.isExpandable == false) Get.back();
         item.onTap();
       },
       title: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: item.icon == null ? AppColors.current.dimmed.withOpacity(0.1): AppColors.current.transparent),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: item.iconPath == null ? AppColors.current.dimmed.withOpacity(0.1) : AppColors.current.transparent),
           child: Text(item.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: Get.textTheme.headline4?.fontSize))),
-      leading: item.icon == null ? const SizedBox() : Icon(item.icon, color: AppColors.current.accent,),
-      trailing: item.isExpandable??false? const Icon(CupertinoIcons.chevron_down): const SizedBox(),
+      leading: item.iconPath == null ? const SizedBox() : SvgPicture.asset(item.iconPath??'', color: AppColors.current.accent,),
+      trailing: item.isExpandable ?? false ? const Icon(CupertinoIcons.chevron_down) : const SizedBox(),
     );
   }
 }

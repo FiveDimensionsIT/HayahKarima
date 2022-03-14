@@ -6,6 +6,7 @@ import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/pages/home/home_controller.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
+import 'package:hayah_karema/utils/ui/empty.dart';
 
 class HomeView extends GetView<HomeController> {
 

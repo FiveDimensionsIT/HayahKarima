@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18">
+  <g id="partners" transform="translate(-4840 3410)">
+    <g id="icons8_conference" transform="translate(4838 -3413)">
+      <path id="Path_47318" data-name="Path 47318" d="M16,21H8a3,3,0,0,1-3-3V6A3,3,0,0,1,8,3h8a3,3,0,0,1,3,3V18A3,3,0,0,1,16,21Z" fill="#f47321" opacity="0.35"/>
+      <path id="Path_47319" data-name="Path 47319" d="M5,18V6a2.962,2.962,0,0,1,.184-1H4A2,2,0,0,0,2,7V17a2,2,0,0,0,2,2H5.184A2.962,2.962,0,0,1,5,18Z" fill="#f47321"/>
+      <path id="Path_47320" data-name="Path 47320" d="M20,5H18.816A2.962,2.962,0,0,1,19,6V18a2.962,2.962,0,0,1-.184,1H20a2,2,0,0,0,2-2V7A2,2,0,0,0,20,5Z" fill="#f47321"/>
+      <circle id="Ellipse_44" data-name="Ellipse 44" cx="3" cy="3" r="3" transform="translate(9 6)" fill="#f47321"/>
+      <path id="Path_47321" data-name="Path 47321" d="M15,14H9a2,2,0,0,0,0,4h6a2,2,0,0,0,0-4Z" fill="#f47321"/>
+    </g>
+  </g>
+</svg>

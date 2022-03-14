@@ -20,6 +20,7 @@ abstract class Routes {
   static const NEW_POST =  _Paths.NEW_POST;
   static const COMMENTS =  _Paths.COMMENT_VIEW;
   static const NOTIFICATION =  _Paths.NOTIFICATION_VIEW;
+  static const MY_VILLAGE =  _Paths.MY_VILLAGE;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const NEW_POST = '/new-post';
   static const NOTIFICATION_VIEW = '/notification';
   static const COMMENT_VIEW = '/comment';
+  static const MY_VILLAGE = '/my-village';
 }

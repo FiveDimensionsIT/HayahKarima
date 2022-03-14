@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/managers/api/auth/_model/user_data.dart';
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
+import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
 import 'package:hayah_karema/setup.dart';
@@ -11,6 +12,7 @@ class SideMenuController extends GetxController {
   final menuItems = <MenuItem>[].obs;
   final cacheManager = DI.find<ICacheManager>();
   final _userData = UserData().obs;
+  var honorFilesExpanded = false.obs;
 
   UserData? get userData => _userData.value;
 
@@ -34,7 +36,7 @@ class SideMenuController extends GetxController {
     /// == Home
     menuItems.add(MenuItem(
         name: AppText.homePage,
-        icon: Icons.home,
+        iconPath: AppAssets.homeSideMenuIcon,
         onTap: () {
           Get.toNamed(Routes.HOME);
         }));
@@ -42,7 +44,7 @@ class SideMenuController extends GetxController {
     /// == my village
     menuItems.add(MenuItem(
         name: AppText.myVillage,
-        icon: Icons.holiday_village,
+        iconPath: AppAssets.villageSideMenuIcon,
         onTap: () {
           // Get.toNamed(Routes.HOME);
         }));
@@ -50,11 +52,13 @@ class SideMenuController extends GetxController {
     /// == honor files
     menuItems.add(MenuItem(
         name: AppText.honorFiles,
-        icon: Icons.file_copy_sharp,
+        iconPath: AppAssets.honorbordSideMenuIcon,
         isExpandable: true,
         onTap: () {
-
+          honorFilesExpanded.value = !honorFilesExpanded.value;
+          honorFilesExpanded.refresh();
         }));
+
 
     /// == homeland martyrs
     menuItems.add(MenuItem(
@@ -80,7 +84,7 @@ class SideMenuController extends GetxController {
     /// == shop
     menuItems.add(MenuItem(
         name: AppText.shop,
-        icon: Icons.shopping_cart,
+        iconPath: AppAssets.marketSideMenuIcon,
         onTap: () {
 
         }));
@@ -88,7 +92,7 @@ class SideMenuController extends GetxController {
     /// == rewards
     menuItems.add(MenuItem(
         name: AppText.rewards,
-        icon: Icons.star,
+        iconPath: AppAssets.awardsSideMenuIcon,
         onTap: () {
 
         }));
@@ -96,7 +100,7 @@ class SideMenuController extends GetxController {
     /// == Sponsor
     menuItems.add(MenuItem(
         name: AppText.sponsors,
-        icon: Icons.supervised_user_circle_sharp,
+        iconPath: AppAssets.partnersSideMenuIcon,
         onTap: () {
           Get.toNamed(Routes.TOP_COMPANIES);
         }));
@@ -104,7 +108,7 @@ class SideMenuController extends GetxController {
     /// == Courses
     menuItems.add(MenuItem(
         name: AppText.courses,
-        icon: Icons.model_training_outlined,
+        iconPath: AppAssets.coursesSideMenuIcon,
         onTap: () {
 
         }));
@@ -112,7 +116,7 @@ class SideMenuController extends GetxController {
     /// == Settings
     menuItems.add(MenuItem(
         name: AppText.settings,
-        icon: Icons.settings,
+        iconPath: AppAssets.settingsSideMenuIcon,
         onTap: () {
 
         }));
@@ -120,7 +124,7 @@ class SideMenuController extends GetxController {
     /// == Logout
     menuItems.add(MenuItem(
         name: AppText.logout,
-        icon: Icons.logout,
+        iconPath: AppAssets.logoutSideMenuIcon,
         onTap: () async {
           final result = await DialogHelper.showActionDialog(
               yesText: AppText.yes,
@@ -140,9 +144,9 @@ class SideMenuController extends GetxController {
 
 class MenuItem {
   String name;
-  IconData? icon;
+  String? iconPath;
   VoidCallback onTap;
   bool? isExpandable;
 
-  MenuItem({required this.name, this.icon, required this.onTap, this.isExpandable});
+  MenuItem({required this.name, this.iconPath, required this.onTap, this.isExpandable});
 }

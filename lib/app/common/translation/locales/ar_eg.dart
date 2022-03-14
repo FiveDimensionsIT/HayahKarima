@@ -203,7 +203,18 @@ const ar_eg = {
   "write_comment":"أكتب تعليق",
   "notification":"الإشعارات",
   "all":"الكل",
-  "not_read":"الغير مقروءة"
-
+  "not_read":"الغير مقروءة",
+  "point_village":"نقاط القرية",
+  "people":"السكان",
+  "photo_gallery":"معرض الصور",
+  "replaceable":"قابل للإستبدال",
+  "replaced":"تم إستبدالها",
+  "information":"معلومات",
+  "education":"التعليم",
+  "practical_experience":"الخبرة العملية",
+  "earn_points":"إكتساب نقاط",
+  "replacing_prizes":"إستبدال الجوائز",
+  "title":"اللقب",
+  "what_is_in_your_mind":"ماذا يدور بعقلك"
 
 };
