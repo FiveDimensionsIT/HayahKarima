@@ -22,7 +22,7 @@ class ProfileImage extends StatelessWidget {
       child: DottedBorder(
         color: AppColors.current.accent,
         borderType: BorderType.Circle,
-        padding: EdgeInsets.all(1),
+        padding: const EdgeInsets.all(1),
         child: ClipOval(
           child: isAssetImage? Image.asset(profileImageUrl)
           :FadeInImage.assetNetwork(

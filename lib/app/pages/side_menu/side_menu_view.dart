@@ -95,7 +95,7 @@ class SideMenuView extends StatelessWidget {
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: item.iconPath == null ? AppColors.current.dimmed.withOpacity(0.1) : AppColors.current.transparent),
           child: Text(item.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: Get.textTheme.headline4?.fontSize))),
       leading: item.iconPath == null ? const SizedBox() : SvgPicture.asset(item.iconPath??'', color: AppColors.current.accent,),
-      trailing: item.isExpandable ?? false ? const Icon(CupertinoIcons.chevron_down) : const SizedBox(),
+      trailing: item.isExpandable ?? false ?  Icon(controller.honorFilesExpanded.value ? CupertinoIcons.chevron_up: CupertinoIcons.chevron_down) : const SizedBox(),
     );
   }
 }

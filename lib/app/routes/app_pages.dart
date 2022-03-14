@@ -27,7 +27,7 @@ import 'package:hayah_karema/app/pages/new_post/new_post_view.dart';
 import 'package:hayah_karema/app/pages/notification/notification_binding.dart';
 import 'package:hayah_karema/app/pages/notification/notification_view.dart';
 import 'package:hayah_karema/app/pages/profile/profile_binding.dart';
-import 'package:hayah_karema/app/pages/profile/profile_view.dart';
+import 'package:hayah_karema/app/pages/profile/views/profile_view.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_binding.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
 import 'package:hayah_karema/app/pages/splash/splash_binding.dart';
@@ -138,10 +138,6 @@ class AppPages {
     GetPage(name: _Paths.COMMENT_VIEW,
       page: ()=> const CommentView(),
       binding: CommentBinding(),
-    ),
-    GetPage(name: _Paths.MY_VILLAGE,
-      page: ()=> const MyVillageView(),
-      binding: MyVillageBinding(),
     ),
     GetPage(name: _Paths.PROFILE,
       page: ()=> ProfileView(),

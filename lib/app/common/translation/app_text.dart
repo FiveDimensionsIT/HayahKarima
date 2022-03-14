@@ -9,6 +9,7 @@ abstract class AppText {
   static String get somethingWrong => 'something_wrong'.tr;
   static String get noInternet => 'no_internet'.tr;
   static String get name => 'name'.tr;
+  static String get fullName => 'full_name'.tr;
   static String get login => 'login'.tr;
   static String get loginTitle => 'login_title'.tr;
   static String get forgotPassword => 'forgot_password'.tr;
@@ -42,6 +43,7 @@ abstract class AppText {
   static String get shop => 'shop'.tr;
   static String get postTitle => 'post_title'.tr;
   static String get postBody => 'post_body'.tr;
+  static String get points => 'points'.tr;
 
   static String get getStarted => 'get_started'.tr;
   static String get hello => 'hello'.tr;

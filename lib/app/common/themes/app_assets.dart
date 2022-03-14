@@ -13,6 +13,11 @@ abstract class AppAssets{
   static const String activitiesIcon = 'assets/images/activities.svg';
   static const String mediaIcon = 'assets/images/media.svg';
   static const String threeDotsIcon = 'assets/images/threedots_icon.svg';
+  static const String doneIcon = 'assets/images/done_icon.svg';
+  static const String giftcardIcon = 'assets/images/giftcard_icon.svg';
+  static const String pointsIcon = 'assets/images/points_icon.svg';
+  static const String graduatedIcon = 'assets/images/graduated_icon.svg';
+  static const String comapnyPlaceholderIcon = 'assets/images/comapny_placeholder_icon.svg';
 
   static const String settingsSideMenuIcon = 'assets/images/settings_side_menu.svg';
   static const String coursesSideMenuIcon = 'assets/images/course_side_menu.svg';

@@ -7,6 +7,7 @@ const en_us = {
   "no_internet": "No Internet Connection",
   "name": "Name",
   "login_title": "Login",
+  "full_name": "Full-Name",
   "login": "Login",
   "forgot_password": "Forgot Password",
   "are_you_remember_password": "Remember Password?",
@@ -40,6 +41,7 @@ const en_us = {
   "proficients":"Proficients",
   "creators":"Creators",
   "companies":"Companies",
+  "points":"Points",
 
 
   "hello": "Hello",
