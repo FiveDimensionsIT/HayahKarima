@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/models/enums/contacts_enum.dart';
 import 'package:hayah_karema/app/common/models/generic_model.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
@@ -8,6 +9,7 @@ import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
 import 'package:hayah_karema/app/common/widgets/loading_design.dart';
+import 'package:hayah_karema/app/pages/grids_view/grid_details/grid_details_view.dart';
 import 'package:hayah_karema/app/pages/grids_view/grid_item.dart';
 
 import 'creators_controller.dart';
@@ -46,9 +48,12 @@ class CreatorsView extends GetView<CreatorsController> {
                     return GridItemView(
                         model: GenericModel(
                             title: controller.creatorsList[index].userName,
-                            subTitle: 'التصوير الفوتوغرافي',
+                            subTitle: controller.creatorsList[index].excellenceField??'',
                             imgPath: controller.creatorsList[index].avatar,
-                            callBack: () {}));
+                            callBack: () => Get.to(() => GridDetails(
+                              pointerItemModel: controller.creatorsList[index],
+                              contactsEnum: ContactsEnum.creator,
+                            ))));
                   }));
             }),
     );

@@ -1,23 +1,32 @@
 import 'package:get/get.dart';
+import 'package:hayah_karema/services/logger/log.dart';
 import 'package:image_picker/image_picker.dart';
 
 class NewPostController extends GetxController{
 
-  final ImagePicker imgpicker = ImagePicker();
-  RxList<XFile> imagefiles=<XFile>[].obs;
+  var postTitle = ''.obs;
+  var postBody = ''.obs;
+  var loginLoading = false.obs;
+  RxList<XFile> imageFilesList=<XFile>[].obs;
+
+  final ImagePicker _imagePicker = ImagePicker();
 
   openImages() async {
     try {
-      var pickedfiles = await imgpicker.pickMultiImage();
-      if (pickedfiles != null && pickedfiles.isNotEmpty) {
-        imagefiles.assignAll(pickedfiles);
+      final pickedFiles = await _imagePicker.pickMultiImage();
+      if (pickedFiles != null && pickedFiles.isNotEmpty) {
+        imageFilesList.assignAll(pickedFiles);
 
       } else {
-        print("No image is selected.");
+        Log.error("No image is selected.");
       }
     } catch (e) {
-      print("error while picking file.");
+      Log.error("error while picking file: $e");
     }
+  }
+
+  void onAddPostButtonClick(){
+
   }
 
 }

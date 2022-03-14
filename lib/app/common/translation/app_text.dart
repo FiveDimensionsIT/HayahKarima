@@ -40,6 +40,8 @@ abstract class AppText {
   static String get sponsors => 'sponsors'.tr;
   static String get rewards => 'rewards'.tr;
   static String get shop => 'shop'.tr;
+  static String get postTitle => 'post_title'.tr;
+  static String get postBody => 'post_body'.tr;
 
   static String get getStarted => 'get_started'.tr;
   static String get hello => 'hello'.tr;
@@ -201,9 +203,11 @@ abstract class AppText {
   static String get live => 'live'.tr;
   static String get share => 'share'.tr;
   static String get comments => 'comments'.tr;
-  static String get write_comment => 'write_comment'.tr;
+  static String get writeComment => 'write_comment'.tr;
   static String get notification => 'notification'.tr;
   static String get all => 'all'.tr;
+  static String get notRead =>'not_read'.tr;
+
   static  String get notRead =>'not_read'.tr;
   static  String get pointVillage =>'point_village'.tr;
   static String get replaceable => 'replaceable'.tr;

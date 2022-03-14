@@ -2,17 +2,28 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
+import 'package:hayah_karema/app/common/models/enums/contacts_enum.dart';
+import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
+import 'package:hayah_karema/app/common/widgets/empty_response.dart';
 import 'package:hayah_karema/app/common/widgets/shadow_view.dart';
+import 'package:hayah_karema/app/pages/grids_view/grid_details/grid_details_controller.dart';
 
 class GridDetails extends StatelessWidget {
-  const GridDetails({Key? key}) : super(key: key);
+  final PointerItemModel pointerItemModel;
+  final ContactsEnum contactsEnum;
+
+  GridDetails({Key? key, required this.pointerItemModel, required this.contactsEnum}) : super(key: key);
+
+  final controller = Get.put(GridDetailsController());
 
   @override
   Widget build(BuildContext context) {
+    controller.getGalleryApi(pointerItemModel.id!);
     return Scaffold(
       backgroundColor: AppColors.current.neutral,
       body: SafeArea(
@@ -36,23 +47,27 @@ class GridDetails extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-
             _buildPrefCard(),
-
-            const SizedBox(height: 20,),
-
-            _buildDeadDate(),
-
-            const SizedBox(height: 20,),
-
-            _buildSpecialist(),
-
-            const SizedBox(height: 20,),
-
-            _buildDeadMercy(),
-
-            const SizedBox(height: 25,),
-
+            const SizedBox(
+              height: 20,
+            ),
+            if (contactsEnum == ContactsEnum.martyr)
+              Column(
+                children: [
+                  _buildDeadDate(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildDeadMercy(),
+                ],
+              ),
+            const SizedBox(
+              height: 20,
+            ),
+            if (contactsEnum != ContactsEnum.martyr) _buildSpecialist(),
+            const SizedBox(
+              height: 25,
+            ),
             _buildGallery(),
           ],
         ),
@@ -61,6 +76,16 @@ class GridDetails extends StatelessWidget {
   }
 
   Widget _buildPrefCard() {
+    final userName = pointerItemModel.userName;
+    String? name, subTitle;
+    if (userName != null && userName.contains('-')) {
+      name = userName.split('-')[0];
+      subTitle = userName.split('-')[1];
+      if (subTitle.isNotEmpty) {
+        name += '\n$subTitle';
+      }
+    }
+
     return Container(
       width: Get.width,
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -76,25 +101,39 @@ class GridDetails extends StatelessWidget {
             height: Get.width / 3,
             child: ClipOval(
               child: Image.network(
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRurCcJNZBSJYjDSCKTjj4vBTFhOs2A_810Rw&usqp=CAU'),
+                pointerItemModel.avatar ?? '',
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) {
+                  return Image.asset(
+                    AppAssets.userIcon,
+                    fit: BoxFit.cover,
+                  );
+                },
+              ),
             ),
           ),
 
           /// name
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
-            child: Text(
-              'أنور ابراهيم المنزلاوي',
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: Get.textTheme.headline2?.fontSize),
+            child: FittedBox(
+              child: Text(
+                '${name ?? userName}',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: Get.textTheme.headline2?.fontSize),
+              ),
             ),
           ),
 
           /// desc
-          Text('مركز مطوبس - قرية منية المرشد', maxLines: 2,
+          Text(
+            '${pointerItemModel.center} - ${pointerItemModel.village}',
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: Get.textTheme.headline4?.fontSize),),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: Get.textTheme.headline4?.fontSize),
+          ),
         ],
       ),
     );
@@ -127,7 +166,7 @@ class GridDetails extends StatelessWidget {
             child: SizedBox(),
           ),
           Text(
-            '22/10/1940',
+            pointerItemModel.deathDate ?? '',
             style: TextStyle(
                 color: AppColors.current.accent,
                 fontWeight: FontWeight.bold,
@@ -157,7 +196,7 @@ class GridDetails extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              'العلوم الحديثة',
+              pointerItemModel.excellenceField ?? '',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -193,7 +232,7 @@ class GridDetails extends StatelessWidget {
       children: [
         Text(
           'معرض الصور',
-          style: TextStyle(fontSize: Get.textTheme.headline2?.fontSize, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: Get.textTheme.headline3?.fontSize, fontWeight: FontWeight.bold),
         ),
         const SizedBox(
           height: 10,
@@ -203,7 +242,7 @@ class GridDetails extends StatelessWidget {
           height: 10,
         ),
         Text(
-          'ولد بمنية المرشد عام 1944، استدعي للخدمة باليمن أثناء تجنيده، لحماية ثورة الشعب ضد نظام البدر البدائي. ظل عامين باليمن ثم عاد إلى منية المرشد، وحصل على شهادة انتهاء خدمته، فتزوج وبدأ حياته المدنية، لكن إسرائيل هجمت على مصر في 5 يونيو 1967، واستدعي أنور كجندي احتياط. وطال انتظار الزوجة والأهل لعودته دون جدوى. وفي النهاية وصل الخبر رسميا باستشهاده. وكرمته الدولة بإطلاق اسمه على إحدى مدارس القرية مدرسة الشهيد المنزلاوي',
+          pointerItemModel.biography ?? '',
           style: TextStyle(fontSize: Get.textTheme.headline3?.fontSize),
           textAlign: TextAlign.justify,
         ),
@@ -212,22 +251,38 @@ class GridDetails extends StatelessWidget {
   }
 
   Widget _buildGallerySlider() {
-    return CarouselSlider(
-      options: CarouselOptions(height: Get.height / 3, initialPage: 0, viewportFraction: 0.8,),
+    return Obx(() {
+      if (controller.apiLoading.value) return const Center(child: CircularProgressIndicator());
 
-      items: [1, 2, 3, 4, 5].map((i) {
-        return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
+      if (controller.galleryList.isEmpty) return const EmptyResponse();
+
+      return CarouselSlider(
+        options: CarouselOptions(
           height: Get.height / 3,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
+          initialPage: 0,
+          viewportFraction: 0.8,
+        ),
+        items: controller.galleryList.map((item) {
+          return Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            height: Get.height / 3,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
               child: Stack(
                 children: [
                   ShadowView(
                     child: Image.network(
-                      'https://media.istockphoto.com/photos/aerial-photograph-rural-landscape-farms-villages-picturesque-green-picture-id1292399669?b=1&k=20&m=1292399669&s=170667a&w=0&h=LQAbbZdgZVPntMvwUvMBwTuJkIU7JF6XP4sGe-Mq4o0=',
+                      item.filename ?? '',
                       fit: BoxFit.cover,
                       height: Get.height / 3,
+                      errorBuilder: (_, __, ___) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          height: Get.height / 3,
+                          decoration:
+                              const BoxDecoration(image: DecorationImage(image: AssetImage(AppAssets.imgNotFound), fit: BoxFit.contain)),
+                        );
+                      },
                     ),
                   ),
                   Positioned(
@@ -237,15 +292,20 @@ class GridDetails extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         color: AppColors.current.text.withOpacity(0.7),
                         child: Text(
-                          'صور تعبر عن مدخل القرية',
+                          (contactsEnum == ContactsEnum.martyr)
+                              ? 'صور تعبر عن مدخل القرية'
+                              : (contactsEnum == ContactsEnum.proficient || contactsEnum == ContactsEnum.creator)
+                                  ? 'صور تعبر عن الشخص صاحب الملف التعريفي'
+                                  : 'صور تعبر عن الرعاة',
                           style: TextStyle(color: AppColors.current.neutral),
                         ),
                       )),
                 ],
               ),
-          ),
-        );
-      }).toList(),
-    );
+            ),
+          );
+        }).toList(),
+      );
+    });
   }
 }

@@ -10,11 +10,16 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const VERIFY_AUTH =  _Paths.VERIFY_AUTH;
   static const NEW_PASSWORD = _Paths.NEW_PASSWORD;
-  static const NEW_POST = _Paths.NEW_POST;
-  static const NOTIFICATION_VIEW=_Paths.NOTIFICATION_VIEW;
-  static const COMMENT_VIEW=_Paths.COMMENT_VIEW;
-  static const MY_VILLAGE = _Paths.MY_VILLAGE;
-  static const PROFILE = _Paths.PROFILE;
+  static const HOMELAND_MARTYRS = _Paths.HOMELAND_MARTYRS;
+  static const PROFICIENTS = _Paths.PROFICIENTS;
+  static const CREATORS = _Paths.CREATORS;
+  static const TOP_COMPANIES = _Paths.TOP_COMPANIES;
+  static const SIDE_MENU = _Paths.SIDE_MENU;
+  static const DIGITAL_POINTER = _Paths.DIGITAL_POINTER;
+  static const PROFILE =  _Paths.PROFILE;
+  static const NEW_POST =  _Paths.NEW_POST;
+  static const COMMENTS =  _Paths.COMMENT_VIEW;
+  static const NOTIFICATION =  _Paths.NOTIFICATION_VIEW;
 }
 
 abstract class _Paths {

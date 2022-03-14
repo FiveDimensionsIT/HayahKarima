@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="media" transform="translate(-1938 -107)">
+    <rect id="Rectangle_11183" data-name="Rectangle 11183" width="24" height="24" transform="translate(1938 107)" fill="#22a99b" opacity="0"/>
+    <path id="icons8_image_gallery_1" d="M3,3A2.015,2.015,0,0,0,1,5V15a2.015,2.015,0,0,0,2,2H16a2.015,2.015,0,0,0,2-2V5a2.015,2.015,0,0,0-2-2ZM3,5H16v7l-1.779-1.779a1.02,1.02,0,0,0-1.441,0l-2.73,2.725a1,1,0,0,1-1.418-1.416l.85-.85L8.156,9.283a1.018,1.018,0,0,0-1.463-.016L3,12.992Zm8,1a1,1,0,1,0,1,1A1,1,0,0,0,11,6Zm9.984.986A1,1,0,0,0,20,8V19H6a1,1,0,1,0,0,2H20a2.015,2.015,0,0,0,2-2V8a1,1,0,0,0-1.016-1.014Z" transform="translate(1938 107)" fill="#22a99b"/>
+  </g>
+</svg>

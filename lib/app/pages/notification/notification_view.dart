@@ -1,161 +1,132 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
-import 'package:hayah_karema/app/common/widgets/shadow_view.dart';
+import 'package:hayah_karema/app/pages/notification/notification_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
-
 import '../../common/themes/app_colors.dart';
 
-class NotificationView extends StatelessWidget {
-  NotificationView({Key? key}) : super(key: key);
+class NotificationView extends GetView<NotificationController> {
+  const NotificationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        backgroundColor: AppColors.current.neutral,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(136),
-          child: SafeArea(
+    return Obx(() {
+      return DefaultTabController(
+        length: controller.tabList.length,
+        child: Scaffold(
+          backgroundColor: AppColors.current.neutral,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(136),
+            child: SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  AppToolbar(
+                    title: AppText.notification,
+                    backCallBack: () {},
+                  ),
+                  Empty(
+                    height: 16,
+                  ),
+                  TabBar(
+                    indicatorColor: Colors.transparent,
+                    labelPadding: EdgeInsets.zero,
+                    isScrollable: true,
+                    onTap: (index)=> controller.onTabClick(index),
+                    tabs: controller.tabList
+                        .map(
+                          (item) => Container(
+                              decoration: BoxDecoration(
+                                  color: item.isSelected == true
+                                      ? AppColors.current.accentLight
+                                      : AppColors.current.accentLight.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(10)),
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                              margin: const EdgeInsets.symmetric(horizontal: 20),
+                              child: Text(item.title??'', style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: item.isSelected == false
+                                  ? AppColors.current.accentLight
+                                  : AppColors.current.neutral),)),
+                        )
+                        .toList(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          body: _contentNotification(),
+        ),
+      );
+    });
+  }
+
+  Widget _contentNotification() {
+    return ListView.separated(
+        itemCount: 10,
+        separatorBuilder: (_, __) => const Divider(
+              height: 1,
+            ),
+        itemBuilder: (context, index) {
+          return _buildNotificationItem(index);
+        });
+  }
+
+  Widget _buildNotificationItem(int index) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      color: index % 2 == 0 ? AppColors.current.neutral : AppColors.current.primary.withOpacity(0.05),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 64,
+            height: 64,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                image: const DecorationImage(fit: BoxFit.fill, image: AssetImage(AppAssets.userIcon))),
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+          Expanded(
             child: Column(
-              children: <Widget>[
-                AppToolbar(
-                  title: AppText.notification,
-                  backCallBack: () {},
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  child: Text(
+                    'هناك حقيقة مثبتة منذ زمن طويل وهى ان المحتوى المقروء لصفحة  ',
+                    maxLines: 2,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(color: AppColors.current.text, fontWeight: FontWeight.bold),
+                  ),
                 ),
-                Empty(
-                  height: 24,
-                ),
-                TabBar(
-                  indicatorColor: Colors.transparent,
-                  padding: const EdgeInsets.only(left: 136),
-                  indicatorPadding: EdgeInsets.zero,
-                  labelPadding: EdgeInsets.zero,
-                  tabs: [
-                    _buildContentButton(AppText.all, 48,
-                        AppColors.current.neutral, AppColors.current.accent),
-                    _buildContentButton(
-                        AppText.notRead,
-                        96,
-                        AppColors.current.accent,
-                        AppColors.current.accent.withOpacity(0.2)),
-                  ],
+                Text(
+                  '14 الاثنين.فبراير 2022',
+                  style: TextStyle(color: AppColors.current.primary, fontSize: Get.textTheme.bodyMedium?.fontSize),
                 ),
               ],
             ),
           ),
-        ),
-        body: _contentBody(),
-      ),
-    );
-  }
-
-  Widget _buildContentButton(
-      String text, double width, Color fontColor, Color colorContinaer) {
-    return Container(
-      width: width,
-      decoration: BoxDecoration(
-          color: colorContinaer, borderRadius: BorderRadius.circular(12)),
-      child: Tab(
-        child: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: TextStyle(color: fontColor),
-        ),
-      ),
-    );
-  }
-
-  Widget _contentBody() {
-    return TabBarView(
-        children: [
-      Flex(
-        direction: Axis.vertical,
-        children: [
-          Expanded(
-            flex: 1,
-            child: _contentNotification(),
-          ),
-        ],
-      ),
-      Flex(
-        direction: Axis.vertical,
-        children: [
-          Expanded(
-            flex: 1,
-            child: _contentNotification(),
-          ),
-        ],
-      ),
-    ]);
-  }
-
-  Widget _contentNotification(){
-    return ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return ShadowView(
-            child: Container(
-              color: index % 2 == 0
-                  ? AppColors.current.neutral
-                  : AppColors.current.primary.withOpacity(0.05),
-              child: Row(
-                children: [
-                  Container(
-                    width: 64,
-                    height: 64,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        image: const DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage(
-                              'assets/images/icon_user.png',
-                            ))),
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: Get.width / 1.65,
-                        child: Text(
-                          'هناك حقيقة مثبتة منذ زمن طويل وهى ان المحتوى المقروء لصفحة  ',
-                          maxLines: 2,
-                          softWrap: true,
-                          //overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: AppColors.current.text,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Text(
-                        '14 الاثنين.فبراير 2022',
-                        style:
-                        TextStyle(color: AppColors.current.primary),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: Get.width / 12,
-                    child: Text(
-                      "...",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: AppColors.current.dimmed,
-                          letterSpacing: 1),
-                      textAlign: TextAlign.end,
-                    ),
-                  )
-                ],
+          SizedBox(
+            width: 40,
+            child: Center(
+              child: Text(
+                "...",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: Get.textTheme.headline1?.fontSize,
+                    color: AppColors.current.dimmed,
+                    letterSpacing: 1),
               ),
             ),
-          );
-        });
+          )
+        ],
+      ),
+    );
   }
 }

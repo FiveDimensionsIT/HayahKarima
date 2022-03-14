@@ -34,7 +34,8 @@ const en_us = {
   "rewards":"Rewards",
   "settings":"Settings",
   "courses":"Courses",
-
+  "post_title":"Enter post title",
+  "post_body":"Enter post body",
   "homeland_martyrs":"Homeland Martyrs",
   "proficients":"Proficients",
   "creators":"Creators",
@@ -217,6 +218,7 @@ const en_us = {
   "what_is_in_your_mind":"What is in your mind"
 
 
+  "not_read":"Not Read"
 
 
 };
