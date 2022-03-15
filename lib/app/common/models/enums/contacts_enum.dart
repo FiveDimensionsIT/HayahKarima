@@ -2,5 +2,6 @@ enum ContactsEnum{
   martyr,
   creator,
   proficient,
-  sponsor
+  sponsor,
+  myVillage,
 }

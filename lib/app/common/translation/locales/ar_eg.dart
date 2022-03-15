@@ -38,6 +38,7 @@ const ar_eg = {
   "homeland_martyrs":"شهداء الوطن",
   "post_title":"ادخل عنوان المنشور",
   "post_body":"ادخل تفاصيل المنشور",
+  "choose_post_type":"اختر نوع المنشور",
   "companies":"الشركات",
   "points":"النقاط",
 

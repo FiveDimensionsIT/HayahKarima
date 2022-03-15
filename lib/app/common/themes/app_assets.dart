@@ -10,6 +10,7 @@ abstract class AppAssets{
   static const String imgNotFound = 'assets/images/img_not_found.png';
 
   static const String liveIcon = 'assets/images/live.svg';
+  static const String dateOfDeathIcon = 'assets/images/date_of_death_icon.svg';
   static const String activitiesIcon = 'assets/images/activities.svg';
   static const String mediaIcon = 'assets/images/media.svg';
   static const String threeDotsIcon = 'assets/images/threedots_icon.svg';
@@ -28,6 +29,17 @@ abstract class AppAssets{
   static const String villageSideMenuIcon = 'assets/images/village_side_menu.svg';
   static const String marketSideMenuIcon = 'assets/images/market_side_menu.svg';
   static const String homeSideMenuIcon = 'assets/images/home_side_menu.svg';
+  static const String peopleIcon = 'assets/images/people_icon.svg';
+
+  static const String postType1 = 'assets/images/post_type1.svg';
+  static const String postType2 = 'assets/images/post_type2.svg';
+  static const String postType3 = 'assets/images/post_type3.svg';
+  static const String postType4 = 'assets/images/post_type4.svg';
+  static const String postType5 = 'assets/images/post_type5.svg';
+  static const String postType6 = 'assets/images/post_type6.svg';
+  static const String postType7 = 'assets/images/post_type7.svg';
+  static const String postType8 = 'assets/images/post_type8.svg';
+  static const String postType9 = 'assets/images/post_type9.svg';
 
   static const String logo = 'assets/images/logo.svg';
   static const String homeBG = 'assets/images/home_bg.png';

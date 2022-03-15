@@ -48,10 +48,10 @@ class ProficientsView extends GetView<ProficientsController> {
                       title: controller.proficientsList[index].userName,
                       subTitle:  controller.proficientsList[index].excellenceField,
                       imgPath: controller.proficientsList[index].avatar,
-                      callBack: () => Get.to(() => GridDetails(
-                            pointerItemModel: controller.proficientsList[index],
-                            contactsEnum: ContactsEnum.proficient,
-                          ))));
+                      callBack: () => Get.to(() => GridDetails(), arguments: {
+                        'ContactsEnum': ContactsEnum.proficient,
+                        "PointerItemModel": controller.proficientsList[index]
+                      })));
             }));
       }),
     );

@@ -87,7 +87,7 @@ class SideMenuView extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
       horizontalTitleGap: 0,
       onTap: () {
-        if (item.isExpandable == false) Get.back();
+        if (item.isExpandable == null || item.isExpandable == false) Get.back();
         item.onTap();
       },
       title: Container(

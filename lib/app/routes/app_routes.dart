@@ -16,11 +16,12 @@ abstract class Routes {
   static const TOP_COMPANIES = _Paths.TOP_COMPANIES;
   static const SIDE_MENU = _Paths.SIDE_MENU;
   static const DIGITAL_POINTER = _Paths.DIGITAL_POINTER;
-  static const PROFILE =  _Paths.PROFILE;
-  static const NEW_POST =  _Paths.NEW_POST;
-  static const COMMENTS =  _Paths.COMMENT_VIEW;
-  static const NOTIFICATION =  _Paths.NOTIFICATION_VIEW;
-  static const MY_VILLAGE =  _Paths.MY_VILLAGE;
+  static const PROFILE = _Paths.PROFILE;
+  static const NEW_POST = _Paths.NEW_POST;
+  static const COMMENTS = _Paths.COMMENT_VIEW;
+  static const NOTIFICATION = _Paths.NOTIFICATION_VIEW;
+  static const MY_VILLAGE = _Paths.MY_VILLAGE;
+  static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
 }
 
 abstract class _Paths {
@@ -41,4 +42,5 @@ abstract class _Paths {
   static const NOTIFICATION_VIEW = '/notification';
   static const COMMENT_VIEW = '/comment';
   static const MY_VILLAGE = '/my-village';
+  static const CHANGE_PASSWORD = '/change-password';
 }

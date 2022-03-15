@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/big_btn.dart';
+import 'package:hayah_karema/app/pages/auth/change_password/change_password_view.dart';
 
 class ProfileInfoView extends StatelessWidget {
   const ProfileInfoView({Key? key}) : super(key: key);
@@ -71,7 +73,7 @@ class ProfileInfoView extends StatelessWidget {
   }
 
   void _displayActionSheet(){
-
+    Get.bottomSheet(ChangePasswordView());
   }
 
 }

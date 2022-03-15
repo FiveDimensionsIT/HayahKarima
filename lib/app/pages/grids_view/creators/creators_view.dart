@@ -44,16 +44,17 @@ class CreatorsView extends GetView<CreatorsController> {
                   mainAxisSpacing: 10,
                   childAspectRatio: 0.6,
                   children: List.generate(controller.creatorsList.length, (index) {
-
                     return GridItemView(
                         model: GenericModel(
                             title: controller.creatorsList[index].userName,
                             subTitle: controller.creatorsList[index].excellenceField??'',
                             imgPath: controller.creatorsList[index].avatar,
-                            callBack: () => Get.to(() => GridDetails(
-                              pointerItemModel: controller.creatorsList[index],
-                              contactsEnum: ContactsEnum.creator,
-                            ))));
+                            callBack: ()=>Get.to(() => GridDetails(), arguments: {
+                              'ContactsEnum': ContactsEnum.creator,
+                              "PointerItemModel": controller.creatorsList[index]
+                            })
+                        )
+                    );
                   }));
             }),
     );

@@ -44,6 +44,7 @@ abstract class AppText {
   static String get postTitle => 'post_title'.tr;
   static String get postBody => 'post_body'.tr;
   static String get points => 'points'.tr;
+  static String get choosePostType => 'choose_post_type'.tr;
 
   static String get getStarted => 'get_started'.tr;
   static String get hello => 'hello'.tr;

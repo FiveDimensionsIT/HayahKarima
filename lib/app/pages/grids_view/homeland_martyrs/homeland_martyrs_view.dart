@@ -60,10 +60,10 @@ class HomelandMartyrsView extends GetView<HomelandMartyrsController> {
                       title: name ?? userName,
                       subTitle: subTitle,
                       imgPath: controller.martyrsList[index].avatar,
-                      callBack: () => Get.to(() => GridDetails(
-                            pointerItemModel: controller.martyrsList[index],
-                            contactsEnum: ContactsEnum.martyr,
-                          ))));
+                      callBack: () => Get.to(() => GridDetails(), arguments: {
+                        'ContactsEnum': ContactsEnum.martyr,
+                        "PointerItemModel": controller.martyrsList[index]
+                      })));
             }));
       }),
     );

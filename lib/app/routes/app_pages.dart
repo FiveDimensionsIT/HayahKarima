@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import 'package:hayah_karema/app/pages/auth/change_password/change_password_binding.dart';
+import 'package:hayah_karema/app/pages/auth/change_password/change_password_view.dart';
 import 'package:hayah_karema/app/pages/auth/forgot_password/forgot_password_binding.dart';
 import 'package:hayah_karema/app/pages/auth/forgot_password/forgot_password_view.dart';
 import 'package:hayah_karema/app/pages/auth/login/login_binding.dart';
@@ -23,7 +25,7 @@ import 'package:hayah_karema/app/pages/grids_view/sponsors/sponsors_view.dart';
 import 'package:hayah_karema/app/pages/home/home_binding.dart';
 import 'package:hayah_karema/app/pages/home/home_view.dart';
 import 'package:hayah_karema/app/pages/new_post/new_post_binding.dart';
-import 'package:hayah_karema/app/pages/new_post/new_post_view.dart';
+import 'package:hayah_karema/app/pages/new_post/views/new_post_view.dart';
 import 'package:hayah_karema/app/pages/notification/notification_binding.dart';
 import 'package:hayah_karema/app/pages/notification/notification_view.dart';
 import 'package:hayah_karema/app/pages/profile/profile_binding.dart';
@@ -46,7 +48,6 @@ class AppPages {
       page: () => SplashView(),
       binding: SplashBinding(),
     ),
-
     GetPage(
       name: _Paths.LOGIN,
       page: () => LoginView(),
@@ -127,21 +128,30 @@ class AppPages {
       page: () => ProfileView(),
       binding: ProfileBinding(),
     ),
-    GetPage(name: _Paths.NEW_POST,
-      page: ()=> const NewPostView(),
+    GetPage(
+      name: _Paths.NEW_POST,
+      page: () => const NewPostView(),
       binding: NewPostBinding(),
     ),
-    GetPage(name: _Paths.NOTIFICATION_VIEW,
-        page: ()=> const NotificationView(),
-        binding: NotificationBinding(),
+    GetPage(
+      name: _Paths.NOTIFICATION_VIEW,
+      page: () => const NotificationView(),
+      binding: NotificationBinding(),
     ),
-    GetPage(name: _Paths.COMMENT_VIEW,
-      page: ()=> const CommentView(),
+    GetPage(
+      name: _Paths.COMMENT_VIEW,
+      page: () => const CommentView(),
       binding: CommentBinding(),
     ),
-    GetPage(name: _Paths.PROFILE,
-      page: ()=> ProfileView(),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHANGE_PASSWORD,
+      page: () => ChangePasswordView(),
+      binding: ChangePasswordBinding(),
     ),
   ];
 }

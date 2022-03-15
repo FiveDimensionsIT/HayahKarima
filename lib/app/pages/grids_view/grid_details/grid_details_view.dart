@@ -1,39 +1,40 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
 import 'package:hayah_karema/app/common/models/enums/contacts_enum.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
+import 'package:hayah_karema/app/common/widgets/dot_view.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
+import 'package:hayah_karema/app/common/widgets/loading_design.dart';
 import 'package:hayah_karema/app/common/widgets/shadow_view.dart';
 import 'package:hayah_karema/app/pages/grids_view/grid_details/grid_details_controller.dart';
 
 class GridDetails extends StatelessWidget {
-  final PointerItemModel pointerItemModel;
-  final ContactsEnum contactsEnum;
-
-  GridDetails({Key? key, required this.pointerItemModel, required this.contactsEnum}) : super(key: key);
+  GridDetails({Key? key}) : super(key: key);
 
   final controller = Get.put(GridDetailsController());
 
   @override
   Widget build(BuildContext context) {
-    controller.getGalleryApi(pointerItemModel.id!);
     return Scaffold(
       backgroundColor: AppColors.current.neutral,
       body: SafeArea(
         child: Column(
           children: [
             AppToolbar(
-              title: AppText.back,
+              title: controller.contactsEnum == ContactsEnum.myVillage ? AppText.myVillage : AppText.back,
               backCallBack: () => Get.back(),
             ),
-            _buildContent(),
+            Obx(() {
+              if (controller.apiLoading.value == true) return const Expanded(child: LoadingDesign());
+              return _buildContent();
+            }),
           ],
         ),
       ),
@@ -46,29 +47,58 @@ class GridDetails extends StatelessWidget {
       padding: AppTheme.pagePadding,
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildPrefCard(),
             const SizedBox(
               height: 20,
             ),
-            if (contactsEnum == ContactsEnum.martyr)
+            if (controller.contactsEnum == ContactsEnum.martyr)
               Column(
                 children: [
-                  _buildDeadDate(),
+                  _buildDetailsItem(
+                      title: 'تاريخ الوفاة',
+                      color: AppColors.current.error,
+                      imgPath: AppAssets.dateOfDeathIcon,
+                      countValue: controller.pointerItemModel.deathDate),
                   const SizedBox(
                     height: 20,
                   ),
                   _buildDeadMercy(),
                 ],
               ),
+            if (controller.contactsEnum == ContactsEnum.myVillage)
+              Column(
+                children: [
+                  _buildDetailsItem(
+                      title: 'نقاط القرية',
+                      color: AppColors.current.accent,
+                      imgPath: AppAssets.pointsIcon,
+                      countValue: controller.pointerItemModel.villagePoints ?? ''),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildDetailsItem(
+                      title: 'السكان',
+                      color: AppColors.current.primary,
+                      imgPath: AppAssets.peopleIcon,
+                      countValue: controller.pointerItemModel.villagePeople ?? ''),
+                ],
+              ),
             const SizedBox(
               height: 20,
             ),
-            if (contactsEnum != ContactsEnum.martyr) _buildSpecialist(),
+            if (controller.contactsEnum == ContactsEnum.creator || controller.contactsEnum == ContactsEnum.proficient)
+              _buildDetailsItem(
+                  imgPath: AppAssets.honorbordSideMenuIcon,
+                  title: controller.pointerItemModel.excellenceField ?? '',
+                  color: AppColors.current.accent),
             const SizedBox(
               height: 25,
             ),
             _buildGallery(),
+
+            _buildBiography(),
           ],
         ),
       ),
@@ -76,8 +106,8 @@ class GridDetails extends StatelessWidget {
   }
 
   Widget _buildPrefCard() {
-    final userName = pointerItemModel.userName;
-    String? name, subTitle;
+    final userName = controller.pointerItemModel.userName;
+    String name = userName, subTitle = '';
     if (userName != null && userName.contains('-')) {
       name = userName.split('-')[0];
       subTitle = userName.split('-')[1];
@@ -96,13 +126,17 @@ class GridDetails extends StatelessWidget {
       child: Column(
         children: [
           /// img
-          SizedBox(
+          Container(
+            padding: const EdgeInsets.all(1),
             width: Get.width / 3,
             height: Get.width / 3,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Get.width / 6),
+                border: Border.all(color: AppColors.current.dimmedLight)),
             child: ClipOval(
               child: Image.network(
-                pointerItemModel.avatar ?? '',
-                fit: BoxFit.cover,
+                controller.pointerItemModel.avatar ?? '',
+                fit: BoxFit.contain,
                 errorBuilder: (_, __, ___) {
                   return Image.asset(
                     AppAssets.userIcon,
@@ -118,7 +152,7 @@ class GridDetails extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: FittedBox(
               child: Text(
-                '${name ?? userName}',
+                name,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
@@ -128,82 +162,23 @@ class GridDetails extends StatelessWidget {
           ),
 
           /// desc
-          Text(
-            '${pointerItemModel.center} - ${pointerItemModel.village}',
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: Get.textTheme.headline4?.fontSize),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDeadDate() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      decoration: BoxDecoration(
-          color: AppColors.current.neutral,
-          border: Border.all(color: AppColors.current.accent),
-          borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        children: [
-          Icon(
-            Icons.date_range,
-            color: AppColors.current.accent,
-          ),
-          const SizedBox(
-            width: 20,
-          ),
-          Text(
-            'تاريخ الوفاة',
-            style: TextStyle(
-                color: AppColors.current.accent,
-                fontWeight: FontWeight.bold,
-                fontSize: Get.textTheme.headline3?.fontSize),
-          ),
-          const Expanded(
-            child: SizedBox(),
-          ),
-          Text(
-            pointerItemModel.deathDate ?? '',
-            style: TextStyle(
-                color: AppColors.current.accent,
-                fontWeight: FontWeight.bold,
-                fontSize: Get.textTheme.headline4?.fontSize),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSpecialist() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      decoration: BoxDecoration(
-          color: AppColors.current.neutral,
-          border: Border.all(color: AppColors.current.accent),
-          borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        children: [
-          Icon(
-            Icons.school,
-            color: AppColors.current.accent,
-            size: 30,
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            child: Text(
-              pointerItemModel.excellenceField ?? '',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  color: AppColors.current.accent,
-                  fontWeight: FontWeight.bold,
-                  fontSize: Get.textTheme.headline3?.fontSize),
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '${controller.pointerItemModel.center}',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: Get.textTheme.headline4?.fontSize),
+              ),
+              const DotView(),
+              Text(
+                '${controller.pointerItemModel.village}',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: Get.textTheme.headline4?.fontSize),
+              ),
+            ],
           ),
         ],
       ),
@@ -238,23 +213,20 @@ class GridDetails extends StatelessWidget {
           height: 10,
         ),
         _buildGallerySlider(),
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          pointerItemModel.biography ?? '',
-          style: TextStyle(fontSize: Get.textTheme.headline3?.fontSize),
-          textAlign: TextAlign.justify,
-        ),
       ],
     );
   }
 
   Widget _buildGallerySlider() {
     return Obx(() {
-      if (controller.apiLoading.value) return const Center(child: CircularProgressIndicator());
+      if (controller.galleryApiLoading.value) {
+        return SizedBox(
+            height: Get.height / 3, width: Get.width, child: const Center(child: CircularProgressIndicator()));
+      }
 
-      if (controller.galleryList.isEmpty) return const EmptyResponse();
+      if (controller.galleryList.isEmpty) {
+        return SizedBox(height: Get.height / 3, width: Get.width, child: const EmptyResponse());
+      }
 
       return CarouselSlider(
         options: CarouselOptions(
@@ -279,8 +251,8 @@ class GridDetails extends StatelessWidget {
                         return Container(
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           height: Get.height / 3,
-                          decoration:
-                              const BoxDecoration(image: DecorationImage(image: AssetImage(AppAssets.imgNotFound), fit: BoxFit.contain)),
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(image: AssetImage(AppAssets.imgNotFound), fit: BoxFit.contain)),
                         );
                       },
                     ),
@@ -292,11 +264,13 @@ class GridDetails extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         color: AppColors.current.text.withOpacity(0.7),
                         child: Text(
-                          (contactsEnum == ContactsEnum.martyr)
+                          (controller.contactsEnum == ContactsEnum.martyr ||
+                                  controller.contactsEnum == ContactsEnum.myVillage)
                               ? 'صور تعبر عن مدخل القرية'
-                              : (contactsEnum == ContactsEnum.proficient || contactsEnum == ContactsEnum.creator)
+                              : (controller.contactsEnum == ContactsEnum.proficient ||
+                                      controller.contactsEnum == ContactsEnum.creator)
                                   ? 'صور تعبر عن الشخص صاحب الملف التعريفي'
-                                  : 'صور تعبر عن الرعاة',
+                                  : '',
                           style: TextStyle(color: AppColors.current.neutral),
                         ),
                       )),
@@ -307,5 +281,48 @@ class GridDetails extends StatelessWidget {
         }).toList(),
       );
     });
+  }
+
+  Widget _buildBiography() {
+    if(controller.pointerItemModel.biography == null || controller.pointerItemModel.biography.isEmpty) return const SizedBox();
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Text(
+        controller.pointerItemModel.biography ?? '',
+        style: TextStyle(fontSize: Get.textTheme.headline3?.fontSize),
+        textAlign: TextAlign.justify,
+      ),
+    );
+  }
+
+  Widget _buildDetailsItem({required Color color, required String imgPath, required String title, String? countValue}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      decoration: BoxDecoration(
+          color: AppColors.current.neutral, border: Border.all(color: color), borderRadius: BorderRadius.circular(10)),
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            imgPath,
+            width: 25,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Expanded(
+            child: Text(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: Get.textTheme.headline3?.fontSize),
+            ),
+          ),
+          Text(
+            countValue ?? '',
+            style: TextStyle(color: color, fontSize: Get.textTheme.headline3?.fontSize),
+          ),
+        ],
+      ),
+    );
   }
 }

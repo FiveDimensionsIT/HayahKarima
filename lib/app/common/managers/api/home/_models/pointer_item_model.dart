@@ -1,3 +1,4 @@
+import 'package:hayah_karema/utils/NumberHelper.dart';
 import 'package:hayah_karema/utils/serialization/serialization_lib.dart';
 
 class PointerItemModel extends Serializable {
@@ -18,6 +19,8 @@ class PointerItemModel extends Serializable {
   int? indicator;
   int? villagesCount;
   String? status;
+  String? villagePoints;
+  String? villagePeople;
 
   PointerItemModel({
     this.id,
@@ -37,6 +40,8 @@ class PointerItemModel extends Serializable {
     this.indicator,
     this.status,
     this.villagesCount,
+    this.villagePoints,
+    this.villagePeople,
   });
 
   @override
@@ -58,11 +63,14 @@ class PointerItemModel extends Serializable {
     indicator = map['indicator'];
     status = map['status'];
     villagesCount = map['villagesCount'];
+    villagesCount = map['villagesCount'];
+    villagePoints = map['villagePoints'] != null ?  formatter.format(map['villagePoints']) : '';
+    villagePeople = map['villagePeople'] != null ?  formatter.format(map['villagePeople']) : '';
   }
 
   @override
   Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data =  Map<String, dynamic>();
     data['id'] = this.id;
     data['fullName'] = this.fullName;
     data['name'] = this.name;
@@ -80,6 +88,8 @@ class PointerItemModel extends Serializable {
     data['indicator'] = this.indicator;
     data['status'] = this.status;
     data['villagesCount'] = this.villagesCount;
+    // data['villagePoints'] = this.villagePoints;
+    // data['villagePeople'] = this.villagePeople;
     return data;
   }
 
