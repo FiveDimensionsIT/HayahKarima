@@ -22,6 +22,9 @@ abstract class Routes {
   static const NOTIFICATION = _Paths.NOTIFICATION_VIEW;
   static const MY_VILLAGE = _Paths.MY_VILLAGE;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
+  static const TRAINING_COURSE = _Paths.TRAINING_COURSE;
+  static const DETAILS_COURSE = _Paths.DETAILS_COURSE;
+
 }
 
 abstract class _Paths {
@@ -43,4 +46,7 @@ abstract class _Paths {
   static const COMMENT_VIEW = '/comment';
   static const MY_VILLAGE = '/my-village';
   static const CHANGE_PASSWORD = '/change-password';
+  static const  TRAINING_COURSE = '/training_course';
+  static const  DETAILS_COURSE = '/details_course';
+
 }

@@ -49,6 +49,8 @@ class AppColors {
   Color success;
 
   Color transparent;
+
+
 }
 
 var _defaultLightColors = AppColors(
@@ -60,7 +62,7 @@ var _defaultLightColors = AppColors(
   text: const Color.fromRGBO(37, 47, 61, 1),
   primaryLight: const Color(0xff2ad5c4),
   primary: const Color(0xff22A99B),
-  dimmedLight: const Color.fromRGBO(238, 238, 238, 1),
+  dimmedLight: const Color.fromRGBO(238, 238, 238, 1.0),
   dimmed: const Color.fromRGBO(167, 167, 167, 1),
   success: const Color.fromRGBO(0, 128, 0, 1),
   neutral: Colors.white,

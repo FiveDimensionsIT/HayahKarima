@@ -139,9 +139,7 @@ class NewPostView extends GetView<NewPostController> {
                   onPress: () {}),
             ],
           ),
-
           const SizedBox(height: 10,),
-
           _shareButton(),
         ],
       ),

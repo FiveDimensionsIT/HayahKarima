@@ -222,5 +222,15 @@ abstract class AppText {
   static String get replacingPrizes =>'replacing_prizes'.tr;
   static String get title =>'title'.tr;
   static String get whatIsInYourMind => 'what_is_in_your_mind'.tr;
+  static String get answerAndScore => 'answer_and_score'.tr;
+  static String get sendAnswer => 'send_answer'.tr;
+  static String get like => 'like'.tr;
+  static String get comment => 'comment'.tr;
+  static String get sharing=>'sharing'.tr;
+  static String get searchCourse=>'search_course'.tr;
+  static String get infoAboutCourse=>'info_about_course'.tr;
+  static String get whatLearn=>'what_learn'.tr;
+  static String get studyPlan =>"study_plan".tr;
+  static String get joinNow =>"join_now".tr;
 
 }

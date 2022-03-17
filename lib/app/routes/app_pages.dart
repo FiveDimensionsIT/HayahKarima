@@ -12,6 +12,8 @@ import 'package:hayah_karema/app/pages/auth/verify_mobile_number/verify_mobile_n
 import 'package:hayah_karema/app/pages/auth/verify_mobile_number/verify_mobile_number_view.dart';
 import 'package:hayah_karema/app/pages/comment/comment_binding.dart';
 import 'package:hayah_karema/app/pages/comment/commnet_view.dart';
+import 'package:hayah_karema/app/pages/details_course/details_course_binding.dart';
+import 'package:hayah_karema/app/pages/details_course/views/details_course_view.dart';
 import 'package:hayah_karema/app/pages/digital_pointer/digital_pointer_binding.dart';
 import 'package:hayah_karema/app/pages/digital_pointer/digital_pointer_view.dart';
 import 'package:hayah_karema/app/pages/grids_view/creators/creators_binding.dart';
@@ -23,7 +25,7 @@ import 'package:hayah_karema/app/pages/grids_view/proficients/proficients_view.d
 import 'package:hayah_karema/app/pages/grids_view/sponsors/sponsors_binding.dart';
 import 'package:hayah_karema/app/pages/grids_view/sponsors/sponsors_view.dart';
 import 'package:hayah_karema/app/pages/home/home_binding.dart';
-import 'package:hayah_karema/app/pages/home/home_view.dart';
+import 'package:hayah_karema/app/pages/home/views/home_view.dart';
 import 'package:hayah_karema/app/pages/new_post/new_post_binding.dart';
 import 'package:hayah_karema/app/pages/new_post/views/new_post_view.dart';
 import 'package:hayah_karema/app/pages/notification/notification_binding.dart';
@@ -34,13 +36,15 @@ import 'package:hayah_karema/app/pages/side_menu/side_menu_binding.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
 import 'package:hayah_karema/app/pages/splash/splash_binding.dart';
 import 'package:hayah_karema/app/pages/splash/splash_view.dart';
+import 'package:hayah_karema/app/pages/training_course/training_course_binding.dart';
+import 'package:hayah_karema/app/pages/training_course/views/training_course_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH_VIEW;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
@@ -152,6 +156,14 @@ class AppPages {
       name: _Paths.CHANGE_PASSWORD,
       page: () => ChangePasswordView(),
       binding: ChangePasswordBinding(),
+    ),
+    GetPage(name: _Paths.TRAINING_COURSE,
+      page: ()=>   const TrainingCourseView(),
+      binding: TrainingCourseBinding(),
+    ),
+    GetPage(name: _Paths.DETAILS_COURSE,
+      page: ()=>  DetailsCourseView(),
+      binding: DetailsCourseBinding(),
     ),
   ];
 }

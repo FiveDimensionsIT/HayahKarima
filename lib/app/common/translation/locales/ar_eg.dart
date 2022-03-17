@@ -218,6 +218,17 @@ const ar_eg = {
   "earn_points":"إكتساب نقاط",
   "replacing_prizes":"إستبدال الجوائز",
   "title":"اللقب",
-  "what_is_in_your_mind":"ماذا يدور بعقلك"
+  "what_is_in_your_mind":"ماذا يدور بعقلك",
+  "answer_and_score":"جاوب واكسب",
+  "send_answer":"إرسال الإجابة",
+  "like":"أعجبنى",
+  "comment":"تعليق",
+  "sharing":"مشاركة",
+  "search_course":"عن ماذا تبحث",
+  "info_about_course":"معلومات عن الدورة",
+  "what_learn":"ماذا ستتعلم",
+  "study_plan":"الخطة الدراسية",
+  "join_now":"إنضم الأن"
+
 
 };

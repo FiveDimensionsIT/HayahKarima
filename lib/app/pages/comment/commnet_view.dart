@@ -25,7 +25,10 @@ class CommentView extends GetView<CommentController> {
       child: Column(
         children: [
           /// toolbar.
-          AppToolbar(title: '${AppText.comments} (250)', backCallBack: () {},),
+          AppToolbar(title: '${AppText.comments} (250)',
+            backCallBack: () {
+            Get.back();
+          },),
 
           _contentNotification(),
         ],
@@ -54,6 +57,7 @@ class CommentView extends GetView<CommentController> {
         child: TextFormField(
           decoration: InputDecoration(
             hintText: AppText.writeComment,
+
             suffixIcon: Icon(
               Icons.send,
               color: AppColors.current.accent,

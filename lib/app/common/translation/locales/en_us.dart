@@ -219,6 +219,17 @@ const en_us = {
   "replacing_prizes":"Replacing Prizes",
   "title":"Title",
   "what_is_in_your_mind":"What is in your mind",
+  "answer_and_score":"Answer And Score",
+  "send_answer":"Send Answer",
+  "like":"Like",
+  "comment":"comment",
+  "sharing":"share",
+  "search_course":"what is search",
+  "info_about_course":"Info About Course",
+  "what_learn":"What is learn",
+  "study_plan":"Study Plan",
+  "join_now":"Join now"
+
 
 
 };
