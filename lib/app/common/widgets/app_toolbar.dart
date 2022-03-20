@@ -6,8 +6,9 @@ class AppToolbar extends StatelessWidget {
   final String title;
   Function? backCallBack;
   Function? drawerCallBack;
+  Widget? actions;
 
-  AppToolbar({Key? key, required this.title, this.backCallBack, this.drawerCallBack}) : super(key: key);
+  AppToolbar({Key? key, required this.title, this.backCallBack, this.drawerCallBack, this.actions}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +45,19 @@ class AppToolbar extends StatelessWidget {
               width: 16,
             ),
 
-          Text(
-            title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-                fontSize: Get.textTheme.headline3?.fontSize,
-                color: AppColors.current.accent,
-                fontWeight: FontWeight.bold),
+          Expanded(
+            child: Text(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  fontSize: Get.textTheme.headline2?.fontSize,
+                  color: AppColors.current.accent,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
+
+          actions??const SizedBox()
         ],
       ),
     );

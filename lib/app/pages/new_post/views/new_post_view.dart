@@ -122,7 +122,7 @@ class NewPostView extends GetView<NewPostController> {
                   color: AppColors.current.primary,
                   onPress: () => controller.openImages()),
 
-              const SizedBox(width: 15,),
+              const SizedBox(width: 8,),
 
               BuildButtonWithIcon(
                   title: AppText.activate,
@@ -130,7 +130,7 @@ class NewPostView extends GetView<NewPostController> {
                   color: AppColors.current.accent,
                   onPress: () {}),
 
-              const SizedBox(width: 15,),
+              const SizedBox(width: 8,),
 
               BuildButtonWithIcon(
                   title: AppText.live,

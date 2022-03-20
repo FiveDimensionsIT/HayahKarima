@@ -26,9 +26,9 @@ class BuildButtonWithIcon extends StatelessWidget {
       child: InkWell(
         onTap: onPress,
         child: Row(children: [
-          SvgPicture.asset(icon),
-          const SizedBox(width: 10,),
-          Text(title, style: TextStyle(color: color),),
+          SvgPicture.asset(icon, width: 20,),
+          const SizedBox(width: 5,),
+          FittedBox(child: Text(title, style: TextStyle(color: color),)),
         ],),
       ),
     );

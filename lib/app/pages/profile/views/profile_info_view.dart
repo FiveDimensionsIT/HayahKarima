@@ -38,31 +38,37 @@ class ProfileInfoView extends StatelessWidget {
   Widget _buildName() {
     return TextField(
       decoration: InputDecoration(hintText: AppText.fullName),
+      enabled: false,
     );
   }
   Widget _buildNationalId() {
     return TextField(
       decoration: InputDecoration(hintText: AppText.nationalId),
+      enabled: false,
     );
   }
   Widget _buildTitle() {
     return TextField(
       decoration: InputDecoration(hintText: AppText.title),
+      enabled: false,
     );
   }
   Widget _buildEmail() {
     return TextField(
       decoration: InputDecoration(hintText: AppText.email),
+      enabled: false,
     );
   }
   Widget _buildPhone() {
     return TextField(
       decoration: InputDecoration(hintText: AppText.mobileNumber),
+      enabled: false,
     );
   }
   Widget _buildAddress() {
     return TextField(
       decoration: InputDecoration(hintText: AppText.location),
+      enabled: false,
     );
   }
   Widget _buildChangePassword() {

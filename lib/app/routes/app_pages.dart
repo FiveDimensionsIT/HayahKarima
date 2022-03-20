@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import 'package:hayah_karema/app/pages/auth/change_password/change_password_binding.dart';
 import 'package:hayah_karema/app/pages/auth/change_password/change_password_view.dart';
 import 'package:hayah_karema/app/pages/auth/forgot_password/forgot_password_binding.dart';

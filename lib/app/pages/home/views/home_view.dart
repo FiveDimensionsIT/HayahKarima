@@ -10,6 +10,7 @@ import 'package:hayah_karema/app/pages/home/views/timeline_question_item_view.da
 import 'package:hayah_karema/app/pages/home/home_controller.dart';
 import 'package:hayah_karema/app/pages/home/views/time_line_item_view.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
+import 'package:hayah_karema/app/routes/app_pages.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 class HomeView extends StatelessWidget {
@@ -33,11 +34,46 @@ class HomeView extends StatelessWidget {
           /// toolbar.
           AppToolbar(
             title: AppText.homePage,
+            actions: Row(
+              children: [
+                _buildPointsItem("0"),
+                _buildPointsItem("0"),
+                _buildPointsItem("1"),
+                _buildPointsItem("1"),
+
+                _buildNotificationIcon(),
+              ],
+            ),
             drawerCallBack: () => scaffoldKey.currentState?.openDrawer(),
           ),
           _buildAlContent(),
         ],
       ),
+    );
+  }
+
+  IconButton _buildNotificationIcon() {
+    return IconButton(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                onPressed: () {
+                  Get.toNamed(Routes.NOTIFICATION);
+                },
+                icon: Icon(
+                  Icons.notification_important_outlined,
+                  color: AppColors.current.primary,
+                  size: 25,
+                ),
+              );
+  }
+
+  Widget _buildPointsItem(String title){
+    return Container(
+      width: 25,
+      height: 30,
+      margin: const EdgeInsets.only(left: 3),
+      decoration: BoxDecoration(
+          border: Border.all(color: AppColors.current.accent), borderRadius: BorderRadius.circular(8)),
+      child: Center(child: Text(title, style: TextStyle(fontSize: Get.textTheme.bodySmall?.fontSize, fontWeight: FontWeight.bold, color:  AppColors.current.accent),)),
     );
   }
 
@@ -62,8 +98,10 @@ class HomeView extends StatelessWidget {
     return ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (cxt, index) => index!=0 && index%3 == 0 ? TimelineQuestionItemView():TimelineItemView(),
-        separatorBuilder: (_, __) => const SizedBox(height: 10,),
+        itemBuilder: (cxt, index) => index != 0 && index % 3 == 0 ? TimelineQuestionItemView() : TimelineItemView(),
+        separatorBuilder: (_, __) => const SizedBox(
+              height: 10,
+            ),
         itemCount: 10);
   }
 
@@ -71,7 +109,7 @@ class HomeView extends StatelessWidget {
     return GestureDetector(
       onTap: () => controller.goToNewPostView(),
       child: Container(
-        width: double.infinity,
+        width: Get.width,
         height: 136,
         padding: AppTheme.pagePadding,
         decoration: BoxDecoration(
@@ -112,12 +150,12 @@ class HomeView extends StatelessWidget {
           BuildButtonWithIcon(
               title: AppText.image, icon: AppAssets.mediaIcon, color: AppColors.current.primary, onPress: () {}),
           const SizedBox(
-            width: 15,
+            width: 5,
           ),
           BuildButtonWithIcon(
               title: AppText.activate, icon: AppAssets.activitiesIcon, color: AppColors.current.accent, onPress: () {}),
           const SizedBox(
-            width: 15,
+            width: 5,
           ),
           BuildButtonWithIcon(
               title: AppText.live, icon: AppAssets.liveIcon, color: AppColors.current.error, onPress: () {}),
