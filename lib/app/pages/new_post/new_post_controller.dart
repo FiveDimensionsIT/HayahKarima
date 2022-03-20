@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/models/generic_model.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/pages/new_post/views/post_type_view.dart';
+import 'package:hayah_karema/app/routes/app_pages.dart';
 import 'package:hayah_karema/services/logger/log.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,7 +17,7 @@ class NewPostController extends GetxController {
 
   final postTypeList = [].obs;
 
-  GenericModel? selectedPostType;
+  GenericModel? _selectedPostType;
 
 
   @override
@@ -56,6 +57,11 @@ class NewPostController extends GetxController {
       GenericModel(id: 7, title: 'مثل شعبي', imgPath: AppAssets.postType9),
     ];
     postTypeList.assignAll(list);
+  }
+
+  void onPostTypeChange(GenericModel item) {
+    _selectedPostType = item;
+    Get.offAllNamed(Routes.HOME);
   }
 
 }

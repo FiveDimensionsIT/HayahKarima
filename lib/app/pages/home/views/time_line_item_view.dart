@@ -13,8 +13,8 @@ import 'package:hayah_karema/app/pages/home/home_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 
-class HomeDetailsView extends StatelessWidget {
-   HomeDetailsView({Key? key}) : super(key: key);
+class TimelineItemView extends StatelessWidget {
+   TimelineItemView({Key? key}) : super(key: key);
   var controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {

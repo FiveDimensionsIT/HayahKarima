@@ -6,9 +6,11 @@ import 'package:hayah_karema/app/pages/training_course/training_course_controlle
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 class InformationAboutDetailsCourseView extends StatelessWidget {
-   InformationAboutDetailsCourseView({Key? key,this.index}) : super(key: key);
+  final TrainingCourseModel? item;
+  InformationAboutDetailsCourseView({Key? key, this.item}) : super(key: key);
+
   final controller = Get.put(TrainingCourseController());
-  int? index;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,13 +25,13 @@ class InformationAboutDetailsCourseView extends StatelessWidget {
         ),
         ),
         Empty(height: 16,),
-        _buildInfoAboutCourse(index),
+        _buildInfoAboutCourse(),
       ],
     );
   }
 
-  Widget _buildInfoAboutCourse(index){
-    return Text(controller.foundCourses.value[index].aboutCourse,
+  Widget _buildInfoAboutCourse(){
+    return Text(item?.aboutCourse??'',
     style: TextStyle(
       fontSize: Get.textTheme.bodyLarge?.fontSize,
     ),

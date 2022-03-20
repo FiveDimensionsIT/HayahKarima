@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
+import 'package:hayah_karema/utils/serialization/serialization_lib.dart';
 
 class TrainingCourseController extends GetxController {
 
 
-   List<TrainingCourse> allCourses = [
-    TrainingCourse(
+   List<TrainingCourseModel> _allCourses = [
+    TrainingCourseModel(
         image: 'assets/images/course.png',
         nameCourse: 'بناء المواقع الإلكترونية باستخدام وورد برس المواقـ',
         hourCourse: '20 ساعة',
@@ -20,7 +21,7 @@ class TrainingCourseController extends GetxController {
       "كيف تستطيع تعديل و تخصيص موقعك بأفضل الطرق ليوائم البراند الخاصة بك"
       ]
     ),
-    TrainingCourse(
+    TrainingCourseModel(
         image: 'assets/images/excel.png',
         nameCourse: 'الإكسل: من الصفر إلى الاحتراف',
         hourCourse: '30 ساعة',
@@ -36,7 +37,7 @@ class TrainingCourseController extends GetxController {
       "كيف تستطيع تعديل و تخصيص موقعك بأفضل الطرق ليوائم البراند الخاصة بك"
       ],
     ),
-     TrainingCourse(
+     TrainingCourseModel(
 
          image: 'assets/images/course.png',
          nameCourse: 'بناء المواقع الإلكترونية باستخدام وورد برس المواقـ',
@@ -53,14 +54,15 @@ class TrainingCourseController extends GetxController {
        "كيف تستطيع تعديل و تخصيص موقعك بأفضل الطرق ليوائم البراند الخاصة بك"
        ],
      ),
-  ].obs;
-  Rx<List<TrainingCourse>> foundCourses = Rx<List<TrainingCourse>>([]);
+  ];
+
+  RxList<TrainingCourseModel> coursesList = <TrainingCourseModel>[].obs;
+  RxBool apiLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
-    foundCourses.value = allCourses;
-
+    coursesList.assignAll(_allCourses);
   }
 
   @override
@@ -70,42 +72,70 @@ class TrainingCourseController extends GetxController {
 
 
   void filterCourse(String courseName) {
-    List<TrainingCourse> results = [];
-    if (courseName.isEmpty) {
-      results = allCourses;
-    } else {
-      results = allCourses
-          .where((element) => element.nameCourse
-              .toString()
-              .toLowerCase()
-              .contains(courseName.toLowerCase()))
-          .toList();
-    }
-    foundCourses.value = results;
+    // List<TrainingCourseModel> results = [];
+    // if (courseName.isEmpty) {
+    //   results = allCourses;
+    // } else {
+    //   results = allCourses
+    //       .where((element) => element.nameCourse
+    //           .toString()
+    //           .toLowerCase()
+    //           .contains(courseName.toLowerCase()))
+    //       .toList();
+    // }
+    // coursesList.value = results;
   }
 }
 
-class TrainingCourse {
-  late String nameCourse;
-  late String image;
-  late String trainerName;
-  late String language;
-  late String imageTrainer;
-  late String hourCourse;
-  late String sectionCourse;
-  late double rate;
-  late String aboutCourse;
-  late List<String> whatLearn;
-  TrainingCourse(
-      {required this.nameCourse,
-      required this.image,
-      required this.trainerName,
-      required this.language,
-      required this.imageTrainer,
-      required this.hourCourse,
-      required this.sectionCourse,
-      required this.rate,
-      required this.aboutCourse,
-        required this.whatLearn,
+class TrainingCourseModel extends Serializable{
+  String? nameCourse;
+  String? image;
+  String? trainerName;
+  String? language;
+  String? imageTrainer;
+  String? hourCourse;
+  String? sectionCourse;
+  num? rate;
+  String? aboutCourse;
+  List<String?>? whatLearn;
+
+  TrainingCourseModel({this.nameCourse, this.image, this.trainerName, this.language, this.imageTrainer, this.hourCourse, this.sectionCourse, this.rate, this.aboutCourse, this.whatLearn, });
+
+  @override
+  void fromMap(Map<String, dynamic> map) {
+    nameCourse = map['nameCourse'];
+    image = map['image'];
+    trainerName = map['trainerName'];
+    language = map['language'];
+    imageTrainer = map['imageTrainer'];
+    hourCourse = map['hourCourse'];
+    sectionCourse = map['sectionCourse'];
+    rate = map['rate'];
+    aboutCourse = map['aboutCourse'];
+    if (map['whatLearn'] != null) {
+      whatLearn = [];
+      map['whatLearn'].forEach((v) {
+        whatLearn!.add(v);
       });
+    }
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['nameCourse'] = this.nameCourse;
+    data['image'] = this.image;
+    data['trainerName'] = this.trainerName;
+    data['language'] = this.language;
+    data['imageTrainer'] = this.imageTrainer;
+    data['hourCourse'] = this.hourCourse;
+    data['sectionCourse'] = this.sectionCourse;
+    data['rate'] = this.rate;
+    data['aboutCourse'] = this.aboutCourse;
+    if (this.whatLearn != null) {
+      data['whatLearn'] = this.whatLearn!.map((v) => v).toList();
+    }
+    return data;
+  }
 }
+

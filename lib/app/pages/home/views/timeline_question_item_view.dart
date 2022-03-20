@@ -8,8 +8,8 @@ import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/pages/home/home_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
-class AnswerAndScoreView extends StatelessWidget {
-   AnswerAndScoreView({Key? key}) : super(key: key);
+class TimelineQuestionItemView extends StatelessWidget {
+   TimelineQuestionItemView({Key? key}) : super(key: key);
   var controller = Get.find<HomeController>();
 
   @override

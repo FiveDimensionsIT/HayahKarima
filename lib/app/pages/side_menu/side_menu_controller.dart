@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/managers/api/auth/_model/user_data.dart';
-import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/models/enums/contacts_enum.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
@@ -116,7 +115,7 @@ class SideMenuController extends GetxController {
         name: AppText.courses,
         iconPath: AppAssets.coursesSideMenuIcon,
         onTap: () {
-
+          Get.toNamed(Routes.TRAINING_COURSE);
         }));
 
     /// == Settings

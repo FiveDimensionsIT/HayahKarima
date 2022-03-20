@@ -12,22 +12,20 @@ import 'package:hayah_karema/app/pages/details_course/views/what_learn_course_vi
 import 'package:hayah_karema/app/pages/training_course/training_course_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
-
 class DetailsCourseView extends StatelessWidget {
-   DetailsCourseView({Key? key,this.index}) : super(key: key);
+  final TrainingCourseModel? item;
+   DetailsCourseView({Key? key, this.item}) : super(key: key);
+
    final controller = Get.put(TrainingCourseController());
 
-   int? index;
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.current.neutral,
       body:SafeArea(
         child: Column(
           children: [
-            AppToolbar(title:AppText.back,
-              backCallBack: () => Get.back(),
-            ),
+            AppToolbar(title:AppText.back, backCallBack: () => Get.back(),),
             _buildBody(),
           ],
         ),
@@ -42,13 +40,13 @@ class DetailsCourseView extends StatelessWidget {
              padding: AppTheme.pagePadding,
              child: Column(
                children: [
-                 _buildImageAndNameCourse(index),
-                 Empty(height: 50,),
-                 _buildTrainerInfo(index),
+                 _buildImageAndNameCourse(),
+                 Empty(height: 30,),
+                 _buildTrainerInfo(),
                  Empty(height: 24,),
                  const DetailsStatisticCourseView(),
                  Empty(height: 24,),
-                  InformationAboutDetailsCourseView(index: index),
+                  InformationAboutDetailsCourseView(item: item),
                  Empty(height: 16,),
                   WhatLearnCourseView(),
                  Empty(height: 16,),
@@ -61,16 +59,19 @@ class DetailsCourseView extends StatelessWidget {
     );
   }
 
-  Widget _buildImageAndNameCourse(index){
+  Widget _buildImageAndNameCourse(){
     return Column(
       children: [
-        Image.asset(controller.foundCourses.value[index].image,
-            width: 328,
-            height: 128,
-            fit: BoxFit.cover
+        ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.asset(item?.image??'',
+              width: Get.width,
+              height: Get.height/4,
+              fit: BoxFit.cover
+          ),
         ),
         Empty(height: 16,),
-        Text(controller.foundCourses.value[index].nameCourse,
+        Text(item?.nameCourse??'',
             textAlign: TextAlign.right,
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -80,19 +81,19 @@ class DetailsCourseView extends StatelessWidget {
       ],
     );
   }
-  Widget _buildTrainerInfo(index){
+  Widget _buildTrainerInfo(){
     return Row(
       children: [
         CircleAvatar(
           backgroundColor: AppColors.current.transparent,
           radius: 24,
-          backgroundImage: AssetImage(controller.foundCourses.value[index].imageTrainer),
+          backgroundImage: AssetImage(item?.imageTrainer??''),
         ),
         Empty(width: 10,),
-        Text(controller.foundCourses.value[index].trainerName,
+        Text(item?.trainerName??'',
           style: TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: Get.textTheme.bodyMedium?.fontSize,
+            fontWeight: FontWeight.bold,
+            fontSize: Get.textTheme.bodyLarge?.fontSize,
             color: AppColors.current.text.withOpacity(0.9),
           ),
         ),

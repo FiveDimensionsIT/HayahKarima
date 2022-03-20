@@ -63,7 +63,12 @@ class SideMenuView extends StatelessWidget {
               ),
             ),
 
-            DotsView(onClick: () => Get.toNamed(Routes.PROFILE)),
+            DotsView(onClick: () {
+              // back to home.
+              Get.back();
+              // then go to profile page.
+              Get.toNamed(Routes.PROFILE);
+            }),
           ],
         ),
       );

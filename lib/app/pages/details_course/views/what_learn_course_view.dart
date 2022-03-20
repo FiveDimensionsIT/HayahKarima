@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
-
 
 class WhatLearnCourseView extends StatelessWidget {
    WhatLearnCourseView({Key? key}) : super(key: key);

@@ -17,7 +17,7 @@ class PostTypeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
+      margin: const EdgeInsets.only(top: 90),
       decoration: BoxDecoration(
           color: AppColors.current.neutral,
           borderRadius: const BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25)),
@@ -72,17 +72,17 @@ class PostTypeView extends StatelessWidget {
   }
 
   Widget _buildPostsTypeList() {
-    return ListView.separated(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (cxt, index) => _buildPostTypeItem(controller.postTypeList[index]),
-        separatorBuilder: (_, __) => const SizedBox(height: 8,),
-        itemCount: controller.postTypeList.length);
+    return Expanded(
+      child: ListView.separated(
+          itemBuilder: (cxt, index) => _buildPostTypeItem(controller.postTypeList[index]),
+          separatorBuilder: (_, __) => const SizedBox(height: 8,),
+          itemCount: controller.postTypeList.length),
+    );
   }
 
   Widget _buildPostTypeItem(GenericModel item) {
     return MaterialButton(
-      onPressed: (){controller.selectedPostType = item;},
+      onPressed: ()=> controller.onPostTypeChange(item),
       elevation: 0,
       padding: const EdgeInsets.all(0),
       child: Container(
