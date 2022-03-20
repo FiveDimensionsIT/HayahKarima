@@ -25,6 +25,7 @@ abstract class Routes {
   static const TRAINING_COURSE = _Paths.TRAINING_COURSE;
   static const DETAILS_COURSE = _Paths.DETAILS_COURSE;
 
+  static const BIRTH_PLACE = _Paths.BIRTH_PLACE;
 }
 
 abstract class _Paths {
@@ -46,6 +47,7 @@ abstract class _Paths {
   static const COMMENT_VIEW = '/comment';
   static const MY_VILLAGE = '/my-village';
   static const CHANGE_PASSWORD = '/change-password';
+  static const BIRTH_PLACE = '/birth_place';
   static const  TRAINING_COURSE = '/training_course';
   static const  DETAILS_COURSE = '/details_course';
 

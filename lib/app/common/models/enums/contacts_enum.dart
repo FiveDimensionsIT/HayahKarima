@@ -4,4 +4,5 @@ enum ContactsEnum{
   proficient,
   sponsor,
   myVillage,
+  birthPlace
 }

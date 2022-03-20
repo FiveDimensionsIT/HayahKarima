@@ -8,7 +8,6 @@ import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
-import 'package:hayah_karema/app/common/widgets/loading_design.dart';
 import 'package:hayah_karema/app/pages/grids_view/grid_details/grid_details_view.dart';
 import 'package:hayah_karema/app/pages/grids_view/grid_item.dart';
 

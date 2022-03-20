@@ -72,6 +72,13 @@ class SideMenuController extends GetxController {
           Get.toNamed(Routes.HOMELAND_MARTYRS);
         }));
 
+    /// == birthplace
+    menuItems.add(MenuItem(
+        name: AppText.birthPlace,
+        onTap: () {
+          Get.toNamed(Routes.BIRTH_PLACE);
+        }));
+
     /// == PROFICIENTS
     menuItems.add(MenuItem(
         name: AppText.proficients,
