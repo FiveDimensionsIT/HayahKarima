@@ -166,6 +166,7 @@ class AppPages {
     GetPage(name: _Paths.DETAILS_COURSE,
       page: ()=>  DetailsCourseView(),
       binding: DetailsCourseBinding(),
+    ),
     GetPage(
       name: _Paths.BIRTH_PLACE,
       page: () => BirthPlaceView(),

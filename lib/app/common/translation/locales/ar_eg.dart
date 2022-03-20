@@ -39,7 +39,7 @@ const ar_eg = {
   "post_title":"ادخل عنوان المنشور",
   "post_body":"ادخل تفاصيل المنشور",
   "choose_post_type":"اختر نوع المنشور",
-  "birth_place":"مسقط راسه",
+  "birth_place":"وُلد هنا",
   "companies":"الشركات",
   "points":"النقاط",
 
