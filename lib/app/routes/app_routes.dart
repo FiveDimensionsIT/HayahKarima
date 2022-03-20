@@ -22,6 +22,7 @@ abstract class Routes {
   static const NOTIFICATION = _Paths.NOTIFICATION_VIEW;
   static const MY_VILLAGE = _Paths.MY_VILLAGE;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
+  static const BIRTH_PLACE = _Paths.BIRTH_PLACE;
 }
 
 abstract class _Paths {
@@ -43,4 +44,5 @@ abstract class _Paths {
   static const COMMENT_VIEW = '/comment';
   static const MY_VILLAGE = '/my-village';
   static const CHANGE_PASSWORD = '/change-password';
+  static const BIRTH_PLACE = '/birth_place';
 }

@@ -38,6 +38,7 @@ const en_us = {
   "post_title":"Enter post title",
   "post_body":"Enter post body",
   "choose_post_type":"choose post type",
+  "birth_place":"Birth place",
   "homeland_martyrs":"Homeland Martyrs",
   "proficients":"Proficients",
   "creators":"Creators",

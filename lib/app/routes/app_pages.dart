@@ -14,6 +14,8 @@ import 'package:hayah_karema/app/pages/comment/comment_binding.dart';
 import 'package:hayah_karema/app/pages/comment/commnet_view.dart';
 import 'package:hayah_karema/app/pages/digital_pointer/digital_pointer_binding.dart';
 import 'package:hayah_karema/app/pages/digital_pointer/digital_pointer_view.dart';
+import 'package:hayah_karema/app/pages/grids_view/birth_place/birth_place_binding.dart';
+import 'package:hayah_karema/app/pages/grids_view/birth_place/birth_place_view.dart';
 import 'package:hayah_karema/app/pages/grids_view/creators/creators_binding.dart';
 import 'package:hayah_karema/app/pages/grids_view/creators/creators_view.dart';
 import 'package:hayah_karema/app/pages/grids_view/homeland_martyrs/homeland_martyrs_binding.dart';
@@ -152,6 +154,11 @@ class AppPages {
       name: _Paths.CHANGE_PASSWORD,
       page: () => ChangePasswordView(),
       binding: ChangePasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.BIRTH_PLACE,
+      page: () => BirthPlaceView(),
+      binding: BirthPlaceBinding(),
     ),
   ];
 }
