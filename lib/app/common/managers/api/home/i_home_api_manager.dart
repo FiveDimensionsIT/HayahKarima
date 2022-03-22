@@ -1,7 +1,6 @@
 import 'package:hayah_karema/app/common/managers/api/home/_models/digital_pointer_request.dart';
 import 'package:hayah_karema/app/common/managers/api/home/_models/gallery_model.dart';
 import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
-import 'package:hayah_karema/app/common/managers/api/home/_models/timeline_post_model.dart';
 
 abstract class IHomeApiManager{
 

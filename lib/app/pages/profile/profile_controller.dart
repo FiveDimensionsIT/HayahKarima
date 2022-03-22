@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/managers/api/profile/i_profile_api_manger.dart';
+import 'package:hayah_karema/setup.dart';
 
 class ProfileController extends GetxController  with GetSingleTickerProviderStateMixin{
 
@@ -8,13 +10,14 @@ class ProfileController extends GetxController  with GetSingleTickerProviderStat
 
   late TabController tabBarController;
   var currentTabIndex = 0.obs;
-
+  final _apiManager = DI.find<IProfileApiManager>();
 
   @override
   void onInit() {
     super.onInit();
     tabBarController = TabController(length: 5, vsync: this);
   }
+
 
 
   @override

@@ -5,6 +5,9 @@ import 'package:hayah_karema/app/common/managers/api/auth/i_auth_api_manager.dar
 import 'package:hayah_karema/app/common/managers/api/home/fake_home_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/home/home_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/home/i_home_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/profile/fake_profile_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/profile/i_profile_api_manger.dart';
+import 'package:hayah_karema/app/common/managers/api/profile/profile_api_manger.dart';
 import 'package:hayah_karema/app/common/managers/cache/cache_manager.dart';
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/services/connectivity/connectivity_lib.dart';
@@ -53,6 +56,8 @@ void setup() {
   DI.setSingleton<IAuthApiManager>(() => AuthApiManager(DI.find()));
   // home manager
   DI.setSingleton<IHomeApiManager>(() => HomeApiManager(DI.find()));
+  // Profile Manager
+  DI.setSingleton<IProfileApiManager>(() => ProfileApiManger(DI.find()));
 
   // endregion  ==== managers ====
 
@@ -69,6 +74,9 @@ void setupDemoMode() {
   //
   DI.remove<IHomeApiManager>();
   DI.setSingleton<IHomeApiManager>(() => FakeHomeApiManager());
+  //
+  DI.remove<IProfileApiManager>();
+  DI.setSingleton<IProfileApiManager>(() => FakeProfileApiManger());
 }
 
 /// Dependency Injection wrapper
