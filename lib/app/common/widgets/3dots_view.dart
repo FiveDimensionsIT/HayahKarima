@@ -10,9 +10,9 @@ class DotsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: ()=> onClick(),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-        child: SvgPicture.asset(AppAssets.threeDotsIcon, width: 25,),
+      child: SizedBox(
+        width: 25,height: 25,
+        child: SvgPicture.asset(AppAssets.threeDotsIcon,),
       ),
     );
   }

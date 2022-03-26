@@ -21,7 +21,6 @@ class UserData extends Serializable{
   int? groupStatus;
   String? profileImgUrl;
 
-
   UserData({this.id, this.email, this.name, this.fullName, this.idNumber, this.membershipCatId, this.villageId, this.village, this.group, this.module, this.permissions, this.exp, this.iss, this.aud, this.status, this.groupStatus, this.profileImgUrl});
 
   @override

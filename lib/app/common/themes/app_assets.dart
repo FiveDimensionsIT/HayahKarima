@@ -41,7 +41,7 @@ abstract class AppAssets{
   static const String postType8 = 'assets/images/post_type8.svg';
   static const String postType9 = 'assets/images/post_type9.svg';
 
-  static const String logo = 'assets/images/logo.svg';
+  static const String logo = 'assets/images/logo.png';
   static const String homeBG = 'assets/images/home_bg.png';
   static const String profile = 'assets/images/profile.png';
   static const String servBusIcon = 'assets/images/serv-bus-icon.svg';

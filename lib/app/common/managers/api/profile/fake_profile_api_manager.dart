@@ -1,21 +1,11 @@
-import 'package:hayah_karema/app/common/managers/api/auth/_model/user_data.dart';
-import 'package:hayah_karema/app/common/managers/api/profile/_models/user_point.dart';
-import 'package:hayah_karema/app/common/managers/api/profile/_models/user_profile.dart';
-import 'package:hayah_karema/app/common/managers/api/profile/i_profile_api_manger.dart';
+import 'package:hayah_karema/app/common/managers/api/profile/_model/profile_model.dart';
+import 'package:hayah_karema/app/common/managers/api/profile/i_profile_api_manager.dart';
 
-class FakeProfileApiManger implements IProfileApiManager{
-
+class FakeProfileAPIManager implements IProfileAPIManager{
   @override
-  Future<UserProfile>? getInfo(UserData userId) async{
+  Future<ProfileModel?> getProfileData(String? userId) async{
     await Future.delayed(const Duration(seconds: 2));
-    return UserProfile();
+    throw UnimplementedError();
   }
-
-  @override
-  Future<UserPoint>? getPoints(UserData userId)async {
-    await Future.delayed(const Duration(seconds: 2));
-    return UserPoint();
-  }
-
 
 }

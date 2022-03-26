@@ -1,6 +1,12 @@
+import 'package:hayah_karema/app/common/managers/api/home/_models/answer_request.dart';
 import 'package:hayah_karema/app/common/managers/api/home/_models/digital_pointer_request.dart';
 import 'package:hayah_karema/app/common/managers/api/home/_models/gallery_model.dart';
+import 'package:hayah_karema/app/common/managers/api/home/_models/martyrs_prayers_request.dart';
+import 'package:hayah_karema/app/common/managers/api/home/_models/my_village_model.dart';
 import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
+import 'package:hayah_karema/app/common/managers/api/home/_models/question_response.dart';
+import 'package:hayah_karema/app/common/managers/api/home/_models/timeline_post_model.dart';
+import 'package:hayah_karema/app/common/managers/api/home/_models/user_points_response.dart';
 
 abstract class IHomeApiManager{
 
@@ -18,6 +24,15 @@ abstract class IHomeApiManager{
 
   Future<List<PointerItemModel>?> getCategoriesPointer(DigitalPointerRequest pointerRequest);
 
+  Future<List<TimelinePostModel>?> getTimelinePosts({bool? isApproved, int? pageNumber, int? pageSize, String? orderBy});
 
-  // Future<List<TimelinePostModel>?> getTimelinePosts(bool? isApproved, );
+  Future<UserPointsResponse?> getUserPoints({String? userId});
+
+  Future<List<QuestionResponse>?> getQuestions({String? userId});
+
+  Future postAnswer(AnswerRequest? answerRequest);
+
+  Future<MyVillageModel?> getMyVillage(String? villageId);
+
+  Future postPrayingForMartyrs(MartyrsPrayersRequest? request);
 }
