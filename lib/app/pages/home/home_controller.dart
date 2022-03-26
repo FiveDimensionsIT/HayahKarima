@@ -42,6 +42,11 @@ class HomeController extends GetxController {
     _getUserPointsAPI();
   }
 
+  Future<void> onRefresh() async{
+    _getTimelinePostsAPI();
+    _getQuestionAPI();
+  }
+
   Future<void> _getUserData() async {
     await cacheManager.init();
   }
@@ -83,7 +88,11 @@ class HomeController extends GetxController {
   }
 
   void goToNewPostView() {
-    Get.toNamed(Routes.NEW_POST);
+    Get.toNamed(Routes.NEW_POST)?.then((value) {
+      if(value!= null && value == true){
+        onRefresh();
+      }
+    });
   }
 
   void goToCommentView() {
@@ -151,11 +160,6 @@ class HomeController extends GetxController {
         OverlayHelper.showErrorToast(AppText.somethingWrong);
       }
     }
-  }
-
- Future<void> onRefresh() async{
-   _getTimelinePostsAPI();
-   _getQuestionAPI();
   }
 
 }

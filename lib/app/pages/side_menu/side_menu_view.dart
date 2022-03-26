@@ -42,8 +42,8 @@ class SideMenuView extends StatelessWidget {
               width: 55,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.network(controller.userData?.profileImgUrl ?? '',
-                    errorBuilder: (_, __, ___) => Image.asset(AppAssets.userIcon), color: AppColors.current.dimmed),
+                child: Image.network(controller.userData?.avatar ?? '',
+                    errorBuilder: (_, __, ___) => Image.asset(AppAssets.userIcon)),
               ),
             ),
 
@@ -53,12 +53,14 @@ class SideMenuView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(controller.userData?.name ?? '',
+                  Text(controller.userData?.fullName ?? '',
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: Get.textTheme.headline3?.fontSize),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis),
-                  Text(controller.userData?.village ?? '',
-                      style: const TextStyle(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                  FittedBox(
+                    child: Text('${controller.userData?.village} - ${controller.userData?.governorate}',
+                        style: const TextStyle(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                  ),
                 ],
               ),
             ),

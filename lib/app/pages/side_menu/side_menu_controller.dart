@@ -110,7 +110,7 @@ class SideMenuController extends GetxController {
         name: AppText.rewards,
         iconPath: AppAssets.awardsSideMenuIcon,
         onTap: () {
-
+          Get.toNamed(Routes.PRIZES);
         }));
 
     /// == Sponsor

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/action_center/action_center.dart';
 import 'package:hayah_karema/app/common/managers/api/post/_model/post_request.dart';
@@ -92,32 +91,36 @@ class NewPostController extends GetxController {
   void _addPostAPI() async {
     postApiLoading.value = true;
     final userData = cacheManager.getUserData();
-
+    var videoFile = '';
     final images = <ImageModel>[];
     for (XFile imgFile in imageFilesList) {
       final bytes = await imgFile.readAsBytes();
-      images.add(ImageModel(userPostId: userData!.id, fileName: base64Encode(bytes)));
+      if(imgFile.path.isVideoFileName){
+        videoFile = base64Encode(bytes);
+      }else{
+        images.add(ImageModel(image: base64Encode(bytes)));
+      }
     }
+
+    final data = PostRequestModel(
+        userId: userData!.id,
+        post: postBody.value,
+        postTypeId: _selectedContentType!.id,
+        date: DateTime.now().toIso8601String(),
+        points: 10,
+        video: videoFile,
+        images: images);
 
     var result;
     var success = await _action.execute(() async {
-      result = await _apiManager.addPost(
-          postRequest: PostRequestModel(
-            userId: userData!.id,
-            approvedBy: userData.id,
-            date: DateTime.now().toIso8601String(),
-            points: _selectedContentType!.points,
-            post: postBody.value,
-            postTypeId: _selectedContentType!.id,
-            images: images,
-          ));
+      result = await _apiManager.addPost(postRequest: data);
     }, checkConnection: true);
     //
     postApiLoading.value = false;
     //
     if (success) {
       if (result != null) {
-        OverlayHelper.showSuccessToast("تم اضافة المنشور بنجاح");
+        OverlayHelper.showSuccessToast(result["message"]);
         Get.back(result: true);
       } else {
         OverlayHelper.showErrorToast(AppText.somethingWrong);

@@ -6,12 +6,10 @@ class PostRequestModel extends Serializable{
   int? postTypeId;
   String? date;
   String? video;
-  String? approvedBy;
-  String? approveDate;
   int? points;
   List<ImageModel>? images;
 
-  PostRequestModel({this.userId, this.images, this.post, this.postTypeId, this.date, this.video, this.approvedBy, this.approveDate, this.points, });
+  PostRequestModel({this.userId, this.images, this.post, this.postTypeId, this.date, this.video, this.points, });
 
   @override
   void fromMap(Map<String, dynamic> map) {
@@ -20,8 +18,6 @@ class PostRequestModel extends Serializable{
     postTypeId = map['postTypeId'];
     date = map['date'];
     video = map['video'];
-    approvedBy = map['approvedBy'];
-    approveDate = map['approveDate'];
     points = map['points'];
     if (map['images'] != null) {
       images = [];
@@ -39,8 +35,6 @@ class PostRequestModel extends Serializable{
     data['postTypeId'] = this.postTypeId;
     data['date'] = this.date;
     data['video'] = this.video;
-    data['approvedBy'] = this.approvedBy;
-    data['approveDate'] = this.approveDate;
     data['points'] = this.points;
     if (this.images != null) {
       data['images'] = this.images!.map((v) => v.toMap()).toList();
@@ -50,22 +44,19 @@ class PostRequestModel extends Serializable{
 }
 
 class ImageModel extends Serializable{
-  String? userPostId;
-  String? fileName;
+  String? image;
 
-  ImageModel({this.userPostId, this.fileName, });
+  ImageModel({ this.image, });
 
   @override
   void fromMap(Map<String, dynamic> map) {
-    userPostId = map['userPostId'];
-    fileName = map['fileName'];
+    image = map['image'];
   }
 
   @override
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['userPostId'] = this.userPostId;
-    data['fileName'] = this.fileName;
+    data['image'] = this.image;
     return data;
   }
 }
