@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:hayah_karema/app/common/models/generic_model.dart';
+import 'package:hayah_karema/app/common/managers/api/post/_model/post_type.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
@@ -10,9 +10,10 @@ import 'package:hayah_karema/app/pages/new_post/new_post_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 class PostTypeView extends StatelessWidget {
-  PostTypeView({Key? key}) : super(key: key);
+  final Function onSelectContentType;
+  PostTypeView({Key? key, required this.onSelectContentType}) : super(key: key);
 
-  final controller = Get.find<NewPostController>();
+  final controller = Get.put(NewPostController());
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,7 @@ class PostTypeView extends StatelessWidget {
             )),
 
         Text(
-          AppText.choosePostType,
+          AppText.postTitle,
           style: TextStyle(
               fontSize: Get.textTheme.headline3?.fontSize,
               color: AppColors.current.accent,
@@ -74,15 +75,18 @@ class PostTypeView extends StatelessWidget {
   Widget _buildPostsTypeList() {
     return Expanded(
       child: ListView.separated(
-          itemBuilder: (cxt, index) => _buildPostTypeItem(controller.postTypeList[index]),
+          itemBuilder: (cxt, index) => _buildPostTypeItem(controller.postTypeList[index], index),
           separatorBuilder: (_, __) => const SizedBox(height: 8,),
           itemCount: controller.postTypeList.length),
     );
   }
 
-  Widget _buildPostTypeItem(GenericModel item) {
+  Widget _buildPostTypeItem(PostTypeModel item, int index) {
     return MaterialButton(
-      onPressed: ()=> controller.onPostTypeChange(item),
+      onPressed: (){
+        Get.back();
+        onSelectContentType(item);
+      },
       elevation: 0,
       padding: const EdgeInsets.all(0),
       child: Container(
@@ -91,12 +95,12 @@ class PostTypeView extends StatelessWidget {
             BoxDecoration(borderRadius: BorderRadius.circular(8), color: AppColors.current.dimmedLight.withOpacity(0.5)),
         child: Row(
           children: [
-            SvgPicture.asset(item.imgPath ?? ''),
+            SvgPicture.asset('assets/images/post_type${index+1}.svg'),
             const SizedBox(
               width: 20,
             ),
             Text(
-              item.title ?? '',
+              item.name ?? '',
               style: Get.textTheme.headline2,
             ),
           ],

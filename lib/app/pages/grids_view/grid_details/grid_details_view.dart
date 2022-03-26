@@ -9,11 +9,12 @@ import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
+import 'package:hayah_karema/app/common/widgets/big_btn.dart';
 import 'package:hayah_karema/app/common/widgets/dot_view.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
-import 'package:hayah_karema/app/common/widgets/loading_design.dart';
 import 'package:hayah_karema/app/common/widgets/shadow_view.dart';
 import 'package:hayah_karema/app/pages/grids_view/grid_details/grid_details_controller.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
 class GridDetails extends StatelessWidget {
   GridDetails({Key? key}) : super(key: key);
@@ -32,7 +33,13 @@ class GridDetails extends StatelessWidget {
               backCallBack: () => Get.back(),
             ),
             Obx(() {
-              if (controller.apiLoading.value == true) return const Expanded(child: LoadingDesign());
+              if (controller.apiLoading.value == true) {
+                return const Expanded(
+                    child: Center(
+                  child: CircularProgressIndicator(),
+                ));
+              }
+              if (controller.pointerItemModel == null) return const EmptyResponse();
               return _buildContent();
             }),
           ],
@@ -64,7 +71,7 @@ class GridDetails extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  _buildDeadMercy(),
+                  _buildPrayingForMartyrs(),
                 ],
               ),
             if (controller.contactsEnum == ContactsEnum.myVillage)
@@ -97,7 +104,6 @@ class GridDetails extends StatelessWidget {
               height: 25,
             ),
             _buildGallery(),
-
             _buildBiography(),
           ],
         ),
@@ -136,7 +142,7 @@ class GridDetails extends StatelessWidget {
             child: ClipOval(
               child: Image.network(
                 controller.pointerItemModel.avatar ?? '',
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
                 errorBuilder: (_, __, ___) {
                   return Image.asset(
                     AppAssets.userIcon,
@@ -185,20 +191,14 @@ class GridDetails extends StatelessWidget {
     );
   }
 
-  Widget _buildDeadMercy() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      decoration: BoxDecoration(color: AppColors.current.primary, borderRadius: BorderRadius.circular(10)),
-      child: Center(
-        child: Text(
-          'ادع له بالرحمة',
-          style: TextStyle(
-              color: AppColors.current.neutral,
-              fontWeight: FontWeight.bold,
-              fontSize: Get.textTheme.headline3?.fontSize),
-        ),
-      ),
-    );
+  Widget _buildPrayingForMartyrs() {
+    return Obx(() {
+      return BigBtn(
+        state: controller.buttonApiLoading.value == true ? BtnState.loading : BtnState.active,
+        text: 'ادع له بالرحمة',
+        onPressed: () => controller.prayingForMartyrs(),
+      );
+    });
   }
 
   Widget _buildGallery() {
@@ -229,11 +229,8 @@ class GridDetails extends StatelessWidget {
       }
 
       return CarouselSlider(
-        options: CarouselOptions(
-          height: Get.height / 3,
-          initialPage: 0,
-          viewportFraction: 0.8,
-        ),
+        options:
+            CarouselOptions(height: Get.height / 3, initialPage: 0, viewportFraction: 0.9, enableInfiniteScroll: false),
         items: controller.galleryList.map((item) {
           return Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -284,14 +281,20 @@ class GridDetails extends StatelessWidget {
   }
 
   Widget _buildBiography() {
-    if(controller.pointerItemModel.biography == null || controller.pointerItemModel.biography.isEmpty) return const SizedBox();
+    if (controller.pointerItemModel.biography == null || controller.pointerItemModel.biography.isEmpty) {
+      return const SizedBox();
+    }
     return Padding(
       padding: const EdgeInsets.only(top: 20),
-      child: Text(
-        controller.pointerItemModel.biography ?? '',
-        style: TextStyle(fontSize: Get.textTheme.headline3?.fontSize),
-        textAlign: TextAlign.justify,
-      ),
+      child: controller.contactsEnum == ContactsEnum.myVillage
+          ? HtmlWidget(
+              controller.pointerItemModel.biography ?? '',
+            )
+          : Text(
+              controller.pointerItemModel.biography ?? '',
+              style: TextStyle(fontSize: Get.textTheme.headline3?.fontSize),
+              textAlign: TextAlign.justify,
+            ),
     );
   }
 

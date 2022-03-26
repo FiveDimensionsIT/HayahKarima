@@ -64,7 +64,7 @@ class CommentView extends GetView<CommentController> {
               color: AppColors.current.accent,
             ),
           ),
-          onSaved: (val){controller.comment.value = val!;},
+          onChanged: (val){controller.comment.value = val;},
         ),
       ),
     );

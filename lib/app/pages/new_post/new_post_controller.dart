@@ -1,29 +1,39 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
-import 'package:hayah_karema/app/common/models/generic_model.dart';
-import 'package:hayah_karema/app/common/themes/app_assets.dart';
+import 'package:hayah_karema/app/common/action_center/action_center.dart';
+import 'package:hayah_karema/app/common/managers/api/post/_model/post_request.dart';
+import 'package:hayah_karema/app/common/managers/api/post/_model/post_type.dart';
+import 'package:hayah_karema/app/common/managers/api/post/i_post_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
+import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/pages/new_post/views/post_type_view.dart';
-import 'package:hayah_karema/app/routes/app_pages.dart';
 import 'package:hayah_karema/services/logger/log.dart';
+import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/utils/ui/ui_lib.dart';
 import 'package:image_picker/image_picker.dart';
 
 class NewPostController extends GetxController {
+  final cacheManager = DI.find<ICacheManager>();
+  final _apiManager = DI.find<IPostApiManager>();
+  final _action = ActionCenter();
 
-  var postTitle = ''.obs;
+  var contentType = ''.obs;
   var postBody = ''.obs;
-  var loginLoading = false.obs;
+  var postApiLoading = false.obs;
+  var getApiLoading = false.obs;
   RxList<XFile> imageFilesList = <XFile>[].obs;
 
   final ImagePicker _imagePicker = ImagePicker();
 
-  final postTypeList = [].obs;
+  final postTypeList = <PostTypeModel>[].obs;
 
-  GenericModel? _selectedPostType;
-
+  PostTypeModel? _selectedContentType;
 
   @override
   void onInit() {
     super.onInit();
-    _initPostTypes();
+    _getPostTypes();
   }
 
   openImages() async {
@@ -40,28 +50,78 @@ class NewPostController extends GetxController {
   }
 
   void onAddPostButtonClick() {
-// todo remove this just for test
-  Get.bottomSheet(PostTypeView(), isDismissible: true, isScrollControlled: true);
+    if (_selectedContentType == null) {
+      OverlayHelper.showErrorToast("برجاء اختر نوع المحتوى اولاً");
+      return;
+    }
+
+    if (postBody.value.isEmpty) {
+      OverlayHelper.showErrorToast("برجاء ادخل تفاصيل المنشور");
+      return;
+    }
+    _addPostAPI();
   }
 
-  void _initPostTypes() {
-    final list = <GenericModel>[
-      GenericModel(id: 0, title: 'منشور', imgPath: AppAssets.postType1),
-      GenericModel(id: 1, title: 'خبر', imgPath: AppAssets.postType2),
-      GenericModel(id: 2, title: 'نعي', imgPath: AppAssets.postType3),
-      GenericModel(id: 3, title: 'دعوة فرح', imgPath: AppAssets.postType4),
-      GenericModel(id: 4, title: 'نشاط', imgPath: AppAssets.postType5),
-      GenericModel(id: 5, title: 'تقديم تهنئة', imgPath: AppAssets.postType6),
-      GenericModel(id: 6, title: 'تقديم واجب عزاء', imgPath: AppAssets.postType7),
-      GenericModel(id: 7, title: 'إعلان', imgPath: AppAssets.postType8),
-      GenericModel(id: 7, title: 'مثل شعبي', imgPath: AppAssets.postType9),
-    ];
-    postTypeList.assignAll(list);
+  void onChooseContentType() {
+    if (getApiLoading.value) return;
+    Get.bottomSheet(PostTypeView(onSelectContentType: (PostTypeModel selectedContentType) {
+      _selectedContentType = selectedContentType;
+      contentType.value = selectedContentType.name ?? '';
+      contentType.refresh();
+    }), isDismissible: true, isScrollControlled: true);
   }
 
-  void onPostTypeChange(GenericModel item) {
-    _selectedPostType = item;
-    Get.offAllNamed(Routes.HOME);
+  void _getPostTypes() async {
+    getApiLoading.value = true;
+    List<PostTypeModel>? result;
+    var success = await _action.execute(() async {
+      result = await _apiManager.getPostsType();
+    }, checkConnection: true);
+    //
+    getApiLoading.value = false;
+    //
+    if (success) {
+      if (result != null) {
+        postTypeList.assignAll(result ?? []);
+      } else {
+        OverlayHelper.showErrorToast(AppText.somethingWrong);
+      }
+    }
   }
 
+  void _addPostAPI() async {
+    postApiLoading.value = true;
+    final userData = cacheManager.getUserData();
+
+    final images = <ImageModel>[];
+    for (XFile imgFile in imageFilesList) {
+      final bytes = await imgFile.readAsBytes();
+      images.add(ImageModel(userPostId: userData!.id, fileName: base64Encode(bytes)));
+    }
+
+    var result;
+    var success = await _action.execute(() async {
+      result = await _apiManager.addPost(
+          postRequest: PostRequestModel(
+            userId: userData!.id,
+            approvedBy: userData.id,
+            date: DateTime.now().toIso8601String(),
+            points: _selectedContentType!.points,
+            post: postBody.value,
+            postTypeId: _selectedContentType!.id,
+            images: images,
+          ));
+    }, checkConnection: true);
+    //
+    postApiLoading.value = false;
+    //
+    if (success) {
+      if (result != null) {
+        OverlayHelper.showSuccessToast("تم اضافة المنشور بنجاح");
+        Get.back(result: true);
+      } else {
+        OverlayHelper.showErrorToast(AppText.somethingWrong);
+      }
+    }
+  }
 }

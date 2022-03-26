@@ -6,6 +6,7 @@ import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
+import 'package:hayah_karema/app/common/widgets/dot_view.dart';
 import 'package:hayah_karema/app/pages/profile/profile_controller.dart';
 import 'package:hayah_karema/app/pages/profile/views/profile_awards_view.dart';
 import 'package:hayah_karema/app/pages/profile/views/profile_education_view.dart';
@@ -62,49 +63,48 @@ class ProfileView extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           border: Border.all(width: 1, color: AppColors.current.dimmedLight)),
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16.0),
-            child: Image.asset(AppAssets.userIcon,
-              fit: BoxFit.cover,
-              width: Get.height / 6,
-              height: Get.height / 6,
-            ),
-          ),
+      child: Obx(() {
+        if (controller.profileApiLoading.value) return const Center(child: CircularProgressIndicator());
 
-          const SizedBox(height: 8,),
-
-          Text(
-            'عاطف عبيد', style: TextStyle(fontSize: Get.textTheme.headline2?.fontSize, fontWeight: FontWeight.bold),),
-
-          const SizedBox(height: 5,),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
-              Text('محافظة كفر الشيخ',
-                style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                    color: AppColors.current.text,
-                    shape: BoxShape.circle,
-                  ),
-                ),
+        return Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16.0),
+              child: Image.network(controller.profileModel.value.avatar ?? '',
+                fit: BoxFit.cover,
+                width: Get.height / 6,
+                height: Get.height / 6,
               ),
+            ),
 
-              Text('قرية الزعفران',
-                style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
-            ],
-          ),
-        ],
-      ),
+            const SizedBox(height: 8,),
+
+            Text(controller.profileModel.value.fullName ?? '',
+              style: TextStyle(fontSize: Get.textTheme.headline2?.fontSize, fontWeight: FontWeight.bold),),
+
+            const SizedBox(height: 5,),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+                Text(controller.profileModel.value.village ?? '',
+                  style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
+
+                const DotView(),
+
+                Text(controller.profileModel.value.center ?? '',
+                  style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
+
+                const DotView(),
+
+                Text(controller.profileModel.value.governorate ?? '',
+                  style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
+              ],
+            ),
+          ],
+        );
+      }),
     );
   }
 
@@ -118,16 +118,20 @@ class ProfileView extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildPointsItem(iconPath: AppAssets.pointsIcon, title: AppText.points, points: '1,600'),
-            const SizedBox(height: 8,),
-            _buildPointsItem(iconPath: AppAssets.giftcardIcon, title: AppText.replaceable, points: '1,400'),
-            const SizedBox(height: 8,),
-            _buildPointsItem(iconPath: AppAssets.doneIcon, title: AppText.replacedPoint, points: '200'),
-          ],
-        ),
+        child: Obx(() {
+          if (controller.pointsApiLoading.value) return const Center(child: CircularProgressIndicator());
+
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _buildPointsItem(iconPath: AppAssets.pointsIcon, title: AppText.points, points: '${controller.userPointsResponse.value.total_points}'),
+              const SizedBox(height: 8,),
+              _buildPointsItem(iconPath: AppAssets.giftcardIcon, title: AppText.replaceable, points: '${controller.userPointsResponse.value.available_points}'),
+              const SizedBox(height: 8,),
+              _buildPointsItem(iconPath: AppAssets.doneIcon, title: AppText.replacedPoint, points: '${controller.userPointsResponse.value.exchanged_points}'),
+            ],
+          );
+        }),
       ),
     );
   }
@@ -182,10 +186,10 @@ class ProfileView extends StatelessWidget {
   // TabBar view
   Widget _buildTabBarView() {
     return Obx(() {
-      if(controller.currentTabIndex.value == 0 ) return const ProfileInfoView();
-      if(controller.currentTabIndex.value == 1 ) return const ProfileEducationView();
-      if(controller.currentTabIndex.value == 2 ) return const ProfileExperienceView();
-      if(controller.currentTabIndex.value == 3 ) return const ProfilePointsView();
+      if (controller.currentTabIndex.value == 0) return controller.profileApiLoading.value? const Center(child: CircularProgressIndicator(),): ProfileInfoView(profileModel: controller.profileModel.value);
+      if (controller.currentTabIndex.value == 1) return const ProfileEducationView();
+      if (controller.currentTabIndex.value == 2) return const ProfileExperienceView();
+      if (controller.currentTabIndex.value == 3) return const ProfilePointsView();
       return const ProfileAwardsView();
     });
   }
