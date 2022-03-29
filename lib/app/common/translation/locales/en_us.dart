@@ -42,6 +42,7 @@ const en_us = {
   "homeland_martyrs":"Homeland Martyrs",
   "proficients":"Proficients",
   "creators":"Creators",
+  "replacing":"Replacing",
   "companies":"Companies",
   "points":"Points",
 

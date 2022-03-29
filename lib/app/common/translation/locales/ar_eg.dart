@@ -41,6 +41,7 @@ const ar_eg = {
   "choose_post_type":"اختر نوع المنشور",
   "birth_place":"وُلد هنا",
   "companies":"الشركات",
+  "replacing":"استبدال",
   "points":"النقاط",
 
   "proficients":"المتفوقون",

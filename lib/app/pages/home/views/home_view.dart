@@ -134,7 +134,7 @@ class HomeView extends StatelessWidget {
         padding: AppTheme.pagePadding,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.current.dimmed.withOpacity(0.5), width: 1)),
+            border: Border.all(color: AppColors.current.accent, width: 1)),
         child: Text(
           AppText.whatIsInYourMind,
           style: TextStyle(

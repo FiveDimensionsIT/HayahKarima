@@ -106,13 +106,14 @@ class SideMenuController extends GetxController {
         }));
 
     /// == rewards
-    menuItems.add(MenuItem(
-        name: AppText.rewards,
-        iconPath: AppAssets.awardsSideMenuIcon,
-        onTap: () {
-          Get.toNamed(Routes.PRIZES);
-        }));
-
+    if(_userData.value.userRole == UserType.user) {
+      menuItems.add(MenuItem(
+          name: AppText.rewards,
+          iconPath: AppAssets.awardsSideMenuIcon,
+          onTap: () {
+            Get.toNamed(Routes.PRIZES);
+          }));
+    }
     /// == Sponsor
     menuItems.add(MenuItem(
         name: AppText.sponsors,

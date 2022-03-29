@@ -11,6 +11,9 @@ import 'package:hayah_karema/app/common/managers/api/post/post_api_manager.dart'
 import 'package:hayah_karema/app/common/managers/api/profile/fake_profile_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/i_profile_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/profile_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/rewards/fake_rewards_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/rewards/i_rewards_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/rewards/rewards_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/cache/cache_manager.dart';
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/services/connectivity/connectivity_lib.dart';
@@ -63,6 +66,8 @@ void setup() {
   DI.setSingleton<IPostApiManager>(() => PostApiManager(DI.find()));
   // profile manager
   DI.setSingleton<IProfileAPIManager>(() => ProfileAPIManager(DI.find()));
+  // rewards manager
+  DI.setSingleton<IRewardsApiManager>(() => RewardsApiManager(DI.find()));
   // endregion  ==== managers ====
 
 }
@@ -84,6 +89,10 @@ void setupDemoMode() {
   //
   DI.remove<IProfileAPIManager>();
   DI.setSingleton<IProfileAPIManager>(() => FakeProfileAPIManager());
+  //
+  DI.remove<IRewardsApiManager>();
+  DI.setSingleton<IRewardsApiManager>(() => FakeRewardsApiManager());
+
 }
 
 /// Dependency Injection wrapper

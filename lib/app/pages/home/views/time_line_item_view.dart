@@ -15,7 +15,6 @@ import 'package:hayah_karema/app/pages/home/home_controller.dart';
 import 'package:hayah_karema/utils/DateHelper.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 import 'package:readmore/readmore.dart';
-import 'package:share_plus/share_plus.dart';
 
 class TimelineItemView extends StatelessWidget {
   final TimelinePostModel item;
@@ -262,7 +261,7 @@ class TimelineItemView extends StatelessWidget {
                 controller.goToCommentView();
               }),
           _buildBtCommentShare(icon: 'assets/icons/share_oranges.svg', title: AppText.sharing, onPress: () {
-            Share.share(item.userName??'', subject: item.post,);
+            controller.sharePost(post: item);
           }),
         ],
       ),
