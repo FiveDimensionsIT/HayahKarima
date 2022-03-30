@@ -2,6 +2,9 @@ import 'package:get_it/get_it.dart';
 import 'package:hayah_karema/app/common/managers/api/auth/auth_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/auth/fake_auth_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/auth/i_auth_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/coursce/course_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/coursce/fake_course_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/coursce/i_course_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/home/fake_home_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/home/home_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/home/i_home_api_manager.dart';
@@ -64,7 +67,8 @@ void setup() {
   // profile manager
   DI.setSingleton<IProfileAPIManager>(() => ProfileAPIManager(DI.find()));
   // endregion  ==== managers ====
-
+  // course manager
+  DI.setSingleton<ICourseAPIManager>(() => CourseAPIManager(DI.find()));
 }
 
 void setupDemoMode() {
@@ -84,6 +88,9 @@ void setupDemoMode() {
   //
   DI.remove<IProfileAPIManager>();
   DI.setSingleton<IProfileAPIManager>(() => FakeProfileAPIManager());
+  //
+  DI.remove<ICourseAPIManager>();
+  DI.setSingleton<ICourseAPIManager>(() => FakeCourseAPIManager());
 }
 
 /// Dependency Injection wrapper

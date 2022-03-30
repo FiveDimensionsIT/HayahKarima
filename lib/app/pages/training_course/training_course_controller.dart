@@ -1,5 +1,11 @@
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/action_center/action_center.dart';
+import 'package:hayah_karema/app/common/managers/api/coursce/_model/course_model.dart';
+import 'package:hayah_karema/app/common/managers/api/coursce/i_course_api_manager.dart';
+import 'package:hayah_karema/app/common/translation/app_text.dart';
+import 'package:hayah_karema/setup.dart';
 import 'package:hayah_karema/utils/serialization/serialization_lib.dart';
+import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 
 class TrainingCourseController extends GetxController {
 
@@ -56,15 +62,37 @@ class TrainingCourseController extends GetxController {
      ),
   ];
 
-  RxList<TrainingCourseModel> coursesList = <TrainingCourseModel>[].obs;
+  RxList<CourseModel> coursesList = <CourseModel>[].obs;
   RxBool apiLoading = false.obs;
+   final _apiManager = DI.find<ICourseAPIManager>();
+   final _action = ActionCenter();
 
   @override
   void onInit() {
     super.onInit();
-    coursesList.assignAll(_allCourses);
+    _onLoad();
   }
-
+   void _onLoad()  {
+     _getCourseDataAPI();
+   }
+   void _getCourseDataAPI() async {
+     apiLoading.value = true;
+     List<CourseModel>? result;
+     var success = await _action.execute(() async {
+       result = await _apiManager.getCoursesData();
+     }, checkConnection: true);
+     //
+     apiLoading.value = false;
+     //
+     if (success) {
+       if (result != null) {
+         if(coursesList.isNotEmpty) coursesList.clear();
+         coursesList.assignAll(result ?? []);
+       } else {
+         OverlayHelper.showErrorToast(AppText.somethingWrong);
+       }
+     }
+   }
   @override
   void onReady() {
     super.onReady();
@@ -72,18 +100,18 @@ class TrainingCourseController extends GetxController {
 
 
   void filterCourse(String courseName) {
-    // List<TrainingCourseModel> results = [];
-    // if (courseName.isEmpty) {
-    //   results = allCourses;
-    // } else {
-    //   results = allCourses
-    //       .where((element) => element.nameCourse
-    //           .toString()
-    //           .toLowerCase()
-    //           .contains(courseName.toLowerCase()))
-    //       .toList();
-    // }
-    // coursesList.value = results;
+    List<CourseModel> results = [];
+    if (courseName.isEmpty) {
+      results = coursesList;
+    } else {
+      results = coursesList
+          .where((element) => element.name
+              .toString()
+              .toLowerCase()
+              .contains(courseName.toLowerCase()))
+          .toList();
+    }
+    coursesList.value = results;
   }
 }
 

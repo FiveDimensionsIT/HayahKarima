@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/managers/api/coursce/_model/course_model.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/pages/training_course/training_course_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 class InformationAboutDetailsCourseView extends StatelessWidget {
-  final TrainingCourseModel? item;
+  final CourseModel? item;
   InformationAboutDetailsCourseView({Key? key, this.item}) : super(key: key);
 
   final controller = Get.put(TrainingCourseController());
@@ -31,7 +32,7 @@ class InformationAboutDetailsCourseView extends StatelessWidget {
   }
 
   Widget _buildInfoAboutCourse(){
-    return Text(item?.aboutCourse??'',
+    return Text(item?.name??'',
     style: TextStyle(
       fontSize: Get.textTheme.bodyLarge?.fontSize,
     ),

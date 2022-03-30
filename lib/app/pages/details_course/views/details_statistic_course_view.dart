@@ -1,22 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/managers/api/coursce/_model/course_model.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/pages/details_course/views/about_details_course_view.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 
 class DetailsStatisticCourseView  extends StatelessWidget {
-  const DetailsStatisticCourseView ({Key? key}) : super(key: key);
-
+   DetailsStatisticCourseView ({Key? key,this.item}) : super(key: key);
+   final CourseModel? item;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         _buildNumberOfHoursCourse(),
-        Empty(width: 4,),
-        _buildNumberOfSectionCourse(),
+        // Empty(width: 4,),
+        // _buildNumberOfSectionCourse(),
         Empty(width: 4,),
         _buildRateCourse(),
         Empty(width: 4,),
@@ -40,7 +41,7 @@ class DetailsStatisticCourseView  extends StatelessWidget {
           fit: BoxFit.cover,
           ),
           Empty(width: 4,),
-          Text('20 ساعة',style: TextStyle(
+          Text(item!.no_of_hours.toString(),style: TextStyle(
               fontSize: Get.textTheme.bodySmall?.fontSize,
             fontWeight: FontWeight.bold,
             color: AppColors.current.primary
@@ -112,7 +113,7 @@ class DetailsStatisticCourseView  extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Text(
-        'Html5',
+        item!.category.toString(),
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: Get.textTheme.bodySmall?.fontSize,

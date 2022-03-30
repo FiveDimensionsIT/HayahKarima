@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/managers/api/coursce/_model/course_model.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 class WhatLearnCourseView extends StatelessWidget {
-   WhatLearnCourseView({Key? key}) : super(key: key);
+   WhatLearnCourseView({Key? key,this.item}) : super(key: key);
+   final CourseModel? item;
 
-  List<String> list = [
-    "التعرف على واجهة المستخدم لنظام الووردبريس أساسيات الووردبريس: كيف تنشئ الصفحات, والتعرف على قوائم الووردبريس",
-    "كيف تتحكم في شكل الموقع و الخواص التي يشملها من خلال الثيم و البلاجنز",
-    "كيف تستطيع تعديل و تخصيص موقعك بأفضل الطرق ليوائم البراند الخاصة بك"
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +28,7 @@ class WhatLearnCourseView extends StatelessWidget {
         ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: list.length,
+            itemCount: item?.goals?.length,
             itemBuilder: (context,index){
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
@@ -44,7 +41,8 @@ class WhatLearnCourseView extends StatelessWidget {
                       color: AppColors.current.primary.withOpacity(0.1),
                     ),
                   ),
-                  child: Text(list[index].toString(),
+                  // error
+                  child: Text('item.goals[index].goal',
                     style: TextStyle(
                       fontSize: Get.textTheme.bodyMedium?.fontSize,
                     ),

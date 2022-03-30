@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/managers/api/coursce/_model/course_model.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
@@ -13,8 +14,8 @@ import 'package:hayah_karema/app/pages/training_course/training_course_controlle
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 class DetailsCourseView extends StatelessWidget {
-  final TrainingCourseModel? item;
-   DetailsCourseView({Key? key, this.item}) : super(key: key);
+  final CourseModel? item;
+   DetailsCourseView({Key? key,this.item}) : super(key: key);
 
    final controller = Get.put(TrainingCourseController());
 
@@ -42,9 +43,9 @@ class DetailsCourseView extends StatelessWidget {
                children: [
                  _buildImageAndNameCourse(),
                  Empty(height: 30,),
-                 _buildTrainerInfo(),
-                 Empty(height: 24,),
-                 const DetailsStatisticCourseView(),
+                // _buildTrainerInfo(),
+                // Empty(height: 24,),
+                  DetailsStatisticCourseView(item: item,),
                  Empty(height: 24,),
                   InformationAboutDetailsCourseView(item: item),
                  Empty(height: 16,),
@@ -64,14 +65,14 @@ class DetailsCourseView extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.asset(item?.image??'',
+          child: Container(
               width: Get.width,
               height: Get.height/4,
-              fit: BoxFit.cover
+
           ),
         ),
         Empty(height: 16,),
-        Text(item?.nameCourse??'',
+        Text(item?.name??'',
             textAlign: TextAlign.right,
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -81,25 +82,25 @@ class DetailsCourseView extends StatelessWidget {
       ],
     );
   }
-  Widget _buildTrainerInfo(){
-    return Row(
-      children: [
-        CircleAvatar(
-          backgroundColor: AppColors.current.transparent,
-          radius: 24,
-          backgroundImage: AssetImage(item?.imageTrainer??''),
-        ),
-        Empty(width: 10,),
-        Text(item?.trainerName??'',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: Get.textTheme.bodyLarge?.fontSize,
-            color: AppColors.current.text.withOpacity(0.9),
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget _buildTrainerInfo(){
+  //   return Row(
+  //     children: [
+  //       CircleAvatar(
+  //         backgroundColor: AppColors.current.transparent,
+  //         radius: 24,
+  //         backgroundImage: AssetImage(item?.imageTrainer??''),
+  //       ),
+  //       Empty(width: 10,),
+  //       Text(item?.trainerName??'',
+  //         style: TextStyle(
+  //           fontWeight: FontWeight.bold,
+  //           fontSize: Get.textTheme.bodyLarge?.fontSize,
+  //           color: AppColors.current.text.withOpacity(0.9),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _joinNowButton() {
     return SizedBox(
