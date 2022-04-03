@@ -2,6 +2,9 @@ import 'package:get_it/get_it.dart';
 import 'package:hayah_karema/app/common/managers/api/auth/auth_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/auth/fake_auth_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/auth/i_auth_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/courses/courses_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/courses/fake_courses_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/courses/i_courses_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/home/fake_home_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/home/home_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/home/i_home_api_manager.dart';
@@ -68,6 +71,8 @@ void setup() {
   DI.setSingleton<IProfileAPIManager>(() => ProfileAPIManager(DI.find()));
   // rewards manager
   DI.setSingleton<IRewardsApiManager>(() => RewardsApiManager(DI.find()));
+  // courses manager
+  DI.setSingleton<ICoursesApiManager>(() => CourseApiManager(DI.find()));
   // endregion  ==== managers ====
 
 }
@@ -92,6 +97,9 @@ void setupDemoMode() {
   //
   DI.remove<IRewardsApiManager>();
   DI.setSingleton<IRewardsApiManager>(() => FakeRewardsApiManager());
+  //
+  DI.remove<ICoursesApiManager>();
+  DI.setSingleton<ICoursesApiManager>(() => FakeCourseApiManager());
 
 }
 

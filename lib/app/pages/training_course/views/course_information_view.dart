@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/managers/api/courses/_models/course_model.dart';
+import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/pages/details_course/views/details_course_view.dart';
 import 'package:hayah_karema/app/pages/training_course/training_course_controller.dart';
@@ -8,13 +10,14 @@ import 'package:hayah_karema/utils/ui/empty.dart';
 
 class TrainingCourseItemView extends GetView<TrainingCourseController> {
   final TrainingCourseModel item;
+
   const TrainingCourseItemView({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        Get.to(()=> DetailsCourseView(item: item,));
+      onTap: () {
+        Get.to(() => DetailsCourseView(item: item,));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -22,8 +25,10 @@ class TrainingCourseItemView extends GetView<TrainingCourseController> {
           decoration: BoxDecoration(
               color: AppColors.current.neutral,
               borderRadius: BorderRadius.circular(16.0),
-              border: Border.all(color: AppColors.current.primary, width: 1.0,)
-          ),
+              border: Border.all(
+                color: AppColors.current.primary,
+                width: 1.0,
+              )),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -31,11 +36,13 @@ class TrainingCourseItemView extends GetView<TrainingCourseController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildImageCourse(),
-                Empty(height: 8,),
-                _buildTrainee(),
-                Empty(height: 5,),
+                Empty(
+                  height: 8,
+                ),
                 _buildCourseName(),
-                Empty(height: 10,),
+                Empty(
+                  height: 10,
+                ),
                 StatisticCourseView(item: item),
               ],
             ),
@@ -45,61 +52,37 @@ class TrainingCourseItemView extends GetView<TrainingCourseController> {
     );
   }
 
-  Widget _buildImageCourse(){
+  Widget _buildImageCourse() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
-      child: Image.asset(item.image??'',
+      child: Image.network(
+        item.images == null || item.images!.isEmpty ? '' : item.images![0]!.filename ?? '',
         width: Get.width,
-        height: Get.height/5,
+        height: Get.height / 5,
         fit: BoxFit.cover,
-      ),
-    );
-  }
-  Widget  _buildTrainee(){
-    return SizedBox(
-      height: 36,
-      child: Row(
-        children: [
-          CircleAvatar(
-            backgroundColor: AppColors.current.transparent,
-            radius: 18,
-            backgroundImage: AssetImage(item.imageTrainer??''),
-          ),
-           Empty(width: 16,),
-           Expanded(
-             child: Text(item.trainerName??'',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: Get.textTheme.headline3?.fontSize,
-                color: AppColors.current.text,
-              ),
-          ),
-           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        errorBuilder: (_, __, ___){
+          return Container(
+            padding: const EdgeInsets.only(top: 20),
             decoration: BoxDecoration(
-              color: AppColors.current.dimmedLight,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: Text(item.language??'',textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: Get.textTheme.bodySmall?.fontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.current.dimmed,
-            ),
-            ),
-          ),
-        ],
+                borderRadius: BorderRadius.circular(10),
+                color: AppColors.current.dimmedLight),
+            width: Get.width,
+            height: Get.height / 5,
+            child: Image.asset(AppAssets.logo, color: AppColors.current.dimmed.withOpacity(0.3),),
+          );
+        },
       ),
     );
   }
-  Widget _buildCourseName(){
-    return  Text(item.nameCourse??'',
-    style: TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: Get.textTheme.bodyLarge?.fontSize,
-    ),
-      maxLines: 1,
+
+  Widget _buildCourseName() {
+    return Text(
+      item.name ?? '',
+      style: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: Get.textTheme.bodyMedium?.fontSize,
+      ),
+      maxLines: 2,
       overflow: TextOverflow.ellipsis,
     );
   }

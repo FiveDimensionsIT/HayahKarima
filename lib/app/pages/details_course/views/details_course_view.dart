@@ -1,5 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/managers/api/courses/_models/course_model.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
@@ -12,20 +14,26 @@ import 'package:hayah_karema/app/pages/details_course/views/what_learn_course_vi
 import 'package:hayah_karema/app/pages/training_course/training_course_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
+import '../../../common/themes/app_assets.dart';
+
 class DetailsCourseView extends StatelessWidget {
   final TrainingCourseModel? item;
-   DetailsCourseView({Key? key, this.item}) : super(key: key);
 
-   final controller = Get.put(TrainingCourseController());
+  DetailsCourseView({Key? key, this.item}) : super(key: key);
 
-   @override
+  final controller = Get.put(TrainingCourseController());
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.current.neutral,
-      body:SafeArea(
+      body: SafeArea(
         child: Column(
           children: [
-            AppToolbar(title:AppText.back, backCallBack: () => Get.back(),),
+            AppToolbar(
+              title: AppText.back,
+              backCallBack: () => Get.back(),
+            ),
             _buildBody(),
           ],
         ),
@@ -33,70 +41,77 @@ class DetailsCourseView extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(){
+  Widget _buildBody() {
     return Expanded(
-        child: SingleChildScrollView(
-           child: Padding(
-             padding: AppTheme.pagePadding,
-             child: Column(
-               children: [
-                 _buildImageAndNameCourse(),
-                 Empty(height: 30,),
-                 _buildTrainerInfo(),
-                 Empty(height: 24,),
-                 const DetailsStatisticCourseView(),
-                 Empty(height: 24,),
-                  InformationAboutDetailsCourseView(item: item),
-                 Empty(height: 16,),
-                  WhatLearnCourseView(),
-                 Empty(height: 16,),
-                 StudyPlanCourseView(),
-                 _joinNowButton()
-               ],
-             ),
-           ),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: AppTheme.pagePadding,
+          child: Column(
+            children: [
+              _buildImageAndNameCourse(),
+              Empty(
+                height: 30,
+              ),
+              DetailsStatisticCourseView(item: item),
+              Empty(
+                height: 24,
+              ),
+              InformationAboutDetailsCourseView(item: item),
+              Empty(
+                height: 16,
+              ),
+              WhatLearnCourseView(),
+              Empty(
+                height: 16,
+              ),
+              StudyPlanCourseView(item: item),
+              _joinNowButton()
+            ],
+          ),
         ),
+      ),
     );
   }
 
-  Widget _buildImageAndNameCourse(){
+  Widget _buildImageAndNameCourse() {
     return Column(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.asset(item?.image??'',
-              width: Get.width,
-              height: Get.height/4,
-              fit: BoxFit.cover
+          child: CarouselSlider(
+            items: item!.images
+                ?.map((e) =>
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(16.0),
+                    child: Image.network(
+                      e?.filename ?? '',
+                      width: Get.width,
+                      height: Get.height / 4,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) {
+                        return Container(
+                            width: Get.width,
+                            height: Get.height / 4,
+                            padding: const EdgeInsets.only(top: 20),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10), color: AppColors.current.dimmedLight),
+                            child: Image.asset(AppAssets.logo, color: AppColors.current.dimmed.withOpacity(0.3)));
+                      },
+                    )))
+                .toList(),
+            options: CarouselOptions(
+                autoPlay: false, enlargeCenterPage: true, aspectRatio: 2.0, enableInfiniteScroll: false),
           ),
         ),
-        Empty(height: 16,),
-        Text(item?.nameCourse??'',
+        Empty(
+          height: 16,
+        ),
+        Text(item?.name ?? '',
             textAlign: TextAlign.right,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: Get.textTheme.bodyLarge?.fontSize,
-            )
-        ),
-      ],
-    );
-  }
-  Widget _buildTrainerInfo(){
-    return Row(
-      children: [
-        CircleAvatar(
-          backgroundColor: AppColors.current.transparent,
-          radius: 24,
-          backgroundImage: AssetImage(item?.imageTrainer??''),
-        ),
-        Empty(width: 10,),
-        Text(item?.trainerName??'',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: Get.textTheme.bodyLarge?.fontSize,
-            color: AppColors.current.text.withOpacity(0.9),
-          ),
-        ),
+            )),
       ],
     );
   }
@@ -104,10 +119,15 @@ class DetailsCourseView extends StatelessWidget {
   Widget _joinNowButton() {
     return SizedBox(
       width: Get.width,
-      child: BigBtn(
+      child: Obx(() {
+        return BigBtn(
+          state: controller.postApiLoading.value ? BtnState.loading : BtnState.active,
           text: AppText.joinNow,
-          onPressed: (){},
-      ),
+          onPressed: () => controller.joinNow('${item?.id}'),
+        );
+      }),
     );
   }
+
+
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/managers/api/courses/_models/course_model.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/pages/training_course/training_course_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
@@ -17,19 +18,33 @@ class StatisticCourseView extends GetView<TrainingCourseController> {
         _buildCourseStatisticsItem(
             imgPath: 'assets/icons/time_line.png',
             color: AppColors.current.primary.withOpacity(0.1),
-            title: item.hourCourse??''),
-        Empty(
-          width: 8,
-        ),
+            title: '${item.no_of_hours}'),
+
+        Empty(width: 8,),
+
         _buildCourseStatisticsItem(
             imgPath: 'assets/icons/chapter.png',
             color: AppColors.current.primary.withOpacity(0.1),
-            title: item.sectionCourse??''),
-        Empty(
-          width: 8,
+            title: '${item.lecture_duration_in_minutes}'),
+
+        Expanded(child: Empty(width: 8,)),
+
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+          decoration: BoxDecoration(
+            color: AppColors.current.dimmedLight,
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Text(
+            item.category ?? '',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: Get.textTheme.bodySmall?.fontSize,
+              fontWeight: FontWeight.bold,
+              color: AppColors.current.dimmed,
+            ),
+          ),
         ),
-        _buildCourseStatisticsItem(
-            imgPath: 'assets/icons/rate.png', color: AppColors.current.accent.withOpacity(0.1), title: "${item.rate}"),
       ],
     );
   }
@@ -64,5 +79,4 @@ class StatisticCourseView extends GetView<TrainingCourseController> {
       ),
     );
   }
-
 }
