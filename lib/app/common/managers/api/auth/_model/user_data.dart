@@ -10,6 +10,7 @@ class UserData extends Serializable{
   String? membershipCatId;
   String? villageId;
   String? village;
+  String? governorate;
   String? group;
   String? module;
   String? permissions;
@@ -19,9 +20,9 @@ class UserData extends Serializable{
   int langNo = 0;
   int? status;
   int? groupStatus;
-  String? profileImgUrl;
+  String? avatar;
 
-  UserData({this.id, this.email, this.name, this.fullName, this.idNumber, this.membershipCatId, this.villageId, this.village, this.group, this.module, this.permissions, this.exp, this.iss, this.aud, this.status, this.groupStatus, this.profileImgUrl});
+  UserData({this.id, this.email, this.name, this.governorate, this.fullName, this.idNumber, this.membershipCatId, this.villageId, this.village, this.group, this.module, this.permissions, this.exp, this.iss, this.aud, this.status, this.groupStatus, this.avatar});
 
   @override
   void fromMap(Map<String, dynamic> map) {
@@ -41,7 +42,8 @@ class UserData extends Serializable{
     groupStatus = map['groupStatus'];
     status = map['status'];
     aud = map['aud'];
-    profileImgUrl = map['profileImgUrl'];
+    avatar = map['avatar'];
+    governorate = map['governorate'];
   }
 
   @override
@@ -63,7 +65,8 @@ class UserData extends Serializable{
     data['aud'] = this.aud;
     data['status'] = this.status;
     data['groupStatus'] = this.groupStatus;
-    data['profileImgUrl'] = this.profileImgUrl;
+    data['avatar'] = this.avatar;
+    data['governorate'] = this.governorate;
     return data;
   }
 

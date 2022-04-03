@@ -46,6 +46,7 @@ abstract class AppText {
   static String get points => 'points'.tr;
   static String get choosePostType => 'choose_post_type'.tr;
   static String get birthPlace => 'birth_place'.tr;
+  static String get replacing => 'replacing'.tr;
 
   static String get getStarted => 'get_started'.tr;
   static String get hello => 'hello'.tr;

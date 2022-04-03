@@ -30,33 +30,33 @@ class NewPostView extends StatelessWidget {
     return SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        AppToolbar(
-          title: AppText.new_post,
-          backCallBack: () => Get.back(),
-        ),
-        const SizedBox(height: 10,),
-        Obx(()=> controller.getApiLoading.value? const CircularProgressIndicator(): const SizedBox()),
-        const SizedBox(height: 10,),
-        // Padding(
-        //   padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-        //   child: Text(AppText.postTitle,style: TextStyle(color: AppColors.current.dimmed),),
-        // ),
-        _buildPostTitle(),
-        const SizedBox(
-          height: 10,
-        ),
-        _buildPostBody(),
-        const SizedBox(
-          height: 10,
-        ),
-        _selectedImage(),
-        const SizedBox(
-          height: 10,
-        ),
-        _buildBottomBar()
-      ],
-    ));
+          children: [
+            AppToolbar(
+              title: AppText.new_post,
+              backCallBack: () => Get.back(),
+            ),
+            const SizedBox(height: 10,),
+            Obx(() => controller.getApiLoading.value ? const CircularProgressIndicator() : const SizedBox()),
+            const SizedBox(height: 10,),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+            //   child: Text(AppText.postTitle,style: TextStyle(color: AppColors.current.dimmed),),
+            // ),
+            _buildPostTitle(),
+            const SizedBox(
+              height: 10,
+            ),
+            _buildPostBody(),
+            const SizedBox(
+              height: 10,
+            ),
+            _selectedImage(),
+            const SizedBox(
+              height: 10,
+            ),
+            _buildBottomBar()
+          ],
+        ));
   }
 
   Widget _buildPostTitle() {
@@ -67,9 +67,11 @@ class NewPostView extends StatelessWidget {
           child: Obx(() {
             return TextField(
               style: Get.textTheme.headline3,
-              controller: TextEditingController()..text = controller.contentType.value,
+              controller: TextEditingController()
+                ..text = controller.contentType.value,
               enabled: false,
-              decoration: InputDecoration(hintText: AppText.postTitle, suffixIcon: const Icon(CupertinoIcons.chevron_down)),
+              decoration: InputDecoration(
+                  hintText: AppText.postTitle, suffixIcon: const Icon(CupertinoIcons.chevron_down)),
               textInputAction: TextInputAction.next,
             );
           }),
@@ -100,9 +102,9 @@ class NewPostView extends StatelessWidget {
 
       return CarouselSlider(
         options: CarouselOptions(
-          autoPlay: false,
-          enlargeCenterPage: true,
-          enableInfiniteScroll: false
+            autoPlay: false,
+            enlargeCenterPage: true,
+            enableInfiniteScroll: false
         ),
         items: controller.imageFilesList.map((image) {
           return Container(
@@ -111,7 +113,7 @@ class NewPostView extends StatelessWidget {
                 boxShadow: [BoxShadow(color: AppColors.current.dimmedLight, blurRadius: 2)],
                 borderRadius: BorderRadius.circular(10)),
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10),
               child: Image.file(File(image.path), fit: BoxFit.cover),
             ),
           );
@@ -166,19 +168,21 @@ class NewPostView extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          _shareButton(),
+          _addPostButton(),
         ],
       ),
     );
   }
 
-  Widget _shareButton() {
+  Widget _addPostButton() {
     return SizedBox(
       width: Get.width,
-      child: BigBtn(
-          state: controller.postApiLoading.value ? BtnState.loading : BtnState.active,
-          text: AppText.share,
-          onPressed: () => controller.onAddPostButtonClick()),
+      child: Obx(() {
+        return BigBtn(
+            state: controller.postApiLoading.value ? BtnState.loading : BtnState.active,
+            text: AppText.share,
+            onPressed: () => controller.onAddPostButtonClick());
+      }),
     );
   }
 }

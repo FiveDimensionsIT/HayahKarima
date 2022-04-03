@@ -260,7 +260,9 @@ class TimelineItemView extends StatelessWidget {
               onPress: () {
                 controller.goToCommentView();
               }),
-          _buildBtCommentShare(icon: 'assets/icons/share_oranges.svg', title: AppText.sharing, onPress: () {}),
+          _buildBtCommentShare(icon: 'assets/icons/share_oranges.svg', title: AppText.sharing, onPress: () {
+            controller.sharePost(post: item);
+          }),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import 'package:hayah_karema/app/pages/auth/change_password/change_password_binding.dart';
 import 'package:hayah_karema/app/pages/auth/change_password/change_password_view.dart';
 import 'package:hayah_karema/app/pages/auth/forgot_password/forgot_password_binding.dart';
@@ -31,6 +32,8 @@ import 'package:hayah_karema/app/pages/new_post/new_post_binding.dart';
 import 'package:hayah_karema/app/pages/new_post/views/new_post_view.dart';
 import 'package:hayah_karema/app/pages/notification/notification_binding.dart';
 import 'package:hayah_karema/app/pages/notification/notification_view.dart';
+import 'package:hayah_karema/app/pages/prizes/prizes_binding.dart';
+import 'package:hayah_karema/app/pages/prizes/prizes_view.dart';
 import 'package:hayah_karema/app/pages/profile/profile_binding.dart';
 import 'package:hayah_karema/app/pages/profile/views/profile_view.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_binding.dart';
@@ -153,7 +156,8 @@ class AppPages {
         binding: ProfileBinding(),
         transition: _pageTransition,
         transitionDuration: _transitionDuration),
-    GetPage(name: _Paths.NEW_POST,
+    GetPage(
+        name: _Paths.NEW_POST,
         page: () => NewPostView(),
         binding: NewPostBinding(),
         transition: _pageTransition),
@@ -199,5 +203,10 @@ class AppPages {
         binding: BirthPlaceBinding(),
         transition: _pageTransition,
         transitionDuration: _transitionDuration),
+    GetPage(
+      name: _Paths.PRIZES,
+      page: () => PrizesView(),
+      binding: PrizesBinding(),
+    ),
   ];
 }

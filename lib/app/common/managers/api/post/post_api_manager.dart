@@ -19,7 +19,7 @@ class PostApiManager implements IPostApiManager{
     var resp = await _httpService.sendRequest(request);
     //
     if (resp != null && resp.statusCode == 200 && resp.data != null) {
-      return resp.data;
+      return jsonDecode(resp.data!);
     }
     return null;
   }

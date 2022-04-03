@@ -4,6 +4,7 @@ class GenericModel{
   int? id;
   String? title;
   String? subTitle;
+  String? points;
   bool? isSelected;
   IconData? icon;
   String? imgPath;
@@ -12,7 +13,7 @@ class GenericModel{
   DateTime? date;
   Function? callBack;
   GenericModel({this.id, this.title, this.subTitle, this.isSelected, this.icon, this.imgPath, this.backgroundColor,
-    this.foregroundColor, this.date, this.callBack});
+    this.foregroundColor, this.date, this.callBack, this.points});
 
 
 }
