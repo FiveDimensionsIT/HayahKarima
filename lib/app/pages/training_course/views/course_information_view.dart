@@ -17,7 +17,7 @@ class TrainingCourseItemView extends GetView<TrainingCourseController> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Get.to(()=> DetailsCourseView(item: item,));
+        Get.to(()=> DetailsCourseView());
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -48,7 +48,7 @@ class TrainingCourseItemView extends GetView<TrainingCourseController> {
     );
   }
   Widget _buildListImageCourse() {
-    //if (item.images == null || item.images!.isEmpty) return const SizedBox();
+    if (item.images == null || item.images!.isEmpty) return const SizedBox();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: CarouselSlider(

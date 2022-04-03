@@ -81,9 +81,7 @@ class TrainingCourseController extends GetxController {
      var success = await _action.execute(() async {
        result = await _apiManager.getCoursesData();
      }, checkConnection: true);
-     //
      apiLoading.value = false;
-     //
      if (success) {
        if (result != null) {
          if(coursesList.isNotEmpty) coursesList.clear();
@@ -93,11 +91,6 @@ class TrainingCourseController extends GetxController {
        }
      }
    }
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
 
   void filterCourse(String courseName) {
     List<CourseModel> results = [];

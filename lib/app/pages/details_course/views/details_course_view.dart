@@ -14,11 +14,9 @@ import 'package:hayah_karema/app/pages/training_course/training_course_controlle
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 class DetailsCourseView extends StatelessWidget {
-  final CourseModel? item;
-   DetailsCourseView({Key? key,this.item}) : super(key: key);
 
-   final controller = Get.put(TrainingCourseController());
-
+   DetailsCourseView({Key? key}) : super(key: key);
+   var controller = Get.find<TrainingCourseController>();
    @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +43,9 @@ class DetailsCourseView extends StatelessWidget {
                  Empty(height: 30,),
                 // _buildTrainerInfo(),
                 // Empty(height: 24,),
-                  DetailsStatisticCourseView(item: item,),
+                  DetailsStatisticCourseView(item: controller.coursesList[0],),
                  Empty(height: 24,),
-                  InformationAboutDetailsCourseView(item: item),
+                  InformationAboutDetailsCourseView(item: controller.coursesList[0],),
                  Empty(height: 16,),
                   WhatLearnCourseView(),
                  Empty(height: 16,),
@@ -72,7 +70,7 @@ class DetailsCourseView extends StatelessWidget {
           ),
         ),
         Empty(height: 16,),
-        Text(item?.name??'',
+        Text(controller.coursesList[0].name??'',
             textAlign: TextAlign.right,
             style: TextStyle(
               fontWeight: FontWeight.bold,

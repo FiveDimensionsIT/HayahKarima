@@ -17,7 +17,7 @@ class StatisticCourseView extends GetView<TrainingCourseController> {
         _buildCourseStatisticsItem(
             imgPath: 'assets/icons/time_line.png',
             color: AppColors.current.primary.withOpacity(0.1),
-            title: item.no_of_hours.toString()??''),
+            title: item.no_of_hours?.toString()??''),
         Empty(
           width: 8,
         ),
@@ -61,12 +61,12 @@ class StatisticCourseView extends GetView<TrainingCourseController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Image.asset(
-          //   imgPath,
-          //   width: 20,
-          //   height: 20,
-          //   fit: BoxFit.cover,
-          // ),
+          Image.asset(
+            imgPath,
+            width: 20,
+            height: 20,
+            fit: BoxFit.cover,
+          ),
           Empty(
             width: 4,
           ),
