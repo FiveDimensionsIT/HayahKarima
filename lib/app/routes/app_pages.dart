@@ -187,7 +187,7 @@ class AppPages {
         transitionDuration: _transitionDuration),
     GetPage(
         name: _Paths.TRAINING_COURSE,
-        page: () => const TrainingCourseView(),
+        page: () =>  TrainingCourseView(),
         binding: TrainingCourseBinding(),
         transition: _pageTransition,
         transitionDuration: _transitionDuration),

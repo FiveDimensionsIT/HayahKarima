@@ -28,7 +28,7 @@ const ar_eg = {
   "citizens_pointer_filter":"ترتيب المؤشر (المواطنين)",
   "types_pointer_filter":"ترتيب المؤشر (نوعي)",
   "my_village":"قريتي",
-  "courses":"الدورات التدريبية",
+  "courses":"البرامج التدريبية",
   "honor_files":"سجل الشرف",
   "home_page":"الرئيسية",
   "rewards":"الجوائز",

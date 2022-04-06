@@ -5,6 +5,7 @@ import 'package:hayah_karema/app/common/managers/api/auth/_model/user_data.dart'
 import 'package:hayah_karema/app/common/managers/api/home/_models/user_points_response.dart';
 import 'package:hayah_karema/app/common/managers/api/home/i_home_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/_model/profile_model.dart';
+import 'package:hayah_karema/app/common/managers/api/profile/_model/user_earn_point_model.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/i_profile_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
@@ -21,6 +22,7 @@ class ProfileController extends GetxController  with GetSingleTickerProviderStat
   String? name, nationalId,title,email,phone,address;
   var loginLoading = false.obs;
   final pointsApiLoading = false.obs;
+  final pointsEarnedApiLoading = false.obs;
   final profileApiLoading = false.obs;
 
   late TabController tabBarController;
@@ -28,7 +30,7 @@ class ProfileController extends GetxController  with GetSingleTickerProviderStat
 
   Rx<UserPointsResponse> userPointsResponse = UserPointsResponse().obs;
   Rx<ProfileModel> profileModel = ProfileModel().obs;
-
+  RxList<UserEarnedPointModel> userEarnedPointModelList = <UserEarnedPointModel>[].obs;
   UserData? userData;
 
   @override
@@ -44,6 +46,7 @@ class ProfileController extends GetxController  with GetSingleTickerProviderStat
     // call APIs
     _getProfileData();
     _getUserPointsAPI();
+    _getUserEarnedPointsAPI();
   }
 
   @override
@@ -71,7 +74,27 @@ class ProfileController extends GetxController  with GetSingleTickerProviderStat
       }
     }
   }
+  void _getUserEarnedPointsAPI() async {
+    pointsEarnedApiLoading.value = true;
+    final userData = cacheManager.getUserData();
+    List<UserEarnedPointModel>? result;
 
+    var success = await _action.execute(() async {
+      result = await _profileApiManager.getUserEarnedPoints(userId: '${userData?.id}');
+    }, checkConnection: true);
+    //
+    pointsEarnedApiLoading.value = false;
+    //
+    if (success) {
+      if (result != null) {
+
+        if(userEarnedPointModelList.isNotEmpty) userEarnedPointModelList.clear();
+        userEarnedPointModelList.assignAll(result ?? []);
+      } else {
+        OverlayHelper.showErrorToast(AppText.somethingWrong);
+      }
+    }
+  }
   void _getProfileData() async {
     profileApiLoading.value = true;
     final userData = cacheManager.getUserData();

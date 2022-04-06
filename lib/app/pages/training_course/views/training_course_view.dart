@@ -10,8 +10,10 @@ import 'package:hayah_karema/app/pages/training_course/views/course_information_
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 
-class TrainingCourseView extends GetView<TrainingCourseController> {
-  const TrainingCourseView({Key? key}) : super(key: key);
+class TrainingCourseView extends StatelessWidget  {
+   TrainingCourseView({Key? key}) : super(key: key);
+
+  var controller = Get.find<TrainingCourseController>();
 
   @override
   Widget build(BuildContext context) {
