@@ -15,7 +15,7 @@ import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 import 'package:share_plus/share_plus.dart';
 
 class HomeController extends GetxController {
-  final cacheManager = DI.find<ICacheManager>();
+  final _cacheManager = DI.find<ICacheManager>();
   final _apiManager = DI.find<IHomeApiManager>();
   final _action = ActionCenter();
 
@@ -56,7 +56,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> _getUserData() async {
-    await cacheManager.init();
+    await _cacheManager.init();
   }
 
   void changeColorBtLike() {
@@ -103,7 +103,7 @@ class HomeController extends GetxController {
 
   void _getQuestionAPI() async {
     questionApiLoading.value = true;
-    final userData = cacheManager.getUserData();
+    final userData = _cacheManager.getUserData();
     List<QuestionResponse>? result;
     var success = await _action.execute(() async {
       result = await _apiManager.getQuestions(userId: '${userData?.id}');
@@ -122,7 +122,7 @@ class HomeController extends GetxController {
 
   void _getUserPointsAPI() async {
     pointsApiLoading.value = true;
-    final userData = cacheManager.getUserData();
+    final userData = _cacheManager.getUserData();
     UserPointsResponse? result;
     var success = await _action.execute(() async {
       result = await _apiManager.getUserPoints(userId: '${userData?.id}');
@@ -140,12 +140,12 @@ class HomeController extends GetxController {
   }
 
   void sendAnswerBtnClick() async{
-    if(selectedAnswer == null) {
+    if(selectedAnswer == null || selectedAnswer!.isEmpty) {
       OverlayHelper.showErrorToast('برجاء قم باختيار الإجابة أولاً');
       return;
     }
     sendAnswerLoading.value = true;
-    final userData = cacheManager.getUserData();
+    final userData = _cacheManager.getUserData();
     var result;
     var success = await _action.execute(() async {
       QuestionResponse question = questionsList.firstWhere((e) => e.answer_option_text == selectedAnswer);
@@ -158,21 +158,26 @@ class HomeController extends GetxController {
       if (result != null) {
         String res = result["result"];
         if(res.isNotEmpty){
-          var icon = Icon(Icons.close, color: AppColors.current.error);
-          var colorText = AppColors.current.error;
+          var icon = Icon(Icons.close, color: AppColors.current.neutral);
+          var bgColor = AppColors.current.error;
           if(res.contains('10') || res.contains('نقاط')){
             _getUserPointsAPI();
-            icon = Icon(Icons.done, color: AppColors.current.success);
-            colorText = AppColors.current.success;
+            icon = Icon(Icons.done, color: AppColors.current.neutral);
+            bgColor = AppColors.current.success;
           }
           Get.snackbar(
               '',
               '',
               icon: icon,
               snackPosition: SnackPosition.TOP,
-              titleText: Text(res, style: TextStyle(color: colorText, fontSize: Get.textTheme.headline3?.fontSize, fontWeight: FontWeight.bold),)
+              backgroundColor: bgColor,
+              padding: const EdgeInsets.only(top: 15, bottom: 0),
+              shouldIconPulse: false,
+
+              titleText: Text(res, style: TextStyle(color: AppColors.current.neutral, fontSize: Get.textTheme.headline3?.fontSize, fontWeight: FontWeight.bold),)
           );
           questionsList.clear();
+          selectedAnswer = '';
           _getQuestionAPI();
         }
       } else {

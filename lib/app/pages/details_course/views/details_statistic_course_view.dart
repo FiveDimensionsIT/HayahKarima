@@ -1,26 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hayah_karema/app/common/managers/api/coursce/_model/course_model.dart';
+import 'package:hayah_karema/app/common/managers/api/courses/_models/course_model.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
-import 'package:hayah_karema/app/pages/details_course/views/about_details_course_view.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 
 class DetailsStatisticCourseView  extends StatelessWidget {
-   DetailsStatisticCourseView ({Key? key,this.item}) : super(key: key);
-   final CourseModel? item;
+  final TrainingCourseModel? item;
+  const DetailsStatisticCourseView ({Key? key, this.item}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         _buildNumberOfHoursCourse(),
+        Empty(width: 4,),
+        _buildNumberOfSectionCourse(),
+        Empty(width: 4,),
+        // _buildRateCourse(),
         // Empty(width: 4,),
-        // _buildNumberOfSectionCourse(),
-        Empty(width: 4,),
-        _buildRateCourse(),
-        Empty(width: 4,),
         _buildNameCourse(),
       ],
     );
@@ -41,7 +41,7 @@ class DetailsStatisticCourseView  extends StatelessWidget {
           fit: BoxFit.cover,
           ),
           Empty(width: 4,),
-          Text(item!.no_of_hours.toString(),style: TextStyle(
+          Text('${item?.no_of_hours} ساعة ',style: TextStyle(
               fontSize: Get.textTheme.bodySmall?.fontSize,
             fontWeight: FontWeight.bold,
             color: AppColors.current.primary
@@ -65,7 +65,7 @@ class DetailsStatisticCourseView  extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Empty(width: 4,),
-          Text('30 مقطع',style: TextStyle(
+          Text('${item?.lecture_duration_in_minutes} مقطع ',style: TextStyle(
               fontSize: Get.textTheme.bodySmall?.fontSize,
               fontWeight: FontWeight.bold,
               color: AppColors.current.primary
@@ -74,6 +74,7 @@ class DetailsStatisticCourseView  extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildRateCourse(){
     return Container(
       width: 64,
@@ -103,6 +104,7 @@ class DetailsStatisticCourseView  extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildNameCourse(){
     return  Container(
       alignment: Alignment.center,
@@ -113,7 +115,7 @@ class DetailsStatisticCourseView  extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Text(
-        item!.category.toString(),
+        item?.category??'',
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: Get.textTheme.bodySmall?.fontSize,

@@ -91,9 +91,25 @@ class SplashView extends GetView<SplashController> {
         left: 0,
         right: 0,
         child: Center(
-            child: Text(
-          "Powered by OneVillage..Operating village",
-          style: TextStyle(color: AppColors.current.text, fontSize: Get.textTheme.bodySmall?.fontSize),
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Operating village",
+              style: TextStyle(color: AppColors.current.success, fontSize: 11),
+            ),
+            Image.asset(
+              AppAssets.copyrightsIcon,
+              width: 20,
+              height: 15,
+              color: AppColors.current.success,
+            ),
+            Text(
+              "Powered by OneVillage",
+              style: TextStyle(color: AppColors.current.success, fontSize: 11),
+            ),
+
+          ],
         )));
   }
 }
