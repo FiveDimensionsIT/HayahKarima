@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:hayah_karema/app/common/managers/api/profile/_model/profile_model.dart';
+import 'package:hayah_karema/app/common/managers/api/profile/_model/user_earn_point_model.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/i_profile_api_manager.dart';
 import 'package:hayah_karema/services/http/http_lib.dart';
 
@@ -20,4 +23,18 @@ class ProfileAPIManager implements IProfileAPIManager{
     return null;
   }
 
-}
+
+  @override
+  Future<List<UserEarnedPointModel>?> getUserEarnedPoints({String? userId}) async{
+    var request = HttpRequest(method: HttpMethod.get, url: 'UserEarnedPoints/$userId',)..addJsonHeaders();
+    //
+    var resp = await _httpService.sendRequest(request);
+    //
+    if (resp != null && resp.statusCode == 200 && resp.data != null) {
+      return List<UserEarnedPointModel>.from(
+          json.decode(resp.data!).map((x) => UserEarnedPointModel()..deserialize(jsonEncode(x))));
+    }
+    return null;
+    }
+
+  }
