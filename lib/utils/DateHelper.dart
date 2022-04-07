@@ -1,5 +1,6 @@
 import 'package:hayah_karema/services/logger/log.dart';
 import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 int getDayFromDate(DateTime d) => d.day;
 
@@ -89,4 +90,10 @@ int daysBetween({required DateTime from, required DateTime to}) {
 
 String getCurrentDayName(){
   return DateFormat('EEEE').format(DateTime.now());
+}
+
+String getUserRewardDate(String dateString){
+  initializeDateFormatting();
+  final date = DateTime.parse(dateString);
+ return DateFormat.yMMMMd('ar').add_jm().format(date);
 }

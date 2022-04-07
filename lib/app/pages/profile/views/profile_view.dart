@@ -198,7 +198,9 @@ class ProfileView extends StatelessWidget {
             ? const Center(child: CircularProgressIndicator())
             : ProfilePointsView(userEarnedList: controller.userEarnedPointModelList,);
       }
-      return const ProfileAwardsView();
+      return controller.userRewardsApiLoading.value
+          ? const Center(child: CircularProgressIndicator())
+          : ProfileAwardsView(userRewardsList: controller.userRewardsModelList,);
     });
   }
 
