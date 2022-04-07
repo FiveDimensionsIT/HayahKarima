@@ -59,14 +59,15 @@ class PrizesController extends GetxController {
     //
     if (success) {
       if (result != null) {
-        OverlayHelper.showSuccessToast(result["message"]);
-        Get.find<HomeController>().onRefreshUserPoints();
+        final String message = result["message"];
+        OverlayHelper.showSuccessToast(message);
+        if(!message.contains('عفواً')){
+          Get.find<HomeController>().onRefreshUserPoints();
+        }
       } else {
         OverlayHelper.showErrorToast(AppText.somethingWrong);
       }
     }
   }
-
-
 
 }

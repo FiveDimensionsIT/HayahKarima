@@ -36,6 +36,7 @@ class InformationAboutDetailsCourseView extends StatelessWidget {
   }
 
   Widget _buildInfoAboutCourse() {
+    if(item == null || item?.goals == null){return const SizedBox();}
     String goals = "";
     item?.goals?.forEach((goal) {
       goals += '- ${goal?.goal}.\n';
