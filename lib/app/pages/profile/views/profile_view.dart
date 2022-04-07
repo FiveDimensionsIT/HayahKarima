@@ -186,14 +186,18 @@ class ProfileView extends StatelessWidget {
   // TabBar view
   Widget _buildTabBarView() {
     return Obx(() {
-      if (controller.currentTabIndex.value == 0) return controller.profileApiLoading.value? const Center(child: CircularProgressIndicator(),):
-      ProfileInfoView(profileModel: controller.profileModel.value);
+      if (controller.currentTabIndex.value == 0) {
+        return controller.profileApiLoading.value
+            ? const Center(child: CircularProgressIndicator(),)
+            : ProfileInfoView(profileModel: controller.profileModel.value);
+      }
       if (controller.currentTabIndex.value == 1) return const ProfileEducationView();
       if (controller.currentTabIndex.value == 2) return const ProfileExperienceView();
-      if (controller.currentTabIndex.value == 3) return controller.profileApiLoading.value? const Center(child: CircularProgressIndicator(),):
-      ProfilePointsView(
-        userEarnedList: controller.userEarnedPointModelList.value,
-      );
+      if (controller.currentTabIndex.value == 3) {
+        return controller.pointsEarnedApiLoading.value
+            ? const Center(child: CircularProgressIndicator())
+            : ProfilePointsView(userEarnedList: controller.userEarnedPointModelList,);
+      }
       return const ProfileAwardsView();
     });
   }
