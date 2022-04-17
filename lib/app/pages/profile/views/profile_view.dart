@@ -21,7 +21,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 3,
       child: Scaffold(
         backgroundColor: AppColors.current.neutral,
         body: SafeArea(
@@ -155,7 +155,7 @@ class ProfileView extends StatelessWidget {
   /// Build Tabs
   Widget _buildTab() {
     return ButtonsTabBar(
-        controller: controller.tabBarController,
+        // controller: controller.tabBarController,
         height: 40,
         labelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.current.background),
         contentPadding: const EdgeInsets.symmetric(horizontal: 8),
@@ -167,13 +167,13 @@ class ProfileView extends StatelessWidget {
           Tab(
             text: AppText.information,
           ),
-          Tab(
-            text: AppText.education,
-          ),
-          Tab(
-            text: AppText.practicalExperience,
-            //child: _buildTab(AppText.practicalExperience,width: 90),
-          ),
+          // Tab(
+          //   text: AppText.education,
+          // ),
+          // Tab(
+          //   text: AppText.practicalExperience,
+          //   //child: _buildTab(AppText.practicalExperience,width: 90),
+          // ),
           Tab(
             text: AppText.earnPoints,
           ),
@@ -191,9 +191,9 @@ class ProfileView extends StatelessWidget {
             ? const Center(child: CircularProgressIndicator(),)
             : ProfileInfoView(profileModel: controller.profileModel.value);
       }
-      if (controller.currentTabIndex.value == 1) return const ProfileEducationView();
-      if (controller.currentTabIndex.value == 2) return const ProfileExperienceView();
-      if (controller.currentTabIndex.value == 3) {
+      // if (controller.currentTabIndex.value == 1) return const ProfileEducationView();
+      // if (controller.currentTabIndex.value == 2) return const ProfileExperienceView();
+      if (controller.currentTabIndex.value == 1) {
         return controller.pointsEarnedApiLoading.value
             ? const Center(child: CircularProgressIndicator())
             : ProfilePointsView(userEarnedList: controller.userEarnedPointModelList,);

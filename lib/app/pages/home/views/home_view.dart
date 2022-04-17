@@ -110,7 +110,8 @@ class HomeView extends StatelessWidget {
                 TimelineItemView(item: controller.timelinePostsList[index]),
 
                 if(index==1)Obx(() {
-                  if (controller.questionApiLoading.value || controller.questionsList.isEmpty) return const SizedBox();
+                  if (controller.questionApiLoading.value) return const SizedBox(height: 30, width : 30,child: CircularProgressIndicator(strokeWidth: 3,));
+                  if (controller.questionsList.isEmpty) return const SizedBox();
                   return Column(
                     children: [
                       Empty(height: 10),
@@ -150,7 +151,8 @@ class HomeView extends StatelessWidget {
 
   Widget _buildUserPoints() {
     return Obx(() {
-      if (controller.pointsApiLoading.value || controller.availablePoints.value.isEmpty) return const SizedBox();
+      if (controller.pointsApiLoading.value) return const SizedBox(height: 25, width : 25,child: CircularProgressIndicator(strokeWidth: 2.5,));
+      if (controller.availablePoints.value.isEmpty) return const SizedBox();
       var reversedList = List.from(controller.availablePoints.value
           .split('')
           .map((ch) => ch)

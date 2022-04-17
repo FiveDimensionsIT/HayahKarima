@@ -173,7 +173,6 @@ class HomeController extends GetxController {
               backgroundColor: bgColor,
               padding: const EdgeInsets.only(top: 15, bottom: 0),
               shouldIconPulse: false,
-
               titleText: Text(res, style: TextStyle(color: AppColors.current.neutral, fontSize: Get.textTheme.headline3?.fontSize, fontWeight: FontWeight.bold),)
           );
           questionsList.clear();

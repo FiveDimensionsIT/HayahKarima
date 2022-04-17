@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/action_center/action_center.dart';
 import 'package:hayah_karema/app/common/managers/api/auth/_model/user_data.dart';
@@ -13,7 +13,7 @@ import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/setup.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 
-class ProfileController extends GetxController  with GetSingleTickerProviderStateMixin{
+class ProfileController extends GetxController {
 
   final cacheManager = DI.find<ICacheManager>();
   final _apiManager = DI.find<IHomeApiManager>();
@@ -26,8 +26,6 @@ class ProfileController extends GetxController  with GetSingleTickerProviderStat
   final pointsEarnedApiLoading = false.obs;
   final profileApiLoading = false.obs;
   final userRewardsApiLoading = false.obs;
-
-  late TabController tabBarController;
   var currentTabIndex = 0.obs;
 
   Rx<UserPointsResponse> userPointsResponse = UserPointsResponse().obs;
@@ -39,7 +37,6 @@ class ProfileController extends GetxController  with GetSingleTickerProviderStat
   @override
   void onInit() {
     super.onInit();
-    tabBarController = TabController(length: 5, vsync: this);
     _getUserData();
   }
 
@@ -52,13 +49,6 @@ class ProfileController extends GetxController  with GetSingleTickerProviderStat
     _getUserEarnedPointsAPI();
     _getUserRewardsAPI();
   }
-
-  @override
-  void onClose() {
-    tabBarController.dispose();
-    super.onClose();
-  }
-
 
   void _getUserPointsAPI() async {
     pointsApiLoading.value = true;

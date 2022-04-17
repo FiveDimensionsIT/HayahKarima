@@ -46,7 +46,7 @@ import 'package:hayah_karema/app/pages/training_course/views/training_course_vie
 part 'app_routes.dart';
 
 const _pageTransition = Transition.circularReveal;
-const _transitionDuration = Duration(seconds: 1);
+const _transitionDuration = Duration(milliseconds: 700);
 
 class AppPages {
   AppPages._();
@@ -161,6 +161,7 @@ class AppPages {
         page: () => NewPostView(),
         binding: NewPostBinding(),
         transition: _pageTransition),
+
     GetPage(
         name: _Paths.NOTIFICATION_VIEW,
         page: () => const NotificationView(),
