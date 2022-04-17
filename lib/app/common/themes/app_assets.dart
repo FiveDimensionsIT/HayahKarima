@@ -3,10 +3,8 @@ abstract class AppAssets{
 
   static const String splash1 = 'assets/images/splash_1.png';
   static const String splash2 = 'assets/images/splash_2.png';
-  static const String splash3 = 'assets/images/splash_3.png';
-  static const String splash4 = 'assets/images/splash_4.png';
-  static const String splash5 = 'assets/images/splash_5.png';
-  static const String splash6 = 'assets/images/splash_6.png';
+  static const String splashAnim = 'assets/images/logo_anim.riv';
+
   static const String imgNotFound = 'assets/images/img_not_found.png';
   static const String copyrightsIcon = 'assets/images/copyrights.png';
 

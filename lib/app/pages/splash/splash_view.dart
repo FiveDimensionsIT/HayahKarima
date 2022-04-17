@@ -6,6 +6,7 @@ import 'package:hayah_karema/app/pages/auth/forgot_password/forgot_password_view
 import 'package:hayah_karema/app/pages/auth/login/login_view.dart';
 import 'package:hayah_karema/app/pages/auth/new_password/new_password_view.dart';
 import 'package:hayah_karema/app/pages/auth/verify_mobile_number/verify_mobile_number_view.dart';
+import 'package:rive/rive.dart';
 import 'splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {
@@ -56,13 +57,8 @@ class SplashView extends GetView<SplashController> {
 
   Center _buildLogoDesign() {
     return Center(
-      child: Stack(
-        children: [
-          Image.asset(AppAssets.splash3),
-          Image.asset(AppAssets.splash4),
-          Image.asset(AppAssets.splash5),
-          Image.asset(AppAssets.splash6),
-        ],
+      child: SizedBox(
+          height: Get.height / 2.5, child: const RiveAnimation.asset(AppAssets.splashAnim),
       ),
     );
   }
@@ -79,10 +75,12 @@ class SplashView extends GetView<SplashController> {
   Positioned _buildTopShapeDesign() => Positioned(
       right: 0,
       top: 0,
-      child: Image.asset(
-        AppAssets.splash2,
-        height: Get.height / 3,
-        fit: BoxFit.fill,
+      child: InteractiveViewer(
+        child: Image.asset(
+          AppAssets.splash2,
+          height: Get.height / 3,
+          fit: BoxFit.fill,
+        ),
       ));
 
   Widget _buildPoweredBy() {
@@ -96,17 +94,17 @@ class SplashView extends GetView<SplashController> {
           children: [
             Text(
               "Operating village",
-              style: TextStyle(color: AppColors.current.success, fontSize: 11),
+              style: TextStyle(color: AppColors.current.primary, fontSize: 11),
             ),
             Image.asset(
               AppAssets.copyrightsIcon,
               width: 20,
               height: 15,
-              color: AppColors.current.success,
+              color: AppColors.current.primary,
             ),
             Text(
               "Powered by OneVillage",
-              style: TextStyle(color: AppColors.current.success, fontSize: 11),
+              style: TextStyle(color: AppColors.current.primary, fontSize: 11),
             ),
 
           ],

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/action_center/action_center.dart';
 import 'package:hayah_karema/app/common/managers/api/courses/_models/available_course_model.dart';
@@ -8,15 +9,21 @@ import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/setup.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
+import 'package:rxdart/rxdart.dart';
 
 class TrainingCourseController extends GetxController {
   RxList<TrainingCourseModel> coursesList = <TrainingCourseModel>[].obs;
+  List<TrainingCourseModel> allCoursesList = <TrainingCourseModel>[];
+
   RxList<AvailableCourseModel> availableCourses = <AvailableCourseModel>[].obs;
+
   final _cacheManager = DI.find<ICacheManager>();
   RxBool apiLoading = false.obs;
   RxBool postApiLoading = false.obs;
   final _apiManager = DI.find<ICoursesApiManager>();
   final _action = ActionCenter();
+
+  final PublishSubject<String> _searchTextController = PublishSubject();
 
   @override
   void onInit() async {
@@ -24,9 +31,32 @@ class TrainingCourseController extends GetxController {
 
     await _cacheManager.init();
     _getCoursesApi();
+    _searchListener();
   }
 
-  void filterCourse(String courseName) {}
+  void filterCourse(String courseName) {
+    if(courseName.isEmpty){
+      coursesList.clear();
+      coursesList.assignAll(allCoursesList);
+      coursesList.refresh();
+      return;
+    }
+    _searchTextController.sink.add(courseName);
+  }
+
+  void _searchListener() {
+    _searchTextController.stream
+        .debounce((_) => TimerStream(true, const Duration(milliseconds: 500)))
+        .switchMap((val) async* {
+      debugPrint("==>> Search result :: $val");
+      yield val;
+    }).listen((result) {
+      final list = allCoursesList.where((c) => c.category!.toLowerCase().contains(result.toLowerCase()) || c.name!.toLowerCase().contains(result.toLowerCase()));
+      coursesList.clear();
+      coursesList.assignAll(list);
+      coursesList.refresh();
+    });
+  }
 
   void joinNow(String programId) {
     _getAvailableCourses(programId);
@@ -44,6 +74,7 @@ class TrainingCourseController extends GetxController {
     if (success) {
       if (result != null) {
         coursesList.assignAll(result ?? []);
+        allCoursesList.assignAll(result ?? []);
       } else {
         OverlayHelper.showErrorToast(AppText.somethingWrong);
       }
