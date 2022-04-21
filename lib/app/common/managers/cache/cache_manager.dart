@@ -36,8 +36,6 @@ class CacheManager implements ICacheManager {
 
   @override
   bool? logout() {
-    /// remove cached customer data
-    _cacheService.remove('customer');
     /// remove cached user data
     _cacheService.remove('user');
     return true;

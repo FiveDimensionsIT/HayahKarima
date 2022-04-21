@@ -25,6 +25,11 @@ class LoginController extends GetxController {
   final _cacheManager = DI.find<ICacheManager>();
 
   onLoginClick() {
+    // validate email
+    if(!userName.value.isNum && !userName.value.isEmail){
+      OverlayHelper.showErrorToast(AppText.invalidUserName);
+      return;
+    }
     callLoginApi();
   }
 
@@ -50,17 +55,6 @@ class LoginController extends GetxController {
     //
     if (success) {
       if (result != null) {
-        // غير معتمد
-        if (result!.status != 2) {
-          OverlayHelper.showWarningToast('حسابك غير معتمد، برجاء قم بالتواصل مع الادارة');
-          return;
-        }
-
-        // ليس لة صلاحية
-        if (result!.groupStatus != 2) {
-          OverlayHelper.showWarningToast('ليس لديك صلاحية الدخول الي التطبيق، برجاء قم بالتواصل مع الادارة');
-          return;
-        }
 
         if (result!.token == null || result!.token!.isEmpty) {
           OverlayHelper.showWarningToast(AppText.unHandledErrorAction);
@@ -69,6 +63,18 @@ class LoginController extends GetxController {
 
         // parse token to user data
         UserData userData = UserData()..deserialize(jsonEncode(parseJwt(result!.token!)));
+        // // غير معتمد
+        // if (userData.status != 2) {
+        //   OverlayHelper.showWarningToast('حسابك غير معتمد، برجاء قم بالتواصل مع الادارة');
+        //   return;
+        // }
+        //
+        // // ليس لة صلاحية
+        // if (userData.groupStatus != 2) {
+        //   OverlayHelper.showWarningToast('ليس لديك صلاحية الدخول الي التطبيق، برجاء قم بالتواصل مع الادارة');
+        //   return;
+        // }
+
         // save user data
         await _cacheManager.setUserData(userData);
         // navigate to next page

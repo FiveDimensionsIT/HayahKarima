@@ -1,5 +1,6 @@
 import 'package:hayah_karema/services/logger/log.dart';
 import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 int getDayFromDate(DateTime d) => d.day;
 
@@ -56,7 +57,7 @@ String formatDateToDay(String dateString){
 }
 
 String formatDateToDateTime(String dateString){
-  if(dateString.isEmpty) return '0000-00-00 00:00 --';
+  if(dateString.isEmpty) return '0000-00-00 00:00 00';
   try{
     final date = DateTime.parse(dateString);
     final day = date.day<10? '0${date.day}': '${date.day}';
@@ -65,9 +66,9 @@ String formatDateToDateTime(String dateString){
     final hours = date.hour<10? '0${date.hour}': '${date.hour}';
     final mins = date.minute<10? '0${date.minute}': '${date.minute}';
     final secs = date.second<10? '0${date.second}': '${date.second}';
-    final time = '$hours:$mins:$secs';
+    final time = '$hours:$mins';
 
-    return '${date.year}-$month-$day ${formatTimeTo12Hrs(time)}';
+    return '$time $day-$month-${date.year}';
   }catch (ex){
     Log.error('parse operation_date error : ',ex);
   }
@@ -89,4 +90,10 @@ int daysBetween({required DateTime from, required DateTime to}) {
 
 String getCurrentDayName(){
   return DateFormat('EEEE').format(DateTime.now());
+}
+
+String getUserRewardDate(String dateString){
+  initializeDateFormatting();
+  final date = DateTime.parse(dateString);
+ return DateFormat.yMMMMd('ar').add_jm().format(date);
 }

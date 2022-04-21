@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
@@ -45,7 +44,7 @@ class LoginView extends StatelessWidget {
               Empty(height: 20,),
 
               /// mobile no
-              _buildMobileNoTextField(),
+              _buildUsernameTextField(),
 
               Empty(height: 10,),
 
@@ -80,14 +79,13 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Widget _buildMobileNoTextField() {
+  Widget _buildUsernameTextField() {
     return Obx(() {
       return TextFormField(
         enabled: !controller.loginLoading.value,
-        decoration: InputDecoration(hintText: AppText.mobileNumber),
+        decoration: InputDecoration(hintText: AppText.userName),
         keyboardType: TextInputType.text,
         textInputAction: TextInputAction.next,
-        initialValue: controller.userName.value,
         onChanged: (val) => controller.userName.value = val,
         validator: RequiredValidator(errorText: AppText.requiredField),
       );
@@ -101,7 +99,6 @@ class LoginView extends StatelessWidget {
         decoration: InputDecoration(hintText: AppText.password,),
         obscureText: true,
         textInputAction: TextInputAction.done,
-        initialValue: controller.password.value,
         onChanged: (val) => controller.password.value = val,
         validator: RequiredValidator(errorText: AppText.requiredField),
         onEditingComplete: () => _onLogin(),
@@ -116,12 +113,14 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  BigBtn _buildLoginButton() {
-    return BigBtn(
-      state: controller.loginLoading.value ? BtnState.loading : BtnState.active,
-      text: AppText.login,
-      onPressed: () => _onLogin(),
-    );
+  Widget _buildLoginButton() {
+    return Obx(() {
+      return BigBtn(
+        state: controller.loginLoading.value ? BtnState.loading : BtnState.active,
+        text: AppText.login,
+        onPressed: () => _onLogin(),
+      );
+    });
   }
 
   _onLogin() {

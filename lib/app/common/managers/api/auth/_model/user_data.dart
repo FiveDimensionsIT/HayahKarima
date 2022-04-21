@@ -10,6 +10,7 @@ class UserData extends Serializable{
   String? membershipCatId;
   String? villageId;
   String? village;
+  String? governorate;
   String? group;
   String? module;
   String? permissions;
@@ -17,8 +18,11 @@ class UserData extends Serializable{
   String? iss;
   String? aud;
   int langNo = 0;
+  int? status;
+  int? groupStatus;
+  String? avatar;
 
-  UserData({this.id, this.email, this.name, this.fullName, this.idNumber, this.membershipCatId, this.villageId, this.village, this.group, this.module, this.permissions, this.exp, this.iss, this.aud, });
+  UserData({this.id, this.email, this.name, this.governorate, this.fullName, this.idNumber, this.membershipCatId, this.villageId, this.village, this.group, this.module, this.permissions, this.exp, this.iss, this.aud, this.status, this.groupStatus, this.avatar});
 
   @override
   void fromMap(Map<String, dynamic> map) {
@@ -35,7 +39,11 @@ class UserData extends Serializable{
     permissions = map['permissions'];
     exp = map['exp'];
     iss = map['iss'];
+    groupStatus = map['groupStatus'];
+    status = map['status'];
     aud = map['aud'];
+    avatar = map['avatar'];
+    governorate = map['governorate'];
   }
 
   @override
@@ -55,9 +63,13 @@ class UserData extends Serializable{
     data['exp'] = this.exp;
     data['iss'] = this.iss;
     data['aud'] = this.aud;
+    data['status'] = this.status;
+    data['groupStatus'] = this.groupStatus;
+    data['avatar'] = this.avatar;
+    data['governorate'] = this.governorate;
     return data;
   }
 
-  UserType get userRole => module == '2' ? UserType.admin:UserType.user;
+  UserType get userRole => module == '1' ? UserType.admin:UserType.user;
 }
 

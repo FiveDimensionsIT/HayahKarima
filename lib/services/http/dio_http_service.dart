@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:hayah_karema/services/logger/log.dart';
 import 'package:hayah_karema/utils/serialization/serialization_lib.dart';
+import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 import 'http_lib.dart';
 import 'package:dio/dio.dart';
 
@@ -92,9 +93,10 @@ class DioHttpService implements IHttpService {
   }
 
   void _throwResponseError(Response<dynamic>? response, dynamic error) {
-    throw ApiResponseException(
-        response?.statusCode ?? 0, response?.statusMessage ?? "")
-      ..originalException = error;
+    // throw ApiResponseException(response?.statusCode ?? 0, response?.statusMessage ?? "")
+    //   ..originalException = error;
+    OverlayHelper.showErrorToast(response?.data??'');
+    Log.error('Api response Error:', response);
   }
 
   void _throwTimeOut(Object error) {
