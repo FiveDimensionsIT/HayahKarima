@@ -26,7 +26,7 @@ class ProfileAPIManager implements IProfileAPIManager{
 
   @override
   Future<List<UserEarnedPointModel>?> getUserEarnedPoints({String? userId}) async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'UserEarnedPoints/$userId',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get, url: 'UserEarnedPoints?userId=$userId&orderBy=date%20desc',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -40,7 +40,7 @@ class ProfileAPIManager implements IProfileAPIManager{
 
   @override
   Future<List<UserRewards>?> getUserRewards({String? userId}) async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'UserRewards/Search?userId=$userId&OrderBy=date%20desc',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get, url: 'UserRewards/Search?userId=$userId&ForApp=true&OrderBy=date%20desc',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //

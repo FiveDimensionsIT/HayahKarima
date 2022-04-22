@@ -65,16 +65,16 @@ class ProfileAwardsView extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            // Text(
-            //   'DDL-QUEST-0002009',
-            //   style: TextStyle(
-            //       color: AppColors.current.text,
-            //       fontSize: Get.textTheme.bodySmall?.fontSize,
-            //       fontWeight: FontWeight.bold),
-            // ),
-            // const SizedBox(
-            //   height: 5,
-            // ),
+            Text(
+              userRewardsList[index].status??'',
+              style: TextStyle(
+                  color: AppColors.current.text,
+                  fontSize: Get.textTheme.bodySmall?.fontSize,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
             Text(
              // userRewardsList[index].date ??"",
               getUserRewardDate(userRewardsList[index].date??''),
