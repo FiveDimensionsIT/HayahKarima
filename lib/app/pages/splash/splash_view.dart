@@ -10,6 +10,8 @@ import 'package:rive/rive.dart';
 import 'splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {
+  const SplashView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,28 +87,32 @@ class SplashView extends GetView<SplashController> {
 
   Widget _buildPoweredBy() {
     return Positioned(
-        bottom: 10,
+        bottom: 5,
         left: 0,
         right: 0,
         child: Center(
             child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Operating village",
-              style: TextStyle(color: AppColors.current.primary, fontSize: 11),
-            ),
-            Image.asset(
-              AppAssets.copyrightsIcon,
-              width: 20,
-              height: 15,
-              color: AppColors.current.primary,
-            ),
-            Text(
-              "Powered by OneVillage",
-              style: TextStyle(color: AppColors.current.primary, fontSize: 11),
-            ),
+            // Text(
+            //   "Operating village",
+            //   style: TextStyle(color: AppColors.current.primary, fontSize: 11),
+            // ),
+            //
+            // Image.asset(
+            //   AppAssets.copyrightsIcon,
+            //   width: 20,
+            //   height: 15,
+            //   color: AppColors.current.primary,
+            // ),
 
+
+
+            Image.asset(AppAssets.poweredBy, width: 40, height: 30,),
+            const SizedBox(width : 5),
+            Text("Powered by",
+              style: TextStyle(color: AppColors.current.primary, fontSize: 11),
+            ),
           ],
         )));
   }

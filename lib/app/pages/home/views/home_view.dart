@@ -136,13 +136,28 @@ class HomeView extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: AppColors.current.accent, width: 1)),
-        child: Text(
-          AppText.whatIsInYourMind,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: AppColors.current.dimmed.withOpacity(0.5),
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              AppText.whatIsInYourMind,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: AppColors.current.dimmed.withOpacity(0.5),
+              ),
+            ),
+
+            Text(
+              '(10 نقاط)',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: AppColors.current.dimmed.withOpacity(0.7),
+              ),
+            ),
+          ],
         ),
       ),
     );

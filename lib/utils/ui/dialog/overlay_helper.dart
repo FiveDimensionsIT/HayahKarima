@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/widgets/shadow_view.dart';
 import '../ui_lib.dart';
 
 abstract class OverlayHelper {
@@ -118,22 +119,30 @@ class OverlayToast extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(10)),
               side: BorderSide.none,
             ),
-            child: FullRow(
-              widths: "auto 1*",
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Icon(
-                    iconData,
-                    color: color,
-                    size: 35,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.grey.shade200, width: 1),
+                color: Colors.grey.shade50,
+                boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 2 )]
+              ),
+              child: FullRow(
+                widths: "auto 1*",
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Icon(
+                      iconData,
+                      color: color,
+                      size: 35,
+                    ),
                   ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                    child: Text(text,
-                        textAlign: TextAlign.start, style: TextStyle(color: color, fontSize: 16)))
-              ],
+                  Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                      child: Text(text,
+                          textAlign: TextAlign.start, style: TextStyle(color: color, fontSize: 16)))
+                ],
+              ),
             ),
           )
         ],
