@@ -57,7 +57,7 @@ class ProfilePointsView extends StatelessWidget {
                 const SizedBox(height: 5,),
 
                 Text(
-                  formatDateToDateTime(userEarnedList[index].date??''),
+                  getUserRewardDate(userEarnedList[index].date??''),
                   style: TextStyle(
                       color: AppColors.current.primary,
                       fontSize: Get.textTheme.bodySmall?.fontSize),

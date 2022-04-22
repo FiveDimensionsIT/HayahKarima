@@ -8,6 +8,7 @@ class UserRewards extends Serializable {
   String? avatar;
   String? date;
   int? points;
+  String? status;
 
   @override
   void fromMap(Map<String, dynamic> map) {
@@ -15,6 +16,7 @@ class UserRewards extends Serializable {
     avatar = map['avatar'];
     points = map['points'];
     date =  map['date'];
+    status =  map['status'];
   }
 
   @override
@@ -24,6 +26,7 @@ class UserRewards extends Serializable {
     data['avatar'] = this.avatar;
     data['points'] = this.points;
     data['date'] = this.date;
+    data['status'] = this.status;
     return data;
   }
 
