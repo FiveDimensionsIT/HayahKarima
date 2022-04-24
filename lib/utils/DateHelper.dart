@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hayah_karema/services/logger/log.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -97,3 +98,7 @@ String getUserRewardDate(String dateString){
   final date = DateTime.parse(dateString);
  return DateFormat.yMMMMd('ar').add_jm().format(date);
 }
+
+double timeToDouble(TimeOfDay myTime) => myTime.hour + myTime.minute/60.0;
+
+String timeToString(TimeOfDay myTime) => '${myTime.hour}:${myTime.minute}';

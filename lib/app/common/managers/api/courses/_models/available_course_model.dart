@@ -1,3 +1,4 @@
+import 'package:hayah_karema/utils/DateHelper.dart';
 import 'package:hayah_karema/utils/serialization/serialization_lib.dart';
 
 class AvailableCourseModel extends Serializable{
@@ -47,6 +48,8 @@ class AvailableCourseModel extends Serializable{
     }
     return data;
   }
+
+  double get noOfHoursPerDay => noOfMinutesPerDay!/60;
 }
 
 class Dates extends Serializable{
@@ -54,8 +57,10 @@ class Dates extends Serializable{
   String? date;
   String? timeFrom;
   String? timeTo;
+  bool? isSelected;
+  late String dateId;
 
-  Dates({this.day, this.date, this.timeFrom, this.timeTo, });
+  Dates({this.day, this.date, this.timeFrom, this.timeTo, this.isSelected});
 
   @override
   void fromMap(Map<String, dynamic> map) {
@@ -63,6 +68,8 @@ class Dates extends Serializable{
     date = map['date'];
     timeFrom = map['timeFrom'];
     timeTo = map['timeTo'];
+    isSelected = false;
+    dateId = '${formatDateToDay(date??'')}T$timeTo';
   }
 
   @override

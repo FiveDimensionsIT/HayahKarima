@@ -14,7 +14,7 @@ import 'package:hayah_karema/app/common/widgets/dot_view.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
 import 'package:hayah_karema/app/common/widgets/shadow_view.dart';
 import 'package:hayah_karema/app/pages/grids_view/grid_details/grid_details_controller.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class GridDetails extends StatelessWidget {
   GridDetails({Key? key}) : super(key: key);
@@ -254,20 +254,14 @@ class GridDetails extends StatelessWidget {
                       },
                     ),
                   ),
+                  if(item.caption!=null && item.caption!.isNotEmpty)
                   Positioned(
                       bottom: 0,
                       child: Container(
                         width: Get.width,
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         color: AppColors.current.text.withOpacity(0.7),
-                        child: Text(
-                          (controller.contactsEnum == ContactsEnum.martyr ||
-                                  controller.contactsEnum == ContactsEnum.myVillage)
-                              ? 'صور تعبر عن مدخل القرية'
-                              : (controller.contactsEnum == ContactsEnum.proficient ||
-                                      controller.contactsEnum == ContactsEnum.creator)
-                                  ? 'صور تعبر عن الشخص صاحب الملف التعريفي'
-                                  : '',
+                        child: Text(item.caption??'',
                           style: TextStyle(color: AppColors.current.neutral),
                         ),
                       )),
@@ -287,9 +281,8 @@ class GridDetails extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: controller.contactsEnum == ContactsEnum.myVillage
-          ? HtmlWidget(
-              controller.pointerItemModel.biography ?? '',
-            )
+          ? Html(
+              data: controller.pointerItemModel.biography ?? '', style: {'html': Style(textAlign: TextAlign.justify)})
           : Text(
               controller.pointerItemModel.biography ?? '',
               style: TextStyle(fontSize: Get.textTheme.headline3?.fontSize),

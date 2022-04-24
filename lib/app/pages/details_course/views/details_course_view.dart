@@ -118,7 +118,7 @@ class DetailsCourseView extends StatelessWidget {
         return BigBtn(
           state: controller.postApiLoading.value ? BtnState.loading : BtnState.active,
           text: AppText.joinNow,
-          onPressed: () => controller.joinNow('${item?.id}'),
+          onPressed: () => controller.getAvailableCourses(programId: '${item?.id}', programName: item?.name??''),
         );
       }),
     );

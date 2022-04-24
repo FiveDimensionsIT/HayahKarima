@@ -84,24 +84,12 @@ class ProfileView extends StatelessWidget {
 
             const SizedBox(height: 5,),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-                Text(controller.profileModel.value.village ?? '',
-                  style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
-
-                const DotView(),
-
-                Text(controller.profileModel.value.center ?? '',
-                  style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
-
-                const DotView(),
-
-                Text(controller.profileModel.value.governorate ?? '',
-                  style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
-              ],
-            ),
+            FittedBox(
+              child: Text( '${controller.profileModel.value.village} ، '
+                  '${controller.profileModel.value.center} ، '
+                  '${controller.profileModel.value.governorate}',
+                style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
+            )
           ],
         );
       }),
