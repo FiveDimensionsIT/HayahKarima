@@ -6,6 +6,7 @@ import 'package:hayah_karema/app/common/widgets/3dots_view.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/pages/notification/notification_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
+
 import '../../common/themes/app_colors.dart';
 
 class NotificationView extends GetView<NotificationController> {

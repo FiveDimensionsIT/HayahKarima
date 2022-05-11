@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/models/enums/contacts_enum.dart';
@@ -14,7 +15,6 @@ import 'package:hayah_karema/app/common/widgets/dot_view.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
 import 'package:hayah_karema/app/common/widgets/shadow_view.dart';
 import 'package:hayah_karema/app/pages/grids_view/grid_details/grid_details_controller.dart';
-import 'package:flutter_html/flutter_html.dart';
 
 class GridDetails extends StatelessWidget {
   GridDetails({Key? key}) : super(key: key);

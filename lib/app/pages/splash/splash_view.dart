@@ -7,6 +7,7 @@ import 'package:hayah_karema/app/pages/auth/login/login_view.dart';
 import 'package:hayah_karema/app/pages/auth/new_password/new_password_view.dart';
 import 'package:hayah_karema/app/pages/auth/verify_mobile_number/verify_mobile_number_view.dart';
 import 'package:rive/rive.dart';
+
 import 'splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {

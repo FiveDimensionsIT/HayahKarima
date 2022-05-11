@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YoutubePlayerView extends StatefulWidget {

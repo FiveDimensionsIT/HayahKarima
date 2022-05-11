@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hayah_karema/services/logger/log.dart';
-import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 
 int getDayFromDate(DateTime d) => d.day;
 

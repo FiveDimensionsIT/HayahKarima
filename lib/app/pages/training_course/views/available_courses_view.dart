@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/pages/training_course/training_course_controller.dart';
-import 'package:flutter/material.dart';
 import 'package:hayah_karema/app/pages/training_course/views/available_course_item.dart';
 
 import '../../../common/managers/api/courses/_models/available_course_model.dart';

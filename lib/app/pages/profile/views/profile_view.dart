@@ -6,11 +6,8 @@ import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
-import 'package:hayah_karema/app/common/widgets/dot_view.dart';
 import 'package:hayah_karema/app/pages/profile/profile_controller.dart';
 import 'package:hayah_karema/app/pages/profile/views/profile_awards_view.dart';
-import 'package:hayah_karema/app/pages/profile/views/profile_education_view.dart';
-import 'package:hayah_karema/app/pages/profile/views/profile_experience_view.dart';
 import 'package:hayah_karema/app/pages/profile/views/profile_info_view.dart';
 import 'package:hayah_karema/app/pages/profile/views/profile_points_view.dart';
 

@@ -8,7 +8,6 @@ import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/big_btn.dart';
 import 'package:hayah_karema/app/pages/home/home_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
-import 'package:video_player/video_player.dart';
 
 class TimelineQuestionItemView extends StatelessWidget {
   final List<QuestionResponse> questions;

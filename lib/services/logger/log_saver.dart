@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 /// requires path_provider: ">=0.5.0+1 <2.0.0"
 /// and permission <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

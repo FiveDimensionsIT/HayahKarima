@@ -1,8 +1,10 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/utils/ui/dialog/dialog_helper.dart';
 import 'package:hayah_karema/utils/ui/ui_lib.dart';
+
 import '../empty.dart';
 
 class GeneralDialog extends StatelessWidget {
