@@ -15,7 +15,7 @@ class CourseApiManager implements ICoursesApiManager{
 
   @override
   Future<List<TrainingCourseModel>?> getAllCourses() async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'Training/Programs/Search?statusId=2',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get, url: 'Training/Programs/Search?statusId=2&ForApp=true',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //

@@ -19,7 +19,9 @@ abstract class AppAssets{
   static const String graduatedIcon = 'assets/images/graduated_icon.svg';
   static const String comapnyPlaceholderIcon = 'assets/images/comapny_placeholder_icon.svg';
 
+  static const String searchIcon = 'assets/icons/search.png';
   static const String settingsSideMenuIcon = 'assets/images/settings_side_menu.svg';
+  static const String usersSideMenuIcon = 'assets/images/users_icon.svg';
   static const String coursesSideMenuIcon = 'assets/images/course_side_menu.svg';
   static const String logoutSideMenuIcon = 'assets/images/logout_side_menu.svg';
   static const String awardsSideMenuIcon = 'assets/images/awards_side_menu.svg';

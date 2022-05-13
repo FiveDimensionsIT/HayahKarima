@@ -41,7 +41,7 @@ class DetailsStatisticCourseView  extends StatelessWidget {
           fit: BoxFit.cover,
           ),
           Empty(width: 4,),
-          Text('${item?.no_of_hours} ساعة ',style: TextStyle(
+          Text('${item?.noOfHours} ساعة ',style: TextStyle(
               fontSize: Get.textTheme.bodySmall?.fontSize,
             fontWeight: FontWeight.bold,
             color: AppColors.current.primary
@@ -65,7 +65,7 @@ class DetailsStatisticCourseView  extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Empty(width: 4,),
-          Text('${item?.lecture_duration_in_minutes} مقطع ',style: TextStyle(
+          Text('${item?.lectureDurationInMinutes} مقطع ',style: TextStyle(
               fontSize: Get.textTheme.bodySmall?.fontSize,
               fontWeight: FontWeight.bold,
               color: AppColors.current.primary

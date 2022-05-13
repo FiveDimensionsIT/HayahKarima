@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/action_center/action_center.dart';
 import 'package:hayah_karema/app/common/managers/api/post/_model/post_request.dart';
@@ -91,25 +92,22 @@ class NewPostController extends GetxController {
 
   void _addPostAPI() async {
     postApiLoading.value = true;
-    final userData = cacheManager.getUserData();
-    var videoFile = '';
-    final images = <ImageModel>[];
+    final images = <Images>[];
     for (XFile imgFile in imageFilesList) {
       final bytes = await imgFile.readAsBytes();
-      if(imgFile.path.isVideoFileName){
-        videoFile = base64Encode(bytes);
-      }else{
-        images.add(ImageModel(image: base64Encode(bytes)));
-      }
+      final fileName = imgFile.name;
+      final extension = imgFile.mimeType;
+      images.add(Images(image: MediaModel(filename: fileName, base64: base64Encode(bytes))));
     }
 
+    final userData = cacheManager.getUserData();
     final data = PostRequestModel(
         userId: userData!.id,
         post: postBody.value,
         postTypeId: _selectedContentType!.id,
         date: DateTime.now().toIso8601String(),
         points: 10,
-        video: videoFile,
+        video: null,
         images: images);
 
     var result;

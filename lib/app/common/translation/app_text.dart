@@ -2,6 +2,9 @@ import 'package:get/get.dart';
 
 abstract class AppText {
 
+  static String get gender => 'gender'.tr;
+  static String get healthStatus => 'health_status'.tr;
+  static String get educationalStatus => 'educational_status'.tr;
   static String get requiredField => 'required_field'.tr;
   static String get pleaseWait => 'please_wait'.tr;
   static String get requestTimeout => 'request_timeout'.tr;
@@ -10,9 +13,13 @@ abstract class AppText {
   static String get noInternet => 'no_internet'.tr;
   static String get name => 'name'.tr;
   static String get fullName => 'full_name'.tr;
+  static String get address => 'address'.tr;
+  static String get idNumber => 'id_number'.tr;
   static String get login => 'login'.tr;
   static String get loginTitle => 'login_title'.tr;
   static String get forgotPassword => 'forgot_password'.tr;
+  static String get nickName => 'nick_name'.tr;
+  static String get register => 'register'.tr;
   static String get areYouRememberPassword => 'are_you_remember_password'.tr;
   static String get sendCode => 'send_code'.tr;
   static String get pleaseEnterMobileNo => 'please_enter_mobile_no'.tr;
@@ -23,6 +30,9 @@ abstract class AppText {
   static String get confirm => 'confirm'.tr;
   static String get authMobNoTitle => 'auth_mob_to_title'.tr;
   static String get more => 'more'.tr;
+  static String get village => 'village'.tr;
+  static String get center => 'center'.tr;
+  static String get governorate => 'governorate'.tr;
   static String get digitalCountrysidePointer => 'digital_countryside_pointer'.tr;
   static String get provincesPointerFilter => 'provinces_pointer_filter'.tr;
   static String get centersPointerFilter => 'centers_pointer_filter'.tr;
@@ -37,6 +47,7 @@ abstract class AppText {
   static String get myVillage => 'my_village'.tr;
   static String get honorFiles => 'honor_files'.tr;
   static String get settings => 'settings'.tr;
+  static String get users => 'users'.tr;
   static String get courses => 'courses'.tr;
   static String get sponsors => 'sponsors'.tr;
   static String get rewards => 'rewards'.tr;
@@ -49,6 +60,7 @@ abstract class AppText {
   static String get replacing => 'replacing'.tr;
 
   static String get getStarted => 'get_started'.tr;
+  static String get addUser => 'add_user'.tr;
   static String get hello => 'hello'.tr;
   static String get chooseStudent => 'choose_student'.tr;
   static String get wrongUserPass => 'wrong_user_pass'.tr;
@@ -158,6 +170,7 @@ abstract class AppText {
   static String get firstName => 'first_name'.tr;
   static String get lastName => 'last_name'.tr;
   static String get userName => 'user_name'.tr;
+  static String get enterCode => 'enter_code'.tr;
   static String get updateUserDataSuccessfully => 'update_user_data_successfully'.tr;
   static String get changePassword => 'change_password'.tr;
   static String get changeLang => 'change_lang'.tr;
@@ -191,6 +204,7 @@ abstract class AppText {
   static String get tripStarted => 'trip_started'.tr;
   static String get students => 'students'.tr;
   static String get enterNewPassword => 'enter_new_password'.tr;
+  static String get enterPassword => 'enter_password'.tr;
   static String get contactInfo => 'contact_info'.tr;
   static String get noTripToday => 'no_trip_today'.tr;
   static String get uninstallMockLocationMsg => 'uninstall_mock_location_msg'.tr;

@@ -14,7 +14,10 @@ class BigBtn extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          if (state == BtnState.active) onPressed();
+          if (state == BtnState.active) {
+            FocusManager.instance.primaryFocus?.unfocus();
+            onPressed();
+          }
         },
         child: state == BtnState.loading ? _getScalingProgressIndicator(context) : Text(text),
         style: state == BtnState.disabled

@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+
+import 'package:hayah_karema/app/pages/add_user/add_user_binding.dart';
+import 'package:hayah_karema/app/pages/add_user/add_user_view.dart';
 import 'package:hayah_karema/app/pages/auth/change_password/change_password_binding.dart';
 import 'package:hayah_karema/app/pages/auth/change_password/change_password_view.dart';
 import 'package:hayah_karema/app/pages/auth/forgot_password/forgot_password_binding.dart';
@@ -41,6 +44,8 @@ import 'package:hayah_karema/app/pages/splash/splash_binding.dart';
 import 'package:hayah_karema/app/pages/splash/splash_view.dart';
 import 'package:hayah_karema/app/pages/training_course/training_course_binding.dart';
 import 'package:hayah_karema/app/pages/training_course/views/training_course_view.dart';
+import 'package:hayah_karema/app/pages/users/users_binding.dart';
+import 'package:hayah_karema/app/pages/users/users_view.dart';
 
 part 'app_routes.dart';
 
@@ -160,7 +165,6 @@ class AppPages {
         page: () => NewPostView(),
         binding: NewPostBinding(),
         transition: _pageTransition),
-
     GetPage(
         name: _Paths.NOTIFICATION_VIEW,
         page: () => const NotificationView(),
@@ -187,7 +191,7 @@ class AppPages {
         transitionDuration: _transitionDuration),
     GetPage(
         name: _Paths.TRAINING_COURSE,
-        page: () =>  TrainingCourseView(),
+        page: () => TrainingCourseView(),
         binding: TrainingCourseBinding(),
         transition: _pageTransition,
         transitionDuration: _transitionDuration),
@@ -207,6 +211,16 @@ class AppPages {
       name: _Paths.PRIZES,
       page: () => PrizesView(),
       binding: PrizesBinding(),
+    ),
+    GetPage(
+      name: _Paths.USERS,
+      page: () => UsersView(),
+      binding: UsersBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_USER,
+      page: () => AddUserView(),
+      binding: AddUserBinding(),
     ),
   ];
 }
