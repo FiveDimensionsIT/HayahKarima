@@ -6,8 +6,8 @@ import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/common/widgets/circular_statistic.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
 import 'package:hayah_karema/app/common/widgets/pointer_item.dart';
+import 'package:hayah_karema/app/pages/digital_pointer/_widgets/pointer_details_list.dart';
 import 'package:hayah_karema/app/pages/digital_pointer/digital_pointer_controller.dart';
-import 'package:hayah_karema/app/pages/digital_pointer/pointer_details_list.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
 import 'package:hayah_karema/utils/NumberHelper.dart';
 

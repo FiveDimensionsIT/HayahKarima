@@ -6,6 +6,7 @@ import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/big_btn.dart';
+import 'package:hayah_karema/app/pages/home/_widgets/build_answer_item_timeline_question.dart';
 import 'package:hayah_karema/app/pages/home/home_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
@@ -86,7 +87,9 @@ class TimelineQuestionItemView extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: questions.length,
-      itemBuilder: (cxt, index) => _buildAnswerItem(index),
+      itemBuilder: (cxt, index) => BuildAnswerItem(
+          index: index,
+          questions: questions),
       separatorBuilder: (BuildContext context, int index) =>
       const SizedBox(
         height: 5,
