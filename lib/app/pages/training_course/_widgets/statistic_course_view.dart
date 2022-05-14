@@ -18,14 +18,14 @@ class StatisticCourseView extends GetView<TrainingCourseController> {
         _buildCourseStatisticsItem(
             imgPath: 'assets/icons/time_line.png',
             color: AppColors.current.primary.withOpacity(0.1),
-            title: '${item.no_of_hours}'),
+            title: '${item.noOfHours}'),
 
         Empty(width: 8,),
 
         _buildCourseStatisticsItem(
             imgPath: 'assets/icons/chapter.png',
             color: AppColors.current.primary.withOpacity(0.1),
-            title: '${item.lecture_duration_in_minutes}'),
+            title: '${item.lectureDurationInMinutes}'),
 
         Expanded(child: Empty(width: 8,)),
 

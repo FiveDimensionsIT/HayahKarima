@@ -5,9 +5,9 @@ import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
-import 'package:hayah_karema/app/pages/home/views/timeline_question_item_view.dart';
 import 'package:hayah_karema/app/pages/home/home_controller.dart';
 import 'package:hayah_karema/app/pages/home/views/time_line_item_view.dart';
+import 'package:hayah_karema/app/pages/home/views/timeline_question_item_view.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
@@ -110,7 +110,8 @@ class HomeView extends StatelessWidget {
                 TimelineItemView(item: controller.timelinePostsList[index]),
 
                 if(index==1)Obx(() {
-                  if (controller.questionApiLoading.value || controller.questionsList.isEmpty) return const SizedBox();
+                  if (controller.questionApiLoading.value) return const SizedBox(height: 30, width : 30,child: CircularProgressIndicator(strokeWidth: 3,));
+                  if (controller.questionsList.isEmpty) return const SizedBox();
                   return Column(
                     children: [
                       Empty(height: 10),
@@ -135,13 +136,28 @@ class HomeView extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: AppColors.current.accent, width: 1)),
-        child: Text(
-          AppText.whatIsInYourMind,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: AppColors.current.dimmed.withOpacity(0.5),
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              AppText.whatIsInYourMind,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: AppColors.current.dimmed.withOpacity(0.5),
+              ),
+            ),
+
+            Text(
+              '(10 نقاط)',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: AppColors.current.dimmed.withOpacity(0.7),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -150,7 +166,8 @@ class HomeView extends StatelessWidget {
 
   Widget _buildUserPoints() {
     return Obx(() {
-      if (controller.pointsApiLoading.value || controller.availablePoints.value.isEmpty) return const SizedBox();
+      if (controller.pointsApiLoading.value) return const SizedBox(height: 25, width : 25,child: CircularProgressIndicator(strokeWidth: 2.5,));
+      if (controller.availablePoints.value.isEmpty) return const SizedBox();
       var reversedList = List.from(controller.availablePoints.value
           .split('')
           .map((ch) => ch)

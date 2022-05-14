@@ -6,11 +6,8 @@ import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
-import 'package:hayah_karema/app/common/widgets/dot_view.dart';
 import 'package:hayah_karema/app/pages/profile/profile_controller.dart';
 import 'package:hayah_karema/app/pages/profile/views/profile_awards_view.dart';
-import 'package:hayah_karema/app/pages/profile/views/profile_education_view.dart';
-import 'package:hayah_karema/app/pages/profile/views/profile_experience_view.dart';
 import 'package:hayah_karema/app/pages/profile/views/profile_info_view.dart';
 import 'package:hayah_karema/app/pages/profile/views/profile_points_view.dart';
 
@@ -21,7 +18,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 3,
       child: Scaffold(
         backgroundColor: AppColors.current.neutral,
         body: SafeArea(
@@ -84,24 +81,12 @@ class ProfileView extends StatelessWidget {
 
             const SizedBox(height: 5,),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-                Text(controller.profileModel.value.village ?? '',
-                  style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
-
-                const DotView(),
-
-                Text(controller.profileModel.value.center ?? '',
-                  style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
-
-                const DotView(),
-
-                Text(controller.profileModel.value.governorate ?? '',
-                  style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
-              ],
-            ),
+            FittedBox(
+              child: Text( '${controller.profileModel.value.village} ، '
+                  '${controller.profileModel.value.center} ، '
+                  '${controller.profileModel.value.governorate}',
+                style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
+            )
           ],
         );
       }),
@@ -155,7 +140,7 @@ class ProfileView extends StatelessWidget {
   /// Build Tabs
   Widget _buildTab() {
     return ButtonsTabBar(
-        controller: controller.tabBarController,
+        // controller: controller.tabBarController,
         height: 40,
         labelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.current.background),
         contentPadding: const EdgeInsets.symmetric(horizontal: 8),
@@ -167,13 +152,13 @@ class ProfileView extends StatelessWidget {
           Tab(
             text: AppText.information,
           ),
-          Tab(
-            text: AppText.education,
-          ),
-          Tab(
-            text: AppText.practicalExperience,
-            //child: _buildTab(AppText.practicalExperience,width: 90),
-          ),
+          // Tab(
+          //   text: AppText.education,
+          // ),
+          // Tab(
+          //   text: AppText.practicalExperience,
+          //   //child: _buildTab(AppText.practicalExperience,width: 90),
+          // ),
           Tab(
             text: AppText.earnPoints,
           ),
@@ -186,15 +171,21 @@ class ProfileView extends StatelessWidget {
   // TabBar view
   Widget _buildTabBarView() {
     return Obx(() {
-      if (controller.currentTabIndex.value == 0) return controller.profileApiLoading.value? const Center(child: CircularProgressIndicator(),):
-      ProfileInfoView(profileModel: controller.profileModel.value);
-      if (controller.currentTabIndex.value == 1) return const ProfileEducationView();
-      if (controller.currentTabIndex.value == 2) return const ProfileExperienceView();
-      if (controller.currentTabIndex.value == 3) return controller.profileApiLoading.value? const Center(child: CircularProgressIndicator(),):
-      ProfilePointsView(
-        userEarnedList: controller.userEarnedPointModelList.value,
-      );
-      return const ProfileAwardsView();
+      if (controller.currentTabIndex.value == 0) {
+        return controller.profileApiLoading.value
+            ? const Center(child: CircularProgressIndicator(),)
+            : ProfileInfoView(profileModel: controller.profileModel.value);
+      }
+      // if (controller.currentTabIndex.value == 1) return const ProfileEducationView();
+      // if (controller.currentTabIndex.value == 2) return const ProfileExperienceView();
+      if (controller.currentTabIndex.value == 1) {
+        return controller.pointsEarnedApiLoading.value
+            ? const Center(child: CircularProgressIndicator())
+            : ProfilePointsView(userEarnedList: controller.userEarnedPointModelList,);
+      }
+      return controller.userRewardsApiLoading.value
+          ? const Center(child: CircularProgressIndicator())
+          : ProfileAwardsView(userRewardsList: controller.userRewardsModelList,);
     });
   }
 

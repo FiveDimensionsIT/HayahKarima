@@ -8,6 +8,7 @@ import 'package:hayah_karema/app/common/managers/api/home/i_home_api_manager.dar
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/models/enums/contacts_enum.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
+import 'package:hayah_karema/app/pages/home/home_controller.dart';
 import 'package:hayah_karema/setup.dart';
 import 'package:hayah_karema/utils/NumberHelper.dart';
 import 'package:hayah_karema/utils/ui/ui_lib.dart';
@@ -116,6 +117,9 @@ class GridDetailsController extends GetxController {
     if (success) {
       if (result != null) {
         OverlayHelper.showSuccessToast(result["message"]??'');
+        if(result["message"]!=null && result["message"].toString().isNotEmpty && result["message"].toString().contains('مبروك')){
+          Get.find<HomeController>().onRefreshUserPoints();
+        }
       } else {
         OverlayHelper.showErrorToast(AppText.somethingWrong);
       }

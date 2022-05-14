@@ -3,21 +3,21 @@ import 'package:hayah_karema/utils/serialization/serialization_lib.dart';
 class TrainingCourseModel extends Serializable{
   int? id;
   String? name;
-  int? no_of_hours;
-  int? lecture_duration_in_minutes;
+  int? noOfHours;
+  int? lectureDurationInMinutes;
   String? category;
   List<Goals?>? goals;
   List<Images?>? images;
   List<Outlines?>? outlines;
 
-  TrainingCourseModel({this.id, this.name, this.no_of_hours, this.lecture_duration_in_minutes, this.category, this.goals, this.images, this.outlines, });
+  TrainingCourseModel({this.id, this.name, this.noOfHours, this.lectureDurationInMinutes, this.category, this.goals, this.images, this.outlines, });
 
   @override
   void fromMap(Map<String, dynamic> map) {
     id = map['id'];
     name = map['name'];
-    no_of_hours = map['no_of_hours'];
-    lecture_duration_in_minutes = map['lecture_duration_in_minutes'];
+    noOfHours = map['noOfHours'];
+    lectureDurationInMinutes = map['lectureDurationInMinutes'];
     category = map['category'];
     if (map['goals'] != null) {
       goals = [];
@@ -44,8 +44,8 @@ class TrainingCourseModel extends Serializable{
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
-    data['no_of_hours'] = this.no_of_hours;
-    data['lecture_duration_in_minutes'] = this.lecture_duration_in_minutes;
+    data['noOfHours'] = this.noOfHours;
+    data['lectureDurationInMinutes'] = this.lectureDurationInMinutes;
     data['category'] = this.category;
     if (this.goals != null) {
       data['goals'] = this.goals!.map((v) => v?.toMap()).toList();

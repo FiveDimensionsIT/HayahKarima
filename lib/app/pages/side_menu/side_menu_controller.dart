@@ -13,7 +13,7 @@ import 'package:hayah_karema/setup.dart';
 import 'package:hayah_karema/utils/ui/dialog/dialog_helper.dart';
 
 class SideMenuController extends GetxController {
-  final menuItems = <MenuItem>[].obs;
+  final menuItems = <MenuItemModel>[].obs;
   final cacheManager = DI.find<ICacheManager>();
   final _userData = UserData().obs;
   var honorFilesExpanded = false.obs;
@@ -38,7 +38,7 @@ class SideMenuController extends GetxController {
     if(menuItems.isNotEmpty)menuItems.clear();
 
     /// == Home
-    menuItems.add(MenuItem(
+    menuItems.add(MenuItemModel(
         name: AppText.homePage,
         iconPath: AppAssets.homeSideMenuIcon,
         onTap: () {
@@ -47,7 +47,7 @@ class SideMenuController extends GetxController {
 
     /// == my village
     if(_userData.value.userRole == UserType.user){
-      menuItems.add(MenuItem(
+      menuItems.add(MenuItemModel(
           name: AppText.myVillage,
           iconPath: AppAssets.villageSideMenuIcon,
           onTap: () {
@@ -59,7 +59,7 @@ class SideMenuController extends GetxController {
     }
 
     /// == honor files
-    menuItems.add(MenuItem(
+    menuItems.add(MenuItemModel(
         name: AppText.honorFiles,
         iconPath: AppAssets.honorbordSideMenuIcon,
         isExpandable: true,
@@ -70,35 +70,35 @@ class SideMenuController extends GetxController {
 
 
     /// == homeland martyrs
-    menuItems.add(MenuItem(
+    menuItems.add(MenuItemModel(
         name: AppText.homelandMartyrs,
         onTap: () {
           Get.toNamed(Routes.HOMELAND_MARTYRS);
         }));
 
     /// == birthplace
-    menuItems.add(MenuItem(
+    menuItems.add(MenuItemModel(
         name: AppText.birthPlace,
         onTap: () {
           Get.toNamed(Routes.BIRTH_PLACE);
         }));
 
     /// == PROFICIENTS
-    menuItems.add(MenuItem(
+    menuItems.add(MenuItemModel(
         name: AppText.proficients,
         onTap: () {
           Get.toNamed(Routes.PROFICIENTS);
         }));
 
     /// == creators
-    menuItems.add(MenuItem(
+    menuItems.add(MenuItemModel(
         name: AppText.creators,
         onTap: () {
           Get.toNamed(Routes.CREATORS);
         }));
 
     /// == shop
-    menuItems.add(MenuItem(
+    menuItems.add(MenuItemModel(
         name: AppText.shop,
         iconPath: AppAssets.marketSideMenuIcon,
         onTap: () {
@@ -107,7 +107,7 @@ class SideMenuController extends GetxController {
 
     /// == rewards
     if(_userData.value.userRole == UserType.user) {
-      menuItems.add(MenuItem(
+      menuItems.add(MenuItemModel(
           name: AppText.rewards,
           iconPath: AppAssets.awardsSideMenuIcon,
           onTap: () {
@@ -115,7 +115,7 @@ class SideMenuController extends GetxController {
           }));
     }
     /// == Sponsor
-    menuItems.add(MenuItem(
+    menuItems.add(MenuItemModel(
         name: AppText.sponsors,
         iconPath: AppAssets.partnersSideMenuIcon,
         onTap: () {
@@ -123,15 +123,25 @@ class SideMenuController extends GetxController {
         }));
 
     /// == Courses
-    menuItems.add(MenuItem(
+    menuItems.add(MenuItemModel(
         name: AppText.courses,
         iconPath: AppAssets.coursesSideMenuIcon,
         onTap: () {
           Get.toNamed(Routes.TRAINING_COURSE);
         }));
 
+    /// == users
+    if(_userData.value.isUsersSideMenuItemVisible()) {
+      menuItems.add(MenuItemModel(
+          name: AppText.users,
+          iconPath: AppAssets.usersSideMenuIcon,
+          onTap: () {
+            Get.toNamed(Routes.USERS);
+          }));
+    }
+
     /// == Settings
-    menuItems.add(MenuItem(
+    menuItems.add(MenuItemModel(
         name: AppText.settings,
         iconPath: AppAssets.settingsSideMenuIcon,
         onTap: () {
@@ -139,7 +149,7 @@ class SideMenuController extends GetxController {
         }));
 
     /// == Logout
-    menuItems.add(MenuItem(
+    menuItems.add(MenuItemModel(
         name: AppText.logout,
         iconPath: AppAssets.logoutSideMenuIcon,
         onTap: () async {
@@ -162,11 +172,11 @@ class SideMenuController extends GetxController {
   }
 }
 
-class MenuItem {
+class MenuItemModel {
   String name;
   String? iconPath;
   VoidCallback onTap;
   bool? isExpandable;
 
-  MenuItem({required this.name, this.iconPath, required this.onTap, this.isExpandable});
+  MenuItemModel({required this.name, this.iconPath, required this.onTap, this.isExpandable});
 }

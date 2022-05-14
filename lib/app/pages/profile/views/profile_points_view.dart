@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/_model/user_earn_point_model.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
-import 'package:hayah_karema/app/pages/profile/profile_controller.dart';
+import 'package:hayah_karema/app/common/widgets/empty_response.dart';
 import 'package:hayah_karema/utils/DateHelper.dart';
-import 'package:intl/intl.dart';
 
 class ProfilePointsView extends StatelessWidget {
-   ProfilePointsView({Key? key,required this.userEarnedList}) : super(key: key);
-   List<UserEarnedPointModel> userEarnedList;
+  final List<UserEarnedPointModel> userEarnedList;
+   const ProfilePointsView({Key? key,required this.userEarnedList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +15,13 @@ class ProfilePointsView extends StatelessWidget {
   }
 
   Widget _buildEarnPointsTab() {
+    if(userEarnedList.isEmpty){return const EmptyResponse();}
     return ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: userEarnedList.length,
-        itemBuilder: (context, index) {
-          return _buildItem(index);
-        },
-        separatorBuilder: (context, index) {
-          return _buildSeparator();
-        },
+        itemBuilder: (context, index) => _buildItem(index),
+        separatorBuilder: (context, index) => _buildSeparator()
     );
   }
 
@@ -39,7 +35,7 @@ class ProfilePointsView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  userEarnedList[index].name??'name',
+                  userEarnedList[index].name??'',
                   style: TextStyle(
                       color: AppColors.current.text,
                       fontSize: Get.textTheme.bodyLarge?.fontSize,
@@ -51,7 +47,7 @@ class ProfilePointsView extends StatelessWidget {
                 const SizedBox(height: 5,),
 
                 Text(
-                  userEarnedList[index].code??'code',
+                  userEarnedList[index].code??'',
                   style: TextStyle(
                       color: AppColors.current.text,
                       fontSize: Get.textTheme.bodySmall?.fontSize,
@@ -61,7 +57,7 @@ class ProfilePointsView extends StatelessWidget {
                 const SizedBox(height: 5,),
 
                 Text(
-                  formatDateToDateTime(userEarnedList[index].date??'date'),
+                  getUserRewardDate(userEarnedList[index].date??''),
                   style: TextStyle(
                       color: AppColors.current.primary,
                       fontSize: Get.textTheme.bodySmall?.fontSize),

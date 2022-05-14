@@ -43,8 +43,8 @@ class LoginView extends StatelessWidget {
 
               Empty(height: 20,),
 
-              /// mobile no
-              _buildUsernameTextField(),
+              /// code no
+              _buildCodeNoTextField(),
 
               Empty(height: 10,),
 
@@ -79,11 +79,11 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Widget _buildUsernameTextField() {
+  Widget _buildCodeNoTextField() {
     return Obx(() {
       return TextFormField(
         enabled: !controller.loginLoading.value,
-        decoration: InputDecoration(hintText: AppText.userName),
+        decoration: InputDecoration(hintText: AppText.enterCode),
         keyboardType: TextInputType.text,
         textInputAction: TextInputAction.next,
         onChanged: (val) => controller.userName.value = val,
@@ -96,7 +96,7 @@ class LoginView extends StatelessWidget {
     return Obx(() {
       return TextFormField(
         enabled: !controller.loginLoading.value,
-        decoration: InputDecoration(hintText: AppText.password,),
+        decoration: InputDecoration(hintText: AppText.enterPassword,),
         obscureText: true,
         textInputAction: TextInputAction.done,
         onChanged: (val) => controller.password.value = val,

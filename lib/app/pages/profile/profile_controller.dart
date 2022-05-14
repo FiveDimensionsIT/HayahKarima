@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/action_center/action_center.dart';
 import 'package:hayah_karema/app/common/managers/api/auth/_model/user_data.dart';
@@ -6,13 +6,14 @@ import 'package:hayah_karema/app/common/managers/api/home/_models/user_points_re
 import 'package:hayah_karema/app/common/managers/api/home/i_home_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/_model/profile_model.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/_model/user_earn_point_model.dart';
+import 'package:hayah_karema/app/common/managers/api/profile/_model/user_rewards.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/i_profile_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/setup.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 
-class ProfileController extends GetxController  with GetSingleTickerProviderStateMixin{
+class ProfileController extends GetxController {
 
   final cacheManager = DI.find<ICacheManager>();
   final _apiManager = DI.find<IHomeApiManager>();
@@ -24,19 +25,18 @@ class ProfileController extends GetxController  with GetSingleTickerProviderStat
   final pointsApiLoading = false.obs;
   final pointsEarnedApiLoading = false.obs;
   final profileApiLoading = false.obs;
-
-  late TabController tabBarController;
+  final userRewardsApiLoading = false.obs;
   var currentTabIndex = 0.obs;
 
   Rx<UserPointsResponse> userPointsResponse = UserPointsResponse().obs;
   Rx<ProfileModel> profileModel = ProfileModel().obs;
   RxList<UserEarnedPointModel> userEarnedPointModelList = <UserEarnedPointModel>[].obs;
+  RxList<UserRewards> userRewardsModelList = <UserRewards>[].obs;
   UserData? userData;
 
   @override
   void onInit() {
     super.onInit();
-    tabBarController = TabController(length: 5, vsync: this);
     _getUserData();
   }
 
@@ -47,14 +47,8 @@ class ProfileController extends GetxController  with GetSingleTickerProviderStat
     _getProfileData();
     _getUserPointsAPI();
     _getUserEarnedPointsAPI();
+    _getUserRewardsAPI();
   }
-
-  @override
-  void onClose() {
-    tabBarController.dispose();
-    super.onClose();
-  }
-
 
   void _getUserPointsAPI() async {
     pointsApiLoading.value = true;
@@ -108,6 +102,25 @@ class ProfileController extends GetxController  with GetSingleTickerProviderStat
     if (success) {
       if (result != null) {
         profileModel.value = result!;
+      } else {
+        OverlayHelper.showErrorToast(AppText.somethingWrong);
+      }
+    }
+  }
+
+  //
+  void _getUserRewardsAPI() async {
+    userRewardsApiLoading.value = true;
+    final userData = cacheManager.getUserData();
+    List<UserRewards>? result;
+    var success = await _action.execute(() async {
+      result = await _profileApiManager.getUserRewards(userId: '${userData?.id}');
+    }, checkConnection: true);
+    userRewardsApiLoading.value = false;
+    if (success) {
+      if (result != null) {
+        if(userRewardsModelList.isNotEmpty) userRewardsModelList.clear();
+        userRewardsModelList.assignAll(result ?? []);
       } else {
         OverlayHelper.showErrorToast(AppText.somethingWrong);
       }

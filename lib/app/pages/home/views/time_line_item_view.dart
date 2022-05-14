@@ -75,7 +75,7 @@ class TimelineItemView extends StatelessWidget {
                 style: TextStyle(fontSize: Get.textTheme.headline3?.fontSize, fontWeight: FontWeight.bold),
               ),
               Text(
-                formatDateToDateTime(item.approveDate ?? ''),
+                getUserRewardDate(item.approveDate ?? ''),
                 style: TextStyle(
                   color: AppColors.current.primary,
                   fontSize: 12,

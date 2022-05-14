@@ -14,7 +14,7 @@ class ProfileInfoView extends StatelessWidget {
     return _buildInformationTab();
   }
 
-  /// Build TabBars views
+  /// Build TabBars _widgets
   Widget _buildInformationTab() {
     return Column(
         children: [

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
-import 'package:hayah_karema/app/common/widgets/3dots_view.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
+import 'package:hayah_karema/app/pages/notification/_widgets/notification_item.dart';
 import 'package:hayah_karema/app/pages/notification/notification_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
+
 import '../../common/themes/app_colors.dart';
 
 class NotificationView extends GetView<NotificationController> {
@@ -67,56 +67,8 @@ class NotificationView extends GetView<NotificationController> {
   Widget _contentNotification() {
     return ListView.separated(
         itemCount: 10,
-        separatorBuilder: (_, __) => const Divider(
-              height: 1,
-            ),
-        itemBuilder: (context, index) {
-          return _buildNotificationItem(index);
-        });
+        separatorBuilder: (_, __) => const Divider(height: 1),
+        itemBuilder: (context, index) => NotificationItem(index: index));
   }
 
-  Widget _buildNotificationItem(int index) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-      color: index % 2 == 0 ? AppColors.current.neutral : AppColors.current.primary.withOpacity(0.05),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                image: const DecorationImage(fit: BoxFit.fill, image: AssetImage(AppAssets.userIcon))),
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  child: Text(
-                    'هناك حقيقة مثبتة منذ زمن طويل وهى ان المحتوى المقروء لصفحة  ',
-                    maxLines: 2,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: AppColors.current.text, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Text(
-                  '14 الاثنين.فبراير 2022',
-                  style: TextStyle(color: AppColors.current.primary, fontSize: Get.textTheme.bodyMedium?.fontSize),
-                ),
-              ],
-            ),
-          ),
-
-          DotsView(onClick: (){}),
-        ],
-      ),
-    );
-  }
 }

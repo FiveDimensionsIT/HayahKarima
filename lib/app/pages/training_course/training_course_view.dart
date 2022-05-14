@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
+import 'package:hayah_karema/app/pages/training_course/_widgets/course_information_view.dart';
 import 'package:hayah_karema/app/pages/training_course/training_course_controller.dart';
-import 'package:hayah_karema/app/pages/training_course/views/course_information_view.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 
@@ -51,32 +52,14 @@ class TrainingCourseView extends StatelessWidget  {
     return TextFormField(
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(vertical: 9, horizontal: 12),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: AppColors.current.accent.withOpacity(0.2), width: 1),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: AppColors.current.accent.withOpacity(0.2), width: 1),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: AppColors.current.accent.withOpacity(0.2), width: 1),
-        ),
-        prefixIcon: SizedBox(
-          width: 56,
-          child: Image.asset('assets/icons/search.png',
-            width: 20, height: 20,
-          ),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.current.accent.withOpacity(0.2), width: 1),),
+        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.current.accent.withOpacity(0.2), width: 1),),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.current.accent.withOpacity(0.2), width: 1),),
+        prefixIcon: SizedBox(width: 56, child: Image.asset(AppAssets.searchIcon, width: 20, height: 20,),),
         hintText: AppText.searchCourse,
-        hintStyle: const TextStyle(
-          fontSize: 22,
-        ),
+        hintStyle: TextStyle(fontSize: Get.textTheme.headline2?.fontSize,),
       ),
-      onChanged: (value) {
-        controller.filterCourse(value);
-      },
+      onChanged: (value) => controller.filterCourse(value),
     );
   }
 

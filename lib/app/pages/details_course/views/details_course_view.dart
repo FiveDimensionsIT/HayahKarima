@@ -10,7 +10,6 @@ import 'package:hayah_karema/app/common/widgets/big_btn.dart';
 import 'package:hayah_karema/app/pages/details_course/views/about_details_course_view.dart';
 import 'package:hayah_karema/app/pages/details_course/views/details_statistic_course_view.dart';
 import 'package:hayah_karema/app/pages/details_course/views/study_plan_course_view.dart';
-import 'package:hayah_karema/app/pages/details_course/views/what_learn_course_view.dart';
 import 'package:hayah_karema/app/pages/training_course/training_course_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
@@ -57,10 +56,6 @@ class DetailsCourseView extends StatelessWidget {
                 height: 24,
               ),
               InformationAboutDetailsCourseView(item: item),
-              Empty(
-                height: 16,
-              ),
-              WhatLearnCourseView(),
               Empty(
                 height: 16,
               ),
@@ -123,7 +118,7 @@ class DetailsCourseView extends StatelessWidget {
         return BigBtn(
           state: controller.postApiLoading.value ? BtnState.loading : BtnState.active,
           text: AppText.joinNow,
-          onPressed: () => controller.joinNow('${item?.id}'),
+          onPressed: () => controller.getAvailableCourses(programId: '${item?.id}', programName: item?.name??''),
         );
       }),
     );

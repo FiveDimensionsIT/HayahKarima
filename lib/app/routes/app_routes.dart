@@ -26,6 +26,8 @@ abstract class Routes {
   static const DETAILS_COURSE = _Paths.DETAILS_COURSE;
   static const BIRTH_PLACE = _Paths.BIRTH_PLACE;
   static const PRIZES = _Paths.PRIZES;
+  static const USERS = _Paths.USERS;
+  static const ADD_USER = _Paths.ADD_USER;
 }
 
 abstract class _Paths {
@@ -51,4 +53,6 @@ abstract class _Paths {
   static const TRAINING_COURSE = '/training_course';
   static const DETAILS_COURSE = '/details_course';
   static const PRIZES = '/prizes';
+  static const USERS = '/users';
+  static const ADD_USER = '/add-user';
 }

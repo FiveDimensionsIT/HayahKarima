@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:hayah_karema/app/common/managers/api/home/_models/gallery_model.dart';
 import 'package:hayah_karema/utils/serialization/serialization_lib.dart';
 

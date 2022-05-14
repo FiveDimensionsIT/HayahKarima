@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:hayah_karema/app/common/managers/api/courses/_models/available_course_model.dart';
 import 'package:hayah_karema/app/common/managers/api/courses/_models/course_model.dart';
+import 'package:hayah_karema/app/common/managers/api/courses/_models/join_training_request.dart';
 import 'package:hayah_karema/app/common/managers/api/courses/_models/register_course_request.dart';
 import 'package:hayah_karema/app/common/managers/api/courses/i_courses_api_manager.dart';
 import 'package:hayah_karema/services/http/http_lib.dart';
@@ -14,7 +15,7 @@ class CourseApiManager implements ICoursesApiManager{
 
   @override
   Future<List<TrainingCourseModel>?> getAllCourses() async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'Training/Programs/Search?statusId=2',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get, url: 'Training/Programs/Search?statusId=2&ForApp=true',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -39,6 +40,18 @@ class CourseApiManager implements ICoursesApiManager{
   @override
   Future joinNow(RegisterCourseRequest? courseRequest) async{
     var request = HttpRequest(method: HttpMethod.post, url: 'Training/Registrations', data: courseRequest)..addJsonHeaders();
+    //
+    var resp = await _httpService.sendRequest(request);
+    //
+    if (resp != null && resp.statusCode == 200 && resp.data != null) {
+      return jsonDecode(resp.data!);
+    }
+    return null;
+  }
+
+  @override
+  Future joinTrainingRequest(JoinTrainingRequest? trainingRequest) async{
+    var request = HttpRequest(method: HttpMethod.post, url: 'Training/JoiningRequests', data: trainingRequest)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //

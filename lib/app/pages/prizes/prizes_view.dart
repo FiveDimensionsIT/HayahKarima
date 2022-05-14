@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/managers/api/rewards/_model/reward_model.dart';
-import 'package:hayah_karema/app/common/models/generic_model.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';

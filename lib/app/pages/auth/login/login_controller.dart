@@ -26,10 +26,10 @@ class LoginController extends GetxController {
 
   onLoginClick() {
     // validate email
-    if(!userName.value.isNum && !userName.value.isEmail){
-      OverlayHelper.showErrorToast(AppText.invalidUserName);
-      return;
-    }
+    // if(!userName.value.isNum && !userName.value.isEmail){
+    //   OverlayHelper.showErrorToast(AppText.invalidUserName);
+    //   return;
+    // }
     callLoginApi();
   }
 
@@ -48,7 +48,7 @@ class LoginController extends GetxController {
     LoginResponse? result;
     //
     var success = await _action.execute(() async {
-      result = await _apiManager.login(LoginRequest(email: userName.value, password: password.value));
+      result = await _apiManager.login(LoginRequest(code: userName.value, password: password.value));
     }, checkConnection: true);
     //
     loginLoading.value = false;
@@ -60,21 +60,8 @@ class LoginController extends GetxController {
           OverlayHelper.showWarningToast(AppText.unHandledErrorAction);
           return;
         }
-
         // parse token to user data
         UserData userData = UserData()..deserialize(jsonEncode(parseJwt(result!.token!)));
-        // // غير معتمد
-        // if (userData.status != 2) {
-        //   OverlayHelper.showWarningToast('حسابك غير معتمد، برجاء قم بالتواصل مع الادارة');
-        //   return;
-        // }
-        //
-        // // ليس لة صلاحية
-        // if (userData.groupStatus != 2) {
-        //   OverlayHelper.showWarningToast('ليس لديك صلاحية الدخول الي التطبيق، برجاء قم بالتواصل مع الادارة');
-        //   return;
-        // }
-
         // save user data
         await _cacheManager.setUserData(userData);
         // navigate to next page

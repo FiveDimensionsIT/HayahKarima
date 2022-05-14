@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_translations.dart';
 import 'package:hayah_karema/setup.dart';
+
 import 'app/routes/app_pages.dart';
 
 void main() async{

@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/managers/api/profile/_model/user_rewards.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/widgets/empty_response.dart';
+import 'package:hayah_karema/utils/DateHelper.dart';
 
 class ProfileAwardsView extends StatelessWidget {
-  const ProfileAwardsView({Key? key}) : super(key: key);
+  final List<UserRewards> userRewardsList;
+  const ProfileAwardsView({Key? key,required this.userRewardsList}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -13,25 +18,20 @@ class ProfileAwardsView extends StatelessWidget {
   }
 
   Widget _buildReplacePrizeTab() {
+    if(userRewardsList.isEmpty){return const EmptyResponse();}
     return ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return _buildAwardItem();
-        },
-        separatorBuilder: (context, index) {
-          return _buildDivider();
-        });
+        itemCount: userRewardsList.length,
+        itemBuilder: (context, index)=> _buildAwardItem(index),
+        separatorBuilder: (_, __) =>_buildDivider(),);
   }
 
-  Row _buildAwardItem() {
+  Row _buildAwardItem(int index) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
-
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: Container(
@@ -39,7 +39,7 @@ class ProfileAwardsView extends StatelessWidget {
             height: Get.width / 6,
             color: AppColors.current.dimmedLight.withOpacity(0.2),
             child: Image.network(
-              '',
+              userRewardsList[index].avatar??"",
               errorBuilder: (_, __, ___) {
                 return Image.asset(AppAssets.imgNotFound, fit: BoxFit.cover,);
               },
@@ -54,7 +54,7 @@ class ProfileAwardsView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'هاتف سامسونج',
+              userRewardsList[index].reward ??"",
               style: TextStyle(
                   color: AppColors.current.text,
                   fontSize: Get.textTheme.bodyLarge?.fontSize,
@@ -66,7 +66,7 @@ class ProfileAwardsView extends StatelessWidget {
               height: 5,
             ),
             Text(
-              'DDL-QUEST-0002009',
+              userRewardsList[index].status??'',
               style: TextStyle(
                   color: AppColors.current.text,
                   fontSize: Get.textTheme.bodySmall?.fontSize,
@@ -76,7 +76,8 @@ class ProfileAwardsView extends StatelessWidget {
               height: 5,
             ),
             Text(
-              '14.25 14 . الإثنين . فبراير 2022',
+             // userRewardsList[index].date ??"",
+              getUserRewardDate(userRewardsList[index].date??''),
               style: TextStyle(color: AppColors.current.primary, fontSize: Get.textTheme.bodySmall?.fontSize),
             )
           ],
@@ -86,10 +87,10 @@ class ProfileAwardsView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           decoration:
               BoxDecoration(color: AppColors.current.dimmed.withOpacity(0.1), borderRadius: BorderRadius.circular(12)),
-          child: const Center(
+          child:  Center(
               child: Text(
-            '500',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                "${ userRewardsList[index].points ??""}",
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           )),
         )
       ],

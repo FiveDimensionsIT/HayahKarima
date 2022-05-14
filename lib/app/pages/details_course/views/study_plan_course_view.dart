@@ -9,7 +9,7 @@ import 'package:hayah_karema/utils/ui/empty.dart';
 
 class StudyPlanCourseView extends StatelessWidget {
   final TrainingCourseModel? item;
-   const StudyPlanCourseView({Key? key, this.item}) : super(key: key);
+  const StudyPlanCourseView({Key? key, this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,7 @@ class StudyPlanCourseView extends StatelessWidget {
             shrinkWrap: true,
             itemCount: item?.outlines?.length??0,
             itemBuilder: (context,index){
+              if(item == null || item?.outlines == null){return const SizedBox();}
               String details = '';
               item?.outlines![index]?.details?.forEach((element) {
                 details += '- ${element?.description}.\n';

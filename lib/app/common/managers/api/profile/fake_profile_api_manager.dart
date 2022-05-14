@@ -1,5 +1,6 @@
 import 'package:hayah_karema/app/common/managers/api/profile/_model/profile_model.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/_model/user_earn_point_model.dart';
+import 'package:hayah_karema/app/common/managers/api/profile/_model/user_rewards.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/i_profile_api_manager.dart';
 
 class FakeProfileAPIManager implements IProfileAPIManager{
@@ -15,7 +16,11 @@ class FakeProfileAPIManager implements IProfileAPIManager{
     // TODO: implement getUserEarnedPoints
     throw UnimplementedError();
   }
-
- 
+ //
+  @override
+  Future<List<UserRewards>?> getUserRewards({String? userId}) {
+    // TODO: implement getUserEarnedPoints
+    throw UnimplementedError();
+  }
 
 }

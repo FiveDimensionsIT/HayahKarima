@@ -1,5 +1,6 @@
 import 'package:hayah_karema/app/common/managers/api/courses/_models/available_course_model.dart';
 import 'package:hayah_karema/app/common/managers/api/courses/_models/course_model.dart';
+import 'package:hayah_karema/app/common/managers/api/courses/_models/join_training_request.dart';
 import 'package:hayah_karema/app/common/managers/api/courses/_models/register_course_request.dart';
 
 abstract class ICoursesApiManager{
@@ -9,5 +10,7 @@ abstract class ICoursesApiManager{
   Future<List<AvailableCourseModel>?> getAvailableCourses(String? programId);
 
   Future joinNow(RegisterCourseRequest? courseRequest);
+
+  Future joinTrainingRequest(JoinTrainingRequest? trainingRequest);
 
 }

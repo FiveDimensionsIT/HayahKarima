@@ -1,9 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hayah_karema/services/logger/log.dart';
 import 'package:hayah_karema/utils/serialization/serialization_lib.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
+
 import 'http_lib.dart';
-import 'package:dio/dio.dart';
 
 /// an implementation of the http service using dio
 class DioHttpService implements IHttpService {

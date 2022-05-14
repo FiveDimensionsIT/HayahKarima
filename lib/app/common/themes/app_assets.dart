@@ -3,10 +3,8 @@ abstract class AppAssets{
 
   static const String splash1 = 'assets/images/splash_1.png';
   static const String splash2 = 'assets/images/splash_2.png';
-  static const String splash3 = 'assets/images/splash_3.png';
-  static const String splash4 = 'assets/images/splash_4.png';
-  static const String splash5 = 'assets/images/splash_5.png';
-  static const String splash6 = 'assets/images/splash_6.png';
+  static const String splashAnim = 'assets/images/logo_anim.riv';
+
   static const String imgNotFound = 'assets/images/img_not_found.png';
   static const String copyrightsIcon = 'assets/images/copyrights.png';
 
@@ -21,7 +19,9 @@ abstract class AppAssets{
   static const String graduatedIcon = 'assets/images/graduated_icon.svg';
   static const String comapnyPlaceholderIcon = 'assets/images/comapny_placeholder_icon.svg';
 
+  static const String searchIcon = 'assets/icons/search.png';
   static const String settingsSideMenuIcon = 'assets/images/settings_side_menu.svg';
+  static const String usersSideMenuIcon = 'assets/images/users_icon.svg';
   static const String coursesSideMenuIcon = 'assets/images/course_side_menu.svg';
   static const String logoutSideMenuIcon = 'assets/images/logout_side_menu.svg';
   static const String awardsSideMenuIcon = 'assets/images/awards_side_menu.svg';
@@ -56,4 +56,5 @@ abstract class AppAssets{
   static const String teacherImage = 'assets/images/teacher_image.png';
   static const String otpGif = 'assets/images/otp.gif';
   static const String userIcon = 'assets/images/icon_user.png';
+  static const String poweredBy = 'assets/images/powered_by.png';
 }
