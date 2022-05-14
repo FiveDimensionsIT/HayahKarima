@@ -5,9 +5,8 @@ import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
+import 'package:hayah_karema/app/pages/home/_widgets/build_time_line_list_home.dart';
 import 'package:hayah_karema/app/pages/home/home_controller.dart';
-import 'package:hayah_karema/app/pages/home/views/time_line_item_view.dart';
-import 'package:hayah_karema/app/pages/home/views/timeline_question_item_view.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
@@ -105,22 +104,7 @@ class HomeView extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (cxt, index) {
-            return Column(
-              children: [
-                TimelineItemView(item: controller.timelinePostsList[index]),
-
-                if(index==1)Obx(() {
-                  if (controller.questionApiLoading.value) return const SizedBox(height: 30, width : 30,child: CircularProgressIndicator(strokeWidth: 3,));
-                  if (controller.questionsList.isEmpty) return const SizedBox();
-                  return Column(
-                    children: [
-                      Empty(height: 10),
-                      TimelineQuestionItemView(questions: controller.questionsList),
-                    ],
-                  );
-                }),
-              ],
-            );
+            return BuildTimeLineListHome(index: index);
           },
           separatorBuilder: (_, __) => const SizedBox(height: 10,),
           itemCount: controller.timelinePostsList.length);

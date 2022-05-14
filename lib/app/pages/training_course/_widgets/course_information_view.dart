@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/managers/api/courses/_models/course_model.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
-import 'package:hayah_karema/app/pages/details_course/views/details_course_view.dart';
+import 'package:hayah_karema/app/pages/details_course/details_course_view.dart';
 import 'package:hayah_karema/app/pages/training_course/_widgets/statistic_course_view.dart';
 import 'package:hayah_karema/app/pages/training_course/training_course_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';

@@ -7,13 +7,13 @@ import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/common/widgets/big_btn.dart';
-import 'package:hayah_karema/app/pages/details_course/views/about_details_course_view.dart';
-import 'package:hayah_karema/app/pages/details_course/views/details_statistic_course_view.dart';
-import 'package:hayah_karema/app/pages/details_course/views/study_plan_course_view.dart';
+import 'package:hayah_karema/app/pages/details_course/_widgets/about_details_course_view.dart';
+import 'package:hayah_karema/app/pages/details_course/_widgets/details_statistic_course_view.dart';
+import 'package:hayah_karema/app/pages/details_course/_widgets/study_plan_course_view.dart';
 import 'package:hayah_karema/app/pages/training_course/training_course_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
-import '../../../common/themes/app_assets.dart';
+import '../../common/themes/app_assets.dart';
 
 class DetailsCourseView extends StatelessWidget {
   final TrainingCourseModel? item;

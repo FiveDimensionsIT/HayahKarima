@@ -6,10 +6,10 @@ import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
+import 'package:hayah_karema/app/pages/profile/_widgets/profile_awards_view.dart';
+import 'package:hayah_karema/app/pages/profile/_widgets/profile_info_view.dart';
+import 'package:hayah_karema/app/pages/profile/_widgets/profile_points_view.dart';
 import 'package:hayah_karema/app/pages/profile/profile_controller.dart';
-import 'package:hayah_karema/app/pages/profile/views/profile_awards_view.dart';
-import 'package:hayah_karema/app/pages/profile/views/profile_info_view.dart';
-import 'package:hayah_karema/app/pages/profile/views/profile_points_view.dart';
 
 class ProfileView extends StatelessWidget {
   ProfileView({Key? key}) : super(key: key);

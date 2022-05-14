@@ -14,7 +14,7 @@ import 'package:hayah_karema/app/pages/auth/verify_mobile_number/verify_mobile_n
 import 'package:hayah_karema/app/pages/comment/comment_binding.dart';
 import 'package:hayah_karema/app/pages/comment/commnet_view.dart';
 import 'package:hayah_karema/app/pages/details_course/details_course_binding.dart';
-import 'package:hayah_karema/app/pages/details_course/views/details_course_view.dart';
+import 'package:hayah_karema/app/pages/details_course/details_course_view.dart';
 import 'package:hayah_karema/app/pages/digital_pointer/digital_pointer_binding.dart';
 import 'package:hayah_karema/app/pages/digital_pointer/digital_pointer_view.dart';
 import 'package:hayah_karema/app/pages/grids_view/birth_place/birth_place_binding.dart';
@@ -28,15 +28,15 @@ import 'package:hayah_karema/app/pages/grids_view/proficients/proficients_view.d
 import 'package:hayah_karema/app/pages/grids_view/sponsors/sponsors_binding.dart';
 import 'package:hayah_karema/app/pages/grids_view/sponsors/sponsors_view.dart';
 import 'package:hayah_karema/app/pages/home/home_binding.dart';
-import 'package:hayah_karema/app/pages/home/views/home_view.dart';
+import 'package:hayah_karema/app/pages/home/home_view.dart';
 import 'package:hayah_karema/app/pages/new_post/new_post_binding.dart';
-import 'package:hayah_karema/app/pages/new_post/views/new_post_view.dart';
+import 'package:hayah_karema/app/pages/new_post/new_post_view.dart';
 import 'package:hayah_karema/app/pages/notification/notification_binding.dart';
 import 'package:hayah_karema/app/pages/notification/notification_view.dart';
 import 'package:hayah_karema/app/pages/prizes/prizes_binding.dart';
 import 'package:hayah_karema/app/pages/prizes/prizes_view.dart';
 import 'package:hayah_karema/app/pages/profile/profile_binding.dart';
-import 'package:hayah_karema/app/pages/profile/views/profile_view.dart';
+import 'package:hayah_karema/app/pages/profile/profile_view.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_binding.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
 import 'package:hayah_karema/app/pages/splash/splash_binding.dart';

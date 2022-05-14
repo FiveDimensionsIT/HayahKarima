@@ -72,7 +72,8 @@ class TrainingCourseView extends StatelessWidget  {
       return ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (cxt, index) => TrainingCourseItemView(item: controller.coursesList[index]),
+          itemBuilder: (cxt, index) => TrainingCourseItemView(
+              item: controller.coursesList[index]),
           separatorBuilder: (_, __) => const SizedBox(height: 0,),
           itemCount: controller.coursesList.length);
     });

@@ -1,34 +1,23 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/_model/user_rewards.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
-import 'package:hayah_karema/app/common/widgets/empty_response.dart';
 import 'package:hayah_karema/utils/DateHelper.dart';
 
-class ProfileAwardsView extends StatelessWidget {
-  final List<UserRewards> userRewardsList;
-  const ProfileAwardsView({Key? key,required this.userRewardsList}) : super(key: key);
+class BuildProfileAwardViewItem extends StatelessWidget {
 
+  final List<UserRewards> userRewardsList;
+  final int index;
+
+  const BuildProfileAwardViewItem({Key? key,
+  required this.userRewardsList,
+    required this.index
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return _buildReplacePrizeTab();
-  }
-
-  Widget _buildReplacePrizeTab() {
-    if(userRewardsList.isEmpty){return const EmptyResponse();}
-    return ListView.separated(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: userRewardsList.length,
-        itemBuilder: (context, index)=> _buildAwardItem(index),
-        separatorBuilder: (_, __) =>_buildDivider(),);
-  }
-
-  Row _buildAwardItem(int index) {
-    return Row(
+     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -76,7 +65,7 @@ class ProfileAwardsView extends StatelessWidget {
               height: 5,
             ),
             Text(
-             // userRewardsList[index].date ??"",
+              // userRewardsList[index].date ??"",
               getUserRewardDate(userRewardsList[index].date??''),
               style: TextStyle(color: AppColors.current.primary, fontSize: Get.textTheme.bodySmall?.fontSize),
             )
@@ -86,23 +75,15 @@ class ProfileAwardsView extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           decoration:
-              BoxDecoration(color: AppColors.current.dimmed.withOpacity(0.1), borderRadius: BorderRadius.circular(12)),
+          BoxDecoration(color: AppColors.current.dimmed.withOpacity(0.1), borderRadius: BorderRadius.circular(12)),
           child:  Center(
               child: Text(
                 "${ userRewardsList[index].points ??""}",
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          )),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              )),
         )
       ],
     );
   }
 
-  Divider _buildDivider() {
-    return Divider(
-      color: AppColors.current.primary.withOpacity(0.2),
-      thickness: 1,
-      endIndent: 8,
-      indent: 8,
-    );
-  }
 }
