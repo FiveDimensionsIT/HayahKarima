@@ -11,6 +11,7 @@ import 'package:hayah_karema/utils/ui/empty.dart';
 import 'change_password_controller.dart';
 
 class ChangePasswordView extends StatelessWidget {
+  ChangePasswordView({Key? key}) : super(key: key);
   final controller = Get.put(ChangePasswordController());
   final _keyForm = GlobalKey<FormState>();
 

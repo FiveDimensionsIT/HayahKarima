@@ -11,6 +11,7 @@ import 'package:hayah_karema/utils/ui/empty.dart';
 import 'new_password_controller.dart';
 
 class NewPasswordView extends  StatelessWidget {
+  NewPasswordView({Key? key}) : super(key: key);
 
   final controller = Get.put(NewPasswordController());
   final _keyForm = GlobalKey<FormState>();
@@ -86,7 +87,6 @@ class NewPasswordView extends  StatelessWidget {
 
   TextFormField _buildConfirmNewPasswordTextField() {
     return TextFormField(
-
       decoration: InputDecoration(hintText: AppText.confirmNewPassword,),
       obscureText: true,
       textInputAction: TextInputAction.done,

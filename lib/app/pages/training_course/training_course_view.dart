@@ -55,7 +55,7 @@ class TrainingCourseView extends StatelessWidget  {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.current.accent.withOpacity(0.2), width: 1),),
         enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.current.accent.withOpacity(0.2), width: 1),),
         focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.current.accent.withOpacity(0.2), width: 1),),
-        prefixIcon: SizedBox(width: 56, child: Image.asset(AppAssets.searchIcon, width: 20, height: 20,),),
+        prefixIcon: Padding(padding: const EdgeInsets.all(16), child: Image.asset(AppAssets.searchIcon, width: 20, height: 20,),),
         hintText: AppText.searchCourse,
         hintStyle: TextStyle(fontSize: Get.textTheme.headline2?.fontSize,),
       ),

@@ -70,7 +70,7 @@ class SideMenuView extends StatelessWidget {
               // back to home.
               Get.back();
               // then go to profile page.
-              Get.toNamed(Routes.PROFILE);
+              Get.toNamed(Routes.PROFILE, arguments: {"user_id": controller.userData?.id});
             }),
           ],
         ),

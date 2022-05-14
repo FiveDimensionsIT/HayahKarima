@@ -1,11 +1,17 @@
+import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/models/enums/user_status.dart';
 import 'package:hayah_karema/utils/NumberHelper.dart';
 import 'package:hayah_karema/utils/serialization/serialization_lib.dart';
 
 class PointerItemModel extends Serializable {
   int? id;
   String? fullName;
+  String? nickname;
+  String? mobile;
+  String? barcode;
   String? name;
   String? avatar;
+  String? governorate;
   String? email;
   String? center;
   String? village;
@@ -21,13 +27,18 @@ class PointerItemModel extends Serializable {
   String? status;
   String? villagePoints;
   String? villagePeople;
+  RxString statusObs = ''.obs;
 
   PointerItemModel({
     this.id,
     this.fullName,
+    this.nickname,
+    this.mobile,
+    this.barcode,
     this.name,
     this.avatar,
     this.email,
+    this.governorate,
     this.center,
     this.village,
     this.excellenceField,
@@ -47,9 +58,13 @@ class PointerItemModel extends Serializable {
   @override
   void fromMap(Map<String, dynamic> map) {
     id = map['id'];
+    barcode = map['barcode'];
+    nickname = map['nickname'];
+    mobile = map['mobile'];
     fullName = map['fullName'];
     name = map['name'];
     avatar = map['avatar'];
+    governorate = map['governorate'];
     email = map['email'];
     center = map['center'];
     village = map['village'];
@@ -62,18 +77,25 @@ class PointerItemModel extends Serializable {
     membershipCategory = map['membershipCategory'];
     indicator = map['indicator'];
     status = map['status'];
+    // status = 'مجمد';
+    // status = 'قيد الاعتماد';
     villagesCount = map['villagesCount'];
     villagesCount = map['villagesCount'];
     villagePoints = map['villagePoints'] != null ?  formatter.format(map['villagePoints']) : '';
     villagePeople = map['villagePeople'] != null ?  formatter.format(map['villagePeople']) : '';
+    statusObs.value = (status == null)? '' : status!;
   }
 
   @override
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data =  Map<String, dynamic>();
     data['id'] = this.id;
+    data['barcode'] = this.barcode;
+    data['nickname'] = this.nickname;
     data['fullName'] = this.fullName;
+    data['mobile'] = this.mobile;
     data['name'] = this.name;
+    data['governorate'] = this.governorate;
     data['avatar'] = this.avatar;
     data['email'] = this.email;
     data['center'] = this.center;
@@ -96,4 +118,12 @@ class PointerItemModel extends Serializable {
   double percentage(int maxIndicator) => indicator! / maxIndicator;
 
   String? get userName => name ?? fullName ?? '';
+
+  UserStatus getUserStatus(){
+    if(status == 'معتمد') return UserStatus.CERTIFIED;
+    if(status == 'مجمد') return UserStatus.FREZED;
+    return UserStatus.PENDING;
+  }
+
+
 }

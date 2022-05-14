@@ -74,7 +74,7 @@ class ProfileInfoView extends StatelessWidget {
   }
   Widget _buildAddress() {
     return TextField(
-      controller: TextEditingController()..text = profileModel.addresses == null ? '' : profileModel.addresses![0]?.address??'',
+      controller: TextEditingController()..text = profileModel.addresses == null || profileModel.addresses!.isEmpty? '' : profileModel.addresses![0]?.address??'',
       decoration: InputDecoration(hintText: AppText.location),
       enabled: false,
     );

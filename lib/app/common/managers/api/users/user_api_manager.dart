@@ -1,8 +1,12 @@
 import 'dart:convert';
 
+import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
 import 'package:hayah_karema/app/common/managers/api/users/_models/add_user_data.dart';
 import 'package:hayah_karema/app/common/managers/api/users/_models/register_user_response.dart';
+import 'package:hayah_karema/app/common/managers/api/users/_models/user_model.dart';
+import 'package:hayah_karema/app/common/managers/api/users/_models/user_status_request.dart';
 import 'package:hayah_karema/app/common/managers/api/users/i_user_api_manager.dart';
+import 'package:hayah_karema/app/common/models/enums/user_status.dart';
 import 'package:hayah_karema/app/common/models/lookup_model.dart';
 import 'package:hayah_karema/services/http/http_lib.dart';
 
@@ -13,8 +17,15 @@ class UserApiManager implements IUserApiManager {
   UserApiManager(this._httpService);
 
   @override
-  Future getAllUsers() async{
-
+  Future<List<PointerItemModel>?> getAllUsers(String? userId) async{
+    var request = HttpRequest(method: HttpMethod.get, url: 'Contacts/Search?createdBy=$userId&statusId=2&ForApp=true',)..addJsonHeaders();
+    //
+    var resp = await _httpService.sendRequest(request);
+    //
+    if (resp != null && resp.statusCode == 200 && resp.data != null) {
+      return List<PointerItemModel>.from(json.decode(resp.data!).map((x) => PointerItemModel()..deserialize(jsonEncode(x))));
+    }
+    return null;
   }
 
   @override
@@ -95,6 +106,31 @@ class UserApiManager implements IUserApiManager {
   @override
   Future<List<LookupModel>?> villagesLookup(String id) async{
     var request = HttpRequest(method: HttpMethod.get, url: 'Villages/Search?centerId=$id&statusId=2&ForApp=true&OrderBy=name',)..addJsonHeaders();
+    //
+    var resp = await _httpService.sendRequest(request);
+    //
+    if (resp != null && resp.statusCode == 200 && resp.data != null) {
+      return List<LookupModel>.from(json.decode(resp.data!).map((x) => LookupModel()..deserialize(jsonEncode(x))));
+    }
+    return null;
+  }
+
+
+  @override
+  Future updateUserStatus(UserStatusRequest userStatusRequest) async{
+    var request = HttpRequest(method: HttpMethod.put, url: 'Contacts/UpdateStatus',data: userStatusRequest)..addJsonHeaders();
+    //
+    var resp = await _httpService.sendRequest(request);
+    //
+    if (resp != null && resp.statusCode == 200 && resp.data != null) {
+      return json.decode(resp.data!);
+    }
+    return null;
+  }
+
+  @override
+  Future<List<LookupModel>?> contactStatusLookup() async{
+    var request = HttpRequest(method: HttpMethod.get, url: 'Status/Search',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
