@@ -42,7 +42,7 @@ import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
 import 'package:hayah_karema/app/pages/splash/splash_binding.dart';
 import 'package:hayah_karema/app/pages/splash/splash_view.dart';
 import 'package:hayah_karema/app/pages/training_course/training_course_binding.dart';
-import 'package:hayah_karema/app/pages/training_course/views/training_course_view.dart';
+import 'package:hayah_karema/app/pages/training_course/training_course_view.dart';
 import 'package:hayah_karema/app/pages/users/users_binding.dart';
 import 'package:hayah_karema/app/pages/users/users_view.dart';
 

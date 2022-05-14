@@ -6,8 +6,8 @@ import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
+import 'package:hayah_karema/app/pages/training_course/_widgets/course_information_view.dart';
 import 'package:hayah_karema/app/pages/training_course/training_course_controller.dart';
-import 'package:hayah_karema/app/pages/training_course/views/course_information_view.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 
