@@ -72,6 +72,7 @@ class TrainingCourseController extends GetxController {
     fromRequiredController.dispose();
     toRequiredController.dispose();
     notesController.dispose();
+    _searchTextController.close();
     super.onClose();
   }
 

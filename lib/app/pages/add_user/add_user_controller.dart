@@ -64,6 +64,7 @@ class AddUserController extends GetxController {
   RxBool isIdFrontImageCaptured = false.obs;
   RxBool isIdBackImageCaptured = false.obs;
   UserData? userData;
+  bool _needToRefreshUsersList = false;
 
   @override
   void onInit() {
@@ -230,6 +231,7 @@ class AddUserController extends GetxController {
             Text(result?.code??''),
           ],
         ));
+        _needToRefreshUsersList = true;
         _resetData();
       } else {
         OverlayHelper.showErrorToast(AppText.somethingWrong);
@@ -368,6 +370,11 @@ class AddUserController extends GetxController {
       isVillageRequired.value = true;
       _getVillagesLookup(userData!.centerId!);
     }
+  }
+
+  Future<bool> backToUsersList() async {
+     Get.back(result: _needToRefreshUsersList);
+     return true;
   }
 
 // endregion

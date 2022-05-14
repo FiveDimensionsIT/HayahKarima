@@ -1,13 +1,14 @@
+import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
 import 'package:hayah_karema/app/common/managers/api/users/_models/add_user_data.dart';
 import 'package:hayah_karema/app/common/managers/api/users/_models/register_user_response.dart';
-import 'package:hayah_karema/app/common/managers/api/users/_models/user_model.dart';
+import 'package:hayah_karema/app/common/managers/api/users/_models/user_status_request.dart';
 import 'package:hayah_karema/app/common/managers/api/users/i_user_api_manager.dart';
 import 'package:hayah_karema/app/common/models/lookup_model.dart';
 
 class FakeUserApiManager implements IUserApiManager {
 
   @override
-  Future<List<UserModel>?> getAllUsers() async{
+  Future<List<PointerItemModel>?> getAllUsers(String? userId) async{
     // TODO: implement getAllUsers
     throw UnimplementedError();
   }
@@ -51,6 +52,17 @@ class FakeUserApiManager implements IUserApiManager {
   @override
   Future<List<LookupModel>?> villagesLookup(String id) {
     // TODO: implement villagesLookup
+    throw UnimplementedError();
+  }
+
+  @override
+  Future updateUserStatus(UserStatusRequest userStatusRequest) async{
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<LookupModel>?> contactStatusLookup()async{
+    // TODO: implement contactStatusLookup
     throw UnimplementedError();
   }
 

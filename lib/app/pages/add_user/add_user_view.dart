@@ -13,19 +13,22 @@ class AddUserView extends GetView<AddUserController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.current.neutral,
-      body: SafeArea(
-        child: Column(
-          children: [
-            AppToolbar(
-              title: AppText.addUser,
-              backCallBack: () => Get.back(),
-            ),
-            _space,
-            _buildLoadingIndicator(),
-            _buildBody(),
-          ],
+    return WillPopScope(
+      onWillPop: ()=>  controller.backToUsersList(),
+      child: Scaffold(
+        backgroundColor: AppColors.current.neutral,
+        body: SafeArea(
+          child: Column(
+            children: [
+              AppToolbar(
+                title: AppText.addUser,
+                backCallBack: () => controller.backToUsersList(),
+              ),
+              _space,
+              _buildLoadingIndicator(),
+              _buildBody(),
+            ],
+          ),
         ),
       ),
     );

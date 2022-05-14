@@ -1,176 +1,152 @@
 import 'package:flutter/material.dart';
-import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
+import 'package:hayah_karema/app/common/models/enums/user_status.dart';
+import 'package:hayah_karema/app/common/themes/app_assets.dart';
+import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/translation/app_text.dart';
+import 'package:hayah_karema/app/pages/auth/new_password/new_password_view.dart';
+import 'package:hayah_karema/app/pages/users/_widgets/user_controles_button.dart';
+import 'package:hayah_karema/app/routes/app_pages.dart';
+import 'package:hayah_karema/services/url_launcher/i_url_launcher_service.dart';
+import 'package:hayah_karema/setup.dart';
 
 class UserItem extends StatelessWidget {
-  final String code;
-  final String nickname;
-  final int nationalId;
-
-  const UserItem({Key? key,required this.code,required this.nickname,required this.nationalId,}) : super(key: key);
+  final PointerItemModel user;
+  final Function onChangeStatus;
+  const UserItem({Key? key, required this.user, required this.onChangeStatus}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 16,),
-      padding: const EdgeInsets.only(right: 12,left: 12,top: 12,bottom: 13),
-      decoration: BoxDecoration(
-        color:AppColors.current.neutral,
-        borderRadius: BorderRadius.circular(4),
-        boxShadow: const [
-          BoxShadow(
-              color: Color(0x4D000000),
-              offset: Offset(0, 1.0),
-              blurRadius: 2.0),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  user.avatar ?? '',
+                  fit: BoxFit.cover,
+                  height: 60,
+                  width: 60,
+                  errorBuilder: (_, __, ___) =>
+                      Image.asset(AppAssets.userIcon, fit: BoxFit.cover, height: 60, width: 60),
+                )),
+            const SizedBox(
+              width: 16,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    user.nickname ?? '',
+                    maxLines: 1,
+                    overflow: TextOverflow.clip,
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: Get.textTheme.headline4?.fontSize),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    user.barcode ?? '',
+                    maxLines: 1,
+                    overflow: TextOverflow.clip,
+                    style: TextStyle(
+                        color: AppColors.current.text.withOpacity(0.8),
+                        fontWeight: FontWeight.w500,
+                        fontSize: Get.textTheme.headline4?.fontSize),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        SizedBox(
+          height: 35,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0x1F000000)),
-                  borderRadius: BorderRadius.circular(40),
-
-                ),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
-                    child: Image.asset("assets/images/icon_user.png",fit: BoxFit.cover,height: 40,width: 40,)
-                ),
+              Obx(() {
+                return UserControlsButton(
+                    title: user.statusObs.value ?? '',
+                    color: user.getUserStatus() == UserStatus.PENDING
+                        ? AppColors.current.secondary.withOpacity(0.9)
+                        : user.getUserStatus() == UserStatus.FREZED
+                            ? AppColors.current.text.withOpacity(0.9)
+                            : AppColors.current.primary,
+                    onClick: () => _onStatusClick());
+              }),
+              const SizedBox(
+                width: 10,
               ),
-             const SizedBox(width: 8,),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:  [
-                    Text(nickname,
-                      maxLines: 1,
-                      overflow: TextOverflow.clip,
-                      style:Theme.of(context).textTheme.headline3,
-                    ),
-                    const SizedBox(height: 2),
-                    Text("$nationalId",
-                      maxLines: 1,
-                      overflow: TextOverflow.clip,
-                      style:Theme.of(context).textTheme.headline4,
-                    ),
-                  ],
-                ),
+              UserControlsButton(
+                  title: 'اتصال',
+                  color: AppColors.current.primary,
+                  onClick: () {
+                    if (user.mobile != null && user.mobile!.isNotEmpty) {
+                      final test = DI.find<IUrlLauncherService>();
+                      test.launchTel(user.mobile!);
+                    }
+                  }),
+              const SizedBox(
+                width: 10,
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                    color: const Color(0xFFEBEBEB).withOpacity(.7),
-                    border: Border.all(color: const Color(0xFFEBEBEB).withOpacity(.7)),
-                    borderRadius: BorderRadius.circular(4)),
-                alignment: Alignment.center,
-                child: Text(code,//"400-200-001",
-                  maxLines: 1,
-                  overflow: TextOverflow.clip,
-                  style:Theme.of(context).textTheme.headline5,
-                ),
+              UserControlsButton(
+                  title: 'تغير الباسورد',
+                  color: AppColors.current.primary,
+                  onClick: () {
+                    _displayActionSheet();
+                  }),
+              const SizedBox(
+                width: 10,
               ),
+              UserControlsButton(
+                  title: 'تفاصيل',
+                  color: AppColors.current.accent,
+                  onClick: () {
+                    Get.toNamed(Routes.PROFILE, arguments: {"user_id": '${user.id}'});
+                  }),
             ],
           ),
-       const   SizedBox(height: 20,),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            // mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-
-              const   Icon(Icons.phone_in_talk_outlined,color: Color(0xFF000000),size: 17,),
-              const    SizedBox(width: 10,),
-              Text("01001600581",
-                style:Theme.of(context).textTheme.headline3,
-              ),
-              const  SizedBox(width: 20,),
-              const  SizedBox(
-                  height: 15,
-                  child: VerticalDivider(width: 2,color: Color(0xFF000000),)),
-              const    SizedBox(width: 20,),
-              const    Icon(Icons.phone_in_talk_outlined,color: Color(0xFF000000),size: 17,),
-              const  SizedBox(width: 4,),
-              const   Icon(Icons.whatsapp,color: Color(0xFF000000),size: 17,),
-              const   SizedBox(width: 10,),
-              Text("01001600581",
-                style:Theme.of(context).textTheme.headline3,
-              ),
-            ],
-          ),
-          const   SizedBox(height: 20,),
-          Row(
-            children: [
-
-              Flexible(
-                flex: 1,
-                child: Container(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  decoration: BoxDecoration(
-                      color: AppColors.current.accent,
-                      borderRadius: BorderRadius.circular(4)),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "تغيير الحالة",
-                    style: TextStyle(
-                        fontSize:Get.textTheme.headline4?.fontSize ,
-                        color:  AppColors.current.neutral,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              const  SizedBox(
-                width: 8,
-              ),
-              Flexible(
-                flex: 1,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  decoration: BoxDecoration(
-                      color: const Color(0xFFEBEBEB),
-                      border: Border.all(color: const Color(0xFFEBEBEB)),
-                      borderRadius: BorderRadius.circular(4)),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "تغيير الباسورد",
-                    style: TextStyle(
-                        fontSize:Get.textTheme.headline4?.fontSize ,
-                        color: AppColors.current.accent,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              const  SizedBox(
-                width: 8,
-              ),
-              Flexible(
-                flex: 1,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  decoration: BoxDecoration(
-                     // color: AppColors.current.primary,
-                      color:AppColors.current.neutral,
-                      border: Border.all(color: const Color(0xFFEBEBEB)),
-                      borderRadius: BorderRadius.circular(4)),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "التفاصيل",
-                    style: TextStyle(
-                        fontSize:Get.textTheme.headline4?.fontSize ,
-                        color: AppColors.current.text,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-
-            ],
-          ),
-        ],
-      ),
+        ),
+      ],
     );
+  }
+
+  void _displayActionSheet() {
+    Get.bottomSheet(Container(
+        decoration: BoxDecoration(
+            color: AppColors.current.neutral,
+            borderRadius: const BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25)),
+            boxShadow: [BoxShadow(color: AppColors.current.dimmed.withOpacity(0.3), blurRadius: 10)]),
+        child: NewPasswordView()));
+  }
+
+  void _onStatusClick() {
+    if (user.getUserStatus() == UserStatus.PENDING) return;
+
+    String newStatus = 'تنشيط'; // used for alert dialog.
+    String statusValue = 'معتمد'; // used for api.
+
+    if (user.getUserStatus() == UserStatus.CERTIFIED) {
+      newStatus = 'تجميد';
+      statusValue = 'مجمد';
+    }
+
+    Get.dialog(AlertDialog(
+      backgroundColor: AppColors.current.neutral,
+      content: Text('هل تريد 00 حساب 11'.replaceAll('11', user.nickname ?? '').replaceAll('00', newStatus)),
+      actions: [
+        TextButton(onPressed: () {
+          Get.back();
+          onChangeStatus(user.id, statusValue);
+        }, child: Text(AppText.yes)),
+        TextButton(onPressed: () => Get.back(), child: Text(AppText.no)),
+      ],
+    ));
   }
 }

@@ -71,20 +71,27 @@ class ProfileView extends StatelessWidget {
                 fit: BoxFit.cover,
                 width: Get.height / 6,
                 height: Get.height / 6,
+                errorBuilder: (_, __, ___){
+                return Image.asset(AppAssets.userIcon,
+                    fit: BoxFit.cover,
+                    width: Get.height / 6,
+                    height: Get.height / 6);
+                },
               ),
             ),
 
             const SizedBox(height: 8,),
 
             Text(controller.profileModel.value.fullName ?? '',
+              textAlign: TextAlign.center,
               style: TextStyle(fontSize: Get.textTheme.headline2?.fontSize, fontWeight: FontWeight.bold),),
 
             const SizedBox(height: 5,),
 
             FittedBox(
-              child: Text( '${controller.profileModel.value.village} ، '
-                  '${controller.profileModel.value.center} ، '
-                  '${controller.profileModel.value.governorate}',
+              child: Text( '${controller.profileModel.value.village??'-'} ، '
+                  '${controller.profileModel.value.center??'-'} ، '
+                  '${controller.profileModel.value.governorate??'-'}',
                 style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
             )
           ],

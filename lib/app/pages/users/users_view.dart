@@ -7,7 +7,7 @@ import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
 import 'package:hayah_karema/app/pages/users/_widgets/user_item.dart';
-import 'package:hayah_karema/app/pages/users/shimmers/all_users_shimmer.dart';
+import 'package:hayah_karema/app/pages/users/_widgets/all_users_shimmer.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
 
 import 'users_controller.dart';
@@ -28,15 +28,23 @@ class UsersView extends GetView<UsersController> {
                 title: AppText.users,
                 backCallBack: () => Get.back(),
                 actions: IconButton(
-                  onPressed: () => Get.toNamed(Routes.ADD_USER),
+                  onPressed: () => Get.toNamed(Routes.ADD_USER)!.then((refresh) {
+                    if(refresh!=null && refresh == true){
+                      controller.onRefresh();
+                    }
+                  }),
                   icon: Icon(
                     Icons.add_circle_outline_sharp,
                     color: AppColors.current.primary,
                   ),
                 )),
-              const SizedBox(height: 20,),
+
+              const SizedBox(height: 16,),
+
             _buildUsersSearch(),
-               //
+
+            const SizedBox(height: 10,),
+
             _buildAllUsersView(),
           ],
         ),
@@ -53,8 +61,8 @@ class UsersView extends GetView<UsersController> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.current.accent.withOpacity(0.2), width: 1),),
           enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.current.accent.withOpacity(0.2), width: 1),),
           focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.current.accent.withOpacity(0.2), width: 1),),
-          prefixIcon: SizedBox(width: 56, child: Image.asset(AppAssets.searchIcon, width: 20, height: 20,),),
-          hintText: AppText.searchCourse,
+          prefixIcon: Padding(padding: const EdgeInsets.all(16), child: Image.asset(AppAssets.searchIcon, width: 20, height: 20,),),
+          hintText: 'بحث باللقب أو الكود',
           hintStyle: TextStyle(fontSize: Get.textTheme.headline2?.fontSize,),
         ),
         onChanged: (value) => controller.filterUsers(value),
@@ -63,27 +71,20 @@ class UsersView extends GetView<UsersController> {
   }
   // TabBar view
   Widget _buildAllUsersView() {
-    return const AllUsersShimmer();
-    // return Obx(() {
-    //   return controller.userApiLoading.value
-    //       ?
-    //   // shimmer instead
-    //   const AllUsersShimmer()
-    // //  const Center(child: CircularProgressIndicator())
-    //       :
-    //   controller.usersList.isEmpty ? const EmptyResponse():
-    //    Expanded(
-    //     child: ListView.separated(
-    //       padding: const EdgeInsets.only(top: 16),
-    //       separatorBuilder: (_,__)=>const SizedBox(height: 16,),
-    //       itemBuilder: (c, i)=>  const UserItem(
-    //         code: "800-200-001",
-    //         nationalId: 966555822553,
-    //         nickname: "Ahmed Saad",
-    //       ),
-    //       itemCount:controller.userApiLoading.value?10: controller.usersList.length,),
-    //   );
-    //   //AllUsersView(allUsers: controller.usersList,);
-    // });
+    return Obx(() {
+
+      // if(controller.userApiLoading.value) return const AllUsersShimmer();
+      if(controller.userApiLoading.value) return const CircularProgressIndicator();
+
+      return controller.usersList.isEmpty
+          ? const EmptyResponse()
+          : Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                separatorBuilder: (_,__)=> Divider(color: AppColors.current.accent, thickness: 1.5, height: 35,),
+                itemBuilder: (c, i)=> UserItem(user: controller.usersList[i], onChangeStatus: (int? userId, String? status)=> controller.onChangeStatus(userId, status)),
+                itemCount: controller.usersList.length,),
+          );
+    });
   }
 }
