@@ -1,11 +1,13 @@
 import 'package:hayah_karema/app/common/managers/api/users/_models/add_user_data.dart';
 import 'package:hayah_karema/app/common/managers/api/users/_models/register_user_response.dart';
+import 'package:hayah_karema/app/common/managers/api/users/_models/user_model.dart';
 import 'package:hayah_karema/app/common/managers/api/users/i_user_api_manager.dart';
 import 'package:hayah_karema/app/common/models/lookup_model.dart';
 
 class FakeUserApiManager implements IUserApiManager {
+
   @override
-  Future getAllUsers() async{
+  Future<List<UserModel>?> getAllUsers() async{
     // TODO: implement getAllUsers
     throw UnimplementedError();
   }

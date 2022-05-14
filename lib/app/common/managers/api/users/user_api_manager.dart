@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:hayah_karema/app/common/managers/api/users/_models/add_user_data.dart';
 import 'package:hayah_karema/app/common/managers/api/users/_models/register_user_response.dart';
+import 'package:hayah_karema/app/common/managers/api/users/_models/user_model.dart';
 import 'package:hayah_karema/app/common/managers/api/users/i_user_api_manager.dart';
 import 'package:hayah_karema/app/common/models/lookup_model.dart';
 import 'package:hayah_karema/services/http/http_lib.dart';
@@ -13,8 +14,15 @@ class UserApiManager implements IUserApiManager {
   UserApiManager(this._httpService);
 
   @override
-  Future getAllUsers() async{
-
+  Future<List<UserModel>?> getAllUsers() async{
+    var request = HttpRequest(method: HttpMethod.get, url: 'ContactHealthStatus/Search',)..addJsonHeaders();
+    //
+    var resp = await _httpService.sendRequest(request);
+    //
+    if (resp != null && resp.statusCode == 200 && resp.data != null) {
+      return List<UserModel>.from(json.decode(resp.data!).map((x) => UserModel()..deserialize(jsonEncode(x))));
+    }
+    return null;
   }
 
   @override

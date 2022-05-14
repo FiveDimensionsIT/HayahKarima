@@ -38,6 +38,7 @@ dependencies:
   share_plus: ^4.0.3
   rive: 0.8.4
   flutter_html: ^3.0.0-alpha.3
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:
