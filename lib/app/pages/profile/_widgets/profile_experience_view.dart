@@ -16,7 +16,7 @@ class ProfileExperienceView extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 3,
         itemBuilder: (context, index) {
-          return BuildProfileExperienceViewItem();
+          return const BuildProfileExperienceViewItem();
         },
         separatorBuilder: (context, index) {
           return _buildDivider();

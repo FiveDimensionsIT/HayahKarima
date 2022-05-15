@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
 import 'package:hayah_karema/app/common/managers/api/users/_models/add_user_data.dart';
+import 'package:hayah_karema/app/common/managers/api/users/_models/change_password_request.dart';
 import 'package:hayah_karema/app/common/managers/api/users/_models/register_user_response.dart';
-import 'package:hayah_karema/app/common/managers/api/users/_models/user_model.dart';
 import 'package:hayah_karema/app/common/managers/api/users/_models/user_status_request.dart';
 import 'package:hayah_karema/app/common/managers/api/users/i_user_api_manager.dart';
-import 'package:hayah_karema/app/common/models/enums/user_status.dart';
+import 'package:hayah_karema/app/common/models/global_status_response.dart';
 import 'package:hayah_karema/app/common/models/lookup_model.dart';
 import 'package:hayah_karema/services/http/http_lib.dart';
 
@@ -117,13 +117,25 @@ class UserApiManager implements IUserApiManager {
 
 
   @override
-  Future updateUserStatus(UserStatusRequest userStatusRequest) async{
-    var request = HttpRequest(method: HttpMethod.put, url: 'Contacts/UpdateStatus',data: userStatusRequest)..addJsonHeaders();
+  Future<GlobalStatusResponse?> changePassword(ChangePasswordRequest changePasswordRequest) async{
+    var request = HttpRequest(method: HttpMethod.put, url: 'Users/ChangePassword/${changePasswordRequest.contactId}',data: changePasswordRequest)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
     if (resp != null && resp.statusCode == 200 && resp.data != null) {
-      return json.decode(resp.data!);
+      return GlobalStatusResponse()..deserialize(resp.data!);
+    }
+    return null;
+  }
+
+  @override
+  Future<GlobalStatusResponse?> updateUserStatus(UserStatusRequest userStatusRequest) async{
+    var request = HttpRequest(method: HttpMethod.put, url: 'Contacts/UpdateStatus/${userStatusRequest.id}',data: userStatusRequest)..addJsonHeaders();
+    //
+    var resp = await _httpService.sendRequest(request);
+    //
+    if (resp != null && resp.statusCode == 200 && resp.data != null) {
+      return GlobalStatusResponse()..deserialize(resp.data!);
     }
     return null;
   }

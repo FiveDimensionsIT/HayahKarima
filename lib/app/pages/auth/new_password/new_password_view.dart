@@ -65,7 +65,7 @@ class NewPasswordView extends  StatelessWidget {
     return Row(
       children: [
         /// back button
-        IconButton(onPressed:()=> controller.navigateForgotPassword(), icon: Icon(Icons.arrow_back_ios, color: AppColors.current.accent, size: 20,)),
+        IconButton(onPressed:()=> Get.back(), icon: Icon(Icons.arrow_back_ios, color: AppColors.current.accent, size: 20,)),
 
         Text(
           AppText.enterNewPassword,
@@ -99,7 +99,7 @@ class NewPasswordView extends  StatelessWidget {
   _buildConfirmPasswordButton(){
     return BigBtn(
       state: controller.loginLoading.value? BtnState.loading: BtnState.active,
-      text: AppText.confirm,
+      text: AppText.changePassword,
       onPressed: () => _onConfirm(),
     );
   }

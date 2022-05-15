@@ -12,7 +12,7 @@ import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
 import 'package:hayah_karema/utils/NumberHelper.dart';
 
 class DigitalPointerView extends GetView<DigitalPointerController> {
-
+  DigitalPointerView({Key? key}) : super(key: key);
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override

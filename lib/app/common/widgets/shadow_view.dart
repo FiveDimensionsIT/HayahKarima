@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ShadowView extends StatelessWidget {
   final Widget child;
 
-  ShadowView({required this.child});
+  const ShadowView({required this.child});
 
   @override
   Widget build(BuildContext context) {

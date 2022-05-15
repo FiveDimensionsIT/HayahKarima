@@ -67,7 +67,7 @@ class ProfileInfoView extends StatelessWidget {
   }
   Widget _buildPhone() {
     return TextField(
-      controller: TextEditingController()..text = profileModel.phones == null ? '' : profileModel.phones![0]?.number??'',
+      controller: TextEditingController()..text = profileModel.phones == null || profileModel.phones!.isEmpty? '' : profileModel.phones![0]?.number??'',
       decoration: InputDecoration(hintText: AppText.mobileNumber),
       enabled: false,
     );

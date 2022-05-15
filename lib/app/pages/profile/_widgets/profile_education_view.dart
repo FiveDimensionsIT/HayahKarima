@@ -16,7 +16,7 @@ class ProfileEducationView extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 3,
         itemBuilder: (context, index) {
-          return BuildProfileEducationViewItem();
+          return const BuildProfileEducationViewItem();
         },
         separatorBuilder: (context, index) {
           return _buildDivider();

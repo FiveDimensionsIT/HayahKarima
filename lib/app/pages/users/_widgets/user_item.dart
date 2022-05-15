@@ -14,7 +14,8 @@ import 'package:hayah_karema/setup.dart';
 class UserItem extends StatelessWidget {
   final PointerItemModel user;
   final Function onChangeStatus;
-  const UserItem({Key? key, required this.user, required this.onChangeStatus}) : super(key: key);
+  final Function onChangePassword;
+  const UserItem({Key? key, required this.user, required this.onChangeStatus, required this.onChangePassword}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +73,7 @@ class UserItem extends StatelessWidget {
             children: [
               Obx(() {
                 return UserControlsButton(
-                    title: user.statusObs.value ?? '',
+                    title: user.statusObs.value,
                     color: user.getUserStatus() == UserStatus.PENDING
                         ? AppColors.current.secondary.withOpacity(0.9)
                         : user.getUserStatus() == UserStatus.FREZED
@@ -123,7 +124,11 @@ class UserItem extends StatelessWidget {
             color: AppColors.current.neutral,
             borderRadius: const BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25)),
             boxShadow: [BoxShadow(color: AppColors.current.dimmed.withOpacity(0.3), blurRadius: 10)]),
-        child: NewPasswordView()));
+        child: NewPasswordView())).then((newPassword) {
+          if(newPassword!=null && newPassword.toString().isNotEmpty){
+            onChangePassword(user.id, newPassword);
+          }
+    });
   }
 
   void _onStatusClick() {

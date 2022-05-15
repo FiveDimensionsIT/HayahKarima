@@ -1,8 +1,10 @@
 import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
 import 'package:hayah_karema/app/common/managers/api/users/_models/add_user_data.dart';
+import 'package:hayah_karema/app/common/managers/api/users/_models/change_password_request.dart';
 import 'package:hayah_karema/app/common/managers/api/users/_models/register_user_response.dart';
 import 'package:hayah_karema/app/common/managers/api/users/_models/user_status_request.dart';
 import 'package:hayah_karema/app/common/managers/api/users/i_user_api_manager.dart';
+import 'package:hayah_karema/app/common/models/global_status_response.dart';
 import 'package:hayah_karema/app/common/models/lookup_model.dart';
 
 class FakeUserApiManager implements IUserApiManager {
@@ -56,13 +58,19 @@ class FakeUserApiManager implements IUserApiManager {
   }
 
   @override
-  Future updateUserStatus(UserStatusRequest userStatusRequest) async{
+  Future<GlobalStatusResponse?> updateUserStatus(UserStatusRequest userStatusRequest) async{
     throw UnimplementedError();
   }
 
   @override
   Future<List<LookupModel>?> contactStatusLookup()async{
     // TODO: implement contactStatusLookup
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<GlobalStatusResponse?> changePassword(ChangePasswordRequest changePasswordRequest) {
+    // TODO: implement changePassword
     throw UnimplementedError();
   }
 

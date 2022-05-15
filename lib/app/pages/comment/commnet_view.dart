@@ -43,7 +43,7 @@ class CommentView extends GetView<CommentController> {
           padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 10),
           itemCount: 5,
           itemBuilder: (context, index) {
-            return CommentItem();
+            return const CommentItem();
           }),
     );
   }

@@ -65,7 +65,7 @@ class LoginController extends GetxController {
         // save user data
         await _cacheManager.setUserData(userData);
         // navigate to next page
-        NavigationManager().navigateToHomePage(userData.module == '1' ? UserType.admin : UserType.user);
+        NavigationManager().navigateToHomePage(userData.userRole);
       } else {
         OverlayHelper.showErrorToast(AppText.wrongUserPass);
       }

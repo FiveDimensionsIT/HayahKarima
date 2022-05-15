@@ -6,7 +6,6 @@ import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
 import 'package:hayah_karema/app/pages/users/_widgets/user_item.dart';
-import 'package:hayah_karema/app/pages/users/_widgets/all_users_shimmer.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
 
 import 'users_controller.dart';
@@ -15,6 +14,8 @@ class UsersView extends GetView<UsersController> {
 
 
   const UsersView( {Key? key}) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +45,21 @@ class UsersView extends GetView<UsersController> {
 
             const SizedBox(height: 10,),
 
+            _buildActionLoading,
+
             _buildAllUsersView(),
           ],
         ),
       ),
     );
   }
+
+  get _buildActionLoading => Obx(() => controller.actioApiLoading.value
+      ? const Padding(
+          padding: EdgeInsets.only(bottom: 10),
+          child: CircularProgressIndicator(),
+        )
+      : const SizedBox());
 
   Widget _buildUsersSearch() {
     return Container(
@@ -81,7 +91,11 @@ class UsersView extends GetView<UsersController> {
               child: ListView.separated(
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 separatorBuilder: (_,__)=> Divider(color: AppColors.current.accent, thickness: 1.5, height: 35,),
-                itemBuilder: (c, i)=> UserItem(user: controller.usersList[i], onChangeStatus: (int? userId, String? status)=> controller.onChangeStatus(userId, status)),
+                itemBuilder: (c, i) => UserItem(
+                    user: controller.usersList[i],
+                    onChangeStatus: (int? contactId, String? status) => controller.onChangeStatus(contactId, status),
+                    onChangePassword: (int? contactId, String? newPassword) => controller.onChangePasswordBtnClick(contactId, newPassword),
+                ),
                 itemCount: controller.usersList.length,),
           );
     });

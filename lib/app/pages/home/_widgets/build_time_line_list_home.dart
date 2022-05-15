@@ -5,11 +5,9 @@ import 'package:hayah_karema/app/pages/home/_widgets/timeline_question_item_view
 import 'package:hayah_karema/app/pages/home/home_controller.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
-class BuildTimeLineListHome extends StatelessWidget {
-
-  var controller = Get.find<HomeController>();
+class BuildTimeLineListHome extends GetView<HomeController> {
   final int index;
-   BuildTimeLineListHome({Key? key,required this.index}) : super(key: key);
+  const BuildTimeLineListHome({Key? key,required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

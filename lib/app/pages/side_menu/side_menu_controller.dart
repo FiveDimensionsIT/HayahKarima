@@ -42,7 +42,11 @@ class SideMenuController extends GetxController {
         name: AppText.homePage,
         iconPath: AppAssets.homeSideMenuIcon,
         onTap: () {
-          Get.toNamed(Routes.HOME);
+          if (_userData.value.userRole == UserType.user) {
+            Get.toNamed(Routes.HOME);
+          } else {
+            Get.toNamed(Routes.DIGITAL_POINTER);
+          }
         }));
 
     /// == my village

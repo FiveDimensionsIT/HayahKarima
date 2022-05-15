@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/action_center/action_center.dart';
 import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
+import 'package:hayah_karema/app/common/managers/api/users/_models/change_password_request.dart';
 import 'package:hayah_karema/app/common/managers/api/users/_models/user_status_request.dart';
 import 'package:hayah_karema/app/common/managers/api/users/i_user_api_manager.dart';
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
+import 'package:hayah_karema/app/common/models/global_status_response.dart';
 import 'package:hayah_karema/app/common/models/lookup_model.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/setup.dart';
@@ -15,6 +17,7 @@ class UsersController extends GetxController {
   final PublishSubject<String> _searchTextController = PublishSubject();
 
   RxBool userApiLoading = false.obs;
+  RxBool actioApiLoading = false.obs;
   final _apiManager = DI.find<IUserApiManager>();
   final _action = ActionCenter();
   RxList<PointerItemModel> usersList = <PointerItemModel>[].obs;
@@ -65,8 +68,12 @@ class UsersController extends GetxController {
   }
 
 
-  onChangeStatus(int? userId, String? statusName) {
-    _changeStatusAPI(userId, statusName);
+  void onChangeStatus(int? contactId, String? statusName) {
+    _changeStatusAPI(contactId, statusName);
+  }
+
+  void onChangePasswordBtnClick(int? contactId, String? newPassword){
+    _changePasswordAPI(contactId, newPassword);
   }
 
   void _getContactStatusLookup() async {
@@ -108,8 +115,8 @@ class UsersController extends GetxController {
     }
   }
 
-  void _changeStatusAPI(int? userId, String? statusName) async {
-    userApiLoading.value = true;
+  void _changeStatusAPI(int? contactId, String? statusName) async {
+    actioApiLoading.value = true;
     int index = _contactStatusList.indexWhere((s) => s.name == statusName, -1);
 
     if(index==-1) {
@@ -117,20 +124,48 @@ class UsersController extends GetxController {
       return;
     }
 
-    var result;
+    GlobalStatusResponse? result;
     var success = await _action.execute(() async {
-      result = await _apiManager.updateUserStatus(UserStatusRequest(id: userId, statusId: _contactStatusList[index].id));
+      result = await _apiManager.updateUserStatus(UserStatusRequest(id: contactId, statusId: _contactStatusList[index].id));
     }, checkConnection: true);
     //
-    userApiLoading.value = false;
+    actioApiLoading.value = false;
     //
     if (success) {
       if (result != null) {
-        // int userIndex = usersList.indexWhere((user) => user.id == userId, -1);
-        // if(userIndex>-1) {
-        //   usersList[userIndex].statusObs.value = newStatusName;
-        //   usersList[userIndex].status = newStatusName;
-        // }
+        if(result?.statusId == '1'){
+          OverlayHelper.showSuccessToast(result?.message??'');
+          int userIndex = usersList.indexWhere((user) => user.id == contactId, -1);
+          if(userIndex>-1) {
+            usersList[userIndex].statusObs.value = result?.statusName??'';
+            usersList[userIndex].status = result?.statusName;
+          }
+        }else{
+          OverlayHelper.showErrorToast(result?.message??'');
+        }
+      }
+    }else{
+      OverlayHelper.showErrorToast(AppText.somethingWrong);
+    }
+  }
+
+  void _changePasswordAPI(int? contactId, String? newPassword) async {
+    actioApiLoading.value = true;
+
+    GlobalStatusResponse? result;
+    var success = await _action.execute(() async {
+      result = await _apiManager.changePassword(ChangePasswordRequest(contactId: contactId, password: newPassword));
+    }, checkConnection: true);
+    //
+    actioApiLoading.value = false;
+    //
+    if (success) {
+      if (result != null) {
+        if(result?.statusId == '1'){
+          OverlayHelper.showSuccessToast(result?.message??'');
+        }else{
+          OverlayHelper.showErrorToast(result?.message??'');
+        }
       }
     }else{
       OverlayHelper.showErrorToast(AppText.somethingWrong);
