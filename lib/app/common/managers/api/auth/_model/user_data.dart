@@ -118,4 +118,8 @@ class UserData extends Serializable {
     if(villageRequired == 'true' || villageRequired == '1') return true;
     return false;
   }
+
+  bool myVillageVisibility() {
+    return userRole == UserType.user && villageId!=null && villageId != '0';
+  }
 }

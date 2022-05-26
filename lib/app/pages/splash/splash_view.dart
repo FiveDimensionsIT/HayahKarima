@@ -22,8 +22,8 @@ class SplashView extends GetView<SplashController> {
             _buildTopShapeDesign(),
             _buildBottomShapeDesign(),
             _buildLogoDesign(),
-            _buildAuthPages(),
             _buildPoweredBy(),
+            _buildAuthPages(),
           ],
         ));
   }

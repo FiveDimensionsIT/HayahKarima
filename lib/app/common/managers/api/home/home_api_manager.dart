@@ -57,7 +57,7 @@ class HomeApiManager implements IHomeApiManager {
     final _params = '?PageNumber=${params.pageNo}&PageSize=${params.pageSize}&OrderBy=${params.orderBy}';
     var request = HttpRequest(
       method: HttpMethod.get,
-      url: 'DigitalIndexCategories/Search$_params',
+      url: 'DigitalStandardCategories/Search$_params',
     )..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
