@@ -1,250 +1,163 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
-import 'package:hayah_karema/app/common/widgets/circular_statistic.dart';
 import 'package:hayah_karema/app/common/widgets/empty_response.dart';
-import 'package:hayah_karema/app/common/widgets/pointer_item.dart';
-import 'package:hayah_karema/app/pages/home/pointer_details_list.dart';
-import 'package:hayah_karema/utils/NumberHelper.dart';
+import 'package:hayah_karema/app/pages/home/_widgets/build_time_line_list_home.dart';
+import 'package:hayah_karema/app/pages/home/home_controller.dart';
+import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
+import 'package:hayah_karema/app/routes/app_pages.dart';
+import 'package:hayah_karema/utils/ui/empty.dart';
 
+class HomeView extends StatelessWidget {
+  var controller = Get.find<HomeController>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
-import 'home_controller.dart';
-
-class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      drawer: SideMenuView(),
       backgroundColor: AppColors.current.neutral,
-      body: _buildBody(),
+      body: _buildBody(context),
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     return SafeArea(
       child: Column(
         children: [
-
           /// toolbar.
-          AppToolbar(
-            title: AppText.digitalCountrysidePointer,
-            drawerCallBack: () {},
-          ),
-
-          _buildContent(),
+          _buildToolbar(),
+          _buildBodyView(),
         ],
       ),
     );
   }
 
-  Widget _buildContent() {
-    return Expanded(
-        child: SingleChildScrollView(
-            child: Stack(
-              children: [
-                _buildStatistic(),
-                _buildPointersList(),
-              ],
-            )));
+  AppToolbar _buildToolbar() {
+    return AppToolbar(
+      title: AppText.homePage,
+      actions: Row(
+        children: [
+          _buildUserPoints(),
+          _buildNotificationIcon(),
+        ],
+      ),
+      drawerCallBack: () => scaffoldKey.currentState?.openDrawer(),
+    );
   }
 
-  Widget _buildStatistic() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15),
-      child: CircularStatistic(
-          activeColor: AppColors.current.primary,
-          initValue: 50,
-          content: Padding(
-            padding: EdgeInsets.only(top: Get.width / 4),
+  IconButton _buildNotificationIcon() {
+    return IconButton(
+      padding: const EdgeInsets.symmetric(horizontal: 9),
+      onPressed: () {
+        Get.toNamed(Routes.NOTIFICATION);
+      },
+      icon: Icon(
+        Icons.notification_important_outlined,
+        color: AppColors.current.primary,
+        size: 25,
+      ),
+    );
+  }
+
+  Widget _buildPointsItem(String title) {
+    return Container(
+      width: 22,
+      height: 30,
+      margin: const EdgeInsets.only(left: 3),
+      decoration: BoxDecoration(
+          border: Border.all(color: AppColors.current.accent), borderRadius: BorderRadius.circular(7)),
+      child: Center(child: Text(title, style: TextStyle(
+          fontSize: Get.textTheme.bodySmall?.fontSize, fontWeight: FontWeight.bold, color: AppColors.current.accent),)),
+    );
+  }
+
+  Widget _buildBodyView() {
+    return Expanded(
+      child: RefreshIndicator(
+        onRefresh: ()=> controller.onRefresh(),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: AppTheme.pagePadding,
             child: Column(
               children: [
-                Obx(() {
-                  return Text(
-                    formatter.format(controller.statisticNumber.value),
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: Get.textTheme.headline1?.fontSize),
-                  );
-                }),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(AppText.digitalCountrysidePointer),
+                _buildWhatThink(),
+                Empty(height: 10),
+                _buildTimelineList(),
               ],
             ),
-          )),
-    );
-  }
-
-  Widget _buildPointersList() {
-    return Padding(
-      padding: EdgeInsets.only(top: Get.width / 1.9),
-      child: Obx(() {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Divider(),
-
-            /// provinces
-            _buildPointerItem(
-                title: AppText.provincesPointerFilter,
-                itemBackGround: AppColors.current.primary,
-                list: controller.provincesList,
-                onPressMore: () =>
-                    Get.to(() =>
-                        PointerDetailsListView(
-                            title: AppText.provincesPointerFilter,
-                            list: controller.provincesList,
-                            color: AppColors.current.primary))),
-
-            const SizedBox(
-              height: 10,
-            ),
-
-            /// centers
-            _buildPointerItem(
-                title: AppText.centersPointerFilter,
-                itemBackGround: AppColors.current.secondary,
-                list: controller.centersList,
-                onPressMore: () =>
-                    Get.to(() =>
-                        PointerDetailsListView(
-                            title: AppText.centersPointerFilter,
-                            list: controller.centersList,
-                            color: AppColors.current.secondary))),
-
-            const SizedBox(
-              height: 10,
-            ),
-
-            /// countryside
-            _buildPointerItem(
-                title: AppText.countrysidePointerFilter,
-                itemBackGround: AppColors.current.error,
-                list: controller.villagesList,
-                onPressMore: () =>
-                    Get.to(() =>
-                        PointerDetailsListView(
-                            title: AppText.countrysidePointerFilter,
-                            list: controller.villagesList,
-                            color: AppColors.current.error))),
-
-            const SizedBox(
-              height: 10,
-            ),
-
-            /// citizen
-            _buildPointerItem(
-                title: AppText.citizensPointerFilter,
-                itemBackGround: AppColors.current.primary,
-                list: controller.citizensList,
-                onPressMore: () =>
-                    Get.to(() =>
-                        PointerDetailsListView(
-                            title: AppText.citizensPointerFilter,
-                            list: controller.citizensList,
-                            color: AppColors.current.primary))),
-
-            const SizedBox(
-              height: 10,
-            ),
-
-            /// citizen
-            _buildPointerItem(
-                title: AppText.typesPointerFilter,
-                itemBackGround: AppColors.current.secondary,
-                list: controller.categoriesList,
-                onPressMore: () =>
-                    Get.to(() =>
-                        PointerDetailsListView(
-                            title: AppText.typesPointerFilter,
-                            list: controller.categoriesList,
-                            color: AppColors.current.secondary))),
-
-            const SizedBox(
-              height: 16,
-            ),
-          ],
-        );
-      }),
-    );
-  }
-
-  Widget _buildPointerItem(
-      {required String title, required List list, required Color itemBackGround, required Function onPressMore}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildPointerItemTitle(title),
-        if (list.isNotEmpty) _buildPointerItemList(list, itemBackGround),
-        if (list.isNotEmpty) _buildMoreButton(onPressMore),
-        if (list.isEmpty) SizedBox(width: Get.width, child: const Center(child: EmptyResponse())),
-      ],
-    );
-  }
-
-  Padding _buildPointerItemTitle(String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Text(
-        title,
-        style: TextStyle(
-            fontSize: Get.textTheme.headline3?.fontSize, color: AppColors.current.text, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-
-  ListView _buildPointerItemList(List<dynamic> list, Color itemBackGround) {
-    return ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: list.length > 5 ? 5 : list.length,
-        separatorBuilder: (_, __) => const SizedBox(height: 10),
-        itemBuilder: (cxt, index) {
-          final maxIndicator = list[0].indicator;
-          return PointerItem(
-            title: list[index].name,
-            subtitle: formatter.format(list[index].indicator),
-            percentage: list[index].percentage(maxIndicator),
-            itemBackGround: itemBackGround,
-          );
-        });
-  }
-
-  Container _buildMoreButton(Function onPressMore) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        color: AppColors.current.dimmedLight.withOpacity(0.6),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Center(
-        child: TextButton(
-          style: ButtonStyle(backgroundColor: MaterialStateProperty.all(AppColors.current.transparent)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                AppText.more,
-                style: TextStyle(
-                    fontSize: Get.textTheme.bodyText1?.fontSize,
-                    color: AppColors.current.text,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              const Icon(
-                Icons.navigate_next,
-                size: 30,
-              )
-            ],
           ),
-          onPressed: () => onPressMore(),
         ),
       ),
     );
+  }
+
+  Widget _buildTimelineList() {
+    return Obx(() {
+      if (controller.postApiLoading.value) return const Center(child: CircularProgressIndicator());
+      if (controller.timelinePostsList.isEmpty) return const Center(child: EmptyResponse());
+      return ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (cxt, index) {
+            return BuildTimeLineListHome(index: index);
+          },
+          separatorBuilder: (_, __) => const SizedBox(height: 10,),
+          itemCount: controller.timelinePostsList.length);
+    });
+  }
+
+  Widget _buildWhatThink() {
+    return GestureDetector(
+      onTap: () => controller.goToNewPostView(),
+      child: Container(
+        width: Get.width,
+        padding: AppTheme.pagePadding,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: AppColors.current.accent, width: 1)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              AppText.whatIsInYourMind,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: AppColors.current.dimmed.withOpacity(0.5),
+              ),
+            ),
+
+            Text(
+              '(10 نقاط)',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: AppColors.current.dimmed.withOpacity(0.7),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+  Widget _buildUserPoints() {
+    return Obx(() {
+      if (controller.pointsApiLoading.value) return const SizedBox(height: 25, width : 25,child: CircularProgressIndicator(strokeWidth: 2.5,));
+      if (controller.availablePoints.value.isEmpty) return const SizedBox();
+      var reversedList = List.from(controller.availablePoints.value
+          .split('')
+          .map((ch) => ch)
+          .toList()
+          .reversed);
+      return Row(children: reversedList.map((ch) => _buildPointsItem(ch)).toList(),);
+    });
   }
 }

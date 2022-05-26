@@ -2,6 +2,9 @@ import 'package:get/get.dart';
 
 abstract class AppText {
 
+  static String get gender => 'gender'.tr;
+  static String get healthStatus => 'health_status'.tr;
+  static String get educationalStatus => 'educational_status'.tr;
   static String get requiredField => 'required_field'.tr;
   static String get pleaseWait => 'please_wait'.tr;
   static String get requestTimeout => 'request_timeout'.tr;
@@ -9,9 +12,14 @@ abstract class AppText {
   static String get somethingWrong => 'something_wrong'.tr;
   static String get noInternet => 'no_internet'.tr;
   static String get name => 'name'.tr;
+  static String get fullName => 'full_name'.tr;
+  static String get address => 'address'.tr;
+  static String get idNumber => 'id_number'.tr;
   static String get login => 'login'.tr;
   static String get loginTitle => 'login_title'.tr;
   static String get forgotPassword => 'forgot_password'.tr;
+  static String get nickName => 'nick_name'.tr;
+  static String get register => 'register'.tr;
   static String get areYouRememberPassword => 'are_you_remember_password'.tr;
   static String get sendCode => 'send_code'.tr;
   static String get pleaseEnterMobileNo => 'please_enter_mobile_no'.tr;
@@ -22,14 +30,37 @@ abstract class AppText {
   static String get confirm => 'confirm'.tr;
   static String get authMobNoTitle => 'auth_mob_to_title'.tr;
   static String get more => 'more'.tr;
+  static String get village => 'village'.tr;
+  static String get center => 'center'.tr;
+  static String get governorate => 'governorate'.tr;
   static String get digitalCountrysidePointer => 'digital_countryside_pointer'.tr;
   static String get provincesPointerFilter => 'provinces_pointer_filter'.tr;
   static String get centersPointerFilter => 'centers_pointer_filter'.tr;
   static String get countrysidePointerFilter => 'countryside_pointer_filter'.tr;
   static String get citizensPointerFilter => 'citizens_pointer_filter'.tr;
   static String get typesPointerFilter => 'types_pointer_filter'.tr;
+  static String get homelandMartyrs => 'homeland_martyrs'.tr;
+  static String get proficients => 'proficients'.tr;
+  static String get creators => 'creators'.tr;
+  static String get companies => 'companies'.tr;
+  static String get homePage => 'home_page'.tr;
+  static String get myVillage => 'my_village'.tr;
+  static String get honorFiles => 'honor_files'.tr;
+  static String get settings => 'settings'.tr;
+  static String get users => 'users'.tr;
+  static String get courses => 'courses'.tr;
+  static String get sponsors => 'sponsors'.tr;
+  static String get rewards => 'rewards'.tr;
+  static String get shop => 'shop'.tr;
+  static String get postTitle => 'post_title'.tr;
+  static String get postBody => 'post_body'.tr;
+  static String get points => 'points'.tr;
+  static String get choosePostType => 'choose_post_type'.tr;
+  static String get birthPlace => 'birth_place'.tr;
+  static String get replacing => 'replacing'.tr;
 
   static String get getStarted => 'get_started'.tr;
+  static String get addUser => 'add_user'.tr;
   static String get hello => 'hello'.tr;
   static String get chooseStudent => 'choose_student'.tr;
   static String get wrongUserPass => 'wrong_user_pass'.tr;
@@ -139,6 +170,7 @@ abstract class AppText {
   static String get firstName => 'first_name'.tr;
   static String get lastName => 'last_name'.tr;
   static String get userName => 'user_name'.tr;
+  static String get enterCode => 'enter_code'.tr;
   static String get updateUserDataSuccessfully => 'update_user_data_successfully'.tr;
   static String get changePassword => 'change_password'.tr;
   static String get changeLang => 'change_lang'.tr;
@@ -172,6 +204,7 @@ abstract class AppText {
   static String get tripStarted => 'trip_started'.tr;
   static String get students => 'students'.tr;
   static String get enterNewPassword => 'enter_new_password'.tr;
+  static String get enterPassword => 'enter_password'.tr;
   static String get contactInfo => 'contact_info'.tr;
   static String get noTripToday => 'no_trip_today'.tr;
   static String get uninstallMockLocationMsg => 'uninstall_mock_location_msg'.tr;
@@ -183,5 +216,37 @@ abstract class AppText {
   static String get rakOffice => 'rak_office'.tr;
   static String get dubaiOffice => 'dubai_office'.tr;
   static String get noDataChanged => 'no_data_changed'.tr;
+  static String get new_post => 'new_post'.tr;
+  static String get image => 'image'.tr;
+  static String get activate => 'activate'.tr;
+  static String get live => 'live'.tr;
+  static String get share => 'share'.tr;
+  static String get comments => 'comments'.tr;
+  static String get writeComment => 'write_comment'.tr;
+  static String get notification => 'notification'.tr;
+  static String get all => 'all'.tr;
+  static String get notRead =>'not_read'.tr;
+  static  String get pointVillage =>'point_village'.tr;
+  static String get replaceable => 'replaceable'.tr;
+  static String get replacedPoint => 'replaced'.tr;
+  static  String get people =>'people'.tr;
+  static String get photoGallery =>'photo_gallery'.tr;
+  static String get information =>'information'.tr;
+  static String get education =>'education'.tr;
+  static String get practicalExperience =>'practical_experience'.tr;
+  static String get earnPoints =>'earn_points'.tr;
+  static String get replacingPrizes =>'replacing_prizes'.tr;
+  static String get title =>'title'.tr;
+  static String get whatIsInYourMind => 'what_is_in_your_mind'.tr;
+  static String get answerAndScore => 'answer_and_score'.tr;
+  static String get sendAnswer => 'send_answer'.tr;
+  static String get like => 'like'.tr;
+  static String get comment => 'comment'.tr;
+  static String get sharing=>'sharing'.tr;
+  static String get searchCourse=>'search_course'.tr;
+  static String get infoAboutCourse=>'info_about_course'.tr;
+  static String get whatLearn=>'what_learn'.tr;
+  static String get studyPlan =>"study_plan".tr;
+  static String get joinNow =>"join_now".tr;
 
 }

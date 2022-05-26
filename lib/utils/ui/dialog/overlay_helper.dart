@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+
 import '../ui_lib.dart';
 
 abstract class OverlayHelper {
@@ -12,10 +12,10 @@ abstract class OverlayHelper {
   static Map<int, OverlayEntry?> _lastOverlays = {};
 
   // TODO: refactor to use the theme colors
-  static Color successColor = Color.fromRGBO(46, 204, 113, 1);
-  static Color errorColor = Color.fromRGBO(231, 76, 60, 1);
-  static Color infoColor = Color.fromRGBO(17, 110, 183, 1);
-  static Color warningColor = Color.fromRGBO(241, 196, 15, 1);
+  static Color successColor = const Color.fromRGBO(46, 204, 113, 1);
+  static Color errorColor = const Color.fromRGBO(231, 76, 60, 1);
+  static Color infoColor = const Color.fromRGBO(17, 110, 183, 1);
+  static Color warningColor = const Color.fromRGBO(241, 196, 15, 1);
 
   static int _toastLayerIndex = 2, _progressLayerIndex = 1;
 
@@ -107,7 +107,7 @@ class OverlayToast extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 40, horizontal: 30),
+      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
       child: FullCol(
         heights: "1* auto",
         children: <Widget>[
@@ -116,26 +116,34 @@ class OverlayToast extends StatelessWidget {
             elevation: 2,
             color: Colors.white,
             type: MaterialType.card,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               side: BorderSide.none,
             ),
-            child: FullRow(
-              widths: "auto 1*",
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Icon(
-                    iconData,
-                    color: color,
-                    size: 35,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.grey.shade200, width: 1),
+                color: Colors.grey.shade50,
+                boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 2 )]
+              ),
+              child: FullRow(
+                widths: "auto 1*",
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Icon(
+                      iconData,
+                      color: color,
+                      size: 35,
+                    ),
                   ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                    child: Text(text,
-                        textAlign: TextAlign.start, style: TextStyle(color: color, fontSize: 16)))
-              ],
+                  Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                      child: Text(text,
+                          textAlign: TextAlign.start, style: TextStyle(color: color, fontSize: 16)))
+                ],
+              ),
             ),
           )
         ],
@@ -151,7 +159,7 @@ class OverlayToast extends StatelessWidget {
 class OverlayProgress extends StatelessWidget {
   final String text;
 
-  OverlayProgress(this.text);
+   OverlayProgress(this.text);
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +176,7 @@ class OverlayProgress extends StatelessWidget {
             elevation: 2,
             color: Colors.white,
             type: MaterialType.card,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(50)),
               side: BorderSide.none,
             ),
@@ -177,17 +185,17 @@ class OverlayProgress extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  CircularProgressIndicator(
+                  const CircularProgressIndicator(
                     strokeWidth: 3,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   Text(
                     text,
-                    style: TextStyle(fontSize: 17),
+                    style: const TextStyle(fontSize: 17),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   )
                 ],

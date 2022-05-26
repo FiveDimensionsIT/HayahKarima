@@ -1,7 +1,10 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/utils/ui/dialog/dialog_helper.dart';
 import 'package:hayah_karema/utils/ui/ui_lib.dart';
+
 import '../empty.dart';
 
 class GeneralDialog extends StatelessWidget {
@@ -120,7 +123,6 @@ class GeneralDialog extends StatelessWidget {
               ],
             ),
           ),
-
         ],
       ),
     );
@@ -133,7 +135,9 @@ class GeneralDialog extends StatelessWidget {
         style: ButtonStyle(backgroundColor: MaterialStateProperty.all(yesColor ?? OverlayHelper.successColor)),
         child: Text(
           yesAction,
-          style: TextStyle(fontSize: Theme.of(context).textTheme.headline3?.fontSize),
+          style: TextStyle(
+              color: AppColors.current.neutral,
+              fontSize: Theme.of(context).textTheme.headline3?.fontSize),
         ),
         onPressed: () => _returnWith(true),
       ),
@@ -145,7 +149,9 @@ class GeneralDialog extends StatelessWidget {
       width: double.maxFinite,
       child: TextButton(
         style: ButtonStyle(backgroundColor: MaterialStateProperty.all(noColor ?? OverlayHelper.infoColor)),
-        child: Text(noAction!, style: TextStyle(fontSize: Theme.of(context).textTheme.headline3?.fontSize)),
+        child: Text(noAction!, style: TextStyle(
+            color: AppColors.current.neutral,
+            fontSize: Theme.of(context).textTheme.headline3?.fontSize)),
         onPressed: () => _returnWith(false),
       ),
     );

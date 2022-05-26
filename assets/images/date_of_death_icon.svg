@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="date_of_death" transform="translate(-3 -3)">
+    <path id="Path_47309" data-name="Path 47309" d="M17.167,3H5.833A2.92,2.92,0,0,0,3,6V7H20V6A2.92,2.92,0,0,0,17.167,3Z" transform="translate(0)" fill="#ff4b4b"/>
+    <circle id="Ellipse_31" data-name="Ellipse 31" cx="1" cy="1" r="1" transform="translate(8.684 16.263)" fill="#ff4b4b"/>
+    <circle id="Ellipse_32" data-name="Ellipse 32" cx="1" cy="1" r="1" transform="translate(5 16.263)" fill="#ff4b4b"/>
+    <circle id="Ellipse_33" data-name="Ellipse 33" cx="1" cy="1" r="1" transform="translate(5 12.474)" fill="#ff4b4b"/>
+    <circle id="Ellipse_34" data-name="Ellipse 34" cx="1" cy="1" r="1" transform="translate(8.684 12.474)" fill="#ff4b4b"/>
+    <circle id="Ellipse_35" data-name="Ellipse 35" cx="1" cy="1" r="1" transform="translate(12.474 12.474)" fill="#ff4b4b"/>
+    <circle id="Ellipse_36" data-name="Ellipse 36" cx="1" cy="1" r="1" transform="translate(16.263 8.684)" fill="#ff4b4b"/>
+    <circle id="Ellipse_37" data-name="Ellipse 37" cx="1" cy="1" r="1" transform="translate(12.474 8.684)" fill="#ff4b4b"/>
+    <circle id="Ellipse_38" data-name="Ellipse 38" cx="1" cy="1" r="1" transform="translate(8.684 8.684)" fill="#ff4b4b"/>
+    <path id="Path_47310" data-name="Path 47310" d="M20.122,14.988V7H3V18a2.929,2.929,0,0,0,2.854,3H14.4a4.254,4.254,0,0,0,3.816,2.5A4.395,4.395,0,0,0,22.5,19,4.513,4.513,0,0,0,20.122,14.988Z" transform="translate(0 -1)" fill="#ff4b4b" opacity="0.35"/>
+    <path id="Exclusion_1" data-name="Exclusion 1" d="M5,10a5,5,0,1,1,5-5A5.005,5.005,0,0,1,5,10ZM5,2.183A2.817,2.817,0,1,0,7.816,5,2.82,2.82,0,0,0,5,2.183Z" transform="translate(13 13)" fill="#ff4b4b"/>
+  </g>
+</svg>

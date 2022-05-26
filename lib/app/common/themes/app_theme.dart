@@ -19,9 +19,9 @@ abstract class AppTheme {
 
   // region theme constants
 
-  static const double _textSizeXL = 30;
-  static const double _textSizeL = 22;
-  static const double _textSizeM = 20;
+  static const double _textSizeXL = 25;
+  static const double _textSizeL = 20;
+  static const double _textSizeM = 17.5;
   static const double _textSizeS = 15;
   static const double _textSizeXS = 10;
 
@@ -99,11 +99,12 @@ abstract class AppTheme {
           filled: true,
           fillColor: colors.neutral,
           floatingLabelBehavior: FloatingLabelBehavior.never,
-          border: _outlineInputBorder(colors.dimmedLight),
-          enabledBorder: _outlineInputBorder(colors.dimmedLight),
+          border: _outlineInputBorder(colors.dimmed.withOpacity(0.8)),
+          enabledBorder: _outlineInputBorder(colors.dimmed.withOpacity(0.8)),
           focusedBorder: _outlineInputBorder(colors.primary),
           errorBorder: _outlineInputBorder(colors.error),
           contentPadding: contentPadding,
+          hintStyle: TextStyle(color: colors.text.withOpacity(0.6),),
           errorStyle: TextStyle(color: colors.error, fontSize: 12)),
 
       //> text
@@ -141,6 +142,15 @@ abstract class AppTheme {
     return OutlineInputBorder(
         borderRadius:  const BorderRadius.all(Radius.circular(_borderRadius)),
         borderSide: BorderSide(color: color, width: 1,));
+  }
+
+  static BoxDecoration bottomNavBarDecoration(){
+    return BoxDecoration(
+        color: AppColors.current.neutral,
+        borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+        boxShadow: [
+          BoxShadow(color: AppColors.current.dimmed.withOpacity(0.15), blurRadius: 6, offset: const Offset(0, -6))
+        ]);
   }
 
 }

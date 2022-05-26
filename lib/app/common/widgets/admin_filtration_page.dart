@@ -35,7 +35,7 @@ class AdminFiltrationPage extends StatelessWidget {
           itemBuilder: (cxt, index) {
             final maxIndicator = list[0].indicator;
             return PointerItem(
-              title: list[index].name,
+              title: list[index].userName,
               subtitle: formatter.format(list[index].indicator),
               percentage: list[index].percentage(maxIndicator),
               itemBackGround: itemBackGround,

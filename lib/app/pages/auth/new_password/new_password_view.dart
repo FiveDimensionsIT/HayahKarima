@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
@@ -12,6 +11,7 @@ import 'package:hayah_karema/utils/ui/empty.dart';
 import 'new_password_controller.dart';
 
 class NewPasswordView extends  StatelessWidget {
+  NewPasswordView({Key? key}) : super(key: key);
 
   final controller = Get.put(NewPasswordController());
   final _keyForm = GlobalKey<FormState>();
@@ -65,7 +65,7 @@ class NewPasswordView extends  StatelessWidget {
     return Row(
       children: [
         /// back button
-        IconButton(onPressed:()=> controller.navigateForgotPassword(), icon: Icon(Icons.arrow_back_ios, color: AppColors.current.accent, size: 20,)),
+        IconButton(onPressed:()=> Get.back(), icon: Icon(Icons.arrow_back_ios, color: AppColors.current.accent, size: 20,)),
 
         Text(
           AppText.enterNewPassword,
@@ -87,7 +87,6 @@ class NewPasswordView extends  StatelessWidget {
 
   TextFormField _buildConfirmNewPasswordTextField() {
     return TextFormField(
-
       decoration: InputDecoration(hintText: AppText.confirmNewPassword,),
       obscureText: true,
       textInputAction: TextInputAction.done,
@@ -100,7 +99,7 @@ class NewPasswordView extends  StatelessWidget {
   _buildConfirmPasswordButton(){
     return BigBtn(
       state: controller.loginLoading.value? BtnState.loading: BtnState.active,
-      text: AppText.confirm,
+      text: AppText.changePassword,
       onPressed: () => _onConfirm(),
     );
   }
