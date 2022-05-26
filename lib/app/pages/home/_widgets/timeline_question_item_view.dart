@@ -97,38 +97,38 @@ class TimelineQuestionItemView extends StatelessWidget {
     );
   }
 
-  Container _buildAnswerItem(int index) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 3),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.current.dimmed.withOpacity(0.2), width: 1)),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 40,
-            height: 35,
-            child: Radio<String>(
-              value: questions[index].answer_option_text ?? '',
-              groupValue: controller.selectedAnswer,
-              onChanged: (value) {
-                controller.onChangeAnswer(value);
-              },
-              activeColor: AppColors.current.primary,
-            ),
-          ),
-          Expanded(
-            child: Text(
-              questions[index].answer_option_text ?? '',
-              style: TextStyle(
-                fontSize: Get.textTheme.bodyMedium?.fontSize,
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  // Container _buildAnswerItem(int index) {
+  //   return Container(
+  //     padding: const EdgeInsets.symmetric(vertical: 3),
+  //     decoration: BoxDecoration(
+  //         borderRadius: BorderRadius.circular(16),
+  //         border: Border.all(color: AppColors.current.dimmed.withOpacity(0.2), width: 1)),
+  //     child: Row(
+  //       children: [
+  //         SizedBox(
+  //           width: 40,
+  //           height: 35,
+  //           child: Radio<String>(
+  //             value: questions[index].answer_option_text ?? '',
+  //             groupValue: controller.selectedAnswer,
+  //             onChanged: (value) {
+  //               controller.onChangeAnswer(value);
+  //             },
+  //             activeColor: AppColors.current.primary,
+  //           ),
+  //         ),
+  //         Expanded(
+  //           child: Text(
+  //             questions[index].answer_option_text ?? '',
+  //             style: TextStyle(
+  //               fontSize: Get.textTheme.bodyMedium?.fontSize,
+  //             ),
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildSendAnswer() {
     return Row(
