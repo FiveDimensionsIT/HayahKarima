@@ -7,11 +7,13 @@ class ShopItem extends StatelessWidget {
   final String companyName;
   final String price;
   final String rate;
+  final String photo;
   const ShopItem(
       {Key? key,
       required this.title,
       required this.price,
         required  this.companyName,
+        required this.photo,
       required this.rate})
       : super(key: key);
 
@@ -21,7 +23,7 @@ class ShopItem extends StatelessWidget {
       height: 270,width: 150,
       padding:const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
       decoration: BoxDecoration(
-        border: Border.all(color:  AppColors.current.accent, width: 2),
+        border: Border.all(color:  AppColors.current.accent.withOpacity(.75) , width: 2),
         borderRadius: BorderRadius.circular(16),
         color: const Color(0xFFFFFFFF),
       ),
@@ -29,8 +31,11 @@ class ShopItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Image.asset(AppAssets.userIcon,
-              fit: BoxFit.cover, width: 136, height: 124),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(photo,
+                fit: BoxFit.cover, width: 136, height: 124),
+          ),
           const SizedBox(
             height: 8,
           ),
