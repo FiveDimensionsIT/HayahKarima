@@ -28,6 +28,7 @@ abstract class Routes {
   static const PRIZES = _Paths.PRIZES;
   static const USERS = _Paths.USERS;
   static const ADD_USER = _Paths.ADD_USER;
+  static const SHOP =  _Paths.SHOP;
 }
 
 abstract class _Paths {
@@ -55,4 +56,5 @@ abstract class _Paths {
   static const PRIZES = '/prizes';
   static const USERS = '/users';
   static const ADD_USER = '/add-user';
+  static const SHOP = '/shop';
 }

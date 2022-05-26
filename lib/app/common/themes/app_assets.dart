@@ -57,4 +57,14 @@ abstract class AppAssets{
   static const String otpGif = 'assets/images/otp.gif';
   static const String userIcon = 'assets/images/icon_user.png';
   static const String poweredBy = 'assets/images/powered_by.png';
+
+  // Ahmed Saad added new  images here.
+
+  // Ahmed Saad added new  icons here.
+  static const String filter = 'assets/icons/filter.svg';
+  static const String flashSales = 'assets/icons/flash_sales.svg';
+  static const String basket = 'assets/icons/icons_basket.svg';
+  static const String sellNow = 'assets/icons/sell_now.svg';
+  static const String cubones = 'assets/icons/cubones.svg';
+  static const String exchange = 'assets/icons/exchange.svg';
 }
