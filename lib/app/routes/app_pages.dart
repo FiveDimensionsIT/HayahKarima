@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/pages/shop/views/shop_details_view.dart';
 
 import '../pages/add_user/add_user_binding.dart';
 import '../pages/add_user/add_user_view.dart';
@@ -39,7 +40,7 @@ import '../pages/prizes/prizes_view.dart';
 import '../pages/profile/profile_binding.dart';
 import '../pages/profile/profile_view.dart';
 import '../pages/shop/shop_binding.dart';
-import '../pages/shop/shop_view.dart';
+import '../pages/shop/views/shop_view.dart';
 import '../pages/side_menu/side_menu_binding.dart';
 import '../pages/side_menu/side_menu_view.dart';
 import '../pages/splash/splash_binding.dart';
@@ -227,6 +228,12 @@ class AppPages {
     GetPage(
       name: _Paths.SHOP,
       page: () => ShopView(),
+      binding: ShopBinding(),
+    ),
+    /// edit this
+    GetPage(
+      name: _Paths.SHOP_DETAILS,
+      page: () => ShopDetailsView(),
       binding: ShopBinding(),
     ),
   ];

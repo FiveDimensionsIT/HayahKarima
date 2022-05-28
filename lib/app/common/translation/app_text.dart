@@ -248,5 +248,6 @@ abstract class AppText {
   static String get whatLearn=>'what_learn'.tr;
   static String get studyPlan =>"study_plan".tr;
   static String get joinNow =>"join_now".tr;
-
+  /// edit this
+ // static String get shopDetails => 'shop-details'.tr;
 }

@@ -29,6 +29,8 @@ abstract class Routes {
   static const USERS = _Paths.USERS;
   static const ADD_USER = _Paths.ADD_USER;
   static const SHOP =  _Paths.SHOP;
+  /// edit this
+  static const SHOP_DETAILS =  _Paths.SHOP_DETAILS;
 }
 
 abstract class _Paths {
@@ -57,4 +59,6 @@ abstract class _Paths {
   static const USERS = '/users';
   static const ADD_USER = '/add-user';
   static const SHOP = '/shop';
+  /// edit this
+  static const SHOP_DETAILS = '/shop-details';
 }

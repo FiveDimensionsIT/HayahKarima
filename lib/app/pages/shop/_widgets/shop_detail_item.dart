@@ -1,0 +1,137 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/themes/app_assets.dart';
+import 'package:hayah_karema/app/common/themes/app_colors.dart';
+
+class ShopDetailItem extends StatelessWidget {
+  final String title;
+  final String companyName;
+  final String price;
+  final String description;
+  final String photo;
+  //final  Function? onItemTap;
+  const ShopDetailItem(
+      {Key? key,
+         required this.title,
+         required this.price,
+         required  this.companyName,
+        required this.photo,
+         required this.description,
+        // this.onItemTap,
+      })
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 24,),
+        SizedBox(
+          height: 224,
+          width: double.infinity,
+          child:
+          CarouselSlider(
+            items:
+            [0,1,2].map<Widget>((e) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return   Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16)
+                      ),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.network(photo,fit: BoxFit.fill, height: 224,width: 296,
+                            errorBuilder: (_, __, ___) {
+                              return Container(
+                                  width: Get.width,
+                                  height: Get.height / 4,
+                                  padding: const EdgeInsets.only(top: 20),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10), color: AppColors.current.dimmedLight),
+                                  child: Image.asset(AppAssets.logo, color: AppColors.current.dimmed.withOpacity(0.3)));
+                            },
+                          )));
+                },
+              );
+            }).toList(),
+            options: CarouselOptions(
+              viewportFraction: .84,
+              height: 224,
+              disableCenter: true,
+              enlargeStrategy:CenterPageEnlargeStrategy.scale ,
+              aspectRatio: 296/ 224,
+              initialPage: 0,
+              enlargeCenterPage: true,
+              enableInfiniteScroll: false,
+              autoPlay: true,
+              scrollPhysics:const ClampingScrollPhysics(),
+              onPageChanged: (int index, reason) {},
+            ),
+          ),
+        ),
+        const SizedBox(height: 16,),
+        Padding(padding:const EdgeInsets.symmetric(horizontal: 16),
+        child: Text(title,
+          style: const TextStyle(
+            fontSize: 22,
+            color:  Color(0xFF363535),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        ),
+        const SizedBox(height: 16,),
+        Padding(padding:const EdgeInsets.symmetric(horizontal: 16),
+          child: Text(companyName,
+            style: const TextStyle(
+              fontSize: 14,
+              color:  Color(0xFF363535),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16,),
+        Padding(padding:const EdgeInsets.symmetric(horizontal: 16),
+          child:  Text("$price ج.م ",
+            style:  TextStyle(
+              fontSize: 22,
+            color:  AppColors.current.accent,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const SizedBox(height: 8,),
+        Padding(padding:const EdgeInsets.symmetric(horizontal: 16),
+          child:  Text("وصف المنتج",
+            style:  TextStyle(
+              fontSize: 22,
+              color:  AppColors.current.primary,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const SizedBox(height:16,),
+        Padding(padding:const EdgeInsets.symmetric(horizontal: 16),
+          child: Text(description,
+            style: const TextStyle(
+              fontSize: 18,
+              color:  Color(0xFF363535),
+            ),
+          ),
+        ),
+        const SizedBox(height:16,),
+        Padding(padding:const EdgeInsets.symmetric(horizontal: 16),
+          child:  Text("التقييمات",
+            style:  TextStyle(
+              fontSize: 22,
+              color:  AppColors.current.primary,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
