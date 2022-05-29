@@ -57,4 +57,12 @@ abstract class AppAssets{
   static const String otpGif = 'assets/images/otp.gif';
   static const String userIcon = 'assets/images/icon_user.png';
   static const String poweredBy = 'assets/images/powered_by.png';
+
+  static const String paymentVisa = 'assets/icons/payment_visa_icon.svg';
+  static const String paymentYalla = 'assets/icons/payment_yalla_icon.svg';
+  static const String paymentMasterCard = 'assets/icons/payment_master_icon.svg';
+  static const String paymentFawry = 'assets/icons/payment_fawry_icon.svg';
+  static const String paymentAman = 'assets/images/payment_aman_icon.png';
+  static const String paymentMiza = 'assets/images/payment_miza_icon.png';
+  static const String paymentVodafon = 'assets/images/payment_vodafon_icon.png';
 }
