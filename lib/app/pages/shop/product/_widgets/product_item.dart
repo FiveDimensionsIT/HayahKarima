@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/translation/app_text.dart';
 
-class ShopItem extends StatelessWidget {
+class ProductItem extends StatelessWidget {
   final String title;
   final String companyName;
   final String price;
   final String rate;
   final String photo;
   final  Function? onItemTap;
-  const ShopItem(
+  const ProductItem(
       {Key? key,
       required this.title,
       required this.price,
@@ -25,11 +26,11 @@ class ShopItem extends StatelessWidget {
       onTap: () => onItemTap!(),
       child: Container(
         height: 270,width: 150,
-        padding:const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+        padding:const EdgeInsets.symmetric(horizontal: 8,vertical: 8),
         decoration: BoxDecoration(
           border: Border.all(color:  AppColors.current.accent.withOpacity(.75) , width: 2),
           borderRadius: BorderRadius.circular(16),
-          color: const Color(0xFFFFFFFF),
+          color: AppColors.current.neutral,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,23 +47,23 @@ class ShopItem extends StatelessWidget {
             Text(companyName,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
-            style: const TextStyle(
+            style:  TextStyle(
               fontSize: 14,
-              color:  Color(0xFF363535)
+              color:   AppColors.current.text1,//Color(0xFF363535),
             ),
             ),
             Text(title,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
-              style: const TextStyle(
+              style:  TextStyle(
                   fontSize: 18,
-                  color:  Color(0xFF363535)
+                color:   AppColors.current.text1,//Color(0xFF363535),
               ),
             ),
-            Text("$price ج.م ",
-              style: const TextStyle(
+            Text("$price ${AppText.pound}",
+              style:  TextStyle(
                   fontSize: 18,
-                  color:  Color(0xFF363535),
+                color:   AppColors.current.text1,//Color(0xFF363535),
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hayah_karema/app/common/themes/app_colors.dart';
 
 
 class ButtonItem extends StatelessWidget {
@@ -21,12 +22,12 @@ class ButtonItem extends StatelessWidget {
         margin:const  EdgeInsets.symmetric(horizontal: 16),
         width: double.infinity,
         decoration: BoxDecoration(
-          color: const Color(0xFFF47321),
+          color: AppColors.current.accent,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(title,
-        style:const TextStyle(
-          color:  Color(0xFFFFFFFF),
+        style: TextStyle(
+          color: AppColors.current.neutral,
           fontSize: 22,
           fontWeight: FontWeight.bold
         ),

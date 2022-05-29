@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
 
-class ShopController extends GetxController {
+class ProductController extends GetxController {
   //TODO: Implement ShopController
 
   final count = 0.obs;

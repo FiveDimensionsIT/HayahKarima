@@ -4,18 +4,18 @@ import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
-import 'package:hayah_karema/app/pages/shop/_widgets/app_tool_bar_actions.dart';
-import 'package:hayah_karema/app/pages/shop/_widgets/category_item.dart';
-import 'package:hayah_karema/app/pages/shop/_widgets/general_see_all_item.dart';
-import 'package:hayah_karema/app/pages/shop/_widgets/search_item.dart';
-import 'package:hayah_karema/app/pages/shop/_widgets/shop_item.dart';
-import 'package:hayah_karema/app/pages/shop/_widgets/show_more.dart';
+import 'package:hayah_karema/app/pages/shop/product/_widgets/app_tool_bar_actions.dart';
+import 'package:hayah_karema/app/pages/shop/product/_widgets/category_item.dart';
+import 'package:hayah_karema/app/pages/shop/product/_widgets/general_see_all_item.dart';
+import 'package:hayah_karema/app/pages/shop/product/_widgets/search_item.dart';
+import 'package:hayah_karema/app/pages/shop/product/_widgets/product_item.dart';
+import 'package:hayah_karema/app/pages/shop/product/_widgets/show_more.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
 
-import '../shop_controller.dart';
+import 'product_controller.dart';
 
-class ShopView extends GetView<ShopController> {
-   ShopView({Key? key}) : super(key: key);
+class ProductView extends GetView<ProductController> {
+   ProductView({Key? key}) : super(key: key);
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class ShopView extends GetView<ShopController> {
                         i==3?
                         const ShowMore()
                             :
-                         ShopItem(
+                         ProductItem(
                           onItemTap: (){
                             controller.goToShopDetailsView();
                           },
@@ -105,7 +105,7 @@ class ShopView extends GetView<ShopController> {
                         i==3?
                        const ShowMore()
                             :
-                         ShopItem(
+                         ProductItem(
                           onItemTap: (){
                             controller.goToShopDetailsView();
                           },

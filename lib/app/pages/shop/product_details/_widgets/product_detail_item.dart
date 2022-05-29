@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/translation/app_text.dart';
 
-class ShopDetailItem extends StatelessWidget {
+class ProductDetailItem extends StatelessWidget {
   final String title;
   final String companyName;
   final String price;
   final String description;
   final String photo;
   //final  Function? onItemTap;
-  const ShopDetailItem(
+  const ProductDetailItem(
       {Key? key,
          required this.title,
          required this.price,
@@ -76,9 +77,9 @@ class ShopDetailItem extends StatelessWidget {
         const SizedBox(height: 16,),
         Padding(padding:const EdgeInsets.symmetric(horizontal: 16),
         child: Text(title,
-          style: const TextStyle(
+          style:  TextStyle(
             fontSize: 22,
-            color:  Color(0xFF363535),
+            color:   AppColors.current.text1,//Color(0xFF363535),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -86,15 +87,15 @@ class ShopDetailItem extends StatelessWidget {
         const SizedBox(height: 16,),
         Padding(padding:const EdgeInsets.symmetric(horizontal: 16),
           child: Text(companyName,
-            style: const TextStyle(
+            style:  TextStyle(
               fontSize: 14,
-              color:  Color(0xFF363535),
+              color:   AppColors.current.text1,//Color(0xFF363535),
             ),
           ),
         ),
         const SizedBox(height: 16,),
         Padding(padding:const EdgeInsets.symmetric(horizontal: 16),
-          child:  Text("$price ج.م ",
+          child:  Text("$price ${AppText.pound}",
             style:  TextStyle(
               fontSize: 22,
             color:  AppColors.current.accent,
@@ -104,7 +105,7 @@ class ShopDetailItem extends StatelessWidget {
         ),
         const SizedBox(height: 8,),
         Padding(padding:const EdgeInsets.symmetric(horizontal: 16),
-          child:  Text("وصف المنتج",
+          child:  Text(AppText.productDescription,
             style:  TextStyle(
               fontSize: 22,
               color:  AppColors.current.primary,
@@ -115,15 +116,15 @@ class ShopDetailItem extends StatelessWidget {
         const SizedBox(height:16,),
         Padding(padding:const EdgeInsets.symmetric(horizontal: 16),
           child: Text(description,
-            style: const TextStyle(
+            style:  TextStyle(
               fontSize: 18,
-              color:  Color(0xFF363535),
+              color:   AppColors.current.text1,//Color(0xFF363535),
             ),
           ),
         ),
         const SizedBox(height:16,),
         Padding(padding:const EdgeInsets.symmetric(horizontal: 16),
-          child:  Text("التقييمات",
+          child:  Text(AppText.ratings,
             style:  TextStyle(
               fontSize: 22,
               color:  AppColors.current.primary,

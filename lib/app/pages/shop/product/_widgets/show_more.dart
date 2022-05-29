@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/translation/app_text.dart';
 
 class ShowMore extends StatelessWidget {
 
@@ -23,7 +24,7 @@ class ShowMore extends StatelessWidget {
         children: [
            Icon(Icons.arrow_forward, color: AppColors.current.accent,size: 30,),
           const SizedBox(height: 10,),
-          Text("عرض المزيد",
+          Text(AppText.productShowMore,
             style: TextStyle(
                 color: AppColors.current.accent,
                 fontSize: 20,

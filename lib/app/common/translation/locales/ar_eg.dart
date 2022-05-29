@@ -239,7 +239,12 @@ const ar_eg = {
   "info_about_course":"معلومات عن الدورة",
   "what_learn":"ماذا ستتعلم",
   "study_plan":"الخطة الدراسية",
-  "join_now":"انضم الأن"
-
+  "join_now":"انضم الأن",
+  // shop translation
+"buy":"شراء",
+"product_show_more":"عرض المزيد",
+  "pound":"ج.م",
+  "product_description":"وصف المنتج",
+  "ratings":"التقييمات",
 
 };

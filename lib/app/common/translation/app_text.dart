@@ -250,4 +250,9 @@ abstract class AppText {
   static String get joinNow =>"join_now".tr;
   /// edit this
  // static String get shopDetails => 'shop-details'.tr;
+  static String get buy =>"buy".tr;
+  static String get productShowMore =>"product_show_more".tr;
+  static String get pound =>"pound".tr;
+  static String get productDescription =>"product_description".tr;
+  static String get ratings =>"ratings".tr; //
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/translation/app_text.dart';
 
 class GeneralSeeAllItem extends StatelessWidget {
  final  Function? onSeeAllTap;
@@ -17,15 +18,15 @@ const  GeneralSeeAllItem({Key? key, this.onSeeAllTap,required this.title, }) : s
               child: Text(title,
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
-          style:const TextStyle(
-            color:  Color(0xFF363535),
+          style: TextStyle(
+            color:   AppColors.current.text1,
             fontSize: 22,
             fontWeight: FontWeight.bold
           ),
           )),
            Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
-            child:   Text("المزيد",
+            child:   Text(AppText.more,
               style: TextStyle(
                   color: AppColors.current.accent,
                   fontSize: 14,

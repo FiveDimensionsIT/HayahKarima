@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:hayah_karema/app/common/themes/app_colors.dart';
 
 class RatingItem extends StatelessWidget {
   const RatingItem({
@@ -15,36 +16,36 @@ class RatingItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(name,
-          style: const TextStyle(
+          style:  TextStyle(
             fontSize: 18,
-            color:  Color(0xFF363535),
+            color:   AppColors.current.text1,//Color(0xFF363535),
           ),
         ),
        const SizedBox(height: 8,),
         Text(date,
-          style: const TextStyle(
+          style:  TextStyle(
             fontSize: 18,
-            color:  Color(0xFF363535),
+            color:   AppColors.current.text1,//Color(0xFF363535),
           ),
         ),
         const SizedBox(height: 8,),
         RatingBar(
           ratingWidget: RatingWidget(
-            full: const Icon(
+            full:  Icon(
               Icons.star,
-              color:Color(0xFFF47321),
+              color:AppColors.current.accent,
             ),
-            empty: const Icon(
+            empty:  Icon(
               Icons.star_border,
-              color:Color(0xFFF47321),
+              color:AppColors.current.accent,
             ),
-            half: const Icon(
+            half:  Icon(
               Icons.star_half,
-              color:Color(0xFFF47321),
+              color:AppColors.current.accent,
             ),
           ),
-          unratedColor:const  Color(0xFFF47321),
-          glowColor: const  Color(0xFFFFFFFF),
+          unratedColor:AppColors.current.accent,
+          glowColor: AppColors.current.neutral,
           onRatingUpdate: (val) {
           },
           allowHalfRating: true,
@@ -57,9 +58,9 @@ class RatingItem extends StatelessWidget {
         ),
         const SizedBox(height: 8,),
         Text(comment,
-          style: const TextStyle(
+          style:  TextStyle(
             fontSize: 14,
-            color:  Color(0xFF363535),
+            color:   AppColors.current.text1,//Color(0xFF363535),
           ),
         ),
       ],
