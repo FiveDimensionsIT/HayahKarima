@@ -254,5 +254,8 @@ abstract class AppText {
   static String get productShowMore =>"product_show_more".tr;
   static String get pound =>"pound".tr;
   static String get productDescription =>"product_description".tr;
-  static String get ratings =>"ratings".tr; //
+  static String get ratings =>"ratings".tr;
+  static String get chooseAccountType =>"choose_account_type".tr;
+  static String get individual =>"individual".tr;
+  static String get commercial =>"commercial".tr;
 }

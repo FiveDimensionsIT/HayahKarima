@@ -31,6 +31,7 @@ abstract class Routes {
   static const SHOP =  _Paths.SHOP;
   /// edit this
   static const SHOP_DETAILS =  _Paths.SHOP_DETAILS;
+  static const PRODUCTS_CATEGORY =  _Paths.PRODUCTS_CATEGORY;
 }
 
 abstract class _Paths {
@@ -61,4 +62,5 @@ abstract class _Paths {
   static const SHOP = '/shop';
   /// edit this
   static const SHOP_DETAILS = '/shop-details';
+  static const PRODUCTS_CATEGORY = '/products-category';
 }

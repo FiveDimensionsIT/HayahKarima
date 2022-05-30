@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/pages/shop/product_details/product_details_view.dart';
+import 'package:hayah_karema/app/pages/shop/products_category/products_category_binding.dart';
+import 'package:hayah_karema/app/pages/shop/products_category/products_category_view.dart';
 
 import '../pages/add_user/add_user_binding.dart';
 import '../pages/add_user/add_user_view.dart';
@@ -39,8 +41,8 @@ import '../pages/prizes/prizes_binding.dart';
 import '../pages/prizes/prizes_view.dart';
 import '../pages/profile/profile_binding.dart';
 import '../pages/profile/profile_view.dart';
-import '../pages/shop/product/product_binding.dart';
-import '../pages/shop/product/product_view.dart';
+import '../pages/shop/products/product_binding.dart';
+import '../pages/shop/products/products_view.dart';
 import '../pages/side_menu/side_menu_binding.dart';
 import '../pages/side_menu/side_menu_view.dart';
 import '../pages/splash/splash_binding.dart';
@@ -227,7 +229,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SHOP,
-      page: () => ProductView(),
+      page: () => ProductSView(),
       binding: ProductBinding(),
     ),
     /// edit this
@@ -235,6 +237,11 @@ class AppPages {
       name: _Paths.SHOP_DETAILS,
       page: () => ProductDetailsView(),
       binding: ProductBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCTS_CATEGORY,
+      page: () => ProductSCategoryView(),
+      binding: ProductCategoriesBinding(),
     ),
   ];
 }

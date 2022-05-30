@@ -246,5 +246,7 @@ const ar_eg = {
   "pound":"ج.م",
   "product_description":"وصف المنتج",
   "ratings":"التقييمات",
-
+  "choose_account_type":"اختر نوع حسابك",
+  "individual":"فردي",
+  "commercial":"تجاري",
 };

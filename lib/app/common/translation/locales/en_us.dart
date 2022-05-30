@@ -251,4 +251,7 @@ const en_us = {
   "pound":"EG",
   "product_description":"Product description",
   "ratings":"Ratings",
+  "choose_account_type":"choose account type",
+  "individual":"individual",
+  "commercial":"commercial",
 };
