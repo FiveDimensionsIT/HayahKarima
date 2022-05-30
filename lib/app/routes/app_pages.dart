@@ -41,8 +41,8 @@ import '../pages/prizes/prizes_binding.dart';
 import '../pages/prizes/prizes_view.dart';
 import '../pages/profile/profile_binding.dart';
 import '../pages/profile/profile_view.dart';
-import '../pages/shop/products/product_binding.dart';
-import '../pages/shop/products/products_view.dart';
+import '../pages/shop/products_home/product_binding.dart';
+import '../pages/shop/products_home/products_view.dart';
 import '../pages/side_menu/side_menu_binding.dart';
 import '../pages/side_menu/side_menu_view.dart';
 import '../pages/splash/splash_binding.dart';
@@ -60,7 +60,7 @@ const _transitionDuration = Duration(milliseconds: 700);
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.PRODUCTS_HOME;
 
   static final routes = [
     GetPage(
@@ -228,13 +228,13 @@ class AppPages {
       binding: AddUserBinding(),
     ),
     GetPage(
-      name: _Paths.SHOP,
+      name: _Paths.PRODUCTS_HOME,
       page: () => ProductSView(),
       binding: ProductBinding(),
     ),
     /// edit this
     GetPage(
-      name: _Paths.SHOP_DETAILS,
+      name: _Paths.PRODUCT_ITEM_DETAILS,
       page: () => ProductDetailsView(),
       binding: ProductBinding(),
     ),

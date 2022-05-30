@@ -22,7 +22,7 @@ class ProductsController extends GetxController {
   }
 
   void goToShopDetailsView() {
-    Get.toNamed(Routes.SHOP_DETAILS);
+    Get.toNamed(Routes.PRODUCT_ITEM_DETAILS);
   }
 
   final searchTextEditingController = TextEditingController();

@@ -17,7 +17,7 @@ class ProductsCategoryController extends GetxController {
     // add data here.
   }
   void goToShopDetailsView() {
-    Get.toNamed(Routes.SHOP_DETAILS);
+    Get.toNamed(Routes.PRODUCT_ITEM_DETAILS);
   }
 
 

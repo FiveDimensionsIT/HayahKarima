@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
-import 'package:hayah_karema/app/common/translation/app_text.dart';
 
 class AccountTypeItem extends StatelessWidget {
   final Color borderColor;

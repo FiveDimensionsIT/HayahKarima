@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
-import 'package:hayah_karema/app/pages/shop/products/_widgets/account_type_item.dart';
+import 'package:hayah_karema/app/pages/shop/products_home/_widgets/account_type_item.dart';
 
 class SellerSlideBottomSheet extends StatefulWidget {
   const SellerSlideBottomSheet({Key? key}) : super(key: key);

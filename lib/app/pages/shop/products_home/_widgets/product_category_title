@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/themes/app_dimens.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 
-class GeneralSeeAllItem extends StatelessWidget {
+class ProductCategoryTitle extends StatelessWidget {
  final  Function? onSeeAllTap;
   final String title;
 
-const  GeneralSeeAllItem({Key? key, this.onSeeAllTap,required this.title, }) : super(key: key);
+const  ProductCategoryTitle({Key? key, this.onSeeAllTap,required this.title, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 24,horizontal: 16),
+      padding: const EdgeInsets.only(top: AppDimens.paddingSize20, left: AppDimens.paddingSize16, right: AppDimens.paddingSize16, bottom: AppDimens.paddingSize10),
       child: InkWell(
         onTap: () => onSeeAllTap!(),
         child: Row(
@@ -22,7 +23,7 @@ const  GeneralSeeAllItem({Key? key, this.onSeeAllTap,required this.title, }) : s
             maxLines: 1,
             style: TextStyle(
               color:   AppColors.current.text1,
-              fontSize: 22,
+              fontSize: AppDimens.fontSizeLargeX,
               fontWeight: FontWeight.bold
             ),
             )),
@@ -31,7 +32,7 @@ const  GeneralSeeAllItem({Key? key, this.onSeeAllTap,required this.title, }) : s
               child:   Text(AppText.more,
                 style: TextStyle(
                     color: AppColors.current.accent,
-                    fontSize: 14,
+                    fontSize: AppDimens.fontSizeMedium,
                     fontWeight: FontWeight.bold
                 ),
               ),

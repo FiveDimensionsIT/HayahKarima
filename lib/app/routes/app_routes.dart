@@ -28,9 +28,9 @@ abstract class Routes {
   static const PRIZES = _Paths.PRIZES;
   static const USERS = _Paths.USERS;
   static const ADD_USER = _Paths.ADD_USER;
-  static const SHOP =  _Paths.SHOP;
+  static const PRODUCTS_HOME =  _Paths.PRODUCTS_HOME;
   /// edit this
-  static const SHOP_DETAILS =  _Paths.SHOP_DETAILS;
+  static const PRODUCT_ITEM_DETAILS =  _Paths.PRODUCT_ITEM_DETAILS;
   static const PRODUCTS_CATEGORY =  _Paths.PRODUCTS_CATEGORY;
 }
 
@@ -59,8 +59,7 @@ abstract class _Paths {
   static const PRIZES = '/prizes';
   static const USERS = '/users';
   static const ADD_USER = '/add-user';
-  static const SHOP = '/shop';
-  /// edit this
-  static const SHOP_DETAILS = '/shop-details';
-  static const PRODUCTS_CATEGORY = '/products-category';
+  static const PRODUCTS_HOME = '/products_home';
+  static const PRODUCT_ITEM_DETAILS = '/product_item_details';
+  static const PRODUCTS_CATEGORY = '/products_home-category';
 }

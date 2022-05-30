@@ -22,6 +22,7 @@ class AppDimens{
   static final double fontSizeSmall = 8.sp;
   static final double fontSizeSmallX = 10.sp;
   static final double fontSizeSmallXX = 12.sp;
+  static final double fontSizeSmallXXX = 13.sp;
   //
   static final double fontSizeMedium = 14.sp;
   static final double fontSizeMediumX = 16.sp;

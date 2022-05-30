@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hayah_karema/app/routes/app_pages.dart';
 
 class ProductDetailsController extends GetxController {
   //TODO: Implement ShopController
