@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/themes/app_colors.dart';
 
 import '../ui_lib.dart';
 
@@ -9,7 +10,7 @@ abstract class OverlayHelper {
 
   OverlayHelper._();
 
-  static Map<int, OverlayEntry?> _lastOverlays = {};
+  static final Map<int, OverlayEntry?> _lastOverlays = {};
 
   // TODO: refactor to use the theme colors
   static Color successColor = const Color.fromRGBO(46, 204, 113, 1);
@@ -83,7 +84,7 @@ abstract class OverlayHelper {
 
   static void showProgressOverlay({required String text, durationInSeconds = 65}) {
     clearFocus(Get.context!);
-    showOverlay(layerIndex: _progressLayerIndex, durationInSeconds: durationInSeconds, widget: OverlayProgress(text));
+    showOverlay(layerIndex: _progressLayerIndex, durationInSeconds: durationInSeconds, widget: OverlayProgress(text: text,));
   }
 
   static void hideProgressOverlay() {
@@ -114,7 +115,7 @@ class OverlayToast extends StatelessWidget {
           Empty(),
           Material(
             elevation: 2,
-            color: Colors.white,
+            color: AppColors.current.neutral,
             type: MaterialType.card,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -125,7 +126,7 @@ class OverlayToast extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.grey.shade200, width: 1),
                 color: Colors.grey.shade50,
-                boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 2 )]
+                boxShadow: [BoxShadow(color: AppColors.current.dimmed, blurRadius: 2 )]
               ),
               child: FullRow(
                 widths: "auto 1*",
@@ -159,7 +160,8 @@ class OverlayToast extends StatelessWidget {
 class OverlayProgress extends StatelessWidget {
   final String text;
 
-   OverlayProgress(this.text);
+  const OverlayProgress({Key? key, required this.text}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -168,13 +170,13 @@ class OverlayProgress extends StatelessWidget {
         BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
           child: Container(
-            color: Colors.black.withOpacity(0.6),
+            color: AppColors.current.text.withOpacity(0.6),
           ),
         ),
         Center(
           child: Material(
             elevation: 2,
-            color: Colors.white,
+            color: AppColors.current.neutral,
             type: MaterialType.card,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(50)),

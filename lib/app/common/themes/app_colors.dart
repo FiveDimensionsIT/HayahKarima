@@ -13,6 +13,7 @@ class AppColors {
       required this.secondary,
       required this.primaryLight,
       required this.text,
+        required this.text1,
       required this.dimmed,
       required this.dimmedLight,
       required this.accent,
@@ -37,7 +38,7 @@ class AppColors {
   Color error;
 
   Color text;
-
+  Color text1;
   Color neutral;
 
   Color background;
@@ -60,6 +61,7 @@ var _defaultLightColors = AppColors(
   accentLight: const Color(0xfff79355),
   error: const Color(0xffe62e00),
   text: const Color.fromRGBO(37, 47, 61, 1),
+    text1: const Color(0xFF363535),
   primaryLight: const Color(0xff2ad5c4),
   primary: const Color(0xff22A99B),
   dimmedLight: const Color.fromRGBO(238, 238, 238, 1.0),

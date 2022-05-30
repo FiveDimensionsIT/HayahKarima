@@ -246,8 +246,14 @@ const en_us = {
   "info_about_course":"Info About Course",
   "what_learn":"What is learn",
   "study_plan":"Study Plan",
-  "join_now":"Join now"
-
-
-
+  "join_now":"Join now",
+  // shop
+  "buy":"buy",
+  "product_show_more":"Show more",
+  "pound":"EG",
+  "product_description":"Product description",
+  "ratings":"Ratings",
+  "choose_account_type":"choose account type",
+  "individual":"individual",
+  "commercial":"commercial",
 };

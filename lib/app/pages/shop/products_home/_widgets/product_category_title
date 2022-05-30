@@ -1,0 +1,46 @@
+import 'package:flutter/material.dart';
+import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/themes/app_dimens.dart';
+import 'package:hayah_karema/app/common/translation/app_text.dart';
+
+class ProductCategoryTitle extends StatelessWidget {
+ final  Function? onSeeAllTap;
+  final String title;
+
+const  ProductCategoryTitle({Key? key, this.onSeeAllTap,required this.title, }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: AppDimens.paddingSize20, left: AppDimens.paddingSize16, right: AppDimens.paddingSize16, bottom: AppDimens.paddingSize10),
+      child: InkWell(
+        onTap: () => onSeeAllTap!(),
+        child: Row(
+          children: [
+            Expanded(
+                child: Text(title,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: TextStyle(
+              color:   AppColors.current.text1,
+              fontSize: AppDimens.fontSizeLargeX,
+              fontWeight: FontWeight.bold
+            ),
+            )),
+             Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child:   Text(AppText.more,
+                style: TextStyle(
+                    color: AppColors.current.accent,
+                    fontSize: AppDimens.fontSizeMedium,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
+            Icon(Icons.arrow_forward_ios, color: AppColors.current.accent,size: 16,),
+          ],
+        ),
+      ),
+    );
+  }
+}

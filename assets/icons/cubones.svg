@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="cubones" transform="translate(-2 -2)">
+    <path id="Path_47331" data-name="Path 47331" d="M16.455,28.091a1.455,1.455,0,0,1-1.028-2.483L25.608,15.426a1.454,1.454,0,1,1,2.057,2.057L17.483,27.665A1.451,1.451,0,0,1,16.455,28.091Z" transform="translate(5.909 5.909)" fill="#ff4b4b"/>
+    <circle id="Ellipse_47" data-name="Ellipse 47" cx="2.182" cy="2.182" r="2.182" transform="translate(29.636 29.636)" fill="#ff4b4b"/>
+    <circle id="Ellipse_48" data-name="Ellipse 48" cx="2.182" cy="2.182" r="2.182" transform="translate(20.909 20.909)" fill="#ff4b4b"/>
+    <path id="Path_47332" data-name="Path 47332" d="M25.272,2H19.2a5.783,5.783,0,0,0-4.113,1.7L3.491,15.3a5.092,5.092,0,0,0,0,7.2l7.1,7.1a5.092,5.092,0,0,0,7.2,0L29.386,18a5.776,5.776,0,0,0,1.7-4.113V7.818A5.824,5.824,0,0,0,25.272,2ZM23.818,12.182a2.909,2.909,0,1,1,2.909-2.909A2.909,2.909,0,0,1,23.818,12.182Z" fill="#ff4b4b" opacity="0.35"/>
+  </g>
+</svg>

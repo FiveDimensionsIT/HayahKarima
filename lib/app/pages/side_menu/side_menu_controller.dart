@@ -106,7 +106,7 @@ class SideMenuController extends GetxController {
         name: AppText.shop,
         iconPath: AppAssets.marketSideMenuIcon,
         onTap: () {
-
+          Get.toNamed(Routes.PRODUCTS_HOME);
         }));
 
     /// == rewards
