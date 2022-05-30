@@ -39,8 +39,7 @@ dependencies:
   rive: 0.8.4
   flutter_html: ^3.0.0-alpha.3
   shimmer: ^2.0.0
-  get_cli: ^1.7.1
-  flutter_rating_bar: ^4.0.1
+  flutter_screenutil: ^5.5.3+2
 
 dev_dependencies:
   flutter_test:

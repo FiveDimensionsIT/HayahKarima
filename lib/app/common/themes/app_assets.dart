@@ -67,4 +67,11 @@ abstract class AppAssets{
   static const String sellNow = 'assets/icons/sell_now.svg';
   static const String cubones = 'assets/icons/cubones.svg';
   static const String exchange = 'assets/icons/exchange.svg';
+  static const String paymentVisa = 'assets/icons/payment_visa_icon.svg';
+  static const String paymentYalla = 'assets/icons/payment_yalla_icon.svg';
+  static const String paymentMasterCard = 'assets/icons/payment_master_icon.svg';
+  static const String paymentFawry = 'assets/icons/payment_fawry_icon.svg';
+  static const String paymentAman = 'assets/images/payment_aman_icon.png';
+  static const String paymentMiza = 'assets/images/payment_miza_icon.png';
+  static const String paymentVodafon = 'assets/images/payment_vodafon_icon.png';
 }

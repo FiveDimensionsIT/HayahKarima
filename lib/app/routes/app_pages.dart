@@ -60,12 +60,12 @@ const _transitionDuration = Duration(milliseconds: 700);
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH_VIEW;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
         name: _Paths.SPLASH_VIEW,
-        page: () => SplashView(),
+        page: () => const SplashView(),
         binding: SplashBinding(),
         transition: _pageTransition,
         transitionDuration: _transitionDuration),
@@ -219,12 +219,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.USERS,
-      page: () => UsersView(),
+      page: () => const UsersView(),
       binding: UsersBinding(),
     ),
     GetPage(
       name: _Paths.ADD_USER,
-      page: () => AddUserView(),
+      page: () => const AddUserView(),
       binding: AddUserBinding(),
     ),
     GetPage(

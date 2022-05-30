@@ -11,14 +11,7 @@ class NavigationManager{
   }
 
   void navigateToHomePage(UserType userType) {
-    switch (userType) {
-      case UserType.admin:
-        Get.offAllNamed(Routes.DIGITAL_POINTER);
-        break;
-      case UserType.user:
-        Get.offAllNamed(Routes.HOME);
-        break;
-    }
+    Get.offAllNamed(Routes.DIGITAL_POINTER);
   }
 
 }

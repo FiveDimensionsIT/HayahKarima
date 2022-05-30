@@ -50,7 +50,7 @@ class SideMenuController extends GetxController {
         }));
 
     /// == my village
-    if(_userData.value.userRole == UserType.user){
+    if(_userData.value.myVillageVisibility()){
       menuItems.add(MenuItemModel(
           name: AppText.myVillage,
           iconPath: AppAssets.villageSideMenuIcon,

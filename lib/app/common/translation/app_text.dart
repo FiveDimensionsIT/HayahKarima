@@ -236,6 +236,8 @@ abstract class AppText {
   static String get practicalExperience =>'practical_experience'.tr;
   static String get earnPoints =>'earn_points'.tr;
   static String get replacingPrizes =>'replacing_prizes'.tr;
+  static String get myAddresses =>'my_addresses'.tr;
+  static String get myPaymentCards =>'my_payment_cards'.tr;
   static String get title =>'title'.tr;
   static String get whatIsInYourMind => 'what_is_in_your_mind'.tr;
   static String get answerAndScore => 'answer_and_score'.tr;

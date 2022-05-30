@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
@@ -11,10 +12,8 @@ import 'package:hayah_karema/utils/ui/empty.dart';
 import 'login_controller.dart';
 
 class LoginView extends StatelessWidget {
-
+  LoginView({Key? key}) : super(key: key);
   final controller = Get.put(LoginController());
-
-  final _keyForm = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,36 +27,64 @@ class LoginView extends StatelessWidget {
     return Padding(
       padding: AppTheme.pagePadding,
       child: Form(
-        key: _keyForm,
+        key: controller.keyForm,
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
               /// action sheet indicator
-              const ActionSheetIndicator(),
+              SizedBox(width: Get.width, child: const Center(child: ActionSheetIndicator())),
 
-              Empty(height: 20,),
+              Empty(
+                height: 15,
+              ),
 
               /// title
               _buildToolbar(),
 
-              Empty(height: 20,),
+              Empty(
+                height: 20,
+              ),
 
-              /// code no
+              Text(
+                AppText.enterCode,
+                style: TextStyle(fontSize: Get.textTheme.bodySmall?.fontSize, color: AppColors.current.dimmed),
+              ),
+              Empty(
+                height: 5,
+              ),
               _buildCodeNoTextField(),
+              Empty(
+                height: 5,
+              ),
 
-              Empty(height: 10,),
+              _buildRequiredCode(),
 
-              /// password
+              Empty(
+                height: 10,
+              ),
+
+              Text(
+                AppText.enterPassword,
+                style: TextStyle(fontSize: Get.textTheme.bodySmall?.fontSize, color: AppColors.current.dimmed),
+              ),
+              Empty(
+                height: 5,
+              ),
               _buildPasswordTextField(),
 
               /// forgot password
 
-              Empty(height: 10,),
+              Empty(
+                height: 10,
+              ),
 
-              _buildForgotPassword(),
+              SizedBox(width: Get.width, child: Center(child: _buildForgotPassword())),
 
-              Empty(height: 20,),
+              Empty(
+                height: 15,
+              ),
 
               /// login
               _buildLoginButton()
@@ -67,6 +94,13 @@ class LoginView extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildRequiredCode() =>
+      Obx(() =>
+      controller.isUserCodeRequired.value == true
+          ? Text(AppText.requiredField,
+          style: TextStyle(fontSize: Get.textTheme.bodySmall?.fontSize, color: AppColors.current.error))
+          : const SizedBox());
 
   SizedBox _buildToolbar() {
     return SizedBox(
@@ -80,23 +114,57 @@ class LoginView extends StatelessWidget {
   }
 
   Widget _buildCodeNoTextField() {
-    return Obx(() {
-      return TextFormField(
-        enabled: !controller.loginLoading.value,
-        decoration: InputDecoration(hintText: AppText.enterCode),
-        keyboardType: TextInputType.text,
-        textInputAction: TextInputAction.next,
-        onChanged: (val) => controller.userName.value = val,
-        validator: RequiredValidator(errorText: AppText.requiredField),
-      );
-    });
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+
+        Obx(() {
+          return _buildUserCodeTextFiledItem(
+              focusNode: controller.lastFocusNode,
+              textEditingController: controller.lastTextEditingController,
+              enabled: controller.loginLoading,
+              borderColor: controller.isUserCodeRequired.value ? AppColors.current.error : AppColors.current
+                  .dimmedLight,
+              onTextChanged: (val) =>
+                  controller.appendUserCode(val, controller.passwordFocusNode, controller.middleFocusNode));
+        }),
+
+        const SizedBox(width: 10,),
+
+        Obx(() {
+          return _buildUserCodeTextFiledItem(
+              focusNode: controller.middleFocusNode,
+              textEditingController: controller.middleTextEditingController,
+              enabled: controller.loginLoading,
+              borderColor: controller.isUserCodeRequired.value ? AppColors.current.error : AppColors.current
+                  .dimmedLight,
+              onTextChanged: (val) =>
+                  controller.appendUserCode(val, controller.lastFocusNode, controller.firstFocusNode));
+        }),
+
+        const SizedBox(width: 10,),
+
+        Obx(() {
+          return _buildUserCodeTextFiledItem(
+              focusNode: controller.firstFocusNode,
+              textEditingController: controller.firstTextEditingController,
+              borderColor: controller.isUserCodeRequired.value ? AppColors.current.error : AppColors.current
+                  .dimmedLight,
+              enabled: controller.loginLoading,
+              onTextChanged: (val) => controller.appendUserCode(val, controller.middleFocusNode, null));
+        })
+      ],
+    );
   }
 
   Widget _buildPasswordTextField() {
     return Obx(() {
       return TextFormField(
+        focusNode: controller.passwordFocusNode,
         enabled: !controller.loginLoading.value,
-        decoration: InputDecoration(hintText: AppText.enterPassword,),
+        decoration: InputDecoration(
+          hintText: AppText.enterPassword,
+        ),
         obscureText: true,
         textInputAction: TextInputAction.done,
         onChanged: (val) => controller.password.value = val,
@@ -113,6 +181,34 @@ class LoginView extends StatelessWidget {
     );
   }
 
+  Widget _buildUserCodeTextFiledItem({required FocusNode focusNode,
+    required TextEditingController textEditingController,
+    required RxBool enabled,
+    required Color borderColor,
+    required Function onTextChanged}) {
+    return Obx(() {
+      return SizedBox(
+        width: Get.width / 4,
+        child: TextField(
+          focusNode: focusNode,
+          controller: textEditingController,
+          enabled: !enabled.value,
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            hintText: '---',
+            counter: const SizedBox(),
+            border: _outlineInputBorder(borderColor),
+            enabledBorder: _outlineInputBorder(borderColor),
+          ),
+          maxLength: 3,
+          textInputAction: TextInputAction.next,
+          textAlign: TextAlign.center,
+          onChanged: (val) => onTextChanged(val),
+        ),
+      );
+    });
+  }
+
   Widget _buildLoginButton() {
     return Obx(() {
       return BigBtn(
@@ -124,10 +220,12 @@ class LoginView extends StatelessWidget {
   }
 
   _onLogin() {
-    _keyForm.currentState?.save();
-    if (_keyForm.currentState!.validate()) {
-      controller.onLoginClick();
-    }
+    controller.onLoginClick();
   }
 
+  OutlineInputBorder _outlineInputBorder(color) {
+    return OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
+        borderSide: BorderSide(color: color, width: 1,));
+  }
 }

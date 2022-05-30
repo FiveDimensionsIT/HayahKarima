@@ -228,6 +228,8 @@ const ar_eg = {
   "practical_experience":"الخبرة العملية",
   "earn_points":"اكتساب نقاط",
   "replacing_prizes":"استبدال الجوائز",
+  "my_addresses":"عناويني",
+  "my_payment_cards":"بطاقاتي",
   "title":"اللقب",
   "what_is_in_your_mind":"ماذا يدور بعقلك؟",
   "answer_and_score":"جاوب واكسب",

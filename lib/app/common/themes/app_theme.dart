@@ -99,11 +99,12 @@ abstract class AppTheme {
           filled: true,
           fillColor: colors.neutral,
           floatingLabelBehavior: FloatingLabelBehavior.never,
-          border: _outlineInputBorder(colors.dimmedLight),
-          enabledBorder: _outlineInputBorder(colors.dimmedLight),
+          border: _outlineInputBorder(colors.dimmed.withOpacity(0.8)),
+          enabledBorder: _outlineInputBorder(colors.dimmed.withOpacity(0.8)),
           focusedBorder: _outlineInputBorder(colors.primary),
           errorBorder: _outlineInputBorder(colors.error),
           contentPadding: contentPadding,
+          hintStyle: TextStyle(color: colors.text.withOpacity(0.6),),
           errorStyle: TextStyle(color: colors.error, fontSize: 12)),
 
       //> text

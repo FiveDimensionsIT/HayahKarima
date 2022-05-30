@@ -6,8 +6,10 @@ import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
+import 'package:hayah_karema/app/pages/profile/_widgets/profile_addresses.dart';
 import 'package:hayah_karema/app/pages/profile/_widgets/profile_awards_view.dart';
 import 'package:hayah_karema/app/pages/profile/_widgets/profile_info_view.dart';
+import 'package:hayah_karema/app/pages/profile/_widgets/profile_payment_cards.dart';
 import 'package:hayah_karema/app/pages/profile/_widgets/profile_points_view.dart';
 import 'package:hayah_karema/app/pages/profile/profile_controller.dart';
 
@@ -18,7 +20,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 5,
       child: Scaffold(
         backgroundColor: AppColors.current.neutral,
         body: SafeArea(
@@ -147,7 +149,6 @@ class ProfileView extends StatelessWidget {
   /// Build Tabs
   Widget _buildTab() {
     return ButtonsTabBar(
-        // controller: controller.tabBarController,
         height: 40,
         labelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.current.background),
         contentPadding: const EdgeInsets.symmetric(horizontal: 8),
@@ -172,6 +173,12 @@ class ProfileView extends StatelessWidget {
           Tab(
             text: AppText.replacingPrizes,
           ),
+          Tab(
+            text: AppText.myAddresses,
+          ),
+          Tab(
+            text: AppText.myPaymentCards,
+          ),
         ]);
   }
 
@@ -190,9 +197,15 @@ class ProfileView extends StatelessWidget {
             ? const Center(child: CircularProgressIndicator())
             : ProfilePointsView(userEarnedList: controller.userEarnedPointModelList,);
       }
-      return controller.userRewardsApiLoading.value
-          ? const Center(child: CircularProgressIndicator())
-          : ProfileAwardsView(userRewardsList: controller.userRewardsModelList,);
+
+      if (controller.currentTabIndex.value == 2) {
+        return controller.userRewardsApiLoading.value
+            ? const Center(child: CircularProgressIndicator())
+            : ProfileAwardsView(userRewardsList: controller.userRewardsModelList,);
+      }
+      if (controller.currentTabIndex.value == 3) return const ProfileAddresses();
+
+       return const ProfilePaymentCards();
     });
   }
 
