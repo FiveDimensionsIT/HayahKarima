@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class ProductDetailsController extends GetxController {
+class ProductItemDetailsController extends GetxController {
   //TODO: Implement ShopController
 
   final count = 0.obs;

@@ -14,10 +14,10 @@ import 'package:hayah_karema/app/pages/shop/products_home/_widgets/seller_slide_
 import 'package:hayah_karema/app/pages/shop/products_home/_widgets/show_more.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
 
-import 'product_controller.dart';
+import 'products_home_controller.dart';
 
-class ProductSView extends GetView<ProductsController> {
-   ProductSView({Key? key}) : super(key: key);
+class ProductsHomeView extends GetView<ProductsHomeController> {
+   ProductsHomeView({Key? key}) : super(key: key);
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -43,22 +43,7 @@ class ProductSView extends GetView<ProductsController> {
 
                     _buildShopServices(),
 
-                    ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 3,
-                        padding: const EdgeInsets.only(bottom: AppDimens.paddingSize16),
-                        itemBuilder: (cxt, index) {
-                      return Column(
-                        children: [
-                          /// general item of see all
-                          _buildCategoryTitle("هواتف جوالات سامسونج وأبل جديدة 2022"),
-
-                          /// main item of the screen
-                          _buildCategoryList(),
-                        ],
-                      );
-                    })
+                    _buildProductsCategoryList()
                   ],
                 ),
               ),
@@ -67,6 +52,25 @@ class ProductSView extends GetView<ProductsController> {
         ),
       ),
     );
+  }
+
+  ListView _buildProductsCategoryList() {
+    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: 3,
+                      padding: const EdgeInsets.only(bottom: AppDimens.paddingSize16),
+                      itemBuilder: (cxt, index) {
+                    return Column(
+                      children: [
+                        /// general item of see all
+                        _buildCategoryTitle("هواتف جوالات سامسونج وأبل جديدة 2022"),
+
+                        /// main item of the screen
+                        _buildCategoryList(),
+                      ],
+                    );
+                  });
   }
 
    SizedBox _buildCategoryList() {
