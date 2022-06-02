@@ -251,4 +251,27 @@ const ar_eg = {
   "choose_account_type":"اختر نوع حسابك",
   "individual":"فردي",
   "commercial":"تجاري",
+  // my orders
+  "my-orders":"طلباتى",
+  "current-orders":"الحالية",
+  "previous-orders":"السابقة",
+  "in-progress":"جاري التجهيز",
+  "canceled":"ملغي",
+  "shipping":"جاري الشحن",
+  "delivery-in-progress":"جاري التسليم",
+  "delivered":"تم التسليم",
+  "elements":"عناصر",
+  "quantity":"الكمية",
+  //
+  "order-content":"محتويات الطلب",
+  "shipping-address":"عنوان الشحن",
+  "receiver-data":"بيانات المستلم",
+  "payment-method":"وسيلة الدفع",
+  "shipping-type":"نوع الشحن",
+  "register-order":"سجل الطلب",
+  "cancel-order":"الغاء الطلب",
+
+  "price":"إجمالي المبلغ",
+  "additional-costs":"تكاليف أخرى",
+  "total-price":"المبلغ الكلي",
 };

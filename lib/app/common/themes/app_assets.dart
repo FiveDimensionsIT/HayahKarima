@@ -74,4 +74,5 @@ abstract class AppAssets{
   static const String paymentAman = 'assets/images/payment_aman_icon.png';
   static const String paymentMiza = 'assets/images/payment_miza_icon.png';
   static const String paymentVodafon = 'assets/images/payment_vodafon_icon.png';
+  static const String orders = 'assets/icons/orders.svg';
 }

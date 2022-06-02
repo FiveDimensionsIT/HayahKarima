@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+  <g id="orders" transform="translate(-4851 3131)">
+    <g id="icons8_purchase_order" transform="translate(4849 -3134)">
+      <path id="Path_47406" data-name="Path 47406" d="M20,18a3,3,0,0,1-3,3H8a3,3,0,0,1-3-3V6A3,3,0,0,1,8,3h9a3,3,0,0,1,3,3Z" fill="#f47321" opacity="0.35"/>
+      <path id="Path_47407" data-name="Path 47407" d="M14,18V17a2,2,0,0,0-2-2H4a2,2,0,0,0-2,2v1a3,3,0,0,0,3,3H17A3,3,0,0,1,14,18Z" fill="#f47321"/>
+      <path id="Path_47408" data-name="Path 47408" d="M16,9H13a1,1,0,0,1,0-2h3a1,1,0,0,1,0,2Z" fill="#f47321"/>
+      <path id="Path_47409" data-name="Path 47409" d="M16,13H13a1,1,0,0,1,0-2h3a1,1,0,0,1,0,2Z" fill="#f47321"/>
+      <circle id="Ellipse_54" data-name="Ellipse 54" cx="1" cy="1" r="1" transform="translate(8 7)" fill="#f47321"/>
+      <circle id="Ellipse_55" data-name="Ellipse 55" cx="1" cy="1" r="1" transform="translate(8 11)" fill="#f47321"/>
+    </g>
+  </g>
+</svg>

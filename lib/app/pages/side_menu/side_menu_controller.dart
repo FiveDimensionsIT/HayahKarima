@@ -109,6 +109,14 @@ class SideMenuController extends GetxController {
           Get.toNamed(Routes.PRODUCTS_HOME);
         }));
 
+    /// == orders
+    menuItems.add(MenuItemModel(
+        name: AppText.myOrders,
+        iconPath: AppAssets.orders,
+        onTap: () {
+          Get.toNamed(Routes.ORDERS);
+        }));
+
     /// == rewards
     if(_userData.value.userRole == UserType.user) {
       menuItems.add(MenuItemModel(

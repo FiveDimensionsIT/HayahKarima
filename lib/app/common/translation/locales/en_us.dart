@@ -256,4 +256,27 @@ const en_us = {
   "choose_account_type":"choose account type",
   "individual":"individual",
   "commercial":"commercial",
+  // my orders
+  "my-orders":"My Orders",
+  "current-orders":"Current",
+  "previous-orders":"Previous",
+  "in-progress":"In progress",
+  "canceled":"canceled",
+  "shipping":"shipping",
+  "delivery-in-progress":"delivery in progress",
+  "delivered":"delivered",
+  "elements":"elements",
+  "quantity":"quantity",
+  //
+  "order-content":"order content",
+  "shipping-address":"shipping address",
+  "receiver-data":"receiver data",
+  "payment-method":"payment method",
+  "shipping-type":"shipping type",
+  "register-order":"register order",
+  "cancel-order":"cancel order",
+
+  "price":"price",
+  "additional-costs":"additional costs",
+  "total-price":"total price",
 };

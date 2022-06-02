@@ -260,4 +260,26 @@ abstract class AppText {
   static String get chooseAccountType =>"choose_account_type".tr;
   static String get individual =>"individual".tr;
   static String get commercial =>"commercial".tr;
+  // my orders
+  static String get myOrders =>"my-orders".tr;
+  static String get currentOrders =>"current-orders".tr;
+  static String get previousOrders =>"previous-orders".tr;
+  static String get inProgress =>"in-progress".tr;
+  static String get canceled =>"canceled".tr;
+  static String get shipping =>"shipping".tr;
+  static String get deliveryInProgress =>"delivery-in-progress".tr;
+  static String get delivered =>"delivered".tr;
+  static String get elements =>"elements".tr;
+  static String get quantity =>"quantity".tr;
+  //
+  static String get orderContent =>"order-content".tr;
+  static String get shippingAddress =>"shipping-address".tr;
+  static String get receiverData =>"receiver-data".tr;
+  static String get paymentMethod =>"payment-method".tr;
+  static String get shippingType =>"shipping-type".tr;
+  static String get registerOrder =>"register-order".tr;
+  static String get cancelOrder =>"cancel-order".tr;
+  static String get price =>"price".tr;
+  static String get additionalCosts =>"additional-costs".tr;
+  static String get totalPrice =>"total-price".tr;
 }

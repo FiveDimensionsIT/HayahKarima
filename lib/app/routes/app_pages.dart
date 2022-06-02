@@ -1,7 +1,4 @@
 import 'package:get/get.dart';
-import 'package:hayah_karema/app/pages/shop/product_details/product_item_details_view.dart';
-import 'package:hayah_karema/app/pages/shop/products_category/products_category_binding.dart';
-import 'package:hayah_karema/app/pages/shop/products_category/products_category_view.dart';
 
 import '../pages/add_user/add_user_binding.dart';
 import '../pages/add_user/add_user_view.dart';
@@ -37,10 +34,17 @@ import '../pages/new_post/new_post_binding.dart';
 import '../pages/new_post/new_post_view.dart';
 import '../pages/notification/notification_binding.dart';
 import '../pages/notification/notification_view.dart';
+import '../pages/order/order_details/order_details_binding.dart';
+import '../pages/order/order_details/order_details_view.dart';
+import '../pages/order/orders/orders_binding.dart';
+import '../pages/order/orders/orders_view.dart';
 import '../pages/prizes/prizes_binding.dart';
 import '../pages/prizes/prizes_view.dart';
 import '../pages/profile/profile_binding.dart';
 import '../pages/profile/profile_view.dart';
+import '../pages/shop/product_details/product_item_details_view.dart';
+import '../pages/shop/products_category/products_category_binding.dart';
+import '../pages/shop/products_category/products_category_view.dart';
 import '../pages/shop/products_home/product_home_binding.dart';
 import '../pages/shop/products_home/products_home_view.dart';
 import '../pages/side_menu/side_menu_binding.dart';
@@ -232,6 +236,7 @@ class AppPages {
       page: () => ProductsHomeView(),
       binding: ProductHomeBinding(),
     ),
+
     /// edit this
     GetPage(
       name: _Paths.PRODUCT_ITEM_DETAILS,
@@ -242,6 +247,16 @@ class AppPages {
       name: _Paths.PRODUCTS_CATEGORY,
       page: () => ProductSCategoryView(),
       binding: ProductCategoriesBinding(),
+    ),
+    GetPage(
+      name: _Paths.ORDERS,
+      page: () => OrdersView(),
+      binding: OrdersBinding(),
+    ),
+    GetPage(
+      name: _Paths.ORDER_DETAILS,
+      page: () => OrderDetailsView(),
+      binding: OrderDetailsBinding(),
     ),
   ];
 }
