@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hayah_karema/app/common/themes/app_dimens.dart';
 
 import 'app_colors.dart';
 
@@ -12,7 +13,7 @@ abstract class AppTheme {
 
   static const double _borderRadius = 5;
   static const double _borderRadiusOuter = 10;
-  static const EdgeInsets contentPadding = EdgeInsets.symmetric(vertical: 12, horizontal: 20);
+  static const EdgeInsets contentPadding = EdgeInsets.symmetric(vertical: 10, horizontal: 20);
   static const double _elevation = 5;
 
   // endregion
@@ -85,7 +86,7 @@ abstract class AppTheme {
         overlayColor: MaterialStateProperty.all(colors.primaryLight),
         padding: MaterialStateProperty.all(contentPadding),
         shadowColor: MaterialStateProperty.all(colors.text.withOpacity(0.5)),
-        textStyle: MaterialStateProperty.all(const TextStyle(fontSize: _textSizeM, fontWeight: FontWeight.bold)),
+        textStyle: MaterialStateProperty.all(TextStyle(fontSize: AppDimens.fontSizeLarge, fontWeight: FontWeight.bold)),
       )),
 
       //> toggle buttons
@@ -108,7 +109,7 @@ abstract class AppTheme {
           errorStyle: TextStyle(color: colors.error, fontSize: 12)),
 
       //> text
-      textTheme: GoogleFonts.poppinsTextTheme(TextTheme(
+      textTheme: GoogleFonts.markaziTextTextTheme(TextTheme(
         headline1: TextStyle(fontSize: _textSizeXL, color: colors.text),
         headline2: TextStyle(fontSize: _textSizeL, color: colors.text),
         headline3: TextStyle(fontSize: _textSizeM, color: colors.text),
@@ -116,9 +117,7 @@ abstract class AppTheme {
         headline5: TextStyle(fontSize: _textSizeXS, color: colors.text),
         bodyText1: TextStyle(fontSize: _textSizeS, color: colors.text),
         bodyText2: TextStyle(fontSize: _textSizeS, color: colors.text),
-        // Important Note: subtitle1 affects the input fields
         subtitle1: TextStyle(fontSize: _textSizeM, color: colors.text),
-        //button: TextStyle(color: colors.neutral)
       )),
 
       //> card

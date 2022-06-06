@@ -10,13 +10,16 @@ class AppDimens{
 
   /// borders
   static const double borderRadius = 5;
+  static const double generalBorderRadius = 8;
   static const double borderRadiusOuter = 10;
   static const double borderRadiusLine = 100;
 
   /// content paddings
-  static const EdgeInsets contentPadding = EdgeInsets.symmetric(vertical: 12, horizontal: 20);
-  static const EdgeInsets buttonPadding = EdgeInsets.symmetric(vertical: 16, horizontal: 20);
-  static const EdgeInsets pagePadding = EdgeInsets.all(16);
+  static final EdgeInsets contentPadding = EdgeInsets.symmetric(vertical: 12.h, horizontal: 20.w);
+  static final EdgeInsets buttonPadding = EdgeInsets.symmetric(vertical: 16.h, horizontal: 20.w);
+  static final EdgeInsets pagePadding = EdgeInsets.symmetric(horizontal: 16.w,vertical: 16.h);
+  static final EdgeInsets horizontalPadding = EdgeInsets.symmetric(horizontal: 16.w,);
+  static final EdgeInsets verticalPadding = EdgeInsets.symmetric(vertical: 16.h);
 
   /// font sizes
   static final double fontSizeSmall = 8.sp;
