@@ -11,6 +11,7 @@ import 'package:hayah_karema/app/pages/shop/products_home/_widgets/products_cate
 import 'package:hayah_karema/app/pages/shop/products_home/_widgets/search_item.dart';
 import 'package:hayah_karema/app/pages/shop/products_home/_widgets/seller_slide_bottom_sheet.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_view.dart';
+import 'package:hayah_karema/app/routes/app_pages.dart';
 
 import 'products_home_controller.dart';
 
@@ -109,7 +110,7 @@ class ProductsHomeView extends GetView<ProductsHomeController> {
     return AppToolbar(
       title: AppText.shop,
       actions: AppToolBarActions(
-        onBasketTap: () {},
+        onBasketTap: () {Get.toNamed(Routes.ORDERS);},
         onFilterTap: () {},
       ),
       drawerCallBack: () => scaffoldKey.currentState?.openDrawer(),

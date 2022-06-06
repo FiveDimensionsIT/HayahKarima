@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/themes/app_dimens.dart';
 
 class AppToolbar extends StatelessWidget {
   final String title;
-  Function? backCallBack;
-  Function? drawerCallBack;
-  Widget? actions;
+  final Function? backCallBack;
+  final Function? drawerCallBack;
+  final Widget? actions;
 
-  AppToolbar({Key? key, required this.title, this.backCallBack, this.drawerCallBack, this.actions}) : super(key: key);
+  const AppToolbar({Key? key, required this.title, this.backCallBack, this.drawerCallBack, this.actions}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 8, top: 5),
+      padding: const EdgeInsets.only(bottom: AppDimens.paddingSize10, top: AppDimens.paddingSize8),
       decoration: BoxDecoration(
           color: AppColors.current.neutral,
           borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
@@ -51,7 +51,7 @@ class AppToolbar extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                  fontSize: Get.textTheme.headline2?.fontSize,
+                  fontSize: AppDimens.fontSizeLargeX,
                   color: AppColors.current.accent,
                   fontWeight: FontWeight.bold),
             ),

@@ -26,14 +26,22 @@ class OrdersView extends GetView<OrdersController> {
         body: SafeArea(
           child: Column(
             children: [
-              /// toolbar.
-              _buildAppToolbar(),
+
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColors.current.accent.withOpacity(0.15),
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(25.r), bottomRight: Radius.circular(25.r)),),
+                child: Column(
+                  children: [
+                    _buildAppToolbar(),
+                    _buildTab(),
+                  ],
+                ),
+              ),
               Expanded(
                 child:  SingleChildScrollView(
                   child: Column(
                     children: [
-                      /// the body
-                      _buildTab(),
                        SizedBox(height: 16.h,),
                       _buildTabBarView(),
                     ],
@@ -62,34 +70,30 @@ class OrdersView extends GetView<OrdersController> {
   /// Build Tabs
   Widget _buildTab() {
     return Obx(() {
-      return Container(
-          padding:AppDimens.verticalPadding,
-          decoration:  BoxDecoration(
-            color: const Color(0xFFFEF1E8),
-            borderRadius:  BorderRadius.only(bottomLeft: Radius.circular(15.r), bottomRight: Radius.circular(15.r)),
-          ),
-          child: Row(
-            children: [
-              SizedBox(width: 16.w,),
-              Flexible(
-                  flex: 1,
-                  child:  TabsButtonItem(
-                    name: AppText.currentOrders,
-                    onTap: ()=>controller.currentTabIndex.value = 0,
-                    selected: controller.currentTabIndex.value == 0,
-                  )),
-              SizedBox(width: 16.w,),
-              Flexible(
-                  flex: 1,
-                  child:  TabsButtonItem(
-                    name: AppText.previousOrders,
-                    onTap: ()=>controller.currentTabIndex.value = 1,
-                    selected: controller.currentTabIndex.value == 1,
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: AppDimens.paddingSize15),
+        child: Row(
+          children: [
+            SizedBox(width: 16.w,),
+            Flexible(
+                flex: 1,
+                child:  TabsButtonItem(
+                  name: AppText.currentOrders,
+                  onTap: ()=>controller.currentTabIndex.value = 0,
+                  selected: controller.currentTabIndex.value == 0,
+                )),
+            SizedBox(width: 16.w,),
+            Flexible(
+                flex: 1,
+                child:  TabsButtonItem(
+                  name: AppText.previousOrders,
+                  onTap: ()=>controller.currentTabIndex.value = 1,
+                  selected: controller.currentTabIndex.value == 1,
 
-                  )),
-              SizedBox(width: 16.w,),
-            ],
-          )
+                )),
+            SizedBox(width: 16.w,),
+          ],
+        ),
       );
     });
   }

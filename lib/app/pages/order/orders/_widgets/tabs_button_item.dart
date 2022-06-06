@@ -19,14 +19,14 @@ class TabsButtonItem extends StatelessWidget {
     return InkWell(
       onTap: () => onTap!(),
       child: Container(
-        height: 32.h,
+        height: 34.h,
         width: double.infinity,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
           color: selected
               ? AppColors.current.accent
-              : AppColors.current.accent.withOpacity(.1),
+              : AppColors.current.accent.withOpacity(0.2),
         ),
         child: Text(
           name,
