@@ -27,6 +27,7 @@ abstract class AppText {
   static String get confirmPassword => 'confirm_password'.tr;
   static String get submit => 'submit'.tr;
   static String get back => 'back'.tr;
+  static String get save => 'save'.tr;
   static String get confirm => 'confirm'.tr;
   static String get authMobNoTitle => 'auth_mob_to_title'.tr;
   static String get more => 'more'.tr;
@@ -282,4 +283,18 @@ abstract class AppText {
   static String get price =>"price".tr;
   static String get additionalCosts =>"additional-costs".tr;
   static String get totalPrice =>"total-price".tr;
+  static String get change =>"change".tr;
+  static String get deleteFromTitle =>"delete_from".tr;
+  static String get delete =>"delete".tr;
+  static String get changeAccount =>"change_account".tr;
+  static String get saveAsDefault =>"save_as_default".tr;
+  static String get removePaymentCardConfirmation =>"remove_payment_card_confirmation".tr;
+  static String get savePaymentTitle =>"save_payment_title".tr;
+  static String get removeAddressConfirmation =>"remove_address_confirmation".tr;
+  static String get saveAddressTitle =>"save_address_title".tr;
+  static String get addresses =>"addresses".tr;
+  static String get cards =>"cards".tr;
+  static String get addNewCard =>"add_new_card".tr;
+  static String get addNewAddress =>"add_new_address".tr;
+
 }

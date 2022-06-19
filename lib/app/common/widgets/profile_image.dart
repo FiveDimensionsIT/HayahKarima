@@ -16,25 +16,25 @@ class ProfileImage extends StatelessWidget {
   }
 
   Widget _buildUserImg(double width){
-    return Container(
-      width: width-12,
-      height: width-12,
+    return SizedBox(
+      width: width,
+      height: width,
       child: DottedBorder(
         color: AppColors.current.accent,
         borderType: BorderType.Circle,
         padding: const EdgeInsets.all(1),
         child: ClipOval(
-          child: isAssetImage? Image.asset(profileImageUrl)
+          child: isAssetImage ? Image.asset(profileImageUrl)
           :FadeInImage.assetNetwork(
               width: width,
               height: width,
-              placeholder: AppAssets.profile,
+              placeholder: AppAssets.userIcon,
               fit: BoxFit.cover,
               image: profileImageUrl,
-              imageErrorBuilder: (_, __, ___) =>Container(
+              imageErrorBuilder: (_, __, ___) =>SizedBox(
                   width: width,
                   height: width,
-                  child: Image.asset(AppAssets.profile))),
+                  child: Image.asset(AppAssets.userIcon))),
         ),
       ),
     );

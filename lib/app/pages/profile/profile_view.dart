@@ -13,9 +13,8 @@ import 'package:hayah_karema/app/pages/profile/_widgets/profile_payment_cards.da
 import 'package:hayah_karema/app/pages/profile/_widgets/profile_points_view.dart';
 import 'package:hayah_karema/app/pages/profile/profile_controller.dart';
 
-class ProfileView extends StatelessWidget {
-  ProfileView({Key? key}) : super(key: key);
-  final controller = Get.put(ProfileController());
+class ProfileView extends GetView<ProfileController> {
+  const ProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,11 +72,11 @@ class ProfileView extends StatelessWidget {
                 fit: BoxFit.cover,
                 width: Get.height / 6,
                 height: Get.height / 6,
-                errorBuilder: (_, __, ___){
-                return Image.asset(AppAssets.userIcon,
-                    fit: BoxFit.cover,
-                    width: Get.height / 6,
-                    height: Get.height / 6);
+                errorBuilder: (_, __, ___) {
+                  return Image.asset(AppAssets.userIcon,
+                      fit: BoxFit.cover,
+                      width: Get.height / 6,
+                      height: Get.height / 6);
                 },
               ),
             ),
@@ -91,9 +90,9 @@ class ProfileView extends StatelessWidget {
             const SizedBox(height: 5,),
 
             FittedBox(
-              child: Text( '${controller.profileModel.value.village??'-'} ، '
-                  '${controller.profileModel.value.center??'-'} ، '
-                  '${controller.profileModel.value.governorate??'-'}',
+              child: Text('${controller.profileModel.value.village ?? '-'} ، '
+                  '${controller.profileModel.value.center ?? '-'} ، '
+                  '${controller.profileModel.value.governorate ?? '-'}',
                 style: TextStyle(fontSize: Get.textTheme.bodyText1?.fontSize, fontWeight: FontWeight.bold),),
             )
           ],
@@ -118,11 +117,17 @@ class ProfileView extends StatelessWidget {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildPointsItem(iconPath: AppAssets.pointsIcon, title: AppText.points, points: '${controller.userPointsResponse.value.total_points}'),
+              _buildPointsItem(iconPath: AppAssets.pointsIcon,
+                  title: AppText.points,
+                  points: '${controller.userPointsResponse.value.total_points}'),
               const SizedBox(height: 8,),
-              _buildPointsItem(iconPath: AppAssets.giftcardIcon, title: AppText.replaceable, points: '${controller.userPointsResponse.value.available_points}'),
+              _buildPointsItem(iconPath: AppAssets.giftcardIcon,
+                  title: AppText.replaceable,
+                  points: '${controller.userPointsResponse.value.available_points}'),
               const SizedBox(height: 8,),
-              _buildPointsItem(iconPath: AppAssets.doneIcon, title: AppText.replacedPoint, points: '${controller.userPointsResponse.value.exchanged_points}'),
+              _buildPointsItem(iconPath: AppAssets.doneIcon,
+                  title: AppText.replacedPoint,
+                  points: '${controller.userPointsResponse.value.exchanged_points}'),
             ],
           );
         }),
@@ -190,22 +195,25 @@ class ProfileView extends StatelessWidget {
             ? const Center(child: CircularProgressIndicator(),)
             : ProfileInfoView(profileModel: controller.profileModel.value);
       }
-      // if (controller.currentTabIndex.value == 1) return const ProfileEducationView();
-      // if (controller.currentTabIndex.value == 2) return const ProfileExperienceView();
-      if (controller.currentTabIndex.value == 1) {
+      else if (controller.currentTabIndex.value == 1) {
         return controller.pointsEarnedApiLoading.value
             ? const Center(child: CircularProgressIndicator())
             : ProfilePointsView(userEarnedList: controller.userEarnedPointModelList,);
       }
-
-      if (controller.currentTabIndex.value == 2) {
+      else if (controller.currentTabIndex.value == 2) {
         return controller.userRewardsApiLoading.value
             ? const Center(child: CircularProgressIndicator())
             : ProfileAwardsView(userRewardsList: controller.userRewardsModelList,);
       }
-      if (controller.currentTabIndex.value == 3) return const ProfileAddresses();
+      else if (controller.currentTabIndex.value == 3) {
+        return controller.userAddressesApiLoading.value
+            ? const Center(child: CircularProgressIndicator())
+            : const ProfileAddresses();
+      }
 
-       return const ProfilePaymentCards();
+      return controller.userPaymentCardsApiLoading.value
+          ? const Center(child: CircularProgressIndicator())
+          : const ProfilePaymentCards();
     });
   }
 

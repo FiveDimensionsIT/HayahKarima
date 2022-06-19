@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/pages/profile/profile_binding.dart';
 
 import '../pages/add_user/add_user_binding.dart';
 import '../pages/add_user/add_user_view.dart';
@@ -40,15 +41,12 @@ import '../pages/order/orders/orders_binding.dart';
 import '../pages/order/orders/orders_view.dart';
 import '../pages/prizes/prizes_binding.dart';
 import '../pages/prizes/prizes_view.dart';
-import '../pages/profile/profile_binding.dart';
 import '../pages/profile/profile_view.dart';
 import '../pages/shop/product_details/product_item_details_view.dart';
 import '../pages/shop/products_category/products_category_binding.dart';
 import '../pages/shop/products_category/products_category_view.dart';
 import '../pages/shop/products_home/product_home_binding.dart';
 import '../pages/shop/products_home/products_home_view.dart';
-import '../pages/side_menu/side_menu_binding.dart';
-import '../pages/side_menu/side_menu_view.dart';
 import '../pages/splash/splash_binding.dart';
 import '../pages/splash/splash_view.dart';
 import '../pages/training_course/training_course_binding.dart';
@@ -71,30 +69,6 @@ class AppPages {
         name: _Paths.SPLASH_VIEW,
         page: () => const SplashView(),
         binding: SplashBinding(),
-        transition: _pageTransition,
-        transitionDuration: _transitionDuration),
-    GetPage(
-        name: _Paths.LOGIN,
-        page: () => LoginView(),
-        binding: LoginBinding(),
-        transition: _pageTransition,
-        transitionDuration: _transitionDuration),
-    GetPage(
-        name: _Paths.FORGOT_PASSWORD,
-        page: () => ForgotPasswordView(),
-        binding: ForgotPasswordBinding(),
-        transition: _pageTransition,
-        transitionDuration: _transitionDuration),
-    GetPage(
-        name: _Paths.VERIFY_AUTH,
-        page: () => VerifyMobileNoView(),
-        binding: VerifyMobileNoBinding(),
-        transition: _pageTransition,
-        transitionDuration: _transitionDuration),
-    GetPage(
-        name: _Paths.NEW_PASSWORD,
-        page: () => NewPasswordView(),
-        binding: NewPasswordBinding(),
         transition: _pageTransition,
         transitionDuration: _transitionDuration),
     GetPage(
@@ -152,12 +126,6 @@ class AppPages {
         transition: _pageTransition,
         transitionDuration: _transitionDuration),
     GetPage(
-        name: _Paths.SIDE_MENU,
-        page: () => SideMenuView(),
-        binding: SideMenuBinding(),
-        transition: _pageTransition,
-        transitionDuration: _transitionDuration),
-    GetPage(
         name: _Paths.DIGITAL_POINTER,
         page: () => DigitalPointerView(),
         binding: DigitalPointerBinding(),
@@ -165,15 +133,11 @@ class AppPages {
         transitionDuration: _transitionDuration),
     GetPage(
         name: _Paths.PROFILE,
-        page: () => ProfileView(),
+        page: () => const ProfileView(),
         binding: ProfileBinding(),
         transition: _pageTransition,
         transitionDuration: _transitionDuration),
-    GetPage(
-        name: _Paths.NEW_POST,
-        page: () => NewPostView(),
-        binding: NewPostBinding(),
-        transition: _pageTransition),
+    GetPage(name: _Paths.NEW_POST, page: () => NewPostView(), binding: NewPostBinding(), transition: _pageTransition),
     GetPage(
         name: _Paths.NOTIFICATION_VIEW,
         page: () => const NotificationView(),
@@ -184,12 +148,6 @@ class AppPages {
         name: _Paths.COMMENT_VIEW,
         page: () => const CommentView(),
         binding: CommentBinding(),
-        transition: _pageTransition,
-        transitionDuration: _transitionDuration),
-    GetPage(
-        name: _Paths.PROFILE,
-        page: () => ProfileView(),
-        binding: ProfileBinding(),
         transition: _pageTransition,
         transitionDuration: _transitionDuration),
     GetPage(
@@ -255,7 +213,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ORDER_DETAILS,
-      page: () => OrderDetailsView(),
+      page: () => const OrderDetailsView(),
       binding: OrderDetailsBinding(),
     ),
   ];

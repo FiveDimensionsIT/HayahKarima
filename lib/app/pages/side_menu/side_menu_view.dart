@@ -1,16 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/models/generic_model.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
-import 'package:hayah_karema/app/common/widgets/3dots_view.dart';
+import 'package:hayah_karema/app/pages/profile/_widgets/change_account_view.dart';
 import 'package:hayah_karema/app/pages/side_menu/_widget/side_menu_item.dart';
-import 'package:hayah_karema/app/routes/app_pages.dart';
 
 import 'side_menu_controller.dart';
 
-class SideMenuView extends StatelessWidget {
-  final controller = Get.put(SideMenuController());
+class SideMenuView extends GetView<SideMenuController> {
+  const SideMenuView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +20,9 @@ class SideMenuView extends StatelessWidget {
         child: Column(
           children: [
             _buildUserData(),
-
-            Divider(color: AppColors.current.accentLight,),
-
+            Divider(
+              color: AppColors.current.accentLight,
+            ),
             _buildMenuList(context),
           ],
         ),
@@ -38,7 +38,6 @@ class SideMenuView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-
             SizedBox(
               width: 55,
               child: ClipRRect(
@@ -47,9 +46,9 @@ class SideMenuView extends StatelessWidget {
                     errorBuilder: (_, __, ___) => Image.asset(AppAssets.userIcon)),
               ),
             ),
-
-            const SizedBox(width: 20,),
-
+            const SizedBox(
+              width: 20,
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,13 +64,14 @@ class SideMenuView extends StatelessWidget {
                 ],
               ),
             ),
-
-            DotsView(onClick: () {
-              // back to home.
-              Get.back();
-              // then go to profile page.
-              Get.toNamed(Routes.PROFILE, arguments: {"user_id": controller.userData?.id});
-            }),
+            IconButton(
+                padding: const EdgeInsets.all(0),
+                icon: SvgPicture.asset(AppAssets.manageAccountsIcon),
+                iconSize: 20,
+                onPressed: () {
+                  Get.back();
+                  _displayAccountsActionSheet();
+                }),
           ],
         ),
       );
@@ -85,10 +85,25 @@ class SideMenuView extends StatelessWidget {
           padding: const EdgeInsets.all(0),
           children: controller.menuItems.map((item) {
             if (!controller.honorFilesExpanded.value && item.iconPath == null) return const SizedBox();
-            return SideMenuItem(itemModel: item,);
+            return SideMenuItem(
+              itemModel: item,
+            );
           }).toList(),
         );
       }),
     );
+  }
+
+  void _displayAccountsActionSheet() {
+    Get.bottomSheet(Container(
+        decoration: BoxDecoration(
+            color: AppColors.current.neutral,
+            borderRadius: const BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25)),
+            boxShadow: [BoxShadow(color: AppColors.current.dimmed.withOpacity(0.3), blurRadius: 10)]),
+        child: ChangeAccountsView(
+            accounts: controller.userAccounts,
+            onAccountItemSelectionChange: ({required GenericModel account}) =>
+                controller.onAccountItemSelectionChange(account: account),
+            onChangeAccountBtnClick: () => controller.onChangeAccountBtnClick())));
   }
 }

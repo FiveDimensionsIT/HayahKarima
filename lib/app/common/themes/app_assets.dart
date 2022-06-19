@@ -1,66 +1,60 @@
-
-abstract class AppAssets{
-
+abstract class AppAssets {
   static const String splash1 = 'assets/images/splash_1.png';
   static const String splash2 = 'assets/images/splash_2.png';
   static const String splashAnim = 'assets/images/logo_anim.riv';
-
   static const String imgNotFound = 'assets/images/img_not_found.png';
   static const String copyrightsIcon = 'assets/images/copyrights.png';
-
-  static const String liveIcon = 'assets/images/live.svg';
-  static const String dateOfDeathIcon = 'assets/images/date_of_death_icon.svg';
-  static const String activitiesIcon = 'assets/images/activities.svg';
-  static const String mediaIcon = 'assets/images/media.svg';
-  static const String threeDotsIcon = 'assets/images/threedots_icon.svg';
-  static const String doneIcon = 'assets/images/done_icon.svg';
-  static const String giftcardIcon = 'assets/images/giftcard_icon.svg';
-  static const String pointsIcon = 'assets/images/points_icon.svg';
-  static const String graduatedIcon = 'assets/images/graduated_icon.svg';
-  static const String comapnyPlaceholderIcon = 'assets/images/comapny_placeholder_icon.svg';
-
-  static const String searchIcon = 'assets/icons/search.png';
-  static const String settingsSideMenuIcon = 'assets/images/settings_side_menu.svg';
-  static const String usersSideMenuIcon = 'assets/images/users_icon.svg';
-  static const String coursesSideMenuIcon = 'assets/images/course_side_menu.svg';
-  static const String logoutSideMenuIcon = 'assets/images/logout_side_menu.svg';
-  static const String awardsSideMenuIcon = 'assets/images/awards_side_menu.svg';
-  static const String partnersSideMenuIcon = 'assets/images/partners_side_menu.svg';
-  static const String honorbordSideMenuIcon = 'assets/images/honorbord_side_menu.svg';
-  static const String villageSideMenuIcon = 'assets/images/village_side_menu.svg';
-  static const String marketSideMenuIcon = 'assets/images/market_side_menu.svg';
-  static const String homeSideMenuIcon = 'assets/images/home_side_menu.svg';
-  static const String peopleIcon = 'assets/images/people_icon.svg';
-
-  static const String postType1 = 'assets/images/post_type1.svg';
-  static const String postType2 = 'assets/images/post_type2.svg';
-  static const String postType3 = 'assets/images/post_type3.svg';
-  static const String postType4 = 'assets/images/post_type4.svg';
-  static const String postType5 = 'assets/images/post_type5.svg';
-  static const String postType6 = 'assets/images/post_type6.svg';
-  static const String postType7 = 'assets/images/post_type7.svg';
-  static const String postType8 = 'assets/images/post_type8.svg';
-  static const String postType9 = 'assets/images/post_type9.svg';
-
   static const String logo = 'assets/images/logo.png';
   static const String homeBG = 'assets/images/home_bg.png';
-  static const String profile = 'assets/images/profile.png';
-  static const String servBusIcon = 'assets/images/serv-bus-icon.svg';
-  static const String servAbsenceIcon = 'assets/images/serv-absence-icon.svg';
-  static const String servCalendarIcon = 'assets/images/serv-calendar-icon.svg';
-  static const String servCallIcon = 'assets/images/serv-call-icon.svg';
-  static const String servExamIcon = 'assets/images/serv-exam_results-icon.svg';
-  static const String servStudentAbsenceIcon  = 'assets/images/serv-student-absence-icon.svg';
-  static const String LoaderGIF  = 'assets/images/loader.gif';
+  static const String LoaderGIF = 'assets/images/loader.gif';
   static const String empty = 'assets/images/empty.png';
   static const String teacherImage = 'assets/images/teacher_image.png';
   static const String otpGif = 'assets/images/otp.gif';
   static const String userIcon = 'assets/images/icon_user.png';
   static const String poweredBy = 'assets/images/powered_by.png';
+  static const String paymentAman = 'assets/images/payment_aman_icon.png';
+  static const String paymentMiza = 'assets/images/payment_miza_icon.png';
+  static const String paymentVodafon = 'assets/images/payment_vodafon_icon.png';
 
-  // Ahmed Saad added new  images here.
-
-  // Ahmed Saad added new  icons here.
+  static const String liveIcon = 'assets/icons/live.svg';
+  static const String dateOfDeathIcon = 'assets/icons/date_of_death_icon.svg';
+  static const String activitiesIcon = 'assets/icons/activities.svg';
+  static const String mediaIcon = 'assets/icons/media.svg';
+  static const String threeDotsIcon = 'assets/icons/threedots_icon.svg';
+  static const String doneIcon = 'assets/icons/done_icon.svg';
+  static const String doneGreenIcon = 'assets/icons/done_green.svg';
+  static const String giftcardIcon = 'assets/icons/giftcard_icon.svg';
+  static const String pointsIcon = 'assets/icons/points_icon.svg';
+  static const String graduatedIcon = 'assets/icons/graduated_icon.svg';
+  static const String comapnyPlaceholderIcon = 'assets/icons/comapny_placeholder_icon.svg';
+  static const String searchIcon = 'assets/icons/search.png';
+  static const String settingsSideMenuIcon = 'assets/icons/settings_side_menu.svg';
+  static const String usersSideMenuIcon = 'assets/icons/users_icon.svg';
+  static const String coursesSideMenuIcon = 'assets/icons/course_side_menu.svg';
+  static const String logoutSideMenuIcon = 'assets/icons/logout_side_menu.svg';
+  static const String awardsSideMenuIcon = 'assets/icons/awards_side_menu.svg';
+  static const String partnersSideMenuIcon = 'assets/icons/partners_side_menu.svg';
+  static const String honorbordSideMenuIcon = 'assets/icons/honorbord_side_menu.svg';
+  static const String villageSideMenuIcon = 'assets/icons/village_side_menu.svg';
+  static const String marketSideMenuIcon = 'assets/icons/market_side_menu.svg';
+  static const String homeSideMenuIcon = 'assets/icons/home_side_menu.svg';
+  static const String peopleIcon = 'assets/icons/people_icon.svg';
+  static const String postType1 = 'assets/icons/post_type1.svg';
+  static const String postType2 = 'assets/icons/post_type2.svg';
+  static const String postType3 = 'assets/icons/post_type3.svg';
+  static const String postType4 = 'assets/icons/post_type4.svg';
+  static const String postType5 = 'assets/icons/post_type5.svg';
+  static const String postType6 = 'assets/icons/post_type6.svg';
+  static const String postType7 = 'assets/icons/post_type7.svg';
+  static const String postType8 = 'assets/icons/post_type8.svg';
+  static const String postType9 = 'assets/icons/post_type9.svg';
+  static const String servBusIcon = 'assets/icons/serv-bus-icon.svg';
+  static const String servAbsenceIcon = 'assets/icons/serv-absence-icon.svg';
+  static const String servCalendarIcon = 'assets/icons/serv-calendar-icon.svg';
+  static const String servCallIcon = 'assets/icons/serv-call-icon.svg';
+  static const String servExamIcon = 'assets/icons/serv-exam_results-icon.svg';
+  static const String servStudentAbsenceIcon = 'assets/icons/serv-student-absence-icon.svg';
+  static const String manageAccountsIcon = 'assets/icons/manage_account.svg';
   static const String filter = 'assets/icons/filter.svg';
   static const String flashSales = 'assets/icons/flash_sales.svg';
   static const String basket = 'assets/icons/icons_basket.svg';
@@ -71,8 +65,5 @@ abstract class AppAssets{
   static const String paymentYalla = 'assets/icons/payment_yalla_icon.svg';
   static const String paymentMasterCard = 'assets/icons/payment_master_icon.svg';
   static const String paymentFawry = 'assets/icons/payment_fawry_icon.svg';
-  static const String paymentAman = 'assets/images/payment_aman_icon.png';
-  static const String paymentMiza = 'assets/images/payment_miza_icon.png';
-  static const String paymentVodafon = 'assets/images/payment_vodafon_icon.png';
   static const String orders = 'assets/icons/orders.svg';
 }

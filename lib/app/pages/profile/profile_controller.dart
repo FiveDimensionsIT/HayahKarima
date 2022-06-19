@@ -8,6 +8,7 @@ import 'package:hayah_karema/app/common/managers/api/profile/_model/profile_mode
 import 'package:hayah_karema/app/common/managers/api/profile/_model/user_earn_point_model.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/_model/user_rewards.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/i_profile_api_manager.dart';
+import 'package:hayah_karema/app/common/models/generic_model.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/setup.dart';
@@ -24,6 +25,8 @@ class ProfileController extends GetxController {
   final pointsEarnedApiLoading = false.obs;
   final profileApiLoading = false.obs;
   final userRewardsApiLoading = false.obs;
+  final userAddressesApiLoading = false.obs;
+  final userPaymentCardsApiLoading = false.obs;
   var currentTabIndex = 0.obs;
 
   final Rx<UserPointsResponse> userPointsResponse = UserPointsResponse().obs;
@@ -33,7 +36,7 @@ class ProfileController extends GetxController {
   final RxList<AddressModel> addresses = <AddressModel>[].obs;
   final RxList<PaymentCardModel> paymentCards = <PaymentCardModel>[].obs;
 
-  final String userId = '3';//Get.arguments['user_id']
+  final String _userId = '3'; //Get.arguments['user_id']
 
   @override
   void onInit() {
@@ -42,7 +45,6 @@ class ProfileController extends GetxController {
   }
 
   Future<void> _getUserData() async {
-    // call APIs
     _getProfileData();
     _getUserPointsAPI();
     _getUserEarnedPointsAPI();
@@ -55,7 +57,7 @@ class ProfileController extends GetxController {
     pointsApiLoading.value = true;
     UserPointsResponse? result;
     var success = await _action.execute(() async {
-      result = await _apiManager.getUserPoints(userId: userId);
+      result = await _apiManager.getUserPoints(userId: _userId);
     }, checkConnection: true);
     //
     pointsApiLoading.value = false;
@@ -74,7 +76,7 @@ class ProfileController extends GetxController {
     List<UserEarnedPointModel>? result;
 
     var success = await _action.execute(() async {
-      result = await _profileApiManager.getUserEarnedPoints(userId: userId);
+      result = await _profileApiManager.getUserEarnedPoints(userId: _userId);
     }, checkConnection: true);
     //
     pointsEarnedApiLoading.value = false;
@@ -93,7 +95,7 @@ class ProfileController extends GetxController {
     profileApiLoading.value = true;
     ProfileModel? result;
     var success = await _action.execute(() async {
-      result = await _profileApiManager.getProfileData(userId);
+      result = await _profileApiManager.getProfileData(_userId);
     }, checkConnection: true);
     //
     profileApiLoading.value = false;
@@ -112,7 +114,7 @@ class ProfileController extends GetxController {
     userRewardsApiLoading.value = true;
     List<UserRewards>? result;
     var success = await _action.execute(() async {
-      result = await _profileApiManager.getUserRewards(userId: userId);
+      result = await _profileApiManager.getUserRewards(userId: _userId);
     }, checkConnection: true);
     userRewardsApiLoading.value = false;
     if (success) {
@@ -175,13 +177,13 @@ class ProfileController extends GetxController {
           cardImgPath: AppAssets.paymentYalla,
           expDate: '05/25'),
       PaymentCardModel(
-          cardId: 'cardId4',
+          cardId: 'cardId5',
           cardName: 'cardName4',
           cardNumber: '1234-4321-1234-4321',
           cardImgPath: AppAssets.paymentVodafon,
           expDate: '05/25'),
       PaymentCardModel(
-          cardId: 'cardId4',
+          cardId: 'cardId6',
           cardName: 'cardName4',
           cardNumber: '1234-4321-1234-4321',
           cardImgPath: AppAssets.paymentVisa,
@@ -190,12 +192,12 @@ class ProfileController extends GetxController {
   }
 
   void onDeleteAddress({required AddressModel address}) {
-    addresses.removeWhere((a)=> a.addressId == address.addressId);
+    addresses.removeWhere((a) => a.addressId == address.addressId);
+    addresses.refresh();
   }
 
   void onDeletePaymentCard({required PaymentCardModel card}) {
-    paymentCards.removeWhere((c)=> c.cardId == card.cardId);
+    paymentCards.removeWhere((c) => c.cardId == card.cardId);
+    paymentCards.refresh();
   }
-
-
 }
