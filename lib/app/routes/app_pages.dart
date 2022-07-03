@@ -64,7 +64,7 @@ const _transitionDuration = Duration(milliseconds: 700);
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.PRODUCTS_HOME;
+  static const INITIAL = Routes.SPLASH_VIEW;
 
   static final routes = [
     GetPage(

@@ -10,8 +10,8 @@ import 'http_lib.dart';
 class DioHttpService implements IHttpService {
   final Dio _dioInstance = Dio();
 
-  // final String baseUrl = 'http://38.242.215.195/api/'; // test
-  final String baseUrl = 'http://194.163.129.79/api/'; // live
+  // final String baseUrl = 'http://149.102.138.39/api/'; // test
+  final String baseUrl = 'http://149.102.138.40/api/'; // live
 
   DioHttpService() {
     _addLoggerInterceptor(_dioInstance);

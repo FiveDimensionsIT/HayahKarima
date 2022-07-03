@@ -13,7 +13,9 @@ class RewardsApiManager implements IRewardsApiManager{
 
   @override
   Future<List<RewardModel>?> getRewards() async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'Rewards/Search?statusId=2',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      // edit from Rewards/Search to Membership/Rewards/Search
+      url: 'Membership/Rewards/Search?statusId=2',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -25,7 +27,9 @@ class RewardsApiManager implements IRewardsApiManager{
 
   @override
   Future replacingReward(ReplacingReward? replacingReward) async{
-    var request = HttpRequest(method: HttpMethod.post, url: 'UserRewards',data: replacingReward)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.post,
+        // edit from UserRewards to Membership/UserRewards
+        url: 'Membership/UserRewards',data: replacingReward)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //

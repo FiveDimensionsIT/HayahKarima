@@ -14,7 +14,9 @@ class PostApiManager implements IPostApiManager{
 
   @override
   Future addPost({PostRequestModel? postRequest}) async{
-    var request = HttpRequest(method: HttpMethod.post, url: 'UserPosts',data: postRequest)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.post,
+        // edit from UserPosts to Timeline/UserPosts
+        url: 'Timeline/UserPosts',data: postRequest)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -26,7 +28,9 @@ class PostApiManager implements IPostApiManager{
 
   @override
   Future<List<PostTypeModel>?> getPostsType() async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'PostsTypes/Lookup',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      // edit from PostsTypes/Lookup to Timeline/PostsTypes/Lookup
+      url: 'Timeline/PostsTypes/Lookup',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //

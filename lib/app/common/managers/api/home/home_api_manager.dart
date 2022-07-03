@@ -22,7 +22,8 @@ class HomeApiManager implements IHomeApiManager {
     final _params = '?statusId=${params.statusId}&PageNumber=${params.pageNo}&code=EG';
     var request = HttpRequest(
       method: HttpMethod.get,
-      url: 'Countries/Search$_params',
+      // edit from Countries/Search to VillagesMgmt/Countries/Search
+      url: 'VillagesMgmt/Countries/Search$_params',
     )..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
@@ -40,7 +41,8 @@ class HomeApiManager implements IHomeApiManager {
         '?countryId=${params.countryId}&statusId=${params.statusId}&PageNumber=${params.pageNo}&PageSize=${params.pageSize}&OrderBy=${params.orderBy}';
     var request = HttpRequest(
       method: HttpMethod.get,
-      url: 'Governorates/Search$_params',
+      // edit from Governorates/Search to VillagesMgmt/Governorates/Search
+      url: 'VillagesMgmt/Governorates/Search$_params',
     )..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
@@ -57,7 +59,8 @@ class HomeApiManager implements IHomeApiManager {
     final _params = '?PageNumber=${params.pageNo}&PageSize=${params.pageSize}&OrderBy=${params.orderBy}';
     var request = HttpRequest(
       method: HttpMethod.get,
-      url: 'DigitalStandardCategories/Search$_params',
+      // edit from DigitalStandardCategories/Search to VillagesMgmt/DigitalStandardCategories/Search
+      url: 'VillagesMgmt/DigitalStandardCategories/Search$_params',
     )..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
@@ -75,7 +78,8 @@ class HomeApiManager implements IHomeApiManager {
         '?countryId=${params.countryId}&statusId=${params.statusId}&PageNumber=${params.pageNo}&PageSize=${params.pageSize}&OrderBy=${params.orderBy}';
     var request = HttpRequest(
       method: HttpMethod.get,
-      url: 'Centers/Search$_params',
+      // edit from Centers/Search to VillagesMgmt/Centers/Search
+      url: 'VillagesMgmt/Centers/Search$_params',
     )..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
@@ -93,7 +97,8 @@ class HomeApiManager implements IHomeApiManager {
         '?roleId=${params.roleId}&statusId=${params.statusId}&PageNumber=${params.pageNo}&PageSize=${params.pageSize}&OrderBy=${params.orderBy}';
     var request = HttpRequest(
       method: HttpMethod.get,
-      url: 'Contacts/Search$_params',
+      // edit from Contacts/Search to Security/Contacts/Search
+      url: 'Security/Contacts/Search$_params',
     )..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
@@ -111,7 +116,8 @@ class HomeApiManager implements IHomeApiManager {
         '?countryId=${params.countryId}&statusId=${params.statusId}&PageNumber=${params.pageNo}&PageSize=${params.pageSize}&OrderBy=${params.orderBy}';
     var request = HttpRequest(
       method: HttpMethod.get,
-      url: 'Villages/Search$_params',
+      // edit from Villages/Search to VillagesMgmt/Villages/Search
+      url: 'VillagesMgmt/Villages/Search$_params',
     )..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
@@ -139,7 +145,9 @@ class HomeApiManager implements IHomeApiManager {
 
   @override
   Future<List<TimelinePostModel>?> getTimelinePosts({bool? isApproved, int? pageNumber, int? pageSize, String? orderBy}) async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'UserPosts/Search?isApproved=true&OrderBy=date%20desc',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      //   // edit from UserPosts/Search to Timeline/UserPosts/Search
+      url: 'Timeline/UserPosts/Search?isApproved=true&OrderBy=date%20desc',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -151,7 +159,9 @@ class HomeApiManager implements IHomeApiManager {
 
   @override
   Future<MyVillageModel?> getMyVillage(String? villageId) async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'Villages/$villageId',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      // edit from Villages to VillagesMgmt/Villages
+      url: 'VillagesMgmt/Villages/$villageId',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -163,7 +173,9 @@ class HomeApiManager implements IHomeApiManager {
 
   @override
   Future postPrayingForMartyrs(MartyrsPrayersRequest? requestModel) async{
-    var request = HttpRequest(method: HttpMethod.post, url: 'MartyrsPrayers', data: requestModel)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.post,
+        // edit from MartyrsPrayers to UserMartyrsPrayers
+        url: 'UserMartyrsPrayers', data: requestModel)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -175,7 +187,9 @@ class HomeApiManager implements IHomeApiManager {
 
   @override
   Future<List<QuestionResponse>?> getQuestions({String? userId}) async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'UserQuestion/$userId',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      // edit from UserQuestion to Questions/UserQuestion
+      url: 'Questions/UserQuestion/$userId',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -187,7 +201,9 @@ class HomeApiManager implements IHomeApiManager {
 
   @override
   Future<UserPointsResponse?> getUserPoints({String? userId}) async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'UserPoints/$userId',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      // edit from UserPoints to Membership/UserPoints
+      url: 'Membership/UserPoints/$userId',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -199,7 +215,9 @@ class HomeApiManager implements IHomeApiManager {
 
   @override
   Future postAnswer(AnswerRequest? answerRequest) async{
-    var request = HttpRequest(method: HttpMethod.post, url: 'UserQuestion/SubmitAnswer', data: answerRequest)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.post,
+        // edit from UserQuestion/SubmitAnswer to Questions/UserQuestion/SubmitAnswer
+        url: 'Questions/UserQuestion/SubmitAnswer', data: answerRequest)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //

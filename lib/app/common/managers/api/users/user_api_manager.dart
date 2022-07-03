@@ -18,7 +18,9 @@ class UserApiManager implements IUserApiManager {
 
   @override
   Future<List<PointerItemModel>?> getAllUsers(String? userId) async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'Contacts/Search?createdBy=$userId&statusId=2&ForApp=true',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      // edit from Contacts/Search to Security/Contacts/Search
+      url: 'Security/Contacts/Search?createdBy=$userId&statusId=2&ForApp=true',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -30,7 +32,9 @@ class UserApiManager implements IUserApiManager {
 
   @override
   Future<RegisterUserResponse?> registerUser(AddUserData userData) async{
-    var request = HttpRequest(method: HttpMethod.post, url: 'Contacts',data: userData)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.post,
+        // edit from Contacts to Security/Contacts
+        url: 'Security/Contacts',data: userData)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -42,7 +46,9 @@ class UserApiManager implements IUserApiManager {
 
   @override
   Future<List<LookupModel>?> educationStatusLookup() async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'ContactEducationalStatus/Search',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      // edit from ContactEducationalStatus/Search to Security/ContactEducationalStatus/Search
+      url: 'Security/ContactEducationalStatus/Search',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -54,7 +60,9 @@ class UserApiManager implements IUserApiManager {
 
   @override
   Future<List<LookupModel>?> genderLookup() async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'ContactGender/Search',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      // edit from ContactGender/Search to Security/ContactGender/Search
+      url: 'Security/ContactGender/Search',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -66,7 +74,9 @@ class UserApiManager implements IUserApiManager {
 
   @override
   Future<List<LookupModel>?> healthStatusLookup() async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'ContactHealthStatus/Search',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      // edit from ContactHealthStatus/Search to Security/ContactHealthStatus/Search
+      url: 'Security/ContactHealthStatus/Search',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -79,7 +89,9 @@ class UserApiManager implements IUserApiManager {
 
   @override
   Future<List<LookupModel>?> governoratesLookup() async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'Governorates/Search?statusId=2&ForApp=true&OrderBy=name',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      // edit from Governorates/Search to VillagesMgmt/Governorates/Search
+      url: 'VillagesMgmt/Governorates/Search?statusId=2&ForApp=true&OrderBy=name',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -91,7 +103,9 @@ class UserApiManager implements IUserApiManager {
 
   @override
   Future<List<LookupModel>?> centersLookup(String id) async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'Centers/Search?governorateId=$id&statusId=2&ForApp=true&OrderBy=name',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      // edit from Centers/Search to VillagesMgmt/Centers/Search
+      url: 'VillagesMgmt/Centers/Search?governorateId=$id&statusId=2&ForApp=true&OrderBy=name',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -105,7 +119,9 @@ class UserApiManager implements IUserApiManager {
 
   @override
   Future<List<LookupModel>?> villagesLookup(String id) async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'Villages/Search?centerId=$id&statusId=2&ForApp=true&OrderBy=name',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      // edit from Villages/Search to VillagesMgmt/Villages/Search
+      url: 'VillagesMgmt/Villages/Search?centerId=$id&statusId=2&ForApp=true&OrderBy=name',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -118,7 +134,9 @@ class UserApiManager implements IUserApiManager {
 
   @override
   Future<GlobalStatusResponse?> changePassword(ChangePasswordRequest changePasswordRequest) async{
-    var request = HttpRequest(method: HttpMethod.put, url: 'Users/ChangePassword/${changePasswordRequest.contactId}',data: changePasswordRequest)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.put,
+        // edit from Users/ChangePassword to Security/Users/ChangePassword
+        url: 'Security/Users/ChangePassword/${changePasswordRequest.contactId}',data: changePasswordRequest)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -130,7 +148,9 @@ class UserApiManager implements IUserApiManager {
 
   @override
   Future<GlobalStatusResponse?> updateUserStatus(UserStatusRequest userStatusRequest) async{
-    var request = HttpRequest(method: HttpMethod.put, url: 'Contacts/UpdateStatus/${userStatusRequest.id}',data: userStatusRequest)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.put,
+        // edit from Contacts/UpdateStatus to Security/Contacts/UpdateStatus
+        url: 'Security/Contacts/UpdateStatus/${userStatusRequest.id}',data: userStatusRequest)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -142,7 +162,9 @@ class UserApiManager implements IUserApiManager {
 
   @override
   Future<List<LookupModel>?> contactStatusLookup() async{
-    var request = HttpRequest(method: HttpMethod.get, url: 'Status/Search',)..addJsonHeaders();
+    var request = HttpRequest(method: HttpMethod.get,
+      // edit from Status/Search to Lookups/Status/Search
+      url: 'Lookups/Status/Search',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
