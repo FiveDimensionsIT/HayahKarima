@@ -118,6 +118,7 @@ abstract class AppTheme {
         bodyText1: TextStyle(fontSize: _textSizeS, color: colors.text),
         bodyText2: TextStyle(fontSize: _textSizeS, color: colors.text),
         subtitle1: TextStyle(fontSize: _textSizeM, color: colors.text),
+        button: TextStyle(color: colors.text),
       )),
 
       //> card

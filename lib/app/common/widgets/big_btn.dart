@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/themes/app_dimens.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
 class BigBtn extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final BtnState state;
+  final Color? bgColor;
 
-  BigBtn({required this.text, required this.onPressed, this.state = BtnState.active});
+  BigBtn({required this.text, required this.onPressed, this.state = BtnState.active, this.bgColor});
+
+  Color get buttonTextColor =>
+  bgColor != null && bgColor == AppColors.current.neutral ? AppColors.current.dimmedXX : AppColors.current.neutral;
 
   @override
   Widget build(BuildContext context) {
+
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
@@ -19,12 +27,19 @@ class BigBtn extends StatelessWidget {
             onPressed();
           }
         },
-        child: state == BtnState.loading ? _getScalingProgressIndicator(context) : Text(text),
+        child: state == BtnState.loading
+            ? _getScalingProgressIndicator(context)
+            : Text(
+                text,
+                style: TextStyle(fontSize: AppDimens.fontSizeLarge, color: buttonTextColor,
+                fontFamily: GoogleFonts.markaziTextTextTheme().headline1?.fontFamily
+                ),
+              ),
         style: state == BtnState.disabled
             ? getDisabledStyle(context)
             : state == BtnState.loading
                 ? getLoadingStyle(context)
-                : null,
+                : getDefaultStyle(context),
       ),
     );
   }
@@ -34,14 +49,22 @@ class BigBtn extends StatelessWidget {
       elevation: MaterialStateProperty.all(0),
       backgroundColor: MaterialStateProperty.all(Theme.of(context).disabledColor),
       overlayColor: MaterialStateProperty.all(Theme.of(context).disabledColor),
-      //foregroundColor: MaterialStateProperty.all(Theme.of(context).shadowColor)
+      // foregroundColor: MaterialStateProperty.all(Theme.of(context).shadowColor)
+    );
+  }
+
+  ButtonStyle getDefaultStyle(BuildContext context) {
+    return ButtonStyle(
+      elevation: MaterialStateProperty.all(0),
+      backgroundColor: MaterialStateProperty.all(bgColor ?? AppColors.current.primary),
+      overlayColor: MaterialStateProperty.all(Theme.of(context).disabledColor),
+      side: MaterialStateProperty.all(BorderSide(color: buttonTextColor.withOpacity(0.8)))
     );
   }
 
   ButtonStyle getLoadingStyle(BuildContext context) {
     return ButtonStyle(
       elevation: MaterialStateProperty.all(0),
-      //overlayColor: MaterialStateProperty.all(Theme.of(context).buttonColor),
     );
   }
 

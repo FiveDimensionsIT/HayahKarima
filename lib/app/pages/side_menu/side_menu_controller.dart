@@ -4,10 +4,13 @@ import 'package:hayah_karema/app/common/managers/api/auth/_model/user_data.dart'
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/models/enums/contacts_enum.dart';
 import 'package:hayah_karema/app/common/models/enums/user_type.dart';
+import 'package:hayah_karema/app/common/models/generic_model.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/pages/grids_view/grid_details/grid_details_view.dart';
+import 'package:hayah_karema/app/pages/profile/profile_binding.dart';
+import 'package:hayah_karema/app/pages/profile/profile_view.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
 import 'package:hayah_karema/setup.dart';
 import 'package:hayah_karema/utils/ui/dialog/dialog_helper.dart';
@@ -16,6 +19,7 @@ class SideMenuController extends GetxController {
   final menuItems = <MenuItemModel>[].obs;
   final cacheManager = DI.find<ICacheManager>();
   final _userData = UserData().obs;
+  final RxList<GenericModel> userAccounts = <GenericModel>[].obs;
   var honorFilesExpanded = false.obs;
 
   UserData? get userData => _userData.value;
@@ -24,9 +28,10 @@ class SideMenuController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     //
-    await _getUserData();
+    // await _getUserData();
     //
     initMenuItems();
+    _getUserAccounts();
   }
 
   Future<void> _getUserData() async {
@@ -182,6 +187,32 @@ class SideMenuController extends GetxController {
         }));
     menuItems.refresh();
   }
+
+
+  void _getUserAccounts() {
+    userAccounts.assignAll([
+      GenericModel(id: 0, title: 'مجدي عادل', subTitle: 'حساب شخصي', imgPath: '', isSelectedObs: true.obs),
+      GenericModel(id: 1, title: 'مجدي عادل', subTitle: 'ادارة', imgPath: '', isSelectedObs: false.obs),
+      GenericModel(id: 2, title: 'مجدي عادل', subTitle: 'مدير فرع', imgPath: '', isSelectedObs: false.obs)
+    ]);
+
+    if(userAccounts.length == 1){
+      onChangeAccountBtnClick();
+    }
+  }
+
+  onAccountItemSelectionChange({required GenericModel account}) {
+    userAccounts.firstWhere((a) => a.isSelectedObs?.value == true).isSelectedObs?.value = false;
+    userAccounts.firstWhere((a) => a.id == account.id).isSelectedObs?.value = true;
+    userAccounts.refresh();
+  }
+
+  onChangeAccountBtnClick() {
+    Get.back();
+    final selectedAccount = userAccounts.firstWhere((a) => a.isSelectedObs?.value == true);
+    Get.to(()=> const ProfileView(), binding: ProfileBinding());
+  }
+
 }
 
 class MenuItemModel {
