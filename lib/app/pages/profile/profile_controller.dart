@@ -8,7 +8,6 @@ import 'package:hayah_karema/app/common/managers/api/profile/_model/profile_mode
 import 'package:hayah_karema/app/common/managers/api/profile/_model/user_earn_point_model.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/_model/user_rewards.dart';
 import 'package:hayah_karema/app/common/managers/api/profile/i_profile_api_manager.dart';
-import 'package:hayah_karema/app/common/models/generic_model.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/setup.dart';

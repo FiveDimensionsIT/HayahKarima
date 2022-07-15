@@ -131,8 +131,8 @@ class HomeApiManager implements IHomeApiManager {
 
   @override
   Future<List<GalleryModel>?> getContactsGallery(int contactId) async {
-    final _params = '?contactId=$contactId&PageNumber=1';
-    var request = HttpRequest(method: HttpMethod.get, url: 'ContactImages/Search$_params',)..addJsonHeaders();
+    final params = '?contactId=$contactId&PageNumber=1';
+    var request = HttpRequest(method: HttpMethod.get, url: 'ContactImages/Search$params',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -147,7 +147,7 @@ class HomeApiManager implements IHomeApiManager {
   Future<List<TimelinePostModel>?> getTimelinePosts({bool? isApproved, int? pageNumber, int? pageSize, String? orderBy}) async{
     var request = HttpRequest(method: HttpMethod.get,
       //   // edit from UserPosts/Search to Timeline/UserPosts/Search
-      url: 'Timeline/UserPosts/Search?isApproved=true&OrderBy=date%20desc',)..addJsonHeaders();
+      url: 'Timeline/UserPosts/Search?isApproved=true&ForApp=true&OrderBy=date%20desc',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
@@ -161,7 +161,7 @@ class HomeApiManager implements IHomeApiManager {
   Future<MyVillageModel?> getMyVillage(String? villageId) async{
     var request = HttpRequest(method: HttpMethod.get,
       // edit from Villages to VillagesMgmt/Villages
-      url: 'VillagesMgmt/Villages/$villageId',)..addJsonHeaders();
+      url: 'VillagesMgmt/Villages/$villageId?forapp=true',)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //
