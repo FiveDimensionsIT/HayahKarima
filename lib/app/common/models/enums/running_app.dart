@@ -1,0 +1,4 @@
+enum RunningApp{
+  HayahKarima,
+  ReadersClub
+}

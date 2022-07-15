@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hayah_karema/app/common/models/enums/running_app.dart';
+import 'package:hayah_karema/config/app_config.dart';
+import 'package:hayah_karema/config/setup.dart';
 
 class AppColors {
   static AppColors? _current;
 
-  static AppColors get current => _current ?? _hayahKarimaColors;
+  static AppColors get current {
+    if (_current == null) {
+      return DI.find<AppConfig>().runningApp == RunningApp.HayahKarima ? _hayahKarimaColors : _readersClubColors;
+    }
+    return _current!;
+  }
 
   static set current(value) => _current = value;
 
@@ -24,6 +32,7 @@ class AppColors {
     required this.neutral,
     required this.success,
     required this.transparent,
+    required this.blue,
   });
 
   Color primary;
@@ -42,9 +51,10 @@ class AppColors {
   Color dimmedLight;
   Color success;
   Color transparent;
+  Color blue;
 }
 
-final _hayahKarimaColors = AppColors(
+final _readersClubColors = AppColors(
     background: const Color.fromRGBO(245, 246, 240, 1),
     secondary: const Color(0xffCB7FE6),
     accent: const Color(0xffF47321),
@@ -60,10 +70,10 @@ final _hayahKarimaColors = AppColors(
     dimmedXX: Colors.grey.shade800,
     success: const Color.fromRGBO(0, 128, 0, 1),
     neutral: Colors.white,
+    blue: Colors.lightBlue.shade700,
     transparent: Colors.transparent);
 
-
-final _readersClubColors = AppColors(
+final _hayahKarimaColors = AppColors(
     background: const Color.fromRGBO(245, 246, 240, 1),
     secondary: const Color(0xffCB7FE6),
     accent: const Color(0xffF47321),
@@ -79,4 +89,5 @@ final _readersClubColors = AppColors(
     dimmedXX: Colors.grey.shade800,
     success: const Color.fromRGBO(0, 128, 0, 1),
     neutral: Colors.white,
+    blue: Colors.lightBlue.shade700,
     transparent: Colors.transparent);

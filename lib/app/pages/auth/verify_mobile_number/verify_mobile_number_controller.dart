@@ -6,8 +6,8 @@ import 'package:hayah_karema/app/common/action_center/action_center.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/pages/auth/forgot_password/forgot_password_controller.dart';
 import 'package:hayah_karema/app/pages/splash/splash_controller.dart';
-import 'package:hayah_karema/services/firebase_phone_auth/i_firebase_phone_auth.dart';
 import 'package:hayah_karema/config/setup.dart';
+import 'package:hayah_karema/services/firebase_auth/i_firebase_auth.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 
 class VerifyMobileNoController extends GetxController {
@@ -15,7 +15,7 @@ class VerifyMobileNoController extends GetxController {
   final _action = ActionCenter();
   final _splashController = Get.find<SplashController>();
 
-  final _fPhoneAuthService = DI.find<IFirebasePhoneAuth>();
+  final _fPhoneAuthService = DI.find<IFirebaseAuth>();
 
   String? code;
   var mobileNo = ''.obs;

@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/models/enums/running_app.dart';
+import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
+import 'package:hayah_karema/app/common/themes/app_dimens.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/action_sheet_indicator.dart';
 import 'package:hayah_karema/app/common/widgets/big_btn.dart';
+import 'package:hayah_karema/config/app_config.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 
 import 'login_controller.dart';
@@ -32,7 +39,6 @@ class LoginView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               /// action sheet indicator
               SizedBox(width: Get.width, child: const Center(child: ActionSheetIndicator())),
 
@@ -87,7 +93,13 @@ class LoginView extends StatelessWidget {
               ),
 
               /// login
-              _buildLoginButton()
+              _buildLoginButton(),
+
+              Empty(
+                height: 10,
+              ),
+
+              _buildLoginBySocialMedia(),
             ],
           ),
         ),
@@ -95,12 +107,51 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Widget _buildRequiredCode() =>
-      Obx(() =>
-      controller.isUserCodeRequired.value == true
-          ? Text(AppText.requiredField,
+  Widget _buildLoginBySocialMedia() {
+    final runningApp = DI.find<AppConfig>().runningApp;
+    if (runningApp == RunningApp.HayahKarima) return const SizedBox();
+
+    return Column(
+      children: [
+        _buildSocialMediaButton('Facebook', AppAssets.facebookIcon, ()=> controller.loginByFacebook()),
+        Empty(
+          height: 10,
+        ),
+        _buildSocialMediaButton('Google', AppAssets.googleIcon, ()=> controller.loginByGoogle()),
+      ],
+    );
+  }
+
+  Widget _buildSocialMediaButton(String title, String assetPath, Function onPress) {
+    return MaterialButton(
+      padding: EdgeInsets.zero,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(AppDimens.borderRadius),
+            border: Border.all(width: 1, color: AppColors.current.primary)),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: TextStyle(fontSize: AppDimens.fontSizeLarge),
+            ),
+            SvgPicture.asset(assetPath,
+              height: 35.h,
+            )
+          ],
+        ),
+      ),
+      onPressed: () => onPress(),
+    );
+  }
+
+  Widget _buildRequiredCode() => Obx(() => controller.isUserCodeRequired.value == true
+      ? Text(AppText.requiredField,
           style: TextStyle(fontSize: Get.textTheme.bodySmall?.fontSize, color: AppColors.current.error))
-          : const SizedBox());
+      : const SizedBox());
 
   SizedBox _buildToolbar() {
     return SizedBox(
@@ -117,39 +168,38 @@ class LoginView extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-
         Obx(() {
           return _buildUserCodeTextFiledItem(
               focusNode: controller.lastFocusNode,
               textEditingController: controller.lastTextEditingController,
               enabled: controller.loginLoading,
-              borderColor: controller.isUserCodeRequired.value ? AppColors.current.error : AppColors.current
-                  .dimmedLight,
+              borderColor:
+                  controller.isUserCodeRequired.value ? AppColors.current.error : AppColors.current.dimmedLight,
               onTextChanged: (val) =>
                   controller.appendUserCode(val, controller.passwordFocusNode, controller.middleFocusNode));
         }),
-
-        const SizedBox(width: 10,),
-
+        const SizedBox(
+          width: 10,
+        ),
         Obx(() {
           return _buildUserCodeTextFiledItem(
               focusNode: controller.middleFocusNode,
               textEditingController: controller.middleTextEditingController,
               enabled: controller.loginLoading,
-              borderColor: controller.isUserCodeRequired.value ? AppColors.current.error : AppColors.current
-                  .dimmedLight,
+              borderColor:
+                  controller.isUserCodeRequired.value ? AppColors.current.error : AppColors.current.dimmedLight,
               onTextChanged: (val) =>
                   controller.appendUserCode(val, controller.lastFocusNode, controller.firstFocusNode));
         }),
-
-        const SizedBox(width: 10,),
-
+        const SizedBox(
+          width: 10,
+        ),
         Obx(() {
           return _buildUserCodeTextFiledItem(
               focusNode: controller.firstFocusNode,
               textEditingController: controller.firstTextEditingController,
-              borderColor: controller.isUserCodeRequired.value ? AppColors.current.error : AppColors.current
-                  .dimmedLight,
+              borderColor:
+                  controller.isUserCodeRequired.value ? AppColors.current.error : AppColors.current.dimmedLight,
               enabled: controller.loginLoading,
               onTextChanged: (val) => controller.appendUserCode(val, controller.middleFocusNode, null));
         })
@@ -181,11 +231,12 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Widget _buildUserCodeTextFiledItem({required FocusNode focusNode,
-    required TextEditingController textEditingController,
-    required RxBool enabled,
-    required Color borderColor,
-    required Function onTextChanged}) {
+  Widget _buildUserCodeTextFiledItem(
+      {required FocusNode focusNode,
+      required TextEditingController textEditingController,
+      required RxBool enabled,
+      required Color borderColor,
+      required Function onTextChanged}) {
     return Obx(() {
       return SizedBox(
         width: Get.width / 4,
@@ -226,6 +277,9 @@ class LoginView extends StatelessWidget {
   OutlineInputBorder _outlineInputBorder(color) {
     return OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(5)),
-        borderSide: BorderSide(color: color, width: 1,));
+        borderSide: BorderSide(
+          color: color,
+          width: 1,
+        ));
   }
 }

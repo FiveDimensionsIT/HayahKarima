@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/services/connectivity/connectivity_lib.dart';
 import 'package:hayah_karema/services/http/http_classes.dart';
 import 'package:hayah_karema/services/logger/log.dart';
-import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 
 import 'app_exception.dart';

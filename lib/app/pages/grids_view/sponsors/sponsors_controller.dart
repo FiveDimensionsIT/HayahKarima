@@ -4,8 +4,8 @@ import 'package:hayah_karema/app/common/managers/api/home/_models/digital_pointe
 import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
 import 'package:hayah_karema/app/common/managers/api/home/i_home_api_manager.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
-import 'package:hayah_karema/services/url_launcher/i_url_launcher_service.dart';
 import 'package:hayah_karema/config/setup.dart';
+import 'package:hayah_karema/services/url_launcher/i_url_launcher_service.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 
 class SponsersController extends GetxController {

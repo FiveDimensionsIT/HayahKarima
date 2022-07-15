@@ -12,11 +12,13 @@ import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/pages/splash/splash_controller.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
 import 'package:hayah_karema/config/setup.dart';
+import 'package:hayah_karema/services/firebase_auth/i_firebase_auth.dart';
 import 'package:hayah_karema/utils/parse_token.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 
 class LoginController extends GetxController {
   final _keyForm = GlobalKey<FormState>();
+  final _firebaseAuth = DI.find<IFirebaseAuth>();
   GlobalKey<FormState> get keyForm => _keyForm;
 
   final firstTextEditingController = TextEditingController();
@@ -70,6 +72,34 @@ class LoginController extends GetxController {
         if (isUserCodeRequired.value == true) isUserCodeRequired.value = false;
       }
     }
+  }
+
+  void loginByFacebook() async{
+    final result = await _action.execute(() async{
+      final user = await _firebaseAuth.signInWithFacebook();
+      if(user == null) {
+        OverlayHelper.showErrorToast('failed to sign in by Facebook');
+      }else {
+        OverlayHelper.showSuccessToast('sign in by Facebook successfully');
+      }
+    }, checkConnection: true, errorHandler: (error){
+      OverlayHelper.showErrorToast(error.toString());
+      return false;
+    });
+  }
+
+  void loginByGoogle() async{
+    final result = await _action.execute(() async{
+      final user = await _firebaseAuth.signInWithGoogle();
+      if(user == null) {
+        OverlayHelper.showErrorToast('failed to sign in by Google');
+      }else{
+        OverlayHelper.showSuccessToast('sign in by Google successfully');
+      }
+    }, checkConnection: true, errorHandler: (error){
+      OverlayHelper.showErrorToast(error.toString());
+      return false;
+    });
   }
 
   void navigateToForgotPassword() {

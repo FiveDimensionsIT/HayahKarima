@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">نادي القراء</string>
+    <string name="facebook_app_id">1219643365544804</string>
+    <string name="fb_login_protocol_scheme">fb1219643365544804</string>
+    <string name="facebook_client_token">f29de6fe4cf1a19c2a3ac446f5076175</string>
 </resources>

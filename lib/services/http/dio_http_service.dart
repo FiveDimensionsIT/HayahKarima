@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hayah_karema/config/app_config.dart';
-import 'package:hayah_karema/config/global.dart';
 import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/services/logger/log.dart';
 import 'package:hayah_karema/utils/serialization/serialization_lib.dart';

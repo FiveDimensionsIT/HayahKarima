@@ -1,4 +1,7 @@
 import 'package:hayah_karema/config/app_config.dart';
+import 'package:hayah_karema/services/firebase_auth/fake_firebase_auth.dart';
+import 'package:hayah_karema/services/firebase_auth/firebase_authentication.dart';
+import 'package:hayah_karema/services/firebase_auth/i_firebase_auth.dart';
 
 import '../app/common/managers/api/auth/auth_api_manager.dart';
 import '../app/common/managers/api/auth/fake_auth_api_manager.dart';
@@ -24,10 +27,7 @@ import '../app/common/managers/api/users/user_api_manager.dart';
 import '../app/common/managers/cache/cache_manager.dart';
 import '../app/common/managers/cache/i_cache_manager.dart';
 import '../config/setup.dart';
-import 'main_common.dart';
 import '../services/connectivity/connectivity_lib.dart';
-import '../services/firebase_phone_auth/firebase_phone_auth.dart';
-import '../services/firebase_phone_auth/i_firebase_phone_auth.dart';
 import '../services/http/http_lib.dart';
 import '../services/logger/abs_logger.dart';
 import '../services/logger/debug_logger.dart';
@@ -37,6 +37,7 @@ import '../services/persistence/cache/fake_cache_service.dart';
 import '../services/persistence/cache/local_cache_service.dart';
 import '../services/url_launcher/i_url_launcher_service.dart';
 import '../services/url_launcher/url_launcher_service.dart';
+import 'main_common.dart';
 
 class InitSetupDI{
 
@@ -59,7 +60,7 @@ class InitSetupDI{
     // url launcher service
     DI.setSingleton<IUrlLauncherService>(() => UrlLauncherService());
     // firebase phone auth service
-    DI.setSingleton<IFirebasePhoneAuth>(() => FirebasePhoneAuth());
+    DI.setSingleton<IFirebaseAuth>(() => FirebaseAuthentication());
     // endregion  ==== services ====
   }
 
@@ -111,6 +112,9 @@ class InitSetupDI{
     //
     DI.remove<IUserApiManager>();
     DI.setSingleton<IUserApiManager>(() => FakeUserApiManager());
+    //
+    DI.remove<IFirebaseAuth>();
+    DI.setSingleton<IFirebaseAuth>(() => FakeFirebaseAuth());
     //
     DI.remove<AppConfig>();
     DI.setSingleton(() => config);

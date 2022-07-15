@@ -1,7 +1,8 @@
-import 'package:hayah_karema/services/firebase_phone_auth/i_firebase_phone_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hayah_karema/services/firebase_auth/i_firebase_auth.dart';
 
 
-class FakeFirebasePhoneAuth implements IFirebasePhoneAuth{
+class FakeFirebaseAuth implements IFirebaseAuth{
   @override
   Future authenticatePhone({required String countryCode,
     required String phoneNumber,
@@ -29,6 +30,18 @@ class FakeFirebasePhoneAuth implements IFirebasePhoneAuth{
     onCodeVerified(true);
     //
     return true;
+  }
+
+  @override
+  Future<UserCredential> signInWithFacebook() {
+    // TODO: implement signInWithFacebook
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserCredential> signInWithGoogle() {
+    // TODO: implement signInWithGoogle
+    throw UnimplementedError();
   }
 
 }

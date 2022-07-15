@@ -66,4 +66,8 @@ abstract class AppAssets {
   static const String paymentMasterCard = 'assets/icons/payment_master_icon.svg';
   static const String paymentFawry = 'assets/icons/payment_fawry_icon.svg';
   static const String orders = 'assets/icons/orders.svg';
+
+  static String readersClubIcon = 'assets/images/ic_launcher_readers-club.png';
+  static String facebookIcon = 'assets/icons/facebook_icon.svg';
+  static String googleIcon = 'assets/icons/google_icon.svg';
 }

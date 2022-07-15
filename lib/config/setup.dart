@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:hayah_karema/config/app_config.dart';
+
 import 'init_setup_di.dart';
 
 bool demoMode = false;

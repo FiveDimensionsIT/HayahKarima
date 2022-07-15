@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/pages/side_menu/side_menu_controller.dart';
+
 import 'products_home_controller.dart';
 
 class ProductHomeBinding extends Bindings {

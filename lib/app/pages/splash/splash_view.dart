@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayah_karema/app/common/models/enums/running_app.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/pages/auth/forgot_password/forgot_password_view.dart';
 import 'package:hayah_karema/app/pages/auth/login/login_view.dart';
 import 'package:hayah_karema/app/pages/auth/new_password/new_password_view.dart';
 import 'package:hayah_karema/app/pages/auth/verify_mobile_number/verify_mobile_number_view.dart';
+import 'package:hayah_karema/config/app_config.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:rive/rive.dart';
 
 import 'splash_controller.dart';
@@ -59,9 +62,13 @@ class SplashView extends GetView<SplashController> {
   }
 
   Center _buildLogoDesign() {
+    final runningApp = DI.find<AppConfig>().runningApp;
     return Center(
       child: SizedBox(
-          height: Get.height / 2.5, child: const RiveAnimation.asset(AppAssets.splashAnim),
+        height: Get.height / 2.5,
+        child: runningApp == RunningApp.HayahKarima
+            ? const RiveAnimation.asset(AppAssets.splashAnim)
+            : Image.asset(AppAssets.readersClubIcon),
       ),
     );
   }
@@ -107,11 +114,14 @@ class SplashView extends GetView<SplashController> {
             //   color: AppColors.current.primary,
             // ),
 
-
-
-            Image.asset(AppAssets.poweredBy, width: 40, height: 30,),
-            const SizedBox(width : 5),
-            Text("Powered by",
+            Image.asset(
+              AppAssets.poweredBy,
+              width: 40,
+              height: 30,
+            ),
+            const SizedBox(width: 5),
+            Text(
+              "Powered by",
               style: TextStyle(color: AppColors.current.primary, fontSize: 11),
             ),
           ],

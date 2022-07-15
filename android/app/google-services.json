@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "76544061881",
+    "project_id": "fivedimensions-7e946",
+    "storage_bucket": "fivedimensions-7e946.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76544061881:android:cfc2450da63c59915cc668",
+        "android_client_info": {
+          "package_name": "net.fditc.hayah_karema"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76544061881-muutk6ep6gsbrbghb1iujrv2c00alogs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBARNtr-8q29ABMXcgpafo7ZDbg2YIZWmQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76544061881-muutk6ep6gsbrbghb1iujrv2c00alogs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "76544061881-57ifctaeusj18gfqsvsn77ll935dcvcg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "net.fditc"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76544061881:android:64c9772646c9b3255cc668",
+        "android_client_info": {
+          "package_name": "net.fditc.readers_club"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76544061881-muutk6ep6gsbrbghb1iujrv2c00alogs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBARNtr-8q29ABMXcgpafo7ZDbg2YIZWmQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76544061881-muutk6ep6gsbrbghb1iujrv2c00alogs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "76544061881-57ifctaeusj18gfqsvsn77ll935dcvcg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "net.fditc"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,6 @@
-abstract class IFirebasePhoneAuth {
+import 'package:firebase_auth/firebase_auth.dart';
+
+abstract class IFirebaseAuth {
 
   Future authenticatePhone(
       {required String countryCode,
@@ -8,4 +10,8 @@ abstract class IFirebasePhoneAuth {
       required Function onFailed});
 
   Future verifySMSCode({required String code, required Function onCodeVerified});
+
+  Future<UserCredential?> signInWithGoogle();
+
+  Future<UserCredential?> signInWithFacebook();
 }
