@@ -9,7 +9,7 @@ import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/models/enums/contacts_enum.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/pages/home/home_controller.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/NumberHelper.dart';
 import 'package:hayah_karema/utils/ui/ui_lib.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/managers/navigation_manager.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 
 class SplashController extends GetxController {
 

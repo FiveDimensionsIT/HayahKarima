@@ -10,7 +10,7 @@ import 'package:hayah_karema/app/common/managers/api/users/i_user_api_manager.da
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/models/lookup_model.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 import 'package:image_picker/image_picker.dart';
 

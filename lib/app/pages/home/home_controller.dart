@@ -10,7 +10,7 @@ import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 import 'package:share_plus/share_plus.dart';
 

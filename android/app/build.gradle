@@ -48,14 +48,31 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "net.fditc.hayah_karema"
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
     }
+
+    flavorDimensions "app"
+    productFlavors {
+
+        HayahKarima {
+            dimension "app"
+            applicationId "net.fditc.hayah_karema"
+            versionCode 1
+            versionName "1.0"
+        }
+
+        ReadersClub {
+            dimension "app"
+            applicationId "net.fditc.readers_club"
+            versionCode 1
+            versionName "1.0"
+        }
+    }
+
 
     signingConfigs {
         release {

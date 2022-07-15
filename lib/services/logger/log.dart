@@ -1,7 +1,7 @@
 
 
 import 'package:hayah_karema/services/logger/abs_logger.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 
 /// a static wrapper to use the logger, mainly to make the logger implementation change
 /// (from the debug page) effective

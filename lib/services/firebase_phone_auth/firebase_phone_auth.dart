@@ -1,7 +1,7 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
-import 'package:hayah_karema/main.dart';
+import 'package:hayah_karema/config/main_common.dart';
 import 'package:hayah_karema/services/firebase_phone_auth/i_firebase_phone_auth.dart';
 import 'package:hayah_karema/utils/ui/ui_lib.dart';
 

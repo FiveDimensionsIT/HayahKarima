@@ -1,0 +1,8 @@
+flutter_icons:
+  android: "ic_notification"
+  ios: false
+  image_path: "assets/images/ic_notification_readers-club.png"
+#flutter_icons:
+#  android: true
+#  ios: true
+#  image_path: "assets/images/ic_launcher_readers-club.png"

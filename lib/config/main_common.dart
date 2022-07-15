@@ -4,18 +4,19 @@ import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_theme.dart';
 import 'package:hayah_karema/app/common/translation/app_translations.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/app_config.dart';
+import 'package:hayah_karema/config/setup.dart';
 
-
-void main() async{
+void mainCommon(AppConfig appConfig) async{
+  WidgetsFlutterBinding.ensureInitialized();
   /// setup locator.
-  setup();
+  setupLiveMode(appConfig);
   /// run app
   runApp(
     ScreenUtilInit(
       designSize: const Size(360, 760),
       builder: (cxt, child)=> GetMaterialApp(
-        title: "حياة كريمة",
+        title: appConfig.appTitle,
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
         enableLog: BUILD_TYPE == BuildType.debug,

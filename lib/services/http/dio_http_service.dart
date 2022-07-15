@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hayah_karema/config/app_config.dart';
+import 'package:hayah_karema/config/global.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/services/logger/log.dart';
 import 'package:hayah_karema/utils/serialization/serialization_lib.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
@@ -9,9 +12,6 @@ import 'http_lib.dart';
 /// an implementation of the http service using dio
 class DioHttpService implements IHttpService {
   final Dio _dioInstance = Dio();
-
-  // final String baseUrl = 'http://149.102.138.39/api/'; // test
-  final String baseUrl = 'http://149.102.138.40/api/'; // live
 
   DioHttpService() {
     _addLoggerInterceptor(_dioInstance);
@@ -24,7 +24,7 @@ class DioHttpService implements IHttpService {
     //
     try {
       dioResponse = await _dioInstance.request(
-        baseUrl + request.url,
+        DI.find<AppConfig>().apiURL+ request.url,
         data: request.data?.toMap(),
         options: Options(method: describeEnum(request.method), headers: request.headers),
       );

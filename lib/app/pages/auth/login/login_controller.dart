@@ -11,7 +11,7 @@ import 'package:hayah_karema/app/common/managers/navigation_manager.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/pages/splash/splash_controller.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/parse_token.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 

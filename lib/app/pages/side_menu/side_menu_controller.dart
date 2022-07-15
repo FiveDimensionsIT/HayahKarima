@@ -12,7 +12,7 @@ import 'package:hayah_karema/app/pages/grids_view/grid_details/grid_details_view
 import 'package:hayah_karema/app/pages/profile/profile_binding.dart';
 import 'package:hayah_karema/app/pages/profile/profile_view.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/ui/dialog/dialog_helper.dart';
 
 class SideMenuController extends GetxController {

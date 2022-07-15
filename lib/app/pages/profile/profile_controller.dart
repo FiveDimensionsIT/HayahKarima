@@ -11,7 +11,7 @@ import 'package:hayah_karema/app/common/managers/api/profile/i_profile_api_manag
 import 'package:hayah_karema/app/common/models/generic_model.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 
 class ProfileController extends GetxController {

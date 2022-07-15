@@ -6,7 +6,7 @@ import 'package:hayah_karema/app/common/managers/api/rewards/i_rewards_api_manag
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/pages/home/home_controller.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 
 class PrizesController extends GetxController {

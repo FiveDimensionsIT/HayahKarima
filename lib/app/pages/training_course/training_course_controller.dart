@@ -11,7 +11,7 @@ import 'package:hayah_karema/app/common/models/generic_model.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/pages/training_course/_widgets/available_courses_view.dart';
 import 'package:hayah_karema/app/pages/training_course/_widgets/register_course_view.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/DateHelper.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 import 'package:rxdart/rxdart.dart';

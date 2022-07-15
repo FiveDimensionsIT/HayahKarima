@@ -9,7 +9,7 @@ import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/pages/new_post/_widgets/post_type_view.dart';
 import 'package:hayah_karema/services/logger/log.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/ui/ui_lib.dart';
 import 'package:image_picker/image_picker.dart';
 

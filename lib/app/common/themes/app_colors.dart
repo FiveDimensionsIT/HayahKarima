@@ -1,11 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class AppColors {
   static AppColors? _current;
 
-  static AppColors get current => _current ?? _defaultLightColors;
+  static AppColors get current => _current ?? _hayahKarimaColors;
 
   static set current(value) => _current = value;
 
@@ -46,7 +44,26 @@ class AppColors {
   Color transparent;
 }
 
-var _defaultLightColors = AppColors(
+final _hayahKarimaColors = AppColors(
+    background: const Color.fromRGBO(245, 246, 240, 1),
+    secondary: const Color(0xffCB7FE6),
+    accent: const Color(0xffF47321),
+    accentLight: const Color(0xfff79355),
+    error: const Color(0xffe62e00),
+    text: const Color.fromRGBO(37, 47, 61, 1),
+    text1: const Color(0xFF363535),
+    primaryLight: const Color(0xfff57a75),
+    primary: const Color(0xfffb1309),
+    dimmedLight: const Color.fromRGBO(238, 238, 238, 1.0),
+    dimmed: const Color.fromRGBO(167, 167, 167, 1),
+    dimmedX: Colors.grey.shade600,
+    dimmedXX: Colors.grey.shade800,
+    success: const Color.fromRGBO(0, 128, 0, 1),
+    neutral: Colors.white,
+    transparent: Colors.transparent);
+
+
+final _readersClubColors = AppColors(
     background: const Color.fromRGBO(245, 246, 240, 1),
     secondary: const Color(0xffCB7FE6),
     accent: const Color(0xffF47321),

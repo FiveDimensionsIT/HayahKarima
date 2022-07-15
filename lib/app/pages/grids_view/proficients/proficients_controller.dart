@@ -4,7 +4,7 @@ import 'package:hayah_karema/app/common/managers/api/home/_models/digital_pointe
 import 'package:hayah_karema/app/common/managers/api/home/_models/pointer_item_model.dart';
 import 'package:hayah_karema/app/common/managers/api/home/i_home_api_manager.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/ui/ui_lib.dart';
 
 class ProficientsController extends GetxController {

@@ -9,7 +9,7 @@ import 'package:hayah_karema/app/pages/auth/new_password/new_password_view.dart'
 import 'package:hayah_karema/app/pages/users/_widgets/user_controles_button.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
 import 'package:hayah_karema/services/url_launcher/i_url_launcher_service.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 
 class UserItem extends StatelessWidget {
   final PointerItemModel user;

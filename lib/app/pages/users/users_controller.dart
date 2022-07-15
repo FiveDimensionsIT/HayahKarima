@@ -8,7 +8,7 @@ import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/models/global_status_response.dart';
 import 'package:hayah_karema/app/common/models/lookup_model.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
-import 'package:hayah_karema/setup.dart';
+import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/ui/dialog/overlay_helper.dart';
 import 'package:rxdart/rxdart.dart';
 
