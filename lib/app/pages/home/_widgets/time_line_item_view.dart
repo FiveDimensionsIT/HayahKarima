@@ -9,6 +9,7 @@ import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/3dots_view.dart';
+import 'package:hayah_karema/app/common/widgets/profile_image.dart';
 import 'package:hayah_karema/app/common/widgets/video_player.dart';
 import 'package:hayah_karema/app/common/widgets/youtube_player.dart';
 import 'package:hayah_karema/app/pages/home/home_controller.dart';
@@ -16,11 +17,9 @@ import 'package:hayah_karema/utils/DateHelper.dart';
 import 'package:hayah_karema/utils/ui/empty.dart';
 import 'package:readmore/readmore.dart';
 
-class TimelineItemView extends StatelessWidget {
+class TimelineItemView extends GetView<HomeController> {
   final TimelinePostModel item;
-
-  TimelineItemView({Key? key, required this.item}) : super(key: key);
-  var controller = Get.find<HomeController>();
+  const TimelineItemView({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +57,7 @@ class TimelineItemView extends StatelessWidget {
               item.userAvatar ?? '',
               width: 55,
               height: 55,
+              errorBuilder: (_, __, ___) => SizedBox(width: 55, height: 55, child: Image.asset(AppAssets.userIcon),),
             )),
         Empty(
           width: 16,

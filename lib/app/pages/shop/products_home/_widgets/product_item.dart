@@ -41,7 +41,8 @@ class ProductItem extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(AppDimens.borderRadius),
-              child: Image.network(photo, fit: BoxFit.cover, width: 136.w, height: 124.h),
+              child: Image.network(photo, fit: BoxFit.cover, width: 136.w, height: 124.h,
+                errorBuilder: (_, __, ___) => Container(width: 136.w, height: 124.h, color: Colors.grey[200],),),
             ),
 
             Text(

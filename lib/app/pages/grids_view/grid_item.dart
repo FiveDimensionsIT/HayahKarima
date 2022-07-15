@@ -32,6 +32,8 @@ class GridItemView extends StatelessWidget {
                           model.imgPath ?? '',
                           width: constrains.maxWidth,
                           height: constrains.maxWidth,
+                          errorBuilder: (_, __, ___) => Container(width: constrains.maxWidth,
+                            height: constrains.maxWidth, color: Colors.grey[200],),
                         ));
                   }))),
           const SizedBox(
