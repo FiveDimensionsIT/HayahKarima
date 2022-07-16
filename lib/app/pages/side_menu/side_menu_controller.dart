@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/managers/api/auth/_model/user_data.dart';
 import 'package:hayah_karema/app/common/managers/cache/i_cache_manager.dart';
 import 'package:hayah_karema/app/common/models/enums/contacts_enum.dart';
+import 'package:hayah_karema/app/common/models/enums/running_app.dart';
 import 'package:hayah_karema/app/common/models/enums/user_type.dart';
 import 'package:hayah_karema/app/common/models/generic_model.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
@@ -12,6 +13,7 @@ import 'package:hayah_karema/app/pages/grids_view/grid_details/grid_details_view
 import 'package:hayah_karema/app/pages/profile/profile_binding.dart';
 import 'package:hayah_karema/app/pages/profile/profile_view.dart';
 import 'package:hayah_karema/app/routes/app_pages.dart';
+import 'package:hayah_karema/config/app_config.dart';
 import 'package:hayah_karema/config/setup.dart';
 import 'package:hayah_karema/utils/ui/dialog/dialog_helper.dart';
 
@@ -23,6 +25,7 @@ class SideMenuController extends GetxController {
   var honorFilesExpanded = false.obs;
 
   UserData? get userData => _userData.value;
+  final currentApp = DI.find<AppConfig>().runningApp;
 
   @override
   Future<void> onInit() async {
@@ -69,7 +72,7 @@ class SideMenuController extends GetxController {
 
     /// == honor files
     menuItems.add(MenuItemModel(
-        name: AppText.honorFiles,
+        name: currentApp == RunningApp.HayahKarima ? AppText.honorFiles : AppText.publishers,
         iconPath: AppAssets.honorbordSideMenuIcon,
         isExpandable: true,
         onTap: () {

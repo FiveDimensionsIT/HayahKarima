@@ -47,6 +47,7 @@ abstract class AppText {
   static String get homePage => 'home_page'.tr;
   static String get myVillage => 'my_village'.tr;
   static String get honorFiles => 'honor_files'.tr;
+  static String get publishers => 'publisher'.tr;
   static String get settings => 'settings'.tr;
   static String get users => 'users'.tr;
   static String get courses => 'courses'.tr;

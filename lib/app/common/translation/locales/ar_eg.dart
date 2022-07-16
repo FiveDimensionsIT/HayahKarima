@@ -41,6 +41,7 @@ const ar_eg = {
   "my_village":"قريتي",
   "courses":"البرامج التدريبية",
   "honor_files":"سجل الشرف",
+  "publisher":"الناشرون/المؤلفون",
   "users":"المستخدمون",
   "home_page":"الرئيسية",
   "rewards":"الجوائز",

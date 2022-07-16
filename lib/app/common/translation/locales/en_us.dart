@@ -41,6 +41,7 @@ const en_us = {
   "home_page":"Home Page",
   "my_village":"My village",
   "honor_files":"Honor files",
+  "publisher":"Publishers/Authors",
   "users":"Users",
   "sponsors":"Sponsors",
   "shop":"Shop",
