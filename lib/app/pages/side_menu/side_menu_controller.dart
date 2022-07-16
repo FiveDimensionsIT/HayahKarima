@@ -21,11 +21,11 @@ class SideMenuController extends GetxController {
   final menuItems = <MenuItemModel>[].obs;
   final cacheManager = DI.find<ICacheManager>();
   final _userData = UserData().obs;
+  final _currentApp = DI.find<AppConfig>().runningApp;
   final RxList<GenericModel> userAccounts = <GenericModel>[].obs;
   var honorFilesExpanded = false.obs;
 
   UserData? get userData => _userData.value;
-  final currentApp = DI.find<AppConfig>().runningApp;
 
   @override
   Future<void> onInit() async {
@@ -39,47 +39,53 @@ class SideMenuController extends GetxController {
 
   Future<void> _getUserData() async {
     await cacheManager.init();
-    _userData.value =  cacheManager.getUserData()!;
+    _userData.value = cacheManager.getUserData()!;
   }
 
   void initMenuItems() {
-    if(menuItems.isNotEmpty)menuItems.clear();
+    if (menuItems.isNotEmpty) menuItems.clear();
 
     /// == Home
     menuItems.add(MenuItemModel(
         name: AppText.homePage,
         iconPath: AppAssets.homeSideMenuIcon,
         onTap: () {
-          if (_userData.value.userRole == UserType.user) {
+          if (_currentApp == RunningApp.ReadersClub) {
             Get.toNamed(Routes.HOME);
-          } else {
+          } else if (_userData.value.userRole == UserType.user) {
+            Get.toNamed(Routes.HOME);
+          } else if (_userData.value.userRole == UserType.admin) {
             Get.toNamed(Routes.DIGITAL_POINTER);
           }
         }));
 
     /// == my village
-    if(_userData.value.myVillageVisibility()){
+    if (_userData.value.myVillageVisibility()) {
       menuItems.add(MenuItemModel(
           name: AppText.myVillage,
           iconPath: AppAssets.villageSideMenuIcon,
           onTap: () {
-            Get.to(()=> GridDetails(), arguments: {
-              'ContactsEnum': ContactsEnum.myVillage,
-              "PointerItemModel": null
-            });
+            Get.to(() => GridDetails(), arguments: {'ContactsEnum': ContactsEnum.myVillage, "PointerItemModel": null});
           }));
     }
 
     /// == honor files
-    menuItems.add(MenuItemModel(
-        name: currentApp == RunningApp.HayahKarima ? AppText.honorFiles : AppText.publishers,
-        iconPath: AppAssets.honorbordSideMenuIcon,
-        isExpandable: true,
-        onTap: () {
-          honorFilesExpanded.value = !honorFilesExpanded.value;
-          honorFilesExpanded.refresh();
-        }));
+    if (_currentApp == RunningApp.HayahKarima) {
+      menuItems.add(MenuItemModel(
+          name: AppText.honorFiles,
+          iconPath: AppAssets.honorbordSideMenuIcon,
+          isExpandable: true,
+          onTap: () {
+            honorFilesExpanded.value = !honorFilesExpanded.value;
+            honorFilesExpanded.refresh();
+          }));
+    }
 
+    if (_currentApp == RunningApp.ReadersClub) {
+      menuItems.add(MenuItemModel(name: AppText.publishers, iconPath: '', onTap: () {}));
+
+      menuItems.add(MenuItemModel(name: AppText.authors, iconPath: '', onTap: () {}));
+    }
 
     /// == homeland martyrs
     menuItems.add(MenuItemModel(
@@ -126,7 +132,7 @@ class SideMenuController extends GetxController {
         }));
 
     /// == rewards
-    if(_userData.value.userRole == UserType.user) {
+    if (_userData.value.userRole == UserType.user) {
       menuItems.add(MenuItemModel(
           name: AppText.rewards,
           iconPath: AppAssets.awardsSideMenuIcon,
@@ -134,6 +140,7 @@ class SideMenuController extends GetxController {
             Get.toNamed(Routes.PRIZES);
           }));
     }
+
     /// == Sponsor
     menuItems.add(MenuItemModel(
         name: AppText.sponsors,
@@ -142,16 +149,18 @@ class SideMenuController extends GetxController {
           Get.toNamed(Routes.TOP_COMPANIES);
         }));
 
-    /// == Courses
-    menuItems.add(MenuItemModel(
-        name: AppText.courses,
-        iconPath: AppAssets.coursesSideMenuIcon,
-        onTap: () {
-          Get.toNamed(Routes.TRAINING_COURSE);
-        }));
+    if (_currentApp == RunningApp.HayahKarima) {
+      /// == Courses
+      menuItems.add(MenuItemModel(
+          name: AppText.courses,
+          iconPath: AppAssets.coursesSideMenuIcon,
+          onTap: () {
+            Get.toNamed(Routes.TRAINING_COURSE);
+          }));
+    }
 
     /// == users
-    if(_userData.value.isUsersSideMenuItemVisible()) {
+    if (_userData.value.isUsersSideMenuItemVisible()) {
       menuItems.add(MenuItemModel(
           name: AppText.users,
           iconPath: AppAssets.usersSideMenuIcon,
@@ -161,12 +170,21 @@ class SideMenuController extends GetxController {
     }
 
     /// == Settings
-    menuItems.add(MenuItemModel(
-        name: AppText.settings,
-        iconPath: AppAssets.settingsSideMenuIcon,
-        onTap: () {
+    menuItems.add(MenuItemModel(name: AppText.settings, iconPath: AppAssets.settingsSideMenuIcon, onTap: () {}));
 
-        }));
+    if (_currentApp == RunningApp.ReadersClub) {
+      menuItems.add(MenuItemModel(name: 'الجوائز الثقافية', iconPath: '', onTap: () {}));
+
+      menuItems.add(MenuItemModel(name: "الأخبار", iconPath: '', onTap: () {}));
+
+      menuItems.add(MenuItemModel(name: "الفعاليات", iconPath: '', onTap: () {}));
+    }
+
+    if (_currentApp == RunningApp.HayahKarima) {
+      menuItems.add(MenuItemModel(name: "الاعلانات", iconPath: '', onTap: () {}));
+    }
+
+    menuItems.add(MenuItemModel(name: "الاشتراك", iconPath: '', onTap: () {}));
 
     /// == Logout
     menuItems.add(MenuItemModel(
@@ -174,23 +192,23 @@ class SideMenuController extends GetxController {
         iconPath: AppAssets.logoutSideMenuIcon,
         onTap: () async {
           final result = await DialogHelper.showActionDialog(
-              yesText: AppText.yes,
-              noText: AppText.no,
-              title: AppText.attention,
-              subTitle: AppText.logoutAttentionText,
-              yesColor: AppColors.current.accent,
-              noColor: AppColors.current.primary,
+            yesText: AppText.yes,
+            noText: AppText.no,
+            title: AppText.attention,
+            subTitle: AppText.logoutAttentionText,
+            yesColor: AppColors.current.accent,
+            noColor: AppColors.current.primary,
           );
           if (result ?? false) {
             /// remove cached user data
             cacheManager.logout();
+
             /// go back to setup page
             Get.offAndToNamed(Routes.SPLASH_VIEW);
           }
         }));
     menuItems.refresh();
   }
-
 
   void _getUserAccounts() {
     userAccounts.assignAll([
@@ -199,7 +217,7 @@ class SideMenuController extends GetxController {
       GenericModel(id: 2, title: 'مجدي عادل', subTitle: 'مدير فرع', imgPath: '', isSelectedObs: false.obs)
     ]);
 
-    if(userAccounts.length == 1){
+    if (userAccounts.length == 1) {
       onChangeAccountBtnClick();
     }
   }
@@ -213,9 +231,8 @@ class SideMenuController extends GetxController {
   onChangeAccountBtnClick() {
     Get.back();
     final selectedAccount = userAccounts.firstWhere((a) => a.isSelectedObs?.value == true);
-    Get.to(()=> const ProfileView(), binding: ProfileBinding());
+    Get.to(() => const ProfileView(), binding: ProfileBinding());
   }
-
 }
 
 class MenuItemModel {

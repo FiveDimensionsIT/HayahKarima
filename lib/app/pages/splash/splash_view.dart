@@ -60,7 +60,7 @@ class SplashView extends GetView<SplashController> {
       );
     });
   }
-
+//borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
   Center _buildLogoDesign() {
     final runningApp = DI.find<AppConfig>().runningApp;
     return Center(
@@ -68,7 +68,7 @@ class SplashView extends GetView<SplashController> {
         height: Get.height / 2.5,
         child: runningApp == RunningApp.HayahKarima
             ? const RiveAnimation.asset(AppAssets.splashAnim)
-            : Image.asset(AppAssets.readersClubIcon),
+            : ClipOval(child: Image.asset(AppAssets.readersClubIcon)),
       ),
     );
   }
@@ -80,6 +80,7 @@ class SplashView extends GetView<SplashController> {
         AppAssets.splash1,
         height: Get.height / 3,
         fit: BoxFit.fill,
+        color: AppColors.current.accent,
       ));
 
   Positioned _buildTopShapeDesign() => Positioned(
@@ -90,6 +91,7 @@ class SplashView extends GetView<SplashController> {
           AppAssets.splash2,
           height: Get.height / 3,
           fit: BoxFit.fill,
+          color: AppColors.current.accent,
         ),
       ));
 
@@ -102,18 +104,6 @@ class SplashView extends GetView<SplashController> {
             child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Text(
-            //   "Operating village",
-            //   style: TextStyle(color: AppColors.current.primary, fontSize: 11),
-            // ),
-            //
-            // Image.asset(
-            //   AppAssets.copyrightsIcon,
-            //   width: 20,
-            //   height: 15,
-            //   color: AppColors.current.primary,
-            // ),
-
             Image.asset(
               AppAssets.poweredBy,
               width: 40,
