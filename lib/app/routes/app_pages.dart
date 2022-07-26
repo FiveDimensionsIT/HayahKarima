@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/pages/profile/profile_binding.dart';
+import 'package:hayah_karema/app/pages/shop/product_details/product_item_details_binding.dart';
 
 import '../pages/add_user/add_user_binding.dart';
 import '../pages/add_user/add_user_view.dart';
@@ -199,7 +200,7 @@ class AppPages {
     GetPage(
       name: _Paths.PRODUCT_ITEM_DETAILS,
       page: () => ProductItemDetailsView(),
-      binding: ProductHomeBinding(),
+      binding: ProductItemDetailsBinding(),
     ),
     GetPage(
       name: _Paths.PRODUCTS_CATEGORY,

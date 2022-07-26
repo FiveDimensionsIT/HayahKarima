@@ -5,6 +5,7 @@ import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/themes/app_dimens.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 import 'package:hayah_karema/app/common/widgets/app_toolbar.dart';
+import 'package:hayah_karema/app/common/widgets/empty_response.dart';
 import 'package:hayah_karema/app/pages/shop/products_home/_widgets/app_tool_bar_actions.dart';
 import 'package:hayah_karema/app/pages/shop/products_home/_widgets/category_item.dart';
 import 'package:hayah_karema/app/pages/shop/products_home/_widgets/products_category_list_item.dart';
@@ -15,8 +16,9 @@ import 'package:hayah_karema/app/routes/app_pages.dart';
 
 import 'products_home_controller.dart';
 
-class ProductsHomeView extends GetView<ProductsHomeController> {
+class ProductsHomeView extends StatelessWidget {
    ProductsHomeView({Key? key}) : super(key: key);
+   var controller = Get.find<ProductsHomeController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -53,15 +55,29 @@ class ProductsHomeView extends GetView<ProductsHomeController> {
     );
   }
 
-  ListView _buildProductsCategoryList() {
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: 3,
-        padding: const EdgeInsets.only(bottom: AppDimens.paddingSize16),
-        itemBuilder: (cxt, index) => ProductsCategoryListItem(
-            onProductItemClick: () => controller.goToShopDetailsView(),
-            onProductTitleClick: () => controller.goToProductsCategoryView()));
+   Obx _buildProductsCategoryList() {
+    return Obx((){
+      if (controller.getApiLoading.value) {
+        return const Center(child: CircularProgressIndicator(),);
+      }
+      if (controller.productsList.isEmpty) {
+        return const Center(child: EmptyResponse(),);
+      }
+      return  ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount:1,
+          padding: const EdgeInsets.only(bottom: AppDimens.paddingSize16),
+          itemBuilder: (cxt, index) => ProductsCategoryListItem(
+            title: controller.productsList[index].productName ??"",
+              companyName: controller.productsList[index].vendor ??"",
+              photo: controller.productsList[index].productAvatar ??"",
+              price:controller.productsList[index].price  ,
+              rate:controller.productsList[index].rating  ,
+              productListLength: controller.getApiLoading.value ?1: controller.productsList.length,
+              onProductItemClick: () => controller.goToShopDetailsView(controller.productsList[index].productId ),
+              onProductTitleClick: () => controller.goToProductsCategoryView()));
+    });
   }
 
   Widget _buildShopServices() {

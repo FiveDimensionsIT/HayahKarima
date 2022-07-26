@@ -1,3 +1,4 @@
+
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -152,6 +153,7 @@ class ProfileView extends GetView<ProfileController> {
   }
 
   /// Build Tabs
+
   Widget _buildTab() {
     return ButtonsTabBar(
         height: 40,
@@ -187,7 +189,8 @@ class ProfileView extends GetView<ProfileController> {
         ]);
   }
 
-  // TabBar view
+  //TabBar view
+
   Widget _buildTabBarView() {
     return Obx(() {
       if (controller.currentTabIndex.value == 0) {

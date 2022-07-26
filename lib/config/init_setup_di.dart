@@ -1,3 +1,9 @@
+import 'package:hayah_karema/app/common/managers/api/orders/fake_orders_api_managers.dart';
+import 'package:hayah_karema/app/common/managers/api/orders/i_orders_api_managers.dart';
+import 'package:hayah_karema/app/common/managers/api/orders/orders_api_managers.dart';
+import 'package:hayah_karema/app/common/managers/api/shop/fake_shop_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/shop/i_shop_api_manager.dart';
+import 'package:hayah_karema/app/common/managers/api/shop/shop_api_manager.dart';
 import 'package:hayah_karema/config/app_config.dart';
 import 'package:hayah_karema/services/firebase_auth/fake_firebase_auth.dart';
 import 'package:hayah_karema/services/firebase_auth/firebase_authentication.dart';
@@ -83,6 +89,10 @@ class InitSetupDI{
     DI.setSingleton<IUserApiManager>(() => UserApiManager(DI.find()));
     // app config
     DI.setSingleton(() => config);
+    // Shop manager
+    DI.setSingleton<IShopApiManager>(() => ShopApiManager(DI.find()));
+    // orders manager
+    DI.setSingleton<IOrdersApiManager>(() => OrdersApiManager(DI.find()));
     // endregion  ==== managers ====
   }
 
@@ -112,6 +122,12 @@ class InitSetupDI{
     //
     DI.remove<IUserApiManager>();
     DI.setSingleton<IUserApiManager>(() => FakeUserApiManager());
+    // Shop
+    DI.remove<IShopApiManager>();
+    DI.setSingleton<IShopApiManager>(() => FakeShopApiManager());
+    // orders
+    DI.remove<IOrdersApiManager>();
+    DI.setSingleton<IOrdersApiManager>(() => FakeOrdersApiManager());
     //
     DI.remove<IFirebaseAuth>();
     DI.setSingleton<IFirebaseAuth>(() => FakeFirebaseAuth());

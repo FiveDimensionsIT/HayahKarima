@@ -9,8 +9,8 @@ class AuthApiManager implements IAuthApiManager{
 
   @override
   Future<LoginResponse?> login(LoginRequest? loginRequest) async{
-    // edit from Authenticate to  Security/Authenticate
-    var request = HttpRequest(method: HttpMethod.post, url: 'Security/Authenticate', data: loginRequest)..addJsonHeaders();
+    // edit from Security/Authenticate to  Security/Authentication/Authenticate
+    var request = HttpRequest(method: HttpMethod.post, url: 'Security/Authentication/Authenticate', data: loginRequest)..addJsonHeaders();
     //
     var resp = await _httpService.sendRequest(request);
     //

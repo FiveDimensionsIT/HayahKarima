@@ -28,13 +28,13 @@ class LoginResponse extends Serializable{
 
   @override
   void fromMap(Map<String, dynamic> map) {
-    token = map['token'];
+    token = map['accessToken'];
   }
 
   @override
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['token'] = this.token;
+    data['accessToken'] = this.token;
     return data;
   }
 }

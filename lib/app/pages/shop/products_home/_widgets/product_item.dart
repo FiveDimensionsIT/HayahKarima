@@ -7,8 +7,8 @@ import 'package:hayah_karema/app/common/translation/app_text.dart';
 class ProductItem extends StatelessWidget {
   final String title;
   final String companyName;
-  final String price;
-  final String rate;
+  final dynamic price;
+  final dynamic rate;
   final String photo;
   final Function? onItemTap;
 
@@ -31,8 +31,8 @@ class ProductItem extends StatelessWidget {
         width: 140.w,
         padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSize8, vertical: AppDimens.paddingSize8),
         decoration: BoxDecoration(
-          border: Border.all(color: AppColors.current.accent.withOpacity(.75), width: 1.5),
-          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.current.accent.withOpacity(.75), width: 1.5.w),
+          borderRadius: BorderRadius.circular(16.r),
           color: AppColors.current.neutral,
         ),
         child: Column(
@@ -83,14 +83,14 @@ class ProductItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    rate,
+                    "$rate",
                     style: TextStyle(
                       fontSize: AppDimens.fontSizeSmallX,
                       color: AppColors.current.accent,
                     ),
                   ),
-                  const SizedBox(
-                    width: 7,
+                   SizedBox(
+                    width: 7.w,
                   ),
                   Icon(
                     Icons.star,

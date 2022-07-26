@@ -5,20 +5,24 @@ import 'package:hayah_karema/app/common/themes/app_assets.dart';
 import 'package:hayah_karema/app/common/themes/app_colors.dart';
 import 'package:hayah_karema/app/common/translation/app_text.dart';
 
+import '../../../../common/managers/api/shop/_models/poduct_details_model.dart';
+
 class ProductDetailItem extends StatelessWidget {
   final String title;
   final String companyName;
   final String price;
   final String description;
-  final String photo;
+  //final String photo;
+  final List<Images?>? images;
   //final  Function? onItemTap;
   const ProductDetailItem(
       {Key? key,
          required this.title,
          required this.price,
          required  this.companyName,
-        required this.photo,
+      //  required this.photo,
          required this.description,
+        this.images,
         // this.onItemTap,
       })
       : super(key: key);
@@ -35,17 +39,18 @@ class ProductDetailItem extends StatelessWidget {
           child:
           CarouselSlider(
             items:
-            [0,1,2].map<Widget>((e) {
+            images?.map<Widget>((images) {
               return Builder(
                 builder: (BuildContext context) {
                   return   Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
+                        border: Border.all(color: const Color(0x1F000000)),
                           borderRadius: BorderRadius.circular(16)
                       ),
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(16),
-                          child: Image.network(photo,fit: BoxFit.fill, height: 224,width: 296,
+                          child: Image.network(images?.filename ?? "",fit: BoxFit.fill, height: 224,width: 296,
                             errorBuilder: (_, __, ___) {
                               return Container(
                                   width: Get.width,

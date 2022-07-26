@@ -8,7 +8,13 @@ import 'package:hayah_karema/app/pages/shop/products_home/_widgets/show_more.dar
 class ProductsCategoryListItem extends StatelessWidget {
   final Function onProductItemClick;
   final Function onProductTitleClick;
-  const ProductsCategoryListItem({Key? key, required this.onProductItemClick, required this.onProductTitleClick}) : super(key: key);
+  final String title;
+  final String companyName;
+  final dynamic price;
+  final dynamic rate;
+  final String photo;
+  final int productListLength;
+  const ProductsCategoryListItem({Key? key, required this.onProductItemClick, required this.onProductTitleClick,required this.title, required this.companyName, required this.price,required this.rate,required this.photo,required this.productListLength}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,22 +36,28 @@ class ProductsCategoryListItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSize16),
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
-          itemBuilder: (c, i) => i == 3
+          itemBuilder: (c, i) =>
+          i == productListLength
               ? InkWell(
               onTap: () => onProductTitleClick(),
               child: const ShowMore())
               : ProductItem(
             onItemTap: () => onProductItemClick(),
-            companyName: "المصرية للاتصالات",
-            price: "8500",
-            title: "آيفون اكس برو مكس",
-            rate: "4.5",
-            photo: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1926&q=80",
+            companyName: companyName,
+            price: price,
+            title: title,
+            rate: rate,
+            photo: photo
+            //"https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1926&q=80",
           ),
           separatorBuilder: (_, __) => const SizedBox(
             width: 16,
           ),
-          itemCount: 4),
+          itemCount:
+          productListLength >3 ?
+              4
+              :
+          productListLength + 1),
     );
   }
 
