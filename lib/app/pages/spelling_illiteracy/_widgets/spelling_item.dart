@@ -19,7 +19,7 @@ class SpellingItem extends StatelessWidget {
         style: TextStyle(
             color: AppColors.current.text,
             fontWeight: FontWeight.w600,
-            fontSize: AppDimens.fontSizeVeryLarge,
+            fontSize: AppDimens.fontSizeLargeXX,
             wordSpacing: 1),
       ),
     );

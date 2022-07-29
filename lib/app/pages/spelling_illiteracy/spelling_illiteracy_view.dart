@@ -27,6 +27,7 @@ class SpellingIlliteracyView extends GetView<SpellingIlliteracyController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+
                   /// ==== toolbar
                   Container(
                       padding: const EdgeInsets.symmetric(
@@ -34,7 +35,7 @@ class SpellingIlliteracyView extends GetView<SpellingIlliteracyController> {
                       decoration: BoxDecoration(
                           color: AppColors.current.primary,
                           borderRadius:
-                              const BorderRadius.only(topLeft: Radius.circular(17), topRight: Radius.circular(17))),
+                          const BorderRadius.only(topLeft: Radius.circular(17), topRight: Radius.circular(17))),
                       child: Center(
                         child: Text('همزة وصل..تعليمك يعني مصر بخير',
                             style: TextStyle(color: AppColors.current.neutral, fontSize: AppDimens.fontSizeMediumXX)),
@@ -50,6 +51,7 @@ class SpellingIlliteracyView extends GetView<SpellingIlliteracyController> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+
                           /// ==== levels and points
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,13 +77,14 @@ class SpellingIlliteracyView extends GetView<SpellingIlliteracyController> {
                                           fontSize: AppDimens.fontSizeMediumXX),
                                       underline: const SizedBox(),
                                       items: controller.levelsList
-                                          .map((level) => DropdownMenuItem(
-                                                onTap: () {},
-                                                value: level,
-                                                child: Text(
-                                                  '${level.level}',
-                                                ),
-                                              ))
+                                          .map((level) =>
+                                          DropdownMenuItem(
+                                            onTap: () {},
+                                            value: level,
+                                            child: Text(
+                                              '${level.level}',
+                                            ),
+                                          ))
                                           .toList(),
                                       onChanged: (value) => controller.onLevelChanged(level: value),
                                       value: controller.selectedLevel?.value,
@@ -108,7 +111,7 @@ class SpellingIlliteracyView extends GetView<SpellingIlliteracyController> {
                           Obx(() {
                             if (controller.selectedLevel == null) return const SizedBox();
                             return SizedBox(
-                              height: 150,
+                              height: 130,
                               child: PageView(
                                   controller: controller.sliderController,
                                   physics: const NeverScrollableScrollPhysics(),
@@ -128,11 +131,12 @@ class SpellingIlliteracyView extends GetView<SpellingIlliteracyController> {
                                 focusNode: controller.focusNode,
                                 maxLines: 3,
                                 minLines: 1,
+                                maxLength: controller.texHint.value.length,
                                 textAlign: TextAlign.center,
                                 autofocus: true,
                                 textDirection: TextDirection.rtl,
                                 style: TextStyle(
-                                    fontSize: AppDimens.fontSizeVeryLarge,
+                                    fontSize: AppDimens.fontSizeLargeXX,
                                     fontWeight: FontWeight.w600,
                                     height: 1,
                                     overflow: TextOverflow.clip,
@@ -145,7 +149,7 @@ class SpellingIlliteracyView extends GetView<SpellingIlliteracyController> {
                                     hintText: controller.texHint.value,
                                     hintStyle: TextStyle(
                                         color: AppColors.current.primary,
-                                        fontSize: AppDimens.fontSizeVeryLarge,
+                                        fontSize: AppDimens.fontSizeLargeXX,
                                         fontWeight: FontWeight.w600,
                                         overflow: TextOverflow.clip,
                                         wordSpacing: 2,
@@ -156,10 +160,16 @@ class SpellingIlliteracyView extends GetView<SpellingIlliteracyController> {
                                     errorBorder: outlineInputBorder(),
                                     focusedErrorBorder: outlineInputBorder(),
                                     focusedBorder: outlineInputBorder()),
-                                validator: RequiredValidator(errorText: AppText.requiredField),
+                                onChanged: (value) => controller.onTextEditingChange(value),
                               );
                             }),
                           ),
+
+                          Obx(() {
+                            if(controller.errorText.value.isEmpty) return const SizedBox();
+                            return Text(controller.errorText.value,
+                              style: TextStyle(fontSize: AppDimens.fontSizeMedium, color: AppColors.current.error),);
+                          }),
 
                           const SizedBox(
                             height: 10,
@@ -181,6 +191,7 @@ class SpellingIlliteracyView extends GetView<SpellingIlliteracyController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
+
                       /// ==== total points
                       Container(
                         padding: const EdgeInsets.symmetric(

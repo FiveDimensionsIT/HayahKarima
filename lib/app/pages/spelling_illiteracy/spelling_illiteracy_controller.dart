@@ -14,6 +14,7 @@ class SpellingIlliteracyController extends GetxController {
   final focusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   Rx<SpellingIlliteracyModel>? selectedLevel;
+  RxString errorText = ''.obs;
   final RxString texHint = ''.obs;
   int _sliderPageIndex = 0;
   Timer? typingSpeed;
@@ -38,146 +39,158 @@ class SpellingIlliteracyController extends GetxController {
   }
 
   void _initData() {
-    levelsList.add(SpellingIlliteracyModel(level: 1, points: 10, speed: 5, isSelected: true, contentList: [
-      ContentModel(
-        name: 'أ',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ب',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ت',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ث',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ج',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ح',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'خ',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'د',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ذ',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ر',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ز',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'س',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ش',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ص',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ض',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ط',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ظ',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ع',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'غ',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ف',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ق',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ك',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ل',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'م',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ن',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ه',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'و',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ي',
-        voice: '',
-      ),
-    ]));
+    levelsList.add(SpellingIlliteracyModel(level: 1,
+        points: 10,
+        speed: 5,
+        isSelected: true,
+        contentList: [
+          ContentModel(
+            name: 'أ',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ب',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ت',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ث',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ج',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ح',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'خ',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'د',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ذ',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ر',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ز',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'س',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ش',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ص',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ض',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ط',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ظ',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ع',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'غ',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ف',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ق',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ك',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ل',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'م',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ن',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ه',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'و',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ي',
+            voice: '',
+          ),
+        ]));
 
-    levelsList.add(SpellingIlliteracyModel(level: 2, points: 20, speed: 10, isSelected: false, contentList: [
-      ContentModel(
-        name: 'محمد',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'ابراهيم',
-        voice: '',
-      ),
-    ]));
+    levelsList.add(SpellingIlliteracyModel(level: 2,
+        points: 20,
+        speed: 10,
+        isSelected: false,
+        contentList: [
+          ContentModel(
+            name: 'محمد',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'ابراهيم',
+            voice: '',
+          ),
+        ]));
 
-    levelsList.add(SpellingIlliteracyModel(level: 3, points: 30, speed: 20, isSelected: false, contentList: [
-      ContentModel(
-        name: 'الشهيد احمد المنسي',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'حياة كريمة الرقمية',
-        voice: '',
-      ),
-      ContentModel(
-        name: 'نادي القراء المحترفين',
-        voice: '',
-      ),
-    ]));
+    levelsList.add(SpellingIlliteracyModel(level: 3,
+        points: 30,
+        speed: 20,
+        isSelected: false,
+        contentList: [
+          ContentModel(
+            name: 'الشهيد احمد المنسي',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'حياة كريمة الرقمية',
+            voice: '',
+          ),
+          ContentModel(
+            name: 'نادي القراء المحترفين',
+            voice: '',
+          ),
+        ]));
 
     updateSelectedLevel();
     getHintName();
@@ -203,8 +216,12 @@ class SpellingIlliteracyController extends GetxController {
   void onLevelChanged({SpellingIlliteracyModel? level}) {
     textEditingController.clear();
     sliderController.jumpToPage(0);
-    levelsList.firstWhere((element) => element.isSelected).isSelected = false;
-    levelsList.firstWhere((element) => element.level == level!.level).isSelected = true;
+    levelsList
+        .firstWhere((element) => element.isSelected)
+        .isSelected = false;
+    levelsList
+        .firstWhere((element) => element.level == level!.level)
+        .isSelected = true;
 
     updateSelectedLevel();
     getHintName();
@@ -214,7 +231,9 @@ class SpellingIlliteracyController extends GetxController {
   void updateSelectedLevel() {
     onSliderChangeIndex(pageIndex: 0);
     if (selectedLevel == null) {
-      selectedLevel = levelsList.firstWhere((element) => element.isSelected).obs;
+      selectedLevel = levelsList
+          .firstWhere((element) => element.isSelected)
+          .obs;
     } else {
       selectedLevel!.value = levelsList.firstWhere((element) => element.isSelected);
     }
@@ -222,17 +241,35 @@ class SpellingIlliteracyController extends GetxController {
 
   void onNextClick() async {
     if (textEditingController.text.isEmpty) return;
-
-    final item = selectedLevel!.value.contentList[_sliderPageIndex];
-    if (textEditingController.text == item.name) {
+    if (textEditingController.text == _selectedWord().name) {
       await audioPlayer.setSourceAsset(AppAssets.rightAnswerSound);
       totalPoints.value += selectedLevel!.value.points;
-      textEditingController.clear();
+
+      onSliderChangeIndex(pageIndex: ++_sliderPageIndex);
+
+      if (_sliderPageIndex >= selectedLevel!.value.contentList.length) {
+        typingSpeed?.cancel();
+        counterTimer?.cancel();
+        return;
+      }
+
       sliderController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
-      onSliderChangeIndex(pageIndex: _sliderPageIndex++);
+      getHintName();
+      errorText.value = '';
+      await Future.delayed(const Duration(milliseconds: 400));
+      textEditingController.clear();
     } else {
+      errorText.value = 'حاول مرة آخرى'.tr;
       await audioPlayer.setSourceAsset(AppAssets.wrongAnswerSound);
     }
+  }
+
+  ContentModel _selectedWord() {
+    print('==> sliderPageIndex : $_sliderPageIndex && contentListLength: ${selectedLevel!.value.contentList.length}');
+    if(_sliderPageIndex >= selectedLevel!.value.contentList.length){
+      return  selectedLevel!.value.contentList.last;
+    }
+    return selectedLevel!.value.contentList[_sliderPageIndex];
   }
 
   void onSliderChangeIndex({required int pageIndex}) {
@@ -240,7 +277,7 @@ class SpellingIlliteracyController extends GetxController {
   }
 
   void getHintName() {
-    final item = selectedLevel!.value.contentList[_sliderPageIndex];
+    final item = _selectedWord();
     String name = item.name.trim();
     final nameList = name.split(" ");
     String hint = '';
@@ -249,7 +286,15 @@ class SpellingIlliteracyController extends GetxController {
       List.generate(name.length, (index) => namedCharacter += '-');
       hint += '$namedCharacter ';
     }).toList();
-    texHint.value = hint;
+    texHint.value = hint.trim();
+  }
+
+  void onTextEditingChange(String value) {
+    if(value.isEmpty || _selectedWord().name.length != value.length) errorText.value = '';
+    if(_selectedWord().name.length == value.length){
+      onNextClick();
+      startTimer();
+    }
   }
 }
 
@@ -260,12 +305,11 @@ class SpellingIlliteracyModel {
   late bool isSelected;
   late List<ContentModel> contentList;
 
-  SpellingIlliteracyModel(
-      {required this.level,
-      required this.points,
-      required this.contentList,
-      required this.speed,
-      required this.isSelected});
+  SpellingIlliteracyModel({required this.level,
+    required this.points,
+    required this.contentList,
+    required this.speed,
+    required this.isSelected});
 }
 
 class ContentModel {
