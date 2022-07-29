@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayah_karema/app/common/themes/app_assets.dart';
@@ -15,8 +14,11 @@ class SpellingIlliteracyController extends GetxController {
   final focusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   Rx<SpellingIlliteracyModel>? selectedLevel;
-  int _carouselPageIndex = 0;
-  Timer? timer;
+  final RxString texHint = ''.obs;
+  int _sliderPageIndex = 0;
+  Timer? typingSpeed;
+  Timer? counterTimer;
+  RxString speedValue = ''.obs;
 
   @override
   void onInit() {
@@ -30,12 +32,13 @@ class SpellingIlliteracyController extends GetxController {
     textEditingController.dispose();
     sliderController.dispose();
     focusNode.dispose();
-    timer?.cancel();
+    typingSpeed?.cancel();
+    counterTimer?.cancel();
     super.onClose();
   }
 
   void _initData() {
-    levelsList.add(SpellingIlliteracyModel(level: 1, points: 10, speed: 3, isSelected: true, contentList: [
+    levelsList.add(SpellingIlliteracyModel(level: 1, points: 10, speed: 5, isSelected: true, contentList: [
       ContentModel(
         name: 'أ',
         voice: '',
@@ -150,7 +153,7 @@ class SpellingIlliteracyController extends GetxController {
       ),
     ]));
 
-    levelsList.add(SpellingIlliteracyModel(level: 3, points: 30, speed: 20, isSelected: false, contentList: [
+    levelsList.add(SpellingIlliteracyModel(level: 2, points: 20, speed: 10, isSelected: false, contentList: [
       ContentModel(
         name: 'محمد',
         voice: '',
@@ -159,55 +162,85 @@ class SpellingIlliteracyController extends GetxController {
         name: 'ابراهيم',
         voice: '',
       ),
+    ]));
+
+    levelsList.add(SpellingIlliteracyModel(level: 3, points: 30, speed: 20, isSelected: false, contentList: [
       ContentModel(
-        name: 'احمد المنسي',
+        name: 'الشهيد احمد المنسي',
         voice: '',
       ),
       ContentModel(
-        name: 'الشهيد احمد المنسي',
+        name: 'حياة كريمة الرقمية',
+        voice: '',
+      ),
+      ContentModel(
+        name: 'نادي القراء المحترفين',
         voice: '',
       ),
     ]));
 
     updateSelectedLevel();
+    getHintName();
+    startTimer();
+  }
+
+  void startTimer() {
+    if (typingSpeed != null) typingSpeed!.cancel();
+    if (counterTimer != null) counterTimer!.cancel();
+
+    int counter = selectedLevel!.value.speed;
+    speedValue.value = '$counter';
+    counterTimer = Timer.periodic(const Duration(seconds: 1), (t) {
+      if (counter == 0) counter = selectedLevel!.value.speed;
+      speedValue.value = '$counter';
+      counter--;
+    });
+    typingSpeed = Timer.periodic(Duration(seconds: selectedLevel!.value.speed), (timer) {
+      onNextClick();
+    });
   }
 
   void onLevelChanged({SpellingIlliteracyModel? level}) {
     textEditingController.clear();
+    sliderController.jumpToPage(0);
     levelsList.firstWhere((element) => element.isSelected).isSelected = false;
     levelsList.firstWhere((element) => element.level == level!.level).isSelected = true;
+
     updateSelectedLevel();
+    getHintName();
+    startTimer();
   }
 
   void updateSelectedLevel() {
-    _carouselPageIndex = 0;
+    onSliderChangeIndex(pageIndex: 0);
     if (selectedLevel == null) {
       selectedLevel = levelsList.firstWhere((element) => element.isSelected).obs;
     } else {
       selectedLevel!.value = levelsList.firstWhere((element) => element.isSelected);
     }
-
-    timer = Timer.periodic(Duration(seconds: selectedLevel!.value.speed), (timer) => onNextClick());
   }
 
   void onNextClick() async {
-    final item = selectedLevel!.value.contentList[_carouselPageIndex];
+    if (textEditingController.text.isEmpty) return;
+
+    final item = selectedLevel!.value.contentList[_sliderPageIndex];
     if (textEditingController.text == item.name) {
       await audioPlayer.setSourceAsset(AppAssets.rightAnswerSound);
+      totalPoints.value += selectedLevel!.value.points;
       textEditingController.clear();
       sliderController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
-      totalPoints.value += selectedLevel!.value.points;
+      onSliderChangeIndex(pageIndex: _sliderPageIndex++);
     } else {
       await audioPlayer.setSourceAsset(AppAssets.wrongAnswerSound);
     }
   }
 
   void onSliderChangeIndex({required int pageIndex}) {
-    _carouselPageIndex = pageIndex;
+    _sliderPageIndex = pageIndex;
   }
 
-  String getHintName() {
-    final item = selectedLevel!.value.contentList[_carouselPageIndex];
+  void getHintName() {
+    final item = selectedLevel!.value.contentList[_sliderPageIndex];
     String name = item.name.trim();
     final nameList = name.split(" ");
     String hint = '';
@@ -216,7 +249,7 @@ class SpellingIlliteracyController extends GetxController {
       List.generate(name.length, (index) => namedCharacter += '-');
       hint += '$namedCharacter ';
     }).toList();
-    return hint;
+    texHint.value = hint;
   }
 }
 

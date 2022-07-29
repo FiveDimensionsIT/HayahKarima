@@ -112,7 +112,7 @@ class SpellingIlliteracyView extends GetView<SpellingIlliteracyController> {
                               child: PageView(
                                   controller: controller.sliderController,
                                   physics: const NeverScrollableScrollPhysics(),
-                                  onPageChanged: (index)=> controller.onSliderChangeIndex(pageIndex: index),
+                                  onPageChanged: (index) => controller.onSliderChangeIndex(pageIndex: index),
                                   children: controller.selectedLevel!.value.contentList
                                       .map((element) => SpellingItem(item: element))
                                       .toList()),
@@ -122,46 +122,55 @@ class SpellingIlliteracyView extends GetView<SpellingIlliteracyController> {
                           /// ==== TextFiled
                           Form(
                             key: controller.formKey,
-                            child: TextFormField(
-                              controller: controller.textEditingController,
-                              focusNode: controller.focusNode,
-                              maxLines: 3,
-                              minLines: 1,
-                              textAlign: TextAlign.center,
-                              autofocus: true,
-                              textDirection: TextDirection.rtl,
-                              style: TextStyle(
-                                  fontSize: AppDimens.fontSizeVeryLarge,
-                                  fontWeight: FontWeight.w600,
-                                  height: 1,
-                                  overflow: TextOverflow.clip,
-                                  wordSpacing: 1),
-                              decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                                  fillColor: AppColors.current.dimmedLight,
-                                  hintTextDirection: TextDirection.rtl,
-                                  filled: true,
-                                  hintText: controller.getHintName(),
-                                  hintStyle: TextStyle(
-                                      color: AppColors.current.primary,
-                                      fontSize: AppDimens.fontSizeVeryLarge,
-                                      fontWeight: FontWeight.w600,
-                                      overflow: TextOverflow.clip,
-                                      wordSpacing: 2,
-                                      height: 1),
-                                  border: outlineInputBorder(),
-                                  disabledBorder: outlineInputBorder(),
-                                  enabledBorder: outlineInputBorder(),
-                                  errorBorder: outlineInputBorder(),
-                                  focusedErrorBorder: outlineInputBorder(),
-                                  focusedBorder: outlineInputBorder()),
-                              validator: RequiredValidator(errorText: AppText.requiredField),
-                            ),
+                            child: Obx(() {
+                              return TextFormField(
+                                controller: controller.textEditingController,
+                                focusNode: controller.focusNode,
+                                maxLines: 3,
+                                minLines: 1,
+                                textAlign: TextAlign.center,
+                                autofocus: true,
+                                textDirection: TextDirection.rtl,
+                                style: TextStyle(
+                                    fontSize: AppDimens.fontSizeVeryLarge,
+                                    fontWeight: FontWeight.w600,
+                                    height: 1,
+                                    overflow: TextOverflow.clip,
+                                    wordSpacing: 1),
+                                decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                                    fillColor: AppColors.current.dimmedLight,
+                                    hintTextDirection: TextDirection.rtl,
+                                    filled: true,
+                                    hintText: controller.texHint.value,
+                                    hintStyle: TextStyle(
+                                        color: AppColors.current.primary,
+                                        fontSize: AppDimens.fontSizeVeryLarge,
+                                        fontWeight: FontWeight.w600,
+                                        overflow: TextOverflow.clip,
+                                        wordSpacing: 2,
+                                        height: 1),
+                                    border: outlineInputBorder(),
+                                    disabledBorder: outlineInputBorder(),
+                                    enabledBorder: outlineInputBorder(),
+                                    errorBorder: outlineInputBorder(),
+                                    focusedErrorBorder: outlineInputBorder(),
+                                    focusedBorder: outlineInputBorder()),
+                                validator: RequiredValidator(errorText: AppText.requiredField),
+                              );
+                            }),
                           ),
 
                           const SizedBox(
                             height: 10,
                           ),
+
+                          Obx(() {
+                            return Text(
+                              '-- ${controller.speedValue.value} --',
+                              style: TextStyle(fontSize: AppDimens.fontSizeMediumX),
+                            );
+                          })
                         ],
                       );
                     }),
