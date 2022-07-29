@@ -34,7 +34,8 @@ abstract class Routes {
   static const PRODUCT_ITEM_DETAILS = _Paths.PRODUCT_ITEM_DETAILS;
   static const PRODUCTS_CATEGORY = _Paths.PRODUCTS_CATEGORY;
   static const ORDERS = _Paths.ORDERS;
-  static const ORDER_DETAILS =  _Paths.ORDER_DETAILS;
+  static const ORDER_DETAILS = _Paths.ORDER_DETAILS;
+  static const SPELLING_ILLITERACY = _Paths.SPELLING_ILLITERACY;
 }
 
 abstract class _Paths {
@@ -67,4 +68,5 @@ abstract class _Paths {
   static const PRODUCTS_CATEGORY = '/products_home-category';
   static const ORDERS = '/orders';
   static const ORDER_DETAILS = '/order-details';
+  static const SPELLING_ILLITERACY = '/spelling-illiteracy';
 }

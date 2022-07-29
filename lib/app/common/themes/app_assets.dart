@@ -70,4 +70,7 @@ abstract class AppAssets {
   static String readersClubIcon = 'assets/images/ic_launcher_readers-club.png';
   static String facebookIcon = 'assets/icons/facebook_icon.svg';
   static String googleIcon = 'assets/icons/google_icon.svg';
+  static String rightAnswerSound = 'audio/right.mp3';
+  static String wrongAnswerSound = 'audio/wrong.mp3';
+
 }

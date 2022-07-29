@@ -9,8 +9,7 @@ class BigBtn extends StatelessWidget {
   final VoidCallback onPressed;
   final BtnState state;
   final Color? bgColor;
-
-  BigBtn({required this.text, required this.onPressed, this.state = BtnState.active, this.bgColor});
+  const BigBtn({Key? key, required this.text, required this.onPressed, this.state = BtnState.active, this.bgColor}) : super(key: key);
 
   Color get buttonTextColor =>
   bgColor != null && bgColor == AppColors.current.neutral ? AppColors.current.dimmedXX : AppColors.current.neutral;
@@ -27,6 +26,11 @@ class BigBtn extends StatelessWidget {
             onPressed();
           }
         },
+        style: state == BtnState.disabled
+            ? getDisabledStyle(context)
+            : state == BtnState.loading
+                ? getLoadingStyle(context)
+                : getDefaultStyle(context),
         child: state == BtnState.loading
             ? _getScalingProgressIndicator(context)
             : Text(
@@ -35,11 +39,6 @@ class BigBtn extends StatelessWidget {
                 fontFamily: GoogleFonts.markaziTextTextTheme().headline1?.fontFamily
                 ),
               ),
-        style: state == BtnState.disabled
-            ? getDisabledStyle(context)
-            : state == BtnState.loading
-                ? getLoadingStyle(context)
-                : getDefaultStyle(context),
       ),
     );
   }

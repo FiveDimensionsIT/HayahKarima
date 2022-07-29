@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:hayah_karema/app/pages/profile/profile_binding.dart';
 
 import '../pages/add_user/add_user_binding.dart';
 import '../pages/add_user/add_user_view.dart';
@@ -41,12 +40,15 @@ import '../pages/order/orders/orders_binding.dart';
 import '../pages/order/orders/orders_view.dart';
 import '../pages/prizes/prizes_binding.dart';
 import '../pages/prizes/prizes_view.dart';
+import '../pages/profile/profile_binding.dart';
 import '../pages/profile/profile_view.dart';
 import '../pages/shop/product_details/product_item_details_view.dart';
 import '../pages/shop/products_category/products_category_binding.dart';
 import '../pages/shop/products_category/products_category_view.dart';
 import '../pages/shop/products_home/product_home_binding.dart';
 import '../pages/shop/products_home/products_home_view.dart';
+import '../pages/spelling_illiteracy/spelling_illiteracy_binding.dart';
+import '../pages/spelling_illiteracy/spelling_illiteracy_view.dart';
 import '../pages/splash/splash_binding.dart';
 import '../pages/splash/splash_view.dart';
 import '../pages/training_course/training_course_binding.dart';
@@ -62,7 +64,7 @@ const _transitionDuration = Duration(milliseconds: 700);
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH_VIEW;
+  static const INITIAL = Routes.SPELLING_ILLITERACY;
 
   static final routes = [
     GetPage(
@@ -137,7 +139,11 @@ class AppPages {
         binding: ProfileBinding(),
         transition: _pageTransition,
         transitionDuration: _transitionDuration),
-    GetPage(name: _Paths.NEW_POST, page: () => NewPostView(), binding: NewPostBinding(), transition: _pageTransition),
+    GetPage(
+        name: _Paths.NEW_POST,
+        page: () => NewPostView(),
+        binding: NewPostBinding(),
+        transition: _pageTransition),
     GetPage(
         name: _Paths.NOTIFICATION_VIEW,
         page: () => const NotificationView(),
@@ -215,6 +221,11 @@ class AppPages {
       name: _Paths.ORDER_DETAILS,
       page: () => const OrderDetailsView(),
       binding: OrderDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPELLING_ILLITERACY,
+      page: () => const SpellingIlliteracyView(),
+      binding: SpellingIlliteracyBinding(),
     ),
   ];
 }
